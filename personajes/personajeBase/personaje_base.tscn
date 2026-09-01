@@ -1,21 +1,21 @@
 [gd_scene format=3 uid="uid://dc41qho565f7g"]
 
-[ext_resource type="Script" uid="uid://cc47pj4q8xycv" path="res://personaje_base.gd" id="1_si0da"]
-[ext_resource type="Texture2D" uid="uid://cyc7vrqr8b5cm" path="res://assets/art/personajes/RanaPrueba.png" id="2_b3k4j"]
-[ext_resource type="Texture2D" uid="uid://8p4mcdedeqb4" path="res://assets/art/personajes/sombra.png" id="2_bkly6"]
+[ext_resource type="Script" uid="uid://cc47pj4q8xycv" path="res://personajes/personajeBase/personaje_base.gd" id="1_yik7l"]
+[ext_resource type="Texture2D" uid="uid://8p4mcdedeqb4" path="res://assets/art/personajes/sombra.png" id="2_48g4r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2q5vh"]
 size = Vector2(14, 2)
 
 [node name="PersonajeBase" type="CharacterBody2D" unique_id=1382673604]
-script = ExtResource("1_si0da")
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_yik7l")
 
 [node name="Sombra" type="Sprite2D" parent="." unique_id=1873168614]
 position = Vector2(0, 9)
-texture = ExtResource("2_bkly6")
+texture = ExtResource("2_48g4r")
 
 [node name="personajeSprite" type="Sprite2D" parent="." unique_id=647587542]
-texture = ExtResource("2_b3k4j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1812325256]
 position = Vector2(0, 9)

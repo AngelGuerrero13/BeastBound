@@ -1,7 +1,0 @@
-[gd_scene format=3 uid="uid://bdh2kbmk6owpr"]
-
-[ext_resource type="PackedScene" uid="uid://dc41qho565f7g" path="res://personajes/personaje_base.tscn" id="1_hq15n"]
-[ext_resource type="Script" uid="uid://cg5ivxgso6opl" path="res://personajes/tanque.gd" id="2_1b0fn"]
-
-[node name="PersonajeBase" unique_id=1382673604 instance=ExtResource("1_hq15n")]
-script = ExtResource("2_1b0fn")
