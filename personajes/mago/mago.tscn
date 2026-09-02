@@ -1,14 +1,17 @@
 [gd_scene format=3 uid="uid://808rvxcuw4kj"]
 
 [ext_resource type="PackedScene" uid="uid://dc41qho565f7g" path="res://personajes/personajeBase/personaje_base.tscn" id="1_bq4yt"]
-[ext_resource type="Texture2D" uid="uid://cyc7vrqr8b5cm" path="res://assets/art/personajes/RanaPrueba.png" id="2_bq4yt"]
 [ext_resource type="Script" uid="uid://tw6jqb838bcg" path="res://personajes/mago/mago.gd" id="2_wiglv"]
 [ext_resource type="PackedScene" uid="uid://diajepkcfeqnr" path="res://personajes/mago/bola_fuego.tscn" id="3_wiglv"]
 [ext_resource type="Texture2D" uid="uid://dpcg1lgdhql6o" path="res://assets/art/personajes/ranaF.png" id="4_1d17s"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_n8qig"]
+atlas = ExtResource("4_1d17s")
+region = Rect2(0, 5.112069, 32.893814, 25.08683)
+
 [node name="Mago" unique_id=1382673604 groups=["Jugador"] instance=ExtResource("1_bq4yt")]
-collision_layer = 1
-collision_mask = 9
+collision_layer = 2
+collision_mask = 13
 script = ExtResource("2_wiglv")
 escena_bola_magica = ExtResource("3_wiglv")
 
@@ -16,11 +19,16 @@ escena_bola_magica = ExtResource("3_wiglv")
 texture = ExtResource("4_1d17s")
 
 [node name="PuntoDisparo" type="Marker2D" parent="." index="4" unique_id=2094006370]
-position = Vector2(5, -1)
+position = Vector2(6, -11)
+
+[node name="BarraCarga" parent="." index="6" unique_id=511213222]
+offset_left = -16.0
+offset_top = -26.0
+offset_right = 32.0
+offset_bottom = -9.0
 
 [node name="Icono" parent="HUD" parent_id_path=PackedInt32Array(1918061239) index="1" unique_id=192457262]
-texture = ExtResource("2_bq4yt")
+texture = SubResource("AtlasTexture_n8qig")
 
 [node name="ContenedorCorazones" parent="HUD" parent_id_path=PackedInt32Array(1918061239) index="3" unique_id=959955788]
-offset_top = 20.0
 offset_bottom = 39.0

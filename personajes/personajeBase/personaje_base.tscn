@@ -23,15 +23,15 @@ size = Vector2(14, 2)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vniob"]
 atlas = ExtResource("3_48g4r")
-region = Rect2(287.21698, 0.6209221, 48.10785, 15.374659)
+region = Rect2(287.21698, 126.29547, 48.10785, 15.374659)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mtclc"]
 atlas = ExtResource("3_48g4r")
-region = Rect2(0, 0, 48.783035, 17.858343)
+region = Rect2(2.0490417, 125.67457, 48.783035, 17.858343)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8n3x1"]
 atlas = ExtResource("3_48g4r")
-region = Rect2(50.645798, 0, 44.08542, 17.237421)
+region = Rect2(52.33922, 124.74884, 44.08542, 17.237421)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ddouw"]
 atlas = ExtResource("5_bbtqm")
@@ -41,17 +41,21 @@ region = Rect2(199.31131, 99.760895, 34.521545, 40.11966)
 atlas = ExtResource("5_bbtqm")
 region = Rect2(498.47278, 128.23145, 46.76538, 45.91475)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_vfwvo"]
+atlas = ExtResource("5_bbtqm")
+region = Rect2(578.022, 113.030396, 13.431885, 14.569641)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_xqqnn"]
 atlas = ExtResource("3_48g4r")
-region = Rect2(56.978176, 132.91037, 32.097355, 5.2098694)
+region = Rect2(290.91678, 4.385208, 42.160767, 7.803337)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8adnb"]
 atlas = ExtResource("3_48g4r")
-region = Rect2(6.112075, 130.92601, 37.99563, 11.207962)
+region = Rect2(-0.29074955, 2.0050716, 48.953724, 12.5348835)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q3ei6"]
 atlas = ExtResource("3_48g4r")
-region = Rect2(296.67096, 132.80212, 32.431366, 5.405243)
+region = Rect2(50.100906, 2.5720787, 44.761986, 10.866425)
 
 [node name="PersonajeBase" type="CharacterBody2D" unique_id=1382673604]
 collision_layer = 0
@@ -118,11 +122,26 @@ offset_bottom = 90.0
 texture = SubResource("AtlasTexture_p8cio")
 
 [node name="ContenedorCorazones" type="HBoxContainer" parent="HUD" unique_id=959955788]
-offset_left = 137.0
-offset_top = 27.0
-offset_right = 180.5
-offset_bottom = 38.5
+offset_left = 138.0
+offset_top = 22.0
+offset_right = 187.0
+offset_bottom = 36.0
 scale = Vector2(2, 2)
+
+[node name="corazon" type="TextureRect" parent="HUD/ContenedorCorazones" unique_id=315410112]
+layout_mode = 2
+texture = SubResource("AtlasTexture_vfwvo")
+stretch_mode = 2
+
+[node name="corazon2" type="TextureRect" parent="HUD/ContenedorCorazones" unique_id=431837684]
+layout_mode = 2
+texture = SubResource("AtlasTexture_vfwvo")
+stretch_mode = 2
+
+[node name="corazon3" type="TextureRect" parent="HUD/ContenedorCorazones" unique_id=1311876801]
+layout_mode = 2
+texture = SubResource("AtlasTexture_vfwvo")
+stretch_mode = 2
 
 [node name="BarraVidaEnemigo" type="TextureProgressBar" parent="." unique_id=26031977]
 offset_left = -6.0

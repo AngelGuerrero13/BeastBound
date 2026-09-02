@@ -29,6 +29,9 @@ func configurar(nuevo_objetivo: Node2D, cargado: bool, direccion_base: Vector2):
 
 
 func _physics_process(delta):
+	# Animacion
+	$AnimatedSprite2D.play("default")
+	
 	# Temporizador de autodestrucción si no choca con nada
 	tiempo_vida -= delta
 	if tiempo_vida <= 0:

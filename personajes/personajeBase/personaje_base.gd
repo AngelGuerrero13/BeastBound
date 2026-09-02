@@ -61,6 +61,10 @@ func _ready() -> void:
 		actualizar_corazones()
 	else:
 		if hud: hud.visible = false
+		
+		if has_node("BarraCarga"):
+			$BarraCarga.visible = false
+		
 		if barra_vida_enemigo:
 			barra_vida_enemigo.visible = true
 			barra_vida_enemigo.max_value = vida_maxima
@@ -91,6 +95,10 @@ func actualizar_corazones() -> void:
 
 # BUCLE DE INPUTS (Ataques y UI)
 func _process(delta: float) -> void:
+	
+	if not es_jugador:
+		return
+	
 	# 1. ATAQUE NORMAL
 	if Input.is_action_just_pressed("ataque_normal"):
 		if puede_atacar_normal:
@@ -129,6 +137,10 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func manejar_movimiento() -> void:
+	
+	if not es_jugador:
+		return
+	
 	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	velocity = input_dir * velocidad
 	
@@ -146,7 +158,7 @@ func manejar_gravedad_y_salto(delta: float) -> void:
 			velocidad_vertical = 0.0
 			en_suelo = true
 	else:
-		if Input.is_action_just_pressed("ui_accept"):
+		if es_jugador and Input.is_action_just_pressed("ui_accept"):
 			saltar()
 			
 	# Desplaza el sprite visualmente hacia arriba/abajo basándose en la altura
@@ -170,6 +182,9 @@ func ejecutar_ataque_normal(objetivo) -> void:
 		print(name, " ataca al aire.")
 
 func ejecutar_ataque_cargado(objetivo) -> void:
+	if not es_jugador:
+		return
+	
 	if objetivo:
 		var dano_cargado = dano * 2 
 		print(name, " realiza un ataque CARGADO a ", objetivo.name, " por ", dano_cargado, " de daño.")
@@ -185,6 +200,7 @@ func recibir_dano(cantidad: int) -> void:
 	vida -= cantidad
 	vida_cambiada.emit(vida)
 	print(name, " recibió ", cantidad, " de daño. Vida restante: ", vida)
+	actualizar_corazones()
 	
 	if vida <= 0:
 		morir()

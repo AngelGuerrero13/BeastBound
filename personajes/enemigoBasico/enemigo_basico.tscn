@@ -6,7 +6,7 @@
 
 [node name="EnemigoBasico" unique_id=1382673604 instance=ExtResource("1_6l8mp")]
 collision_layer = 4
-collision_mask = 1
+collision_mask = 3
 script = ExtResource("2_p27fw")
 es_jugador = false
 velocidad = 100.0
@@ -15,6 +15,9 @@ velocidad = 100.0
 position = Vector2(-5.9604645e-08, 1)
 scale = Vector2(0.10156249, 0.10351564)
 texture = ExtResource("3_p27fw")
+
+[node name="BarraCarga" parent="." index="5" unique_id=511213222]
+visible = false
 
 [node name="BarraVidaEnemigo" parent="." index="7" unique_id=26031977]
 offset_top = -14.0
