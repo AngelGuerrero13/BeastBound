@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cyc7vrqr8b5cm" path="res://assets/art/personajes/RanaPrueba.png" id="2_bq4yt"]
 [ext_resource type="Script" uid="uid://tw6jqb838bcg" path="res://personajes/mago/mago.gd" id="2_wiglv"]
 [ext_resource type="PackedScene" uid="uid://diajepkcfeqnr" path="res://personajes/mago/bola_fuego.tscn" id="3_wiglv"]
+[ext_resource type="Texture2D" uid="uid://dpcg1lgdhql6o" path="res://assets/art/personajes/ranaF.png" id="4_1d17s"]
 
 [node name="Mago" unique_id=1382673604 groups=["Jugador"] instance=ExtResource("1_bq4yt")]
 collision_layer = 1
@@ -12,7 +13,7 @@ script = ExtResource("2_wiglv")
 escena_bola_magica = ExtResource("3_wiglv")
 
 [node name="personajeSprite" parent="." index="1" unique_id=647587542]
-texture = ExtResource("2_bq4yt")
+texture = ExtResource("4_1d17s")
 
 [node name="PuntoDisparo" type="Marker2D" parent="." index="4" unique_id=2094006370]
 position = Vector2(5, -1)
