@@ -31,7 +31,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mtclc"]
-radius = 9.0
+radius = 5.0990195
 
 [node name="bolaFuego" type="Area2D" unique_id=414202563]
 collision_layer = 0
@@ -39,10 +39,10 @@ collision_mask = 13
 script = ExtResource("1_pgaii")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1808704032]
-position = Vector2(64, 46)
+position = Vector2(-7, 1)
+scale = Vector2(0.59375, 0.5625)
 sprite_frames = SubResource("SpriteFrames_vniob")
 frame_progress = 0.40002427
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1357159020]
-position = Vector2(76, 45)
 shape = SubResource("CircleShape2D_mtclc")

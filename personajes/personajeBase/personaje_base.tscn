@@ -2,14 +2,64 @@
 
 [ext_resource type="Script" uid="uid://cc47pj4q8xycv" path="res://personajes/personajeBase/personaje_base.gd" id="1_yik7l"]
 [ext_resource type="Texture2D" uid="uid://8p4mcdedeqb4" path="res://assets/art/personajes/sombra.png" id="2_48g4r"]
+[ext_resource type="Texture2D" uid="uid://b6bvyfwxais6r" path="res://assets/art/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Icons/special icons/Special Icons.png" id="2_n8qig"]
+[ext_resource type="Texture2D" uid="uid://bhjjtwm7xul72" path="res://assets/art/ui/Pixel UI pack 3/04.png" id="3_48g4r"]
+[ext_resource type="Texture2D" uid="uid://c4m0wyrn73wiq" path="res://assets/art/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="5_bbtqm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_57iqj"]
+atlas = ExtResource("2_n8qig")
+region = Rect2(50.83536, 47.354027, 12.208984, 16.16719)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5oyti"]
+atlas = ExtResource("2_n8qig")
+region = Rect2(66.2946, 49.116196, 13.884735, 14.883804)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0nfu7"]
+atlas = ExtResource("2_n8qig")
+region = Rect2(82.094475, 48.87681, 12.208992, 15.123192)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2q5vh"]
 size = Vector2(14, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vniob"]
+atlas = ExtResource("3_48g4r")
+region = Rect2(287.21698, 0.6209221, 48.10785, 15.374659)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mtclc"]
+atlas = ExtResource("3_48g4r")
+region = Rect2(0, 0, 48.783035, 17.858343)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8n3x1"]
+atlas = ExtResource("3_48g4r")
+region = Rect2(50.645798, 0, 44.08542, 17.237421)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ddouw"]
+atlas = ExtResource("5_bbtqm")
+region = Rect2(199.31131, 99.760895, 34.521545, 40.11966)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p8cio"]
+atlas = ExtResource("5_bbtqm")
+region = Rect2(498.47278, 128.23145, 46.76538, 45.91475)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqqnn"]
+atlas = ExtResource("3_48g4r")
+region = Rect2(56.978176, 132.91037, 32.097355, 5.2098694)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8adnb"]
+atlas = ExtResource("3_48g4r")
+region = Rect2(6.112075, 130.92601, 37.99563, 11.207962)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q3ei6"]
+atlas = ExtResource("3_48g4r")
+region = Rect2(296.67096, 132.80212, 32.431366, 5.405243)
 
 [node name="PersonajeBase" type="CharacterBody2D" unique_id=1382673604]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_yik7l")
+textura_corazon_lleno = SubResource("AtlasTexture_57iqj")
+textura_corazon_mitad = SubResource("AtlasTexture_5oyti")
+textura_corazon_vacio = SubResource("AtlasTexture_0nfu7")
 
 [node name="Sombra" type="Sprite2D" parent="." unique_id=1873168614]
 position = Vector2(0, 9)
@@ -22,3 +72,64 @@ position = Vector2(0, 9)
 shape = SubResource("RectangleShape2D_2q5vh")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1895968384]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1096102892]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.3
+drag_top_margin = 0.4
+drag_right_margin = 0.3
+drag_bottom_margin = 0.4
+
+[node name="BarraCarga" type="TextureProgressBar" parent="." unique_id=511213222]
+offset_left = -7.0
+offset_top = -13.0
+offset_right = 41.0
+offset_bottom = 4.0
+scale = Vector2(0.3, 0.3)
+max_value = 3.0
+step = 0.01
+texture_under = SubResource("AtlasTexture_vniob")
+texture_over = SubResource("AtlasTexture_mtclc")
+texture_progress = SubResource("AtlasTexture_8n3x1")
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1918061239]
+
+[node name="Marco" type="TextureRect" parent="HUD" unique_id=163228078]
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 110.0
+offset_bottom = 105.0
+texture = SubResource("AtlasTexture_ddouw")
+
+[node name="Icono" type="TextureRect" parent="HUD" unique_id=192457262]
+offset_left = 34.0
+offset_top = 32.0
+offset_right = 78.0
+offset_bottom = 74.0
+
+[node name="MarcoVida" type="TextureRect" parent="HUD" unique_id=32185647]
+offset_left = 103.0
+offset_top = 21.0
+offset_right = 257.0
+offset_bottom = 90.0
+texture = SubResource("AtlasTexture_p8cio")
+
+[node name="ContenedorCorazones" type="HBoxContainer" parent="HUD" unique_id=959955788]
+offset_left = 137.0
+offset_top = 27.0
+offset_right = 180.5
+offset_bottom = 38.5
+scale = Vector2(2, 2)
+
+[node name="BarraVidaEnemigo" type="TextureProgressBar" parent="." unique_id=26031977]
+offset_left = -6.0
+offset_top = -17.0
+offset_right = 37.0
+offset_bottom = 1.0
+scale = Vector2(0.3, 0.3)
+texture_under = SubResource("AtlasTexture_xqqnn")
+texture_over = SubResource("AtlasTexture_8adnb")
+texture_progress = SubResource("AtlasTexture_q3ei6")

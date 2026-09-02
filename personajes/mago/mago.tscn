@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://tw6jqb838bcg" path="res://personajes/mago/mago.gd" id="2_wiglv"]
 [ext_resource type="PackedScene" uid="uid://diajepkcfeqnr" path="res://personajes/mago/bola_fuego.tscn" id="3_wiglv"]
 
-[node name="Mago" unique_id=1382673604 instance=ExtResource("1_bq4yt")]
+[node name="Mago" unique_id=1382673604 groups=["Jugador"] instance=ExtResource("1_bq4yt")]
 collision_layer = 1
 collision_mask = 9
 script = ExtResource("2_wiglv")
@@ -16,3 +16,10 @@ texture = ExtResource("2_bq4yt")
 
 [node name="PuntoDisparo" type="Marker2D" parent="." index="4" unique_id=2094006370]
 position = Vector2(5, -1)
+
+[node name="Icono" parent="HUD" parent_id_path=PackedInt32Array(1918061239) index="1" unique_id=192457262]
+texture = ExtResource("2_bq4yt")
+
+[node name="ContenedorCorazones" parent="HUD" parent_id_path=PackedInt32Array(1918061239) index="3" unique_id=959955788]
+offset_top = 20.0
+offset_bottom = 39.0

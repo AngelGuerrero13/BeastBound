@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://b5o2bic3uhxqd" path="res://assets/art/fondos/MagicMarketFondo/Tilesets/TilesetFloor.png" id="1_280kd"]
 [ext_resource type="Texture2D" uid="uid://bcobdb8ngw7rs" path="res://assets/art/fondos/Size_04.png" id="2_280kd"]
 [ext_resource type="PackedScene" uid="uid://808rvxcuw4kj" path="res://personajes/mago/mago.tscn" id="3_280kd"]
+[ext_resource type="PackedScene" uid="uid://di2623p60lpat" path="res://personajes/enemigoBasico/enemigo_basico.tscn" id="4_cww3w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cww3w"]
 texture = ExtResource("1_280kd")
@@ -737,7 +738,10 @@ tile_map_data = PackedByteArray("AAABAPv/AQAAAAEAAAABAPz/AQAAAAIAAAABAP3/AQAAAAM
 tile_set = SubResource("TileSet_mtclc")
 
 [node name="Mago" parent="." unique_id=1382673604 instance=ExtResource("3_280kd")]
-position = Vector2(21, 81)
+position = Vector2(90, 79)
+
+[node name="EnemigoBasico" parent="." unique_id=829896680 instance=ExtResource("4_cww3w")]
+position = Vector2(321, 57)
 
 [node name="colisiones" type="Node2D" parent="." unique_id=849471331]
 
