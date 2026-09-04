@@ -4,10 +4,11 @@
 [ext_resource type="Script" uid="uid://tw6jqb838bcg" path="res://personajes/mago/mago.gd" id="2_wiglv"]
 [ext_resource type="PackedScene" uid="uid://diajepkcfeqnr" path="res://personajes/mago/bola_fuego.tscn" id="3_wiglv"]
 [ext_resource type="Texture2D" uid="uid://dpcg1lgdhql6o" path="res://assets/art/personajes/ranaF.png" id="4_1d17s"]
+[ext_resource type="Texture2D" uid="uid://qhui7wogoctr" path="res://assets/art/personajes/ranafoto.png" id="5_1d17s"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_n8qig"]
-atlas = ExtResource("4_1d17s")
-region = Rect2(0, 5.112069, 32.893814, 25.08683)
+[sub_resource type="AtlasTexture" id="AtlasTexture_gfrtm"]
+atlas = ExtResource("5_1d17s")
+region = Rect2(0, 0, 33.192474, 33.222958)
 
 [node name="Mago" unique_id=1382673604 groups=["Jugador"] instance=ExtResource("1_bq4yt")]
 collision_layer = 2
@@ -21,17 +22,22 @@ texture = ExtResource("4_1d17s")
 [node name="PuntoDisparo" type="Marker2D" parent="." index="4" unique_id=2094006370]
 position = Vector2(6, -11)
 
-[node name="BarraCarga" parent="." index="6" unique_id=511213222]
+[node name="BarraCarga" parent="." index="7" unique_id=511213222]
 offset_left = -16.0
 offset_top = -26.0
 offset_right = 32.0
 offset_bottom = -9.0
 
 [node name="Icono" parent="HUD" parent_id_path=PackedInt32Array(1918061239) index="1" unique_id=192457262]
-texture = SubResource("AtlasTexture_n8qig")
+offset_left = 33.0
+offset_top = 31.000002
+offset_right = 81.0
+offset_bottom = 79.0
+scale = Vector2(0.9, 0.9)
+texture = SubResource("AtlasTexture_gfrtm")
 
 [node name="ContenedorCorazones" parent="HUD" parent_id_path=PackedInt32Array(1918061239) index="3" unique_id=959955788]
 offset_bottom = 39.0
 
-[node name="BarraVidaEnemigo" parent="." index="8" unique_id=26031977]
+[node name="BarraVidaEnemigo" parent="." index="9" unique_id=26031977]
 visible = false

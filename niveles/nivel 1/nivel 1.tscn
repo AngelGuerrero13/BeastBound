@@ -749,7 +749,7 @@ position = Vector2(602, 59)
 collision_mask = 0
 
 [node name="pared" type="CollisionShape2D" parent="colisiones/StaticBody2D2" unique_id=2008038970]
-position = Vector2(312.5, 11.25)
+position = Vector2(313, -10)
 shape = SubResource("RectangleShape2D_vniob")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="colisiones" unique_id=643306684]
