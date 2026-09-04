@@ -16,9 +16,9 @@ position = Vector2(-5.9604645e-08, 1)
 scale = Vector2(0.10156249, 0.10351564)
 texture = ExtResource("3_p27fw")
 
-[node name="BarraCarga" parent="." index="5" unique_id=511213222]
+[node name="BarraCarga" parent="." index="6" unique_id=511213222]
 visible = false
 
-[node name="BarraVidaEnemigo" parent="." index="7" unique_id=26031977]
+[node name="BarraVidaEnemigo" parent="." index="8" unique_id=26031977]
 offset_top = -14.0
 offset_bottom = 4.0

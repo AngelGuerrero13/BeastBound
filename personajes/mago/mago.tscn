@@ -32,3 +32,6 @@ texture = SubResource("AtlasTexture_n8qig")
 
 [node name="ContenedorCorazones" parent="HUD" parent_id_path=PackedInt32Array(1918061239) index="3" unique_id=959955788]
 offset_bottom = 39.0
+
+[node name="BarraVidaEnemigo" parent="." index="8" unique_id=26031977]
+visible = false

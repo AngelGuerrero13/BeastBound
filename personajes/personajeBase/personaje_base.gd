@@ -200,6 +200,10 @@ func recibir_dano(cantidad: int) -> void:
 	vida -= cantidad
 	vida_cambiada.emit(vida)
 	print(name, " recibió ", cantidad, " de daño. Vida restante: ", vida)
+	
+	if not es_jugador and barra_vida_enemigo:
+		barra_vida_enemigo.value = vida
+	
 	actualizar_corazones()
 	
 	if vida <= 0:

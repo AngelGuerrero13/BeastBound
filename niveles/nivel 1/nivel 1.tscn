@@ -719,7 +719,7 @@ texture = ExtResource("2_280kd")
 sources/1 = SubResource("TileSetAtlasSource_hg3j0")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vniob"]
-size = Vector2(625, 41.5)
+size = Vector2(625, 52.75)
 
 [node name="Nivel 1" type="Node2D" unique_id=76547120]
 
@@ -741,7 +741,7 @@ tile_set = SubResource("TileSet_mtclc")
 position = Vector2(90, 79)
 
 [node name="EnemigoBasico" parent="." unique_id=829896680 instance=ExtResource("4_cww3w")]
-position = Vector2(321, 57)
+position = Vector2(602, 59)
 
 [node name="colisiones" type="Node2D" parent="." unique_id=849471331]
 
@@ -756,5 +756,5 @@ shape = SubResource("RectangleShape2D_vniob")
 collision_mask = 0
 
 [node name="pared" type="CollisionShape2D" parent="colisiones/StaticBody2D" unique_id=831492881]
-position = Vector2(313, 213)
+position = Vector2(313, 207.375)
 shape = SubResource("RectangleShape2D_vniob")

@@ -18,6 +18,9 @@ region = Rect2(66.2946, 49.116196, 13.884735, 14.883804)
 atlas = ExtResource("2_n8qig")
 region = Rect2(82.094475, 48.87681, 12.208992, 15.123192)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3nda5"]
+size = Vector2(16, 15)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2q5vh"]
 size = Vector2(14, 2)
 
@@ -71,7 +74,11 @@ texture = ExtResource("2_48g4r")
 
 [node name="personajeSprite" type="Sprite2D" parent="." unique_id=647587542]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1812325256]
+[node name="ColisionCuerpo" type="CollisionShape2D" parent="." unique_id=1954197429]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_3nda5")
+
+[node name="ColisonSombra" type="CollisionShape2D" parent="." unique_id=1812325256]
 position = Vector2(0, 9)
 shape = SubResource("RectangleShape2D_2q5vh")
 

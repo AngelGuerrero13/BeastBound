@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dwwlweg4viks"]
+
+[ext_resource type="PackedScene" uid="uid://dc41qho565f7g" path="res://personajes/personajeBase/personaje_base.tscn" id="1_ltgak"]
+[ext_resource type="Script" uid="uid://v8j7mso6x6ly" path="res://personajes/tanque/tanque.gd" id="2_wd2uv"]
+
+[node name="Tanque" unique_id=1382673604 instance=ExtResource("1_ltgak")]
+script = ExtResource("2_wd2uv")
+
+[node name="BarraVidaEnemigo" parent="." index="8" unique_id=26031977]
+visible = false

@@ -7,6 +7,10 @@ var es_ataque_cargado: bool = false
 
 var direccion_vuelo: Vector2 = Vector2.ZERO
 var tiempo_vida: float = 3.0
+	
+func _ready() -> void:
+	# La animación arranca una sola vez al crearse la bola
+	$AnimatedSprite2D.play("default")
 
 func configurar(nuevo_objetivo: Node2D, cargado: bool, direccion_base: Vector2):
 	objetivo = nuevo_objetivo
@@ -19,19 +23,16 @@ func configurar(nuevo_objetivo: Node2D, cargado: bool, direccion_base: Vector2):
 	rotation = direccion_vuelo.angle()
 
 	if es_ataque_cargado:
-		dano = 40
+		dano = 2
 		velocidad = 250.0
 		scale = Vector2(3, 3)
 	else:
-		dano = 10
+		dano = 1
 		velocidad = 500.0
 		scale = Vector2(1, 1)
 
 
 func _physics_process(delta):
-	# Animacion
-	$AnimatedSprite2D.play("default")
-	
 	# Temporizador de autodestrucción si no choca con nada
 	tiempo_vida -= delta
 	if tiempo_vida <= 0:
@@ -49,13 +50,8 @@ func _physics_process(delta):
 
 
 func _on_body_entered(body):
-	# Si choca con el objetivo marcado
-	if objetivo and body == objetivo:
-		if body.has_method("recibir_dano"):
+	# Código blindado: Si puede recibir daño y NO es el jugador, lo quemamos.
+	if body.has_method("recibir_dano"):
+		if "es_jugador" in body and not body.es_jugador:
 			body.recibir_dano(dano)
 			queue_free()
-
-	# Si fue un disparo libre (sin objetivo) y choca con cualquier cosa que reciba daño
-	elif not objetivo and body.has_method("recibir_dano"):
-		body.recibir_dano(dano)
-		queue_free()
