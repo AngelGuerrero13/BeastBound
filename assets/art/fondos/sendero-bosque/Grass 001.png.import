@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpcg1lgdhql6o"
-path="res://.godot/imported/ranaF.png-59542f108a847e22e73ee5b1c5884b11.ctex"
+uid="uid://bm4di1cakv3fc"
+path="res://.godot/imported/Grass 001.png-f942c2ed386b627065205fc425dcf64e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/personajes/ranaF.png"
-dest_files=["res://.godot/imported/ranaF.png-59542f108a847e22e73ee5b1c5884b11.ctex"]
+source_file="res://assets/art/fondos/sendero-bosque/Grass 001.png"
+dest_files=["res://.godot/imported/Grass 001.png-f942c2ed386b627065205fc425dcf64e.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btbp8mnlsf71b"
-path="res://.godot/imported/pasto.png-fa41ab0c4de805f8618f1e29463ea568.ctex"
+uid="uid://c0iiw5pyba6uf"
+path="res://.godot/imported/Wall_Tiles.png-ca1359ea24f6a3014e11bd0c01dd810d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/fondos/pasto.png"
-dest_files=["res://.godot/imported/pasto.png-fa41ab0c4de805f8618f1e29463ea568.ctex"]
+source_file="res://assets/art/fondos/sendero-bosque/Wall_Tiles.png"
+dest_files=["res://.godot/imported/Wall_Tiles.png-ca1359ea24f6a3014e11bd0c01dd810d.ctex"]
 
 [params]
 

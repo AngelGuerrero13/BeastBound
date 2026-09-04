@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://dc41qho565f7g" path="res://personajes/personajeBase/personaje_base.tscn" id="1_bq4yt"]
 [ext_resource type="Script" uid="uid://tw6jqb838bcg" path="res://personajes/mago/mago.gd" id="2_wiglv"]
 [ext_resource type="PackedScene" uid="uid://diajepkcfeqnr" path="res://personajes/mago/bola_fuego.tscn" id="3_wiglv"]
-[ext_resource type="Texture2D" uid="uid://dpcg1lgdhql6o" path="res://assets/art/personajes/ranaF.png" id="4_1d17s"]
-[ext_resource type="Texture2D" uid="uid://qhui7wogoctr" path="res://assets/art/personajes/ranafoto.png" id="5_1d17s"]
+[ext_resource type="Texture2D" uid="uid://dpcg1lgdhql6o" path="res://assets/art/personajes/mago/ranaF.png" id="4_1d17s"]
+[ext_resource type="Texture2D" uid="uid://qhui7wogoctr" path="res://assets/art/personajes/mago/ranafoto.png" id="5_1d17s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gfrtm"]
 atlas = ExtResource("5_1d17s")
@@ -29,10 +29,10 @@ offset_right = 32.0
 offset_bottom = -9.0
 
 [node name="Icono" parent="HUD" parent_id_path=PackedInt32Array(1918061239) index="1" unique_id=192457262]
-offset_left = 33.0
-offset_top = 31.000002
-offset_right = 81.0
-offset_bottom = 79.0
+offset_left = 24.0
+offset_top = 17.0
+offset_right = 72.0
+offset_bottom = 65.0
 scale = Vector2(0.9, 0.9)
 texture = SubResource("AtlasTexture_gfrtm")
 

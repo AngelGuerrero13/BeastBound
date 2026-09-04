@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cyc7vrqr8b5cm"
-path="res://.godot/imported/RanaPrueba.png-f939526aa09fcb8bd8b8ef6f8507dcbf.ctex"
+uid="uid://brgticsta4p06"
+path="res://.godot/imported/TX Tileset Grass.png-7fb9e5cbecbb7a912edbe06b211d3a4d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/personajes/RanaPrueba.png"
-dest_files=["res://.godot/imported/RanaPrueba.png-f939526aa09fcb8bd8b8ef6f8507dcbf.ctex"]
+source_file="res://assets/art/fondos/sendero-bosque/TX Tileset Grass.png"
+dest_files=["res://.godot/imported/TX Tileset Grass.png-7fb9e5cbecbb7a912edbe06b211d3a4d.ctex"]
 
 [params]
 

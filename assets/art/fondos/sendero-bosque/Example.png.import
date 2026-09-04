@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://mocbkhi2yua4"
-path="res://.godot/imported/tilesetleo.jpg-6c313d6dec01a4a7e984997064afdc88.ctex"
+uid="uid://bqwu23uwrsfaa"
+path="res://.godot/imported/Example.png-064ddb5891b720db6de990bb4732d9b6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/fondos/tilesetleo.jpg"
-dest_files=["res://.godot/imported/tilesetleo.jpg-6c313d6dec01a4a7e984997064afdc88.ctex"]
+source_file="res://assets/art/fondos/sendero-bosque/Example.png"
+dest_files=["res://.godot/imported/Example.png-064ddb5891b720db6de990bb4732d9b6.ctex"]
 
 [params]
 

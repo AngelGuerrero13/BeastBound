@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bi2h52viplykf"
-path="res://.godot/imported/TX Plant with Shadow.png-365466334fe8d70eb53b0076bb10c3fd.ctex"
+uid="uid://cf2wdgj80fku4"
+path="res://.godot/imported/Floors_Tiles.png-f35ca1638cb45245c613af0161565757.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/fondos/TX Plant with Shadow.png"
-dest_files=["res://.godot/imported/TX Plant with Shadow.png-365466334fe8d70eb53b0076bb10c3fd.ctex"]
+source_file="res://assets/art/fondos/sendero-bosque/Floors_Tiles.png"
+dest_files=["res://.godot/imported/Floors_Tiles.png-f35ca1638cb45245c613af0161565757.ctex"]
 
 [params]
 

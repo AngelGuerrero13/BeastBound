@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://brgticsta4p06"
-path="res://.godot/imported/TX Tileset Grass.png-54375b30011a1e003a7bc5f516763d50.ctex"
+uid="uid://qhui7wogoctr"
+path="res://.godot/imported/ranafoto.png-49f90e4470600491d663ba75f8216068.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/fondos/TX Tileset Grass.png"
-dest_files=["res://.godot/imported/TX Tileset Grass.png-54375b30011a1e003a7bc5f516763d50.ctex"]
+source_file="res://assets/art/personajes/mago/ranafoto.png"
+dest_files=["res://.godot/imported/ranafoto.png-49f90e4470600491d663ba75f8216068.ctex"]
 
 [params]
 

@@ -26,7 +26,7 @@ size = Vector2(14, 2)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vniob"]
 atlas = ExtResource("3_48g4r")
-region = Rect2(287.21698, 126.29547, 48.10785, 15.374659)
+region = Rect2(290.2324, 125.7511, 45.81064, 15.919037)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mtclc"]
 atlas = ExtResource("3_48g4r")
@@ -50,7 +50,7 @@ region = Rect2(578.022, 113.030396, 13.431885, 14.569641)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xqqnn"]
 atlas = ExtResource("3_48g4r")
-region = Rect2(290.91678, 4.385208, 42.160767, 7.803337)
+region = Rect2(287.78485, 1.7737589, 45.292694, 10.414786)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8adnb"]
 atlas = ExtResource("3_48g4r")
@@ -113,6 +113,7 @@ offset_left = 2.0
 offset_top = 2.0
 offset_right = 110.0
 offset_bottom = 105.0
+scale = Vector2(0.8, 0.8)
 texture = SubResource("AtlasTexture_ddouw")
 
 [node name="Icono" type="TextureRect" parent="HUD" unique_id=192457262]
@@ -126,14 +127,15 @@ offset_left = 103.0
 offset_top = 21.0
 offset_right = 257.0
 offset_bottom = 90.0
+scale = Vector2(0.8, 0.8)
 texture = SubResource("AtlasTexture_p8cio")
 
 [node name="ContenedorCorazones" type="HBoxContainer" parent="HUD" unique_id=959955788]
-offset_left = 138.0
-offset_top = 22.0
-offset_right = 187.0
-offset_bottom = 36.0
-scale = Vector2(2, 2)
+offset_left = 133.0
+offset_top = 23.000002
+offset_right = 182.0
+offset_bottom = 37.0
+scale = Vector2(1.5, 1.5)
 
 [node name="corazon" type="TextureRect" parent="HUD/ContenedorCorazones" unique_id=315410112]
 layout_mode = 2

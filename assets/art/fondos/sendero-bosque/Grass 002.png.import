@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcobdb8ngw7rs"
-path="res://.godot/imported/Size_04.png-39f0b16c437f6dd9b4383beac62b1597.ctex"
+uid="uid://betfnppa5iuqe"
+path="res://.godot/imported/Grass 002.png-dd313e86f1ad7f6a649deaa66a5b5d62.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/fondos/Size_04.png"
-dest_files=["res://.godot/imported/Size_04.png-39f0b16c437f6dd9b4383beac62b1597.ctex"]
+source_file="res://assets/art/fondos/sendero-bosque/Grass 002.png"
+dest_files=["res://.godot/imported/Grass 002.png-dd313e86f1ad7f6a649deaa66a5b5d62.ctex"]
 
 [params]
 

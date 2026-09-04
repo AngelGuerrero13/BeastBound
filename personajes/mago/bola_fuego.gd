@@ -24,11 +24,11 @@ func configurar(nuevo_objetivo: Node2D, cargado: bool, direccion_base: Vector2):
 
 	if es_ataque_cargado:
 		dano = 2
-		velocidad = 250.0
+		velocidad = 200.0
 		scale = Vector2(3, 3)
 	else:
 		dano = 1
-		velocidad = 500.0
+		velocidad = 300.0
 		scale = Vector2(1, 1)
 
 

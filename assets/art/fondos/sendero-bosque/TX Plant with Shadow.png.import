@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bm4di1cakv3fc"
-path="res://.godot/imported/Grass 001.png-0dcd7d86ad76de9eda8b51d65708b740.ctex"
+uid="uid://bi2h52viplykf"
+path="res://.godot/imported/TX Plant with Shadow.png-fffa04728f9db43d5a9ac96bff49838d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/fondos/Grass 001.png"
-dest_files=["res://.godot/imported/Grass 001.png-0dcd7d86ad76de9eda8b51d65708b740.ctex"]
+source_file="res://assets/art/fondos/sendero-bosque/TX Plant with Shadow.png"
+dest_files=["res://.godot/imported/TX Plant with Shadow.png-fffa04728f9db43d5a9ac96bff49838d.ctex"]
 
 [params]
 

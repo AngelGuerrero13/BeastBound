@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cf2wdgj80fku4"
-path="res://.godot/imported/Floors_Tiles.png-607f7c79ba6d7e78352a1d671a37df43.ctex"
+uid="uid://b6nn4vt33nopr"
+path="res://.godot/imported/Size_05.png-ead8990b202e36357fbd03b6b4cb22a3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/fondos/Floors_Tiles.png"
-dest_files=["res://.godot/imported/Floors_Tiles.png-607f7c79ba6d7e78352a1d671a37df43.ctex"]
+source_file="res://assets/art/fondos/sendero-bosque/Size_05.png"
+dest_files=["res://.godot/imported/Size_05.png-ead8990b202e36357fbd03b6b4cb22a3.ctex"]
 
 [params]
 

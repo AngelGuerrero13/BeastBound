@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqwu23uwrsfaa"
-path="res://.godot/imported/Example.png-32f1c3527ea21f7fb240d1afa0e4b339.ctex"
+uid="uid://cyc7vrqr8b5cm"
+path="res://.godot/imported/RanaPrueba.png-0ed9a1cb9d565f08ac200584962b371b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/fondos/Example.png"
-dest_files=["res://.godot/imported/Example.png-32f1c3527ea21f7fb240d1afa0e4b339.ctex"]
+source_file="res://assets/art/personajes/mago/RanaPrueba.png"
+dest_files=["res://.godot/imported/RanaPrueba.png-0ed9a1cb9d565f08ac200584962b371b.ctex"]
 
 [params]
 

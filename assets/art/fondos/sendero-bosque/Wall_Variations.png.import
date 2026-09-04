@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qhui7wogoctr"
-path="res://.godot/imported/ranafoto.png-b49845c25053460dcf3f40a90458248d.ctex"
+uid="uid://bptm8eq8m7iw7"
+path="res://.godot/imported/Wall_Variations.png-f9ad6c8d5c31398c433f6822c3afb46e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/personajes/ranafoto.png"
-dest_files=["res://.godot/imported/ranafoto.png-b49845c25053460dcf3f40a90458248d.ctex"]
+source_file="res://assets/art/fondos/sendero-bosque/Wall_Variations.png"
+dest_files=["res://.godot/imported/Wall_Variations.png-f9ad6c8d5c31398c433f6822c3afb46e.ctex"]
 
 [params]
 
