@@ -13,6 +13,8 @@ signal ha_muerto()
 @export var dano: int = 1
 @export var velocidad_ataque: float = 5.0
 @export var rango_ataque: float = 2.0 
+@export var sprite_mira_izquierda: bool = true 
+@export var desfase_horizontal_sprite: float = 0.0
 
 # --- SPRITES DE CORAZONES ---
 @export var textura_corazon_lleno: Texture2D
@@ -30,6 +32,7 @@ var en_suelo: bool = true
 # --- NODOS HIJOS ---
 @onready var sprite: Sprite2D = $personajeSprite
 @onready var barra_carga: TextureProgressBar = $BarraCarga
+@onready var sombra: Sprite2D = get_node_or_null("Sombra")
 
 # UI Jugador
 @onready var hud: CanvasLayer = $HUD
@@ -69,6 +72,8 @@ func _ready() -> void:
 			barra_vida_enemigo.visible = true
 			barra_vida_enemigo.max_value = vida_maxima
 			barra_vida_enemigo.value = vida
+			
+	actualizar_offset_horizontal()
 
 func actualizar_corazones() -> void:
 	if not es_jugador or not corazones_ui: 
@@ -146,7 +151,19 @@ func manejar_movimiento() -> void:
 	
 	if sprite != null:
 		if input_dir.x != 0:
-			sprite.flip_h = input_dir.x < 0
+			if sprite_mira_izquierda:
+				sprite.flip_h = input_dir.x > 0
+			else:
+				sprite.flip_h = input_dir.x < 0
+			actualizar_offset_horizontal()
+
+func actualizar_offset_horizontal() -> void:
+	if sprite == null or desfase_horizontal_sprite == 0.0:
+		return
+	if sprite.flip_h:
+		sprite.position.x = -desfase_horizontal_sprite
+	else:
+		sprite.position.x = desfase_horizontal_sprite
 
 func manejar_gravedad_y_salto(delta: float) -> void:
 	if not en_suelo:
@@ -164,6 +181,11 @@ func manejar_gravedad_y_salto(delta: float) -> void:
 	# Desplaza el sprite visualmente hacia arriba/abajo basándose en la altura
 	if sprite:
 		sprite.position.y = -altura
+		
+	# Efecto de sombra: la sombra se achica levemente al saltar alto
+	if sombra:
+		var escala_sombra = max(0.5, 1.0 - (altura / 350.0))
+		sombra.scale = Vector2(escala_sombra, escala_sombra)
 
 func saltar() -> void:
 	if en_suelo:

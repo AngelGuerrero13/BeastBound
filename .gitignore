@@ -1,3 +1,27 @@
-# Godot 4+ specific ignores
+# Godot 4+ specific ignores (Caché y recursos importados internamente)
 .godot/
 /android/
+
+# Presets de exportación (por si configuran firmas o rutas locales)
+export.cfg
+export_presets.cfg
+
+# Mono / C# (por si en el futuro usan C# en el proyecto)
+.mono/
+data_*/
+mono_crash.*.json
+
+# Archivos temporales y respaldos
+*.tmp
+*.bak
+*.swp
+*~
+
+# Sistema operativo (Windows / macOS / Linux)
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Editores externos (VS Code, Rider, etc.)
+.vscode/
+.idea/

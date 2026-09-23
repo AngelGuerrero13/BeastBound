@@ -28,6 +28,7 @@ func _physics_process(delta: float) -> void:
 			# Voltea el sprite para mirar hacia dónde camina
 			if sprite:
 				sprite.flip_h = direccion.x < 0
+				actualizar_offset_horizontal()
 		else:
 			# Si está lo suficientemente cerca, se detiene y golpea
 			velocity = Vector2.ZERO 

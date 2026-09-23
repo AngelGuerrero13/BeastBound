@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c25l87wx35bf1"]
 
 [ext_resource type="PackedScene" uid="uid://dc41qho565f7g" path="res://personajes/personajeBase/personaje_base.tscn" id="1_a6no7"]
-[ext_resource type="Texture2D" uid="uid://ddopshrdhm58v" path="res://icon.svg" id="2_2g0vp"]
+[ext_resource type="Texture2D" uid="uid://cwa6jfdewjuhb" path="res://personajes/muñecoPrueba/hongo simple.png" id="2_2g0vp"]
 
 [node name="MuñecoPrueba" unique_id=1382673604 instance=ExtResource("1_a6no7")]
 collision_layer = 4
@@ -9,14 +9,27 @@ collision_mask = 1
 es_jugador = false
 vida_maxima = 50
 vida = 50
+desfase_horizontal_sprite = 12.0
+
+[node name="Sombra" parent="." index="0"]
+position = Vector2(0, 23)
 
 [node name="personajeSprite" parent="." index="1" unique_id=647587542]
-position = Vector2(8.940697e-07, 0.4999994)
-scale = Vector2(0.125, 0.11718749)
+position = Vector2(12, 0)
 texture = ExtResource("2_2g0vp")
+
+[node name="ColisionCuerpo" parent="." index="2"]
+position = Vector2(0, 10)
+
+[node name="ColisonSombra" parent="." index="3"]
+position = Vector2(0, 23)
 
 [node name="BarraCarga" parent="." index="6" unique_id=511213222]
 visible = false
 
 [node name="HUD" parent="." index="7" unique_id=1918061239]
 visible = false
+
+[node name="BarraVidaEnemigo" parent="." index="8" unique_id=26031977]
+offset_top = -24.0
+offset_bottom = -6.0
