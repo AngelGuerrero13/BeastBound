@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="BeastBound"
-run/main_scene="uid://b7ny33jmwvcqt"
+run/main_scene="res://ui/menu_principal.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Ajustes="*res://ui/ajustes.gd"
+CursorPatita="*res://ui/cursor_patita.gd"
 
 [display]
 

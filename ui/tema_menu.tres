@@ -1,0 +1,175 @@
+[gd_resource type="Theme" load_steps=22 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/art/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="botones"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="ajustes"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="panel"]
+[ext_resource type="FontFile" path="res://assets/art/ui/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="fuente"]
+
+[sub_resource type="AtlasTexture" id="BotonNormal"]
+atlas = ExtResource("botones")
+region = Rect2(160, 176, 96, 32)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="BotonPresionado"]
+atlas = ExtResource("botones")
+region = Rect2(256, 176, 96, 32)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Ventana"]
+atlas = ExtResource("panel")
+region = Rect2(504, 131, 35, 18)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="PistaApagada"]
+atlas = ExtResource("ajustes")
+region = Rect2(400, 104, 32, 16)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="PistaActiva"]
+atlas = ExtResource("ajustes")
+region = Rect2(400, 72, 32, 16)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Perilla"]
+atlas = ExtResource("ajustes")
+region = Rect2(311, 39, 19, 19)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="PerillaActiva"]
+atlas = ExtResource("ajustes")
+region = Rect2(343, 39, 19, 19)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="InterruptorApagado"]
+atlas = ExtResource("ajustes")
+region = Rect2(432, 96, 32, 32)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="InterruptorActivo"]
+atlas = ExtResource("ajustes")
+region = Rect2(432, 64, 32, 32)
+filter_clip = true
+
+[sub_resource type="StyleBoxTexture" id="Normal"]
+texture = SubResource("BotonNormal")
+texture_margin_left = 10.0
+texture_margin_top = 8.0
+texture_margin_right = 10.0
+texture_margin_bottom = 8.0
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxTexture" id="Hover"]
+texture = SubResource("BotonNormal")
+texture_margin_left = 10.0
+texture_margin_top = 8.0
+texture_margin_right = 10.0
+texture_margin_bottom = 8.0
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 8.0
+modulate_color = Color(1.06, 1.06, 1.06, 1)
+
+[sub_resource type="StyleBoxTexture" id="Pressed"]
+texture = SubResource("BotonPresionado")
+texture_margin_left = 10.0
+texture_margin_top = 8.0
+texture_margin_right = 10.0
+texture_margin_bottom = 8.0
+content_margin_left = 14.0
+content_margin_top = 10.0
+content_margin_right = 14.0
+content_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxTexture" id="Panel"]
+texture = SubResource("Ventana")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+
+[sub_resource type="StyleBoxTexture" id="Slider"]
+texture = SubResource("PistaApagada")
+texture_margin_left = 4.0
+texture_margin_top = 5.0
+texture_margin_right = 4.0
+texture_margin_bottom = 5.0
+content_margin_left = 0.0
+content_margin_top = 4.0
+content_margin_right = 0.0
+content_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="SliderActivo"]
+texture = SubResource("PistaActiva")
+texture_margin_left = 4.0
+texture_margin_top = 5.0
+texture_margin_right = 4.0
+texture_margin_bottom = 5.0
+content_margin_left = 0.0
+content_margin_top = 4.0
+content_margin_right = 0.0
+content_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="Focus"]
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.4, 0.29, 0.22, 0.6)
+
+[sub_resource type="StyleBoxEmpty" id="Empty"]
+
+[resource]
+default_font_size = 15
+Button/colors/font_color = Color(0.31, 0.22, 0.16, 1)
+Button/colors/font_hover_color = Color(0.22, 0.15, 0.1, 1)
+Button/colors/font_focus_color = Color(0.22, 0.15, 0.1, 1)
+Button/colors/font_pressed_color = Color(0.31, 0.22, 0.16, 1)
+Button/colors/font_disabled_color = Color(0.5, 0.4, 0.31, 1)
+Button/colors/icon_normal_color = Color(0.45, 0.32, 0.23, 1)
+Button/colors/icon_hover_color = Color(0.31, 0.22, 0.16, 1)
+Button/colors/icon_focus_color = Color(0.31, 0.22, 0.16, 1)
+Button/colors/icon_pressed_color = Color(0.4, 0.28, 0.19, 1)
+Button/constants/h_separation = 12
+Button/constants/icon_max_width = 24
+Button/styles/normal = SubResource("Normal")
+Button/styles/hover = SubResource("Hover")
+Button/styles/pressed = SubResource("Pressed")
+Button/styles/hover_pressed = SubResource("Pressed")
+Button/styles/disabled = SubResource("Normal")
+Button/styles/focus = SubResource("Focus")
+PixelMenu/base_type = &"Button"
+PixelMenu/fonts/font = ExtResource("fuente")
+PixelMenu/font_sizes/font_size = 22
+Label/colors/font_color = Color(0.31, 0.22, 0.16, 1)
+PanelContainer/styles/panel = SubResource("Panel")
+VBoxContainer/constants/separation = 10
+CheckButton/colors/font_color = Color(0.31, 0.22, 0.16, 1)
+CheckButton/colors/font_hover_color = Color(0.22, 0.15, 0.1, 1)
+CheckButton/colors/font_focus_color = Color(0.22, 0.15, 0.1, 1)
+CheckButton/font_sizes/font_size = 14
+CheckButton/styles/normal = SubResource("Empty")
+CheckButton/styles/hover = SubResource("Empty")
+CheckButton/styles/pressed = SubResource("Empty")
+CheckButton/styles/hover_pressed = SubResource("Empty")
+CheckButton/styles/focus = SubResource("Focus")
+CheckButton/icons/checked = SubResource("InterruptorActivo")
+CheckButton/icons/unchecked = SubResource("InterruptorApagado")
+CheckButton/icons/checked_mirrored = SubResource("InterruptorActivo")
+CheckButton/icons/unchecked_mirrored = SubResource("InterruptorApagado")
+HSlider/styles/slider = SubResource("Slider")
+HSlider/styles/grabber_area = SubResource("SliderActivo")
+HSlider/styles/grabber_area_highlight = SubResource("SliderActivo")
+HSlider/icons/grabber = SubResource("Perilla")
+HSlider/icons/grabber_highlight = SubResource("PerillaActiva")
+HSlider/icons/grabber_disabled = SubResource("Perilla")
+
+

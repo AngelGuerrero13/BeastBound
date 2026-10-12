@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="1440" viewBox="0 0 640 1440">
+  <defs>
+    <linearGradient id="paisaje" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#16364f"/>
+      <stop offset=".24" stop-color="#476c86"/>
+      <stop offset=".43" stop-color="#92b8bc"/>
+      <stop offset=".57" stop-color="#f1d8aa"/>
+      <stop offset=".67" stop-color="#aeb783"/>
+      <stop offset=".79" stop-color="#688b61"/>
+      <stop offset="1" stop-color="#314f3c"/>
+    </linearGradient>
+    <linearGradient id="tierra" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#b59364"/>
+      <stop offset="1" stop-color="#71583e"/>
+    </linearGradient>
+    <linearGradient id="surco" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#806447"/>
+      <stop offset="1" stop-color="#5a4733"/>
+    </linearGradient>
+    <linearGradient id="luz" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#ffeac1" stop-opacity=".25"/>
+      <stop offset="1" stop-color="#ffeac1" stop-opacity="0"/>
+    </linearGradient>
+    <g id="brote">
+      <path d="M0 9V0" stroke="#435d3b" stroke-width="3"/>
+      <path d="M0 5C-14 5-17-3-14-6C-6-8 0-3 0 5Z" fill="#82a861"/>
+      <path d="M0 3C0-7 8-12 13-8C16-1 7 4 0 3Z" fill="#a9bd71"/>
+    </g>
+    <g id="fila">
+      <use href="#brote" x="34"/><use href="#brote" x="83"/>
+      <use href="#brote" x="132"/><use href="#brote" x="181"/>
+      <use href="#brote" x="230"/><use href="#brote" x="279"/>
+      <use href="#brote" x="328"/><use href="#brote" x="377"/>
+      <use href="#brote" x="426"/><use href="#brote" x="475"/>
+      <use href="#brote" x="524"/><use href="#brote" x="573"/>
+    </g>
+  </defs>
+  <!-- Fondo provisional: cuatro pantallas de altura, del cielo a los cultivos. -->
+  <rect width="640" height="1440" fill="url(#paisaje)"/>
+  <ellipse cx="180" cy="720" rx="250" ry="220" fill="url(#luz)"/>
+  <path d="M0 1030Q140 930 290 1008T640 980V1200H0Z" fill="#78926c" opacity=".55"/>
+  <path d="M0 1104Q140 1024 315 1098T640 1060V1440H0Z" fill="#557a55"/>
+  <!-- Parcela de la granja con surcos y brotes simples para ubicar el menú. -->
+  <path d="M-10 1190L650 1140V1440H-10Z" fill="url(#tierra)"/>
+  <g fill="url(#surco)">
+    <path d="M0 1222L640 1172V1192L0 1242Z"/>
+    <path d="M0 1280L640 1230V1252L0 1302Z"/>
+    <path d="M0 1342L640 1292V1316L0 1366Z"/>
+    <path d="M0 1408L640 1358V1384L0 1434Z"/>
+  </g>
+  <g transform="matrix(1 -.078 0 1 8 1214)"><use href="#fila"/></g>
+  <g transform="matrix(1 -.078 0 1 8 1272)"><use href="#fila"/></g>
+  <g transform="matrix(1 -.078 0 1 8 1334)"><use href="#fila"/></g>
+  <g transform="matrix(1 -.078 0 1 8 1400)"><use href="#fila"/></g>
+</svg>
