@@ -7,7 +7,7 @@ const FRAMES: Array[Texture2D] = [
 	preload("res://assets/art/ui/cursor_patita/cierre.png"),
 	preload("res://assets/art/ui/cursor_patita/presionada.png"),
 ]
-const HOTSPOT := Vector2(18, 3)
+const HOTSPOT := Vector2(12, 7)
 const TIEMPO_TRANSICION := 0.065
 const TIEMPO_PRESION_MINIMA := 0.055
 

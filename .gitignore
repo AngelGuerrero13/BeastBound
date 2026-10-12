@@ -33,6 +33,25 @@ mono_crash.*.json
 *.log
 *~
 
+# Archivos comprimidos y paquetes
+*.zip
+*.tar
+*.gz
+*.rar
+*.7z
+/arbustos_nivel1/
+
+# Archivos auxiliares de generacion y borradores (no van al juego final)
+__pycache__/
+*.pyc
+assets/art/ui/cursor_patita/exportar_cursor.py
+assets/art/ui/cursor_patita/prompt_ladeado.txt
+assets/art/ui/cursor_patita/vista_clic.gif
+assets/art/ui/cursor_patita/vista_frames.png
+assets/art/ui/cursor_patita/vista_frames.png.import
+assets/art/ui/cursor_patita/fuente_ladeada.png
+assets/art/ui/cursor_patita/fuente_ladeada.png.import
+
 # Archivos del sistema operativo
 Thumbs.db
 Desktop.ini
@@ -47,3 +66,4 @@ desktop.ini
 
 # Se conservan escenas, scripts, recursos, arte original, archivos .import,
 # identificadores .uid y export_presets.cfg para compartir el proyecto.
+

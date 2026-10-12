@@ -30,10 +30,10 @@ func _ready() -> void:
 	if modo_pausa:
 		$Fondo.hide()
 		$Oscurecer.show()
-		_boton_menu("Jugar").tooltip_text = "Continuar"
-		botones.get_node("TextoContinuar").show()
+		_boton_menu("Jugar").get_node("Texto").text = "Continuar"
+		_boton_menu("Jugar").get_node("Texto").offset_left = 0.0
+		_boton_menu("Jugar").get_node("IconoJugar").hide()
 		_boton_menu("Salir").call("usar_frames", "inicio")
-		_boton_menu("Salir").tooltip_text = "Volver al menú principal"
 		_boton_menu("Salir").get_parent().get_node("Nombre").text = "MENU"
 		$AyudaIntroduccion.hide()
 		_boton_menu("Jugar").grab_focus()

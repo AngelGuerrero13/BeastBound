@@ -2,7 +2,11 @@
 
 Arte: propuesta pastel con dorso sin almohadillas y puño cerrado sin líneas entre los dedos. Edición generada con la herramienta integrada ImageGen. `fuente_puno.png` conserva la lámina original.
 
-`normal.png`, `cierre.png` y `presionada.png` son exportaciones de 48 × 48 con transparencia. Se usa un recorte común de los frames registrados y reducción por vecino más cercano para conservar el pixel art y la alineación del antebrazo. La punta activa está en (18, 3).
+`fuente_ladeada.png` incorpora la inclinación hacia la izquierda de la tercera opción elegida. Los tres estados mantienen esa orientación: abierto, transición y puño cerrado sin líneas entre los dedos.
+
+`normal.png`, `cierre.png` y `presionada.png` son exportaciones de 48 × 48 con transparencia. `exportar_cursor.py` registra la esquina inferior del antebrazo y aplica un recorte común y reducción por vecino más cercano. La punta activa está en (12, 7). `vista_frames.png` y `vista_clic.gif` muestran los archivos usados en el juego, ampliados cuatro veces.
+
+El arte ladeado se editó con la herramienta integrada ImageGen; su prompt está en `prompt_ladeado.txt`.
 
 ## Prompt de la imagen aprobada
 
