@@ -41,21 +41,21 @@ escena_bola_magica = ExtResource("3_wiglv")
 velocidad = 100.0
 velocidad_ataque = 4.0
 rango_ataque = 1.0
+desfase_horizontal_sprite = 8.0
 fuerza_salto = 200.0
 tiempo_requerido = 2.0
-desfase_horizontal_sprite = 8.0
 
-[node name="Sombra" parent="." index="0"]
+[node name="Sombra" parent="." index="0" unique_id=1873168614]
 position = Vector2(0, 25)
 
 [node name="Imagen Personaje" parent="." index="1" unique_id=647587542]
 texture = ExtResource("4_idle")
 hframes = 5
 
-[node name="Colision Cuerpo" parent="." index="2"]
+[node name="Colision Cuerpo" parent="." index="2" unique_id=1954197429]
 position = Vector2(0, 8)
 
-[node name="Colision Sombra" parent="." index="3"]
+[node name="Colision Sombra" parent="." index="3" unique_id=1812325256]
 position = Vector2(0, 25)
 
 [node name="Origen Disparo" type="Marker2D" parent="." index="4" unique_id=2094006370]

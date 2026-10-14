@@ -154,8 +154,12 @@ height = 2
 offsets = PackedFloat32Array(0, 0.2, 0.8, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_salida"]
+size = Vector2(32, 168)
+
 [node name="Nivel 1" type="Node2D" unique_id=76547120]
 script = ExtResource("5_nivel_largo")
+siguiente_nivel = "res://niveles/nivel 2/nivel 2.tscn"
 
 [node name="Ambiente" type="Node2D" parent="."]
 
@@ -341,6 +345,7 @@ shape = SubResource("RectangleShape2D_lateral")
 [node name="Colision Derecha" type="CollisionShape2D" parent="Limites Nivel/Paredes Laterales" unique_id=2063665166]
 position = Vector2(4808, 100)
 shape = SubResource("RectangleShape2D_lateral")
+disabled = true
 
 [node name="Muñeco Prueba" parent="." unique_id=1909748044 instance=ExtResource("4_cww3w")]
 position = Vector2(303, 83)
@@ -369,3 +374,14 @@ position_smoothing_enabled = true
 drag_vertical_enabled = true
 drag_top_margin = 0.4
 drag_bottom_margin = 0.4
+
+[node name="Salida Derecha" type="Area2D" parent="."]
+editor_description = "Al atravesar el extremo derecho se entra al Nivel 2. Destino editable en la raiz: Siguiente Nivel."
+position = Vector2(4824, 100)
+collision_layer = 0
+collision_mask = 2
+
+[node name="Colision Salida" type="CollisionShape2D" parent="Salida Derecha"]
+shape = SubResource("RectangleShape2D_salida")
+
+[connection signal="body_entered" from="Salida Derecha" to="." method="_salir_del_nivel"]

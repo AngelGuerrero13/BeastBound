@@ -32,6 +32,7 @@ mono_crash.*.json
 *.swo
 *.log
 /tests/test-appdata/
+**/test-appdata/
 *~
 
 # Archivos comprimidos y paquetes
@@ -45,6 +46,11 @@ mono_crash.*.json
 # Archivos auxiliares de generacion y borradores (no van al juego final)
 __pycache__/
 *.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
 assets/art/ui/cursor_patita/exportar_cursor.py
 assets/art/ui/cursor_patita/prompt_ladeado.txt
 assets/art/ui/cursor_patita/vista_clic.gif
@@ -64,6 +70,7 @@ desktop.ini
 .env
 .env.*
 !.env.example
+export_credentials.cfg
 
 # Se conservan escenas, scripts, recursos, arte original, archivos .import,
 # identificadores .uid y export_presets.cfg para compartir el proyecto.

@@ -1,0 +1,6 @@
+{
+  "prompt": "Use case: precise-object-edit. Edit target: this transparent 1536x1024 sprite atlas for a pixel-art game. Change ONLY the outlines of the 15 isolated sprites. The current thick near-black outlines look ugly at small game size. Reduce all outlines to a VERY FINE, low-contrast colored edge: wood edges warm medium brown, rope edges tan, leaf edges deep green, flower edges muted green. No black stroke. About 1 to 2 pixels of colored edge at the full 1536x1024 sheet scale, not the current 8 to 12 pixels. Fill most of the old thick black border inward with the appropriate material color so the full silhouette footprint remains exactly the same. Keep all sprites at the EXACT same coordinates, bounding sizes, shapes and spacing. Keep wood grain, warm palette, chipped boards, rope twist, knots, vine, daisy, pink flower, leaves and bush details. Keep every sprite separate and all existing transparent alpha areas transparent. Actual transparent RGBA background; no haze, no glow, no shadows, no backdrop. Do not move, shrink, enlarge, rearrange, add or remove any sprite. No text. Deliver the same 1536x1024 atlas with subtle thin outlines.",
+  "tool": "ImageGen integrado",
+  "source": "piezas_fuente.png",
+  "output": "piezas_trazo_fino.png"
+}

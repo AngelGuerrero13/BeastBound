@@ -39,7 +39,9 @@ func _comprobar() -> void:
 		assert(cartel.get_node("Boton Eliminar") is Button)
 		assert(cartel.get_node("Nombre Nuevo") is LineEdit)
 		assert(cartel.get_node("Barra Avance") is ProgressBar)
-		assert(cartel.get_node("Madera y Cuerdas").texture != null)
+		assert(cartel.get_node("Capa 1 Tabla") is TileMapLayer)
+		assert(cartel.get_node("Capa 2 Cuerda Izquierda") is TileMapLayer)
+		assert(cartel.get_node("Capa 3 Cuerda Derecha") is TileMapLayer)
 	assert(seleccion.get_node("Fondo Pradera").texture != null)
 	assert(seleccion.get_node("Confirmar Borrado/Panel Borrado/Boton Cancelar") is Button)
 	assert(seleccion.get_node("Confirmar Borrado/Panel Borrado/Boton Eliminar") is Button)
@@ -67,7 +69,8 @@ func _comprobar() -> void:
 		assert(is_equal_approx(cartel.get_node("Barra Avance").size.x, 242.0 * 2.0 / 3.0))
 		assert(cartel.get_node("Nombre Nuevo").size.x == 162.0, "El campo de nombre debe medir 162 px de ancho como el cartel 3.")
 		assert(cartel.get_node("Boton Eliminar").position.x > cartel.get_node("Barra Avance").get_rect().end.x)
-		assert(cartel.get_node("Boton Eliminar").get_rect().end.x < cartel.get_node("Boton Partida").position.x)
+		if cartel.get_node("Boton Eliminar").visible:
+			assert(not cartel.get_node("Boton Eliminar").get_rect().intersects(cartel.get_node("Boton Partida").get_rect()))
 		assert(cartel.get_node("Nombre Equipo").position.x >= 80, "El título debe quedar lejos de la cuerda izquierda.")
 		assert(cartel.get_node("Nombre Nuevo").get_global_rect().end.y <= cartel.get_global_rect().end.y - 8, "El campo debe conservar margen inferior dentro de la madera.")
 		assert(cartel.get_node("Boton Partida").get_global_rect().position.x >= cartel.get_node("Barra Avance").get_global_rect().end.x + 10, "La barra y el botón necesitan separación.")
@@ -85,6 +88,33 @@ func _comprobar() -> void:
 			cartel.get_node("Nombre Nuevo").text_submitted.emit(cartel.get_node("Nombre Nuevo").text)
 		else:
 			cartel.get_node("Boton Partida").pressed.emit()
+		await _esperar_escena()
+		assert(current_scene.scene_file_path == partidas.TUTORIAL)
+		assert(partidas.espacio_activo == espacio)
+		assert(not partidas.leer(espacio).tutorial_pendiente)
+		var salida: Button = current_scene.get_node("Interfaz Tutorial/Boton Avanzar")
+		var reloj: Timer = current_scene.get_node("Tiempo Practica")
+		assert(not salida.visible and salida.disabled)
+		assert(reloj.wait_time == 60.0 and reloj.time_left > 59.0)
+		current_scene._avanzar()
+		assert(current_scene.scene_file_path == partidas.TUTORIAL, "No se puede avanzar antes del minuto.")
+		paused = true
+		var tiempo_pausado := reloj.time_left
+		await create_timer(0.05).timeout
+		assert(is_equal_approx(reloj.time_left, tiempo_pausado), "Pausar detiene el minuto de practica.")
+		paused = false
+		assert(partidas.guardar_actual() == OK)
+		assert(partidas.leer(espacio).jugadores.is_empty(), "No trasladar posiciones del granero al Nivel 1.")
+		if espacio == 2:
+			# Salir sin terminar tampoco repite el tutorial al cargar una partida existente.
+			assert(change_scene_to_file("res://ui/seleccion_partidas.tscn") == OK)
+			await _esperar_escena()
+			current_scene.espacios.get_child(espacio - 1).get_node("Boton Partida").pressed.emit()
+		else:
+			reloj.timeout.emit()
+			assert(salida.visible and not salida.disabled)
+			assert(Rect2(Vector2.ZERO, Vector2(640, 360)).encloses(salida.get_global_rect()))
+			salida.pressed.emit()
 		await _esperar_escena()
 		assert(current_scene.scene_file_path == partidas.MUNDO)
 		assert(partidas.espacio_activo == espacio)
@@ -135,11 +165,12 @@ func _comprobar() -> void:
 	# Un guardado anterior sin los tres campos nuevos sigue siendo válido.
 	var antiguo := ConfigFile.new()
 	assert(antiguo.load("user://partidas/partida_2.cfg") == OK)
-	for campo in ["nombre", "nivel", "avance"]:
+	for campo in ["nombre", "nivel", "avance", "tutorial_pendiente"]:
 		antiguo.erase_section_key("partida", campo)
 	assert(antiguo.save("user://partidas/partida_2.cfg") == OK)
 	assert(partidas.leer(2).nombre == "Equipo 2")
 	assert(partidas.leer(2).nivel == 1 and partidas.leer(2).avance == 0)
+	assert(not partidas.leer(2).tutorial_pendiente, "Las partidas anteriores no deben entrar al tutorial.")
 	# La muerte no puede reemplazar el último guardado válido.
 	jugador.vida = 0
 	assert(partidas.guardar_actual() == ERR_UNAVAILABLE)

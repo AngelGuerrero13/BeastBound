@@ -24,11 +24,20 @@ func _comprobar() -> void:
 		"res://personajes/muñecoPrueba/muñeco_prueba.tscn",
 		"res://ui/menu_principal.tscn",
 		"res://ui/seleccion_partidas.tscn",
+		"res://niveles/tutorial/tutorial.tscn",
 	]
 	for ruta in escenas:
 		var escena: Node = load(ruta).instantiate()
 		assert(escena != null, ruta)
 		escena.free()
+	var tutorial: Node = load("res://niveles/tutorial/tutorial.tscn").instantiate()
+	assert(tutorial.get_node("Fondo/Suelo Paja").texture != null)
+	assert(tutorial.get_node("Fondo/Pared Granero") is TileMapLayer)
+	assert(tutorial.get_node("Zona Practica").get_child_count() == 3)
+	assert(tutorial.get_node("Interfaz Tutorial/Boton Avanzar") is Button)
+	assert(tutorial.get_node("Interfaz Tutorial/Boton Avanzar").theme.get_stylebox("normal", "Button") is StyleBoxTexture)
+	assert(tutorial.get_node("Camara Tutorial").limit_right == 480)
+	tutorial.free()
 	var nivel: Node = load(escenas[3]).instantiate()
 	var superior: CollisionShape2D = nivel.get_node("Limites Nivel/Pared Superior/Colision Superior")
 	var inferior: CollisionShape2D = nivel.get_node("Limites Nivel/Pared Inferior/Colision Inferior")
@@ -74,5 +83,5 @@ func _comprobar() -> void:
 			assert(fila.get_node("Porcentaje Volumen").text == "37%")
 		menu._cerrar_modal()
 		assert(not menu.modal.visible)
-	print("PASS: 12 escenas, paredes, camara, animaciones, corazones editables y tres ventanas del menu.")
+	print("PASS: 13 escenas, tutorial editable, paredes, camara, animaciones, corazones y ventanas del menu.")
 	quit()

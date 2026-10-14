@@ -2,9 +2,19 @@
 
 [ext_resource type="PackedScene" uid="uid://btbx3x03l1cxj" path="res://niveles/nivel 1/nivel 1.tscn" id="1_2q5vh"]
 [ext_resource type="Script" path="res://niveles/mundo.gd" id="2_guardado"]
+[ext_resource type="PackedScene" path="res://niveles/nivel 2/nivel 2.tscn" id="3_nivel_2"]
 
 [node name="Mundo" type="Node2D" unique_id=1230376621]
 script = ExtResource("2_guardado")
 
 [node name="Nivel 1" parent="." unique_id=76547120 instance=ExtResource("1_2q5vh")]
 position = Vector2(-17, 183)
+
+[node name="Nivel 2" parent="." instance=ExtResource("3_nivel_2")]
+editor_description = "Nivel editable con suelo, personajes, limites, camara y marcadores. Se activa al cruzar la salida del Nivel 1."
+process_mode = 4
+visible = false
+position = Vector2(-17, 183)
+
+[editable path="Nivel 1"]
+[editable path="Nivel 2"]

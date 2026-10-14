@@ -29,7 +29,15 @@ Abre `niveles/nivel 1/nivel 1.tscn`.
 
 Las capas 1 a 10 usan los TileSet `assets/art/fondos/vegetacion_editable/01_Siluetas.tres` a `10_MalezaInferior.tres`; los nombres de esos archivos se conservan. **Color Fondo** usa `color_fondo.png` de esa carpeta. No se han añadido fondos. Para pintar piezas completas, usa **TileMap → Patrones**. Más detalles en `assets/art/fondos/vegetacion_editable/COMO_EDITAR.md`.
 
-La escena `niveles/mundo.tscn` contiene Nivel 1. Abre la escena del nivel para editar sus nodos internos.
+La escena `niveles/mundo.tscn` contiene **Nivel 1** y **Nivel 2** como instancias guardadas, con sus hijos editables. Expande cada nivel en el árbol para editar suelo, personajes, límites, cámara y marcadores. Nivel 2 está oculto en Mundo para que los dibujos de ambos niveles no se superpongan; abre su escena propia para ver y editar su suelo. Al jugar, solo el nivel activo procesa movimiento, colisiones, cámara e interfaz.
+
+## Paso al Nivel 2
+
+En `niveles/nivel 1/nivel 1.tscn`, **Salida Derecha → Colision Salida** es la zona que abre Nivel 2 al atravesar el extremo derecho. **Limites Nivel → Paredes Laterales → Colision Derecha** está desactivada para permitir el paso. El destino está en **Nivel 1 → Siguiente Nivel** en el Inspector.
+
+Abre `niveles/nivel 2/nivel 2.tscn`. **Fondo → Suelo Pasto** contiene las mismas baldosas y dimensiones del Nivel 1, sin color de fondo, vegetación ni polen. Su TileSet usa `assets/art/fondos/MagicMarketFondo/Tilesets/TilesetFloor.png`; no se añadió ninguna textura de fondo. Los límites, cámara, personajes y marcadores siguen siendo nodos editables. El Nivel 2 conserva su pared derecha porque todavía no hay un Nivel 3.
+
+Al jugar desde el menú, el mundo desactiva Nivel 1 y activa el nodo Nivel 2 ya guardado en la escena, conservando la vida del jugador. Guardar y cargar recuerda el nivel, la posición y la vida; el porcentaje de avance empieza de cero al cambiar de nivel. Las partidas antiguas del Nivel 1 siguen cargando.
 
 **Polen Suave** guarda en la escena una textura `GradientTexture2D` de 2 × 2 píxeles y un gradiente de aparición y desaparición. Son 360 partículas repartidas a lo largo del nivel, de 1 a 2,5 px/s, escala de 0,65 a 1,05 y opacidad máxima del 62%; se dibujan detrás de los personajes y de su interfaz. No añade fondos ni rayos de luz.
 
@@ -49,7 +57,7 @@ Abre `personajes/personajeBase/personaje_base.tscn` para cambios compartidos por
 
 ## Menús
 
-La selección de partidas se edita en `ui/seleccion_partidas.tscn`: **Fondo Pradera** tiene la pradera y el soporte con las cuerdas sujetas al travesaño; **Titulo Partidas** es texto editable. En **Carteles → Cartel 1 / Cartel 2 / Cartel 3**, cada nodo **Madera y Cuerdas** usa una región de `assets/art/ui/partidas_rusticas/carteles.png`; los nombres, datos, barras, campos de nombre y botones son nodos separados. **Boton Volver** y **Estado Partida** están en la raíz. `ui/tema_partidas.tres` usa `boton_madera.png` para las placas ámbar. Los tres PNG están guardados en el proyecto y se ven en el editor sin ejecutar. El script cambia los ejemplos del editor por las partidas reales al iniciar la escena.
+La selección de partidas se edita en `ui/seleccion_partidas.tscn`. **Fondo Pradera** usa `assets/art/ui/partidas_editables/paisaje.png`, sin arco ni cuerdas. **Arco** contiene dos palos, travesaño, placa del título y dos amarres en capas independientes, sin plantas colocadas. En **Carteles → Cartel 1 / Cartel 2 / Cartel 3**, la tabla, cada cuerda, cada nudo y sus adornos son también capas separadas. Al seleccionar una **Capa**, abre **TileMap → Patrones**: las 31 plantillas (incluidos 15 adornos naturales) de `assets/art/ui/partidas_editables/plantillas.tres` permiten pintar piezas completas, igual que en Nivel 1. La cuadrícula es de 4 píxeles. Más detalles en `assets/art/ui/partidas_editables/COMO_EDITAR.md`. Los textos, barras, campos y botones siguen siendo controles editables y el script carga las partidas reales al iniciar.
 
 Abre `ui/menu_principal.tscn`:
 
@@ -65,6 +73,6 @@ Abre `ui/seleccion_partidas.tscn`: **Carteles → Cartel 1 / Cartel 2 / Cartel 3
 
 Usa **F6** para probar la escena abierta o **F5** para iniciar desde el menú principal. Los scripts mantienen las transiciones, el comportamiento, los ajustes y las partidas. Se conserva la ruta guardada `Nivel 1/Mago` para que las partidas anteriores sigan cargando.
 
-La selección usa carteles de 480 píxeles de ancho. En cada **Cartel**, **Boton Eliminar** es la X rojiza: visible en los dos ejemplos guardados y oculta en el espacio vacío. La confirmación también es editable en la raíz: **Confirmar Borrado → Panel Borrado**, con **Titulo Borrado**, **Detalle Borrado**, **Boton Cancelar** y **Boton Eliminar**. Activa Visible de Confirmar Borrado para previsualizarla y vuelve a ocultarla antes de guardar. El estilo Eliminar está en **ui/tema_partidas.tres**. **Pradera_Ancha** es una región de pradera_soporte.png que adapta el soporte al nuevo ancho; no se añadió otro fondo.
+La selección usa carteles de 480 píxeles de ancho. En cada **Cartel**, **Boton Eliminar** es la X rojiza: visible en los dos ejemplos guardados y oculta en el espacio vacío. La confirmación también es editable en la raíz: **Confirmar Borrado → Panel Borrado**, con **Titulo Borrado**, **Detalle Borrado**, **Boton Cancelar** y **Boton Eliminar**. Activa Visible de Confirmar Borrado para previsualizarla y vuelve a ocultarla antes de guardar. **Madera Borrado** usa la tabla limpia `partidas_editables/tabla_1.png`. El estilo Eliminar está en **ui/tema_partidas.tres**.
 
-Ajuste visual de partidas: **Fondo Pradera → Texture → Pradera_Ancha** usa **pradera_soporte_v2.png**, con las cuerdas del travesaño retocadas y alineadas. La barra de progreso mide dos tercios del ancho anterior. En cada **Cartel**, **Boton Eliminar** queda entre las cuerdas, a la izquierda de **Boton Partida**. **Detalle Partida** se oculta en los espacios vacíos. El cartel de guardar se edita en **menu_principal.tscn → Centro Menu → Margen Interior → Botones Menu → Boton Guardar Partida**; sus estilos usan **cartel_sin_cuerdas.png** y su texto es GUARDAR PARTIDA. Ambos PNG y los prompts están en **assets/art/ui/partidas_rusticas**.
+La barra de progreso mide dos tercios del ancho anterior. **Detalle Partida** se oculta en los espacios vacíos. El cartel de guardar se edita en **menu_principal.tscn → Centro Menu → Margen Interior → Botones Menu → Boton Guardar Partida**; sus estilos usan **cartel_sin_cuerdas.png** y su texto es GUARDAR PARTIDA. Ese PNG y sus prompts están en **assets/art/ui/partidas_rusticas**.

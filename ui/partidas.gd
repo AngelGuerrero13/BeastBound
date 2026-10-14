@@ -2,6 +2,7 @@ extends Node
 
 const MAX_PARTIDAS := 3
 const MUNDO := "res://niveles/mundo.tscn"
+const TUTORIAL := "res://niveles/tutorial/tutorial.tscn"
 const CARPETA := "user://partidas"
 
 var espacio_activo := 0
@@ -34,11 +35,14 @@ func leer(espacio: int) -> Dictionary:
 	var nombre: Variant = archivo.get_value("partida", "nombre", "Equipo %d" % espacio)
 	var nivel: Variant = archivo.get_value("partida", "nivel", 1)
 	var avance: Variant = archivo.get_value("partida", "avance", 0)
+	var tutorial_pendiente: Variant = archivo.get_value("partida", "tutorial_pendiente", false)
 	if not nombre is String or nombre.strip_edges().is_empty() or nombre.length() > 24:
 		return {}
 	if not nivel is int or nivel < 1 or not avance is int or avance < 0 or avance > 100:
 		return {}
-	return {"jugadores": jugadores, "fecha": fecha, "nombre": nombre, "nivel": nivel, "avance": avance}
+	if not tutorial_pendiente is bool:
+		return {}
+	return {"jugadores": jugadores, "fecha": fecha, "nombre": nombre, "nivel": nivel, "avance": avance, "tutorial_pendiente": tutorial_pendiente}
 
 
 func crear(espacio: int, nombre: String = "") -> Error:
@@ -49,20 +53,30 @@ func crear(espacio: int, nombre: String = "") -> Error:
 	nombre = nombre.strip_edges()
 	if nombre.is_empty() or nombre.length() > 24:
 		return ERR_INVALID_PARAMETER
-	return _escribir(espacio, [], nombre, 1, 0)
+	return _escribir(espacio, [], nombre, 1, 0, true)
 
 
 func abrir(espacio: int) -> Error:
 	var datos := leer(espacio)
 	if datos.is_empty():
 		return ERR_FILE_CORRUPT
+	var destino: String = TUTORIAL if datos.tutorial_pendiente else MUNDO
+	# Consumir la primera entrada: cargar después siempre abre el Nivel 1.
+	if datos.tutorial_pendiente:
+		var guardado := _escribir(espacio, datos.jugadores, datos.nombre, datos.nivel, datos.avance)
+		if guardado != OK:
+			return guardado
 	var anterior := espacio_activo
 	espacio_activo = espacio
 	estado_pendiente = datos
-	var resultado := Ajustes.cambiar_escena(MUNDO)
+	var resultado := Ajustes.cambiar_escena(destino)
 	if resultado != OK:
 		espacio_activo = anterior
 		estado_pendiente = {}
+		if datos.tutorial_pendiente:
+			var restaurado := _escribir(espacio, datos.jugadores, datos.nombre, datos.nivel, datos.avance, true)
+			if restaurado != OK:
+				push_error("No se pudo restaurar la entrada al tutorial: %s" % error_string(restaurado))
 	return resultado
 
 
@@ -80,11 +94,17 @@ func eliminar(espacio: int) -> Error:
 
 func guardar_actual() -> Error:
 	var mundo := get_tree().current_scene
-	if espacio_activo < 1 or espacio_activo > MAX_PARTIDAS or mundo == null or mundo.scene_file_path != MUNDO:
+	if espacio_activo < 1 or espacio_activo > MAX_PARTIDAS or mundo == null or mundo.scene_file_path not in [MUNDO, TUTORIAL]:
 		return ERR_UNCONFIGURED
+	if mundo.scene_file_path == TUTORIAL:
+		var datos := leer(espacio_activo)
+		if datos.is_empty():
+			return ERR_FILE_CORRUPT
+		# Las posiciones del granero no pertenecen al Nivel 1.
+		return _escribir(espacio_activo, [], datos.nombre, 1, 0)
 	var jugadores: Array = []
 	for jugador in get_tree().get_nodes_in_group("Jugador"):
-		if not mundo.is_ancestor_of(jugador) or not jugador.es_jugador or jugador.is_queued_for_deletion():
+		if not mundo.nivel_actual.is_ancestor_of(jugador) or not jugador.es_jugador or jugador.is_queued_for_deletion():
 			continue
 		if jugador.vida <= 0:
 			return ERR_UNAVAILABLE
@@ -94,15 +114,15 @@ func guardar_actual() -> Error:
 	var anterior := leer(espacio_activo)
 	if anterior.is_empty():
 		return ERR_FILE_CORRUPT
-	var nivel: Node2D = mundo.get_node("Nivel 1")
+	var nivel: Node2D = mundo.nivel_actual
 	var camara: Camera2D = nivel.get_node("Camara Nivel")
 	var inicio: float = nivel.get_meta("inicio_avance")
-	var avance: int = anterior.avance
+	var avance: int = anterior.avance if anterior.nivel == nivel.numero_nivel else 0
 	# shortcut: avance por distancia recorrida; sustituir cuando haya objetivos de nivel.
 	for jugador in jugadores:
 		var recorrido: float = inverse_lerp(inicio, float(camara.limit_right), jugador.posicion.x)
 		avance = maxi(avance, clampi(floori(recorrido * 100.0), 0, 100))
-	return _escribir(espacio_activo, jugadores, anterior.nombre, 1, avance)
+	return _escribir(espacio_activo, jugadores, anterior.nombre, nivel.numero_nivel, avance)
 
 
 func aplicar_estado(mundo: Node2D) -> void:
@@ -120,7 +140,7 @@ func _ruta(espacio: int) -> String:
 	return "%s/partida_%d.cfg" % [CARPETA, espacio]
 
 
-func _escribir(espacio: int, jugadores: Array, nombre: String, nivel: int, avance: int) -> Error:
+func _escribir(espacio: int, jugadores: Array, nombre: String, nivel: int, avance: int, tutorial_pendiente: bool = false) -> Error:
 	var resultado := DirAccess.make_dir_recursive_absolute(CARPETA)
 	if resultado != OK:
 		return resultado
@@ -132,6 +152,7 @@ func _escribir(espacio: int, jugadores: Array, nombre: String, nivel: int, avanc
 	archivo.set_value("partida", "nombre", nombre)
 	archivo.set_value("partida", "nivel", nivel)
 	archivo.set_value("partida", "avance", avance)
+	archivo.set_value("partida", "tutorial_pendiente", tutorial_pendiente)
 	# Escribir primero el temporal evita truncar el guardado anterior si falla la escritura.
 	var temporal := _ruta(espacio) + ".tmp"
 	resultado = archivo.save(temporal)
