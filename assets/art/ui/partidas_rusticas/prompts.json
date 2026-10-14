@@ -1,0 +1,14 @@
+[
+  {
+    "name": "background",
+    "prompt": "Production game asset edit of approved image. Produce the SAME16:9pixelmeadow and timber SUPPORTFRAME on opaque background. REMOVE allTHREE hangingwoodsaveboards, their flowers/vines/grass and theirinter-boardropes, alltheirbuttons/progresstext/input. Reconstructquietskyandmeadow behind them. KEEP thetwotallwoodposts, horizontalcrossbeamwithvegetation, HEADER REDWOODPLAQUE butremove 'Tus partidas' lettering leavingblankwoodheader. KEEP two veryclear tanropeTIES WRAPPEDAROUNDCROSSBEAMwithknots justbelow, andshortstraighttanropesdescendingtojustbelowbeam toconnectfuturecards. These must NOT hangfromnowhere. Remove 'Volver' footerbuttoncompletelyandrestoregrass. Removealltext. No newart. Maintain SAME framing/positions/colors/pixeldensity of support andlandscape. This is backgroundspritefortheapprovedscreen, userwilladdeditable3cardsatsamepositionsinGodot. Not a completedmenu, NO cards/text/actionplaques. Actuallevel1coarsesquarepixels, nogradients/HDdetail."
+  },
+  {
+    "name": "boards",
+    "prompt": "Production game UI sprite edit of supplied approved threeconnectedwoodwindows. KEEP ONLY theTHREE connectedwoodplanks,allropes/clearholes/sixbottomstopperknots anddifferentwildplants ontransparentbackground. DELETE ALLLETTERING, allstatuslabels, all3SMALLGOLDENACTIONPLAQUESincludingtheirnailheads, allprogressbarframes/fillsandinputframe. FILLallthoseregionswithmatchinguninterruptedMATTERED-BROWNWOODface. EachwholeboardfaceshouldbeblankwoodreadyforeditableGodotcontrols. Do not leaveemptygoldbuttonsorbartroughs. Preserve approved solidevenshapes,pixelgrid,redbrownwoodcolors,vinewhiteflowersTOPLEFT,tinyflowerbranchTOPLOWRIGHT, middlepinkrightvine/purplelowleftstem, thirdgrassaboveedge, two aligned ropecolumns threadedthroughupperdarkholes NOtopknots andall6bottomstopperknots. Do notremoveknotsorplants. Keep3boardsverticallystackedandconnected, fullyvisiblemoderatemargins. Genuine transparency. Noenvironment/frame/headerfootertext. OriginalsimpleactualLevel1pixelstyleandflatpalettes. Blank production spriteatlas composedof3woodboardsandconnectingropes withnoUI orlabels."
+  },
+  {
+    "name": "button",
+    "prompt": "Production game asset: isolate ONLY ONE gold/honeyamber smallwoodenbuttonplaquefromtheapprovedimage, nootherobjects. Plainwidegoldwoodrectanglewith4darksmallironfastenerheadsoneineachcorner, darkbrownoutline,matte3flatambercolors,slightchippedpixelcorners. REMOVE alllettering leavingblankgoldface. Transparentbackground. Singleplaque centered withverylittlepadding, aspectratioabout2.4:1. No rope, grass, flowers, board, text, bar, icon, drop shadoworbackground. Same chunkyactualLevel1pixelgrid, no polishedsheenorgradients. IntendedrawtextureforGodotButtonwhichwilladdeditabletext."
+  }
+]

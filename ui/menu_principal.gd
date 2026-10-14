@@ -1,19 +1,18 @@
 extends Control
 
-const MUNDO := "res://niveles/mundo.tscn"
-const RECURSOS_UI := preload("res://ui/recursos_ui.gd")
+const SELECCION_PARTIDAS := "res://ui/seleccion_partidas.tscn"
 
 @export var modo_pausa := false
 @export_range(1.0, 30.0, 0.5) var duracion_introduccion := 7.0
 
-@onready var botones: VBoxContainer = $Panel/Margen/Opciones
-@onready var modal: ColorRect = $Modal
-@onready var contenido: VBoxContainer = $Modal/Centro/Ventana/Margen/Contenido
-@onready var mensaje: Label = $Mensaje
+@onready var botones: VBoxContainer = $"Centro Menu/Margen Interior/Botones Menu"
+@onready var modal: ColorRect = $"Ventanas Menu"
+@onready var contenido: VBoxContainer = $"Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana"
+@onready var mensaje: Label = $"Estado Partida"
 
 var boton_anterior: Control
 var ventana_actual := ""
-var estado_guardado: Label
+@onready var estado_guardado: Label = contenido.get_node("Configuracion/Estado Ajustes")
 var introduccion_activa := false
 var mostrando_menu := false
 var progreso_introduccion := 0.0
@@ -22,34 +21,50 @@ var animacion_menu: Tween
 
 
 func _ready() -> void:
+	for ventana in contenido.get_children():
+		ventana.get_node("Boton Volver").pressed.connect(_cerrar_modal)
+	var configuracion := contenido.get_node("Configuracion")
+	var filas := {"general": "Volumen General", "musica": "Volumen Musica", "efectos": "Volumen Efectos"}
+	for clave in filas:
+		var fila: HBoxContainer = configuracion.get_node(filas[clave])
+		var deslizador: HSlider = fila.get_node("Deslizador Volumen")
+		var porcentaje: Label = fila.get_node("Porcentaje Volumen")
+		deslizador.value_changed.connect(func(valor: float) -> void:
+			Ajustes.establecer_volumen(clave, valor)
+			porcentaje.text = "%d%%" % valor
+		)
+	configuracion.get_node("Opciones Generales/Silenciar Audio").toggled.connect(Ajustes.establecer_silencio)
+	configuracion.get_node("Opciones Generales/Pantalla Completa").toggled.connect(Ajustes.establecer_pantalla_completa)
 	_boton_menu("Jugar").pressed.connect(_jugar)
 	_boton_menu("Configuracion").pressed.connect(_configuracion)
 	_boton_menu("Controles").pressed.connect(_controles)
 	_boton_menu("Creditos").pressed.connect(_creditos)
 	_boton_menu("Salir").pressed.connect(_salir)
+	_boton_menu("GuardarPartida").pressed.connect(_guardar_partida)
+	_boton_menu("GuardarPartida").visible = modo_pausa
 	if modo_pausa:
 		$Fondo.hide()
-		$Oscurecer.show()
-		_boton_menu("Jugar").get_node("Texto").text = "Continuar"
-		_boton_menu("Jugar").get_node("Texto").offset_left = 0.0
-		_boton_menu("Jugar").get_node("IconoJugar").hide()
+		$"Sombra Pantalla".show()
+		_boton_menu("Jugar").get_node("Texto Boton").text = "Continuar"
+		_boton_menu("Jugar").get_node("Texto Boton").offset_left = 0.0
+		_boton_menu("Jugar").get_node("Icono Jugar").hide()
 		_boton_menu("Salir").call("usar_frames", "inicio")
-		_boton_menu("Salir").get_parent().get_node("Nombre").text = "MENU"
-		$AyudaIntroduccion.hide()
+		_boton_menu("Salir").get_parent().get_node("Etiqueta Boton").text = "MENU"
+		$"Ayuda Introduccion".hide()
 		_boton_menu("Jugar").grab_focus()
 		return
 	resized.connect(_ajustar_imagen_introduccion)
 	if Ajustes.introduccion_vista:
 		progreso_introduccion = 1.0
 		_ajustar_imagen_introduccion()
-		$AyudaIntroduccion.hide()
+		$"Ayuda Introduccion".hide()
 		_boton_menu("Jugar").grab_focus()
 	else:
 		_iniciar_introduccion()
 
 
 func _boton_menu(nombre: String) -> BaseButton:
-	return botones.find_child(nombre, true, false) as BaseButton
+	return botones.find_child("Boton " + nombre.replace("GuardarPartida", "Guardar Partida"), true, false) as BaseButton
 
 
 func _opciones_menu() -> Array[BaseButton]:
@@ -61,7 +76,7 @@ func _opciones_menu() -> Array[BaseButton]:
 
 func _iniciar_introduccion() -> void:
 	introduccion_activa = true
-	$Panel.hide()
+	$"Centro Menu".hide()
 	for boton in _opciones_menu():
 		boton.disabled = true
 	_ajustar_imagen_introduccion()
@@ -77,7 +92,7 @@ func _actualizar_introduccion(progreso: float) -> void:
 
 
 func _ajustar_imagen_introduccion() -> void:
-	var imagen: TextureRect = $Fondo/Imagen
+	var imagen: TextureRect = $"Fondo/Imagen Granja"
 	var alto := maxf(size.y, size.x * imagen.texture.get_height() / float(imagen.texture.get_width()))
 	imagen.size = Vector2(size.x, alto)
 	imagen.position = Vector2(0, -(alto - size.y) * progreso_introduccion)
@@ -88,9 +103,9 @@ func _mostrar_menu() -> void:
 		return
 	mostrando_menu = true
 	_actualizar_introduccion(1.0)
-	$AyudaIntroduccion.hide()
+	$"Ayuda Introduccion".hide()
 	animacion_menu = create_tween().set_parallel(true)
-	for nodo in [$Panel]:
+	for nodo in [$"Centro Menu"]:
 		nodo.modulate.a = 0.0
 		nodo.show()
 		animacion_menu.tween_property(nodo, "modulate:a", 1.0, 0.65)
@@ -129,53 +144,41 @@ func _jugar() -> void:
 	if modo_pausa:
 		Ajustes.reanudar()
 	else:
-		_cambiar_escena(MUNDO)
+		_cambiar_escena(SELECCION_PARTIDAS)
+
+
+func _guardar_partida() -> void:
+	var resultado := Partidas.guardar_actual()
+	if resultado == OK:
+		mensaje.text = "PARTIDA %d GUARDADA." % Partidas.espacio_activo
+	elif resultado == ERR_UNCONFIGURED:
+		mensaje.text = "ABRE UNA PARTIDA DESDE JUGAR PARA PODER GUARDARLA."
+	elif resultado == ERR_UNAVAILABLE:
+		mensaje.text = "NO PUEDES GUARDAR SIN UN PERSONAJE CON VIDA."
+	else:
+		mensaje.text = "NO SE PUDO GUARDAR LA PARTIDA. INTENTA DE NUEVO."
 
 
 func _cambiar_escena(ruta: String) -> void:
 	var resultado := Ajustes.cambiar_escena(ruta)
 	if resultado != OK:
-		mensaje.text = "No se pudo abrir la escena. Error: %s" % resultado
+		mensaje.text = "NO SE PUDO ABRIR LA ESCENA. ERROR: %s" % resultado
 		_boton_menu("Jugar").grab_focus()
 
 
-func _abrir_modal(titulo: String, ventana: String) -> void:
+func _abrir_modal(ventana: String) -> void:
 	boton_anterior = get_viewport().gui_get_focus_owner()
 	ventana_actual = ventana
-	for hijo in contenido.get_children():
-		contenido.remove_child(hijo)
-		hijo.queue_free()
+	for panel in contenido.get_children():
+		panel.visible = panel.name == ventana
 	# El teclado queda dentro de la ventana, sin activar botones del fondo.
 	for boton in _opciones_menu():
 		boton.focus_mode = Control.FOCUS_NONE
 	modal.show()
-	var encabezado := _etiqueta(titulo, 22)
-	encabezado.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	contenido.add_child(encabezado)
-	contenido.add_child(HSeparator.new())
-
-
-func _etiqueta(texto: String, tamano: int = 14) -> Label:
-	var etiqueta := Label.new()
-	etiqueta.text = texto
-	etiqueta.add_theme_font_size_override("font_size", tamano)
-	return etiqueta
-
-
-func _boton(texto: String, accion: Callable, icono: String = "") -> Button:
-	var boton := Button.new()
-	boton.text = texto
-	boton.custom_minimum_size.y = 32
-	if not icono.is_empty():
-		boton.icon = RECURSOS_UI.icono(icono)
-		boton.expand_icon = true
-	boton.pressed.connect(accion)
-	contenido.add_child(boton)
-	return boton
 
 
 func _cerrar_modal() -> void:
-	if ventana_actual == "configuracion":
+	if ventana_actual == "Configuracion":
 		if Ajustes.guardar() != OK:
 			estado_guardado.text = "No se pudieron guardar los ajustes. Intenta de nuevo."
 			return
@@ -188,76 +191,27 @@ func _cerrar_modal() -> void:
 
 
 func _configuracion() -> void:
-	_abrir_modal("Configuración", "configuracion")
-	var primer_control: HSlider
-	for clave in ["general", "musica", "efectos"]:
-		var fila := HBoxContainer.new()
-		var nombres := {"general": "Volumen general", "musica": "Música", "efectos": "Efectos"}
-		var etiqueta := _etiqueta(nombres[clave])
-		etiqueta.custom_minimum_size.x = 130
-		fila.add_child(etiqueta)
-		var deslizador := HSlider.new()
-		deslizador.custom_minimum_size = Vector2(150, 24)
-		deslizador.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		deslizador.max_value = 100
-		deslizador.step = 1
-		deslizador.value = Ajustes.volumenes[clave]
-		fila.add_child(deslizador)
-		var porcentaje := _etiqueta("%d%%" % deslizador.value)
-		porcentaje.custom_minimum_size.x = 42
-		porcentaje.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-		fila.add_child(porcentaje)
-		deslizador.value_changed.connect(func(valor: float) -> void:
-			Ajustes.establecer_volumen(clave, valor)
-			porcentaje.text = "%d%%" % valor
-		)
-		contenido.add_child(fila)
-		if primer_control == null:
-			primer_control = deslizador
-	var silencio := CheckButton.new()
-	silencio.text = "Silenciar todo el audio"
-	silencio.button_pressed = Ajustes.silenciado
-	silencio.toggled.connect(Ajustes.establecer_silencio)
-	contenido.add_child(silencio)
-	var pantalla := CheckButton.new()
-	pantalla.text = "Pantalla completa"
-	pantalla.button_pressed = Ajustes.pantalla_completa
-	pantalla.toggled.connect(Ajustes.establecer_pantalla_completa)
-	contenido.add_child(pantalla)
-	estado_guardado = _etiqueta("Los cambios se aplican al instante.", 12)
-	contenido.add_child(estado_guardado)
-	_boton("Guardar y volver", _cerrar_modal, "volver")
-	primer_control.grab_focus()
+	var configuracion := contenido.get_node("Configuracion")
+	var filas := {"general": "Volumen General", "musica": "Volumen Musica", "efectos": "Volumen Efectos"}
+	for clave in filas:
+		var fila := configuracion.get_node(filas[clave])
+		fila.get_node("Deslizador Volumen").set_value_no_signal(Ajustes.volumenes[clave])
+		fila.get_node("Porcentaje Volumen").text = "%d%%" % Ajustes.volumenes[clave]
+	configuracion.get_node("Opciones Generales/Silenciar Audio").set_pressed_no_signal(Ajustes.silenciado)
+	configuracion.get_node("Opciones Generales/Pantalla Completa").set_pressed_no_signal(Ajustes.pantalla_completa)
+	estado_guardado.text = "Los cambios se aplican al instante."
+	_abrir_modal("Configuracion")
+	configuracion.get_node("Volumen General/Deslizador Volumen").grab_focus()
 
 
 func _controles() -> void:
-	_abrir_modal("Controles", "controles")
-	var filas := [
-		["Moverse", "W A S D / Flechas"],
-		["Saltar", "Espacio / Enter"],
-		["Apuntar", "Mover el ratón"],
-		["Ataque normal", "Clic izquierdo"],
-		["Ataque cargado", "Mantener clic derecho"],
-		["Pausar / Volver", "Escape"],
-	]
-	var tabla := GridContainer.new()
-	tabla.columns = 2
-	tabla.add_theme_constant_override("h_separation", 28)
-	tabla.add_theme_constant_override("v_separation", 9)
-	for fila in filas:
-		for texto in fila:
-			tabla.add_child(_etiqueta(texto))
-	contenido.add_child(tabla)
-	contenido.add_child(_etiqueta("Menús: ratón o flechas y Enter.", 12))
-	_boton("Volver", _cerrar_modal, "volver").grab_focus()
+	_abrir_modal("Controles")
+	contenido.get_node("Controles/Boton Volver").grab_focus()
 
 
 func _creditos() -> void:
-	_abrir_modal("Equipo Sixglitch", "creditos")
-	var texto := _etiqueta("Javiera Maluenda · Jorge Muñoz\nPriscilla Álvarez · Constanza Araya\nÁngel Guerrero · Renato Martínez\n\nBeastBound", 15)
-	texto.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	contenido.add_child(texto)
-	_boton("Volver", _cerrar_modal, "volver").grab_focus()
+	_abrir_modal("Creditos")
+	contenido.get_node("Creditos/Boton Volver").grab_focus()
 
 
 func _salir() -> void:

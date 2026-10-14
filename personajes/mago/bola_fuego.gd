@@ -10,7 +10,7 @@ var tiempo_vida: float = 3.0
 	
 func _ready() -> void:
 	# La animación arranca una sola vez al crearse la bola
-	$AnimatedSprite2D.play("default")
+	$"Animacion Fuego".play("default")
 
 func configurar(nuevo_objetivo: Node2D, cargado: bool, direccion_base: Vector2):
 	objetivo = nuevo_objetivo

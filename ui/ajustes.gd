@@ -32,13 +32,14 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel") and not event.is_echo():
 		var escena := get_tree().current_scene
-		if escena != null and escena.scene_file_path != MENU and capa_pausa == null:
+		if escena != null and escena.scene_file_path != MENU and escena.scene_file_path != "res://ui/seleccion_partidas.tscn" and capa_pausa == null:
 			get_viewport().set_input_as_handled()
 			_pausar()
 
 
 func _pausar() -> void:
 	capa_pausa = CanvasLayer.new()
+	capa_pausa.name = "Interfaz Pausa"
 	capa_pausa.layer = 100
 	capa_pausa.process_mode = Node.PROCESS_MODE_ALWAYS
 	var menu: Control = load(MENU).instantiate()

@@ -1,41 +1,13 @@
-# Decoración del nivel 1
+# Editar la decoración del nivel 1
 
-La paleta del panel **TileMap** coloca árboles y arbustos completos con un clic. Sus partes transparentes dejan ver el fondo; la pieza ya no se divide en un pincel de muchas casillas.
+Cada capa contiene directamente sus árboles, arbustos o rocas. Se usa la edición normal de Godot: haz clic en el dibujo para seleccionar su TileMapLayer y abrir el panel TileMap. El resaltado nativo deja más clara la capa activa y atenúa las demás cuando está activado **Resaltar capa seleccionada** en ese panel.
 
-## Añadir un adorno
+Para añadir piezas, elige una plantilla en **TileMap → Patrones** y pinta en el nivel. La cuadrícula es de **8 × 8 píxeles**, la mitad de la original. El tamaño del arte y las posiciones ya guardadas se conservan.
 
-1. Abre `niveles/nivel 1/nivel 1.tscn` y selecciona una capa dentro de **Fondo**, por ejemplo **05_ArbustosGrandes**.
-2. En el panel inferior **TileMap**, selecciona **Piezas para pintar**.
-3. Haz clic sobre el arbusto o árbol de la paleta. Ya se selecciona entero. También puedes elegirlo en **Patrones**.
-4. Haz clic en el nivel para colocarlo. Guarda con **Ctrl + S**.
+Pinta los árboles cercanos en **Capa 4 Arboles Grandes** y los arbustos delanteros en **Capa 5 Arbustos Grandes** para superponerlos sin sustituir casillas de la otra capa. El suelo mantiene su cuadrícula de 16 píxeles.
 
-El borde superior izquierdo de la imagen se alinea con la casilla donde pintas. Cada pieza completa utiliza una sola casilla de colocación, aunque su dibujo sea grande. Para borrar una pieza nueva, borra esa casilla. En una misma capa, pintar en exactamente la misma casilla sustituye la pieza anterior; puedes usar otra capa para compartir también ese punto de colocación.
+La paleta, el dibujo colocado y las plantillas omiten las casillas completamente transparentes, también al seleccionar un rectángulo en la paleta. Tras cargar una actualización, vuelve a seleccionar el arbusto para renovar el pincel que tenías copiado. Una casilla que contiene parte del arbusto sigue sustituyendo esa casilla cuando pintas en la misma capa: TileMap admite una pieza por casilla. Para conservar el árbol detrás de los bordes transparentes del arbusto, usa capas distintas, por ejemplo el árbol en **Capa 4 Arboles Grandes** y el arbusto en **Capa 5 Arbustos Grandes**. El arbusto de **Capa 10 Maleza Frontal** queda delante del muro de **Capa 7 Pared Superior**. Al copiar un rectángulo del dibujo del nivel, también se copian las partes de otros adornos que ese rectángulo contenga; las piezas aisladas están en **Piezas para pintar** y **Patrones**.
 
-## Profundidad
+La profundidad la decide la capa donde pintas. Cualquier plantilla de árbol, arbusto o roca toma esa misma profundidad. De delante hacia atrás: **Capa 10 Maleza Frontal**, **Capa 7 Pared Superior**, **Capa 9 Piedras**, **Capa 8 Flores**, **Capa 6 Brotes**, **Capa 5 Arbustos Grandes**, **Capa 4 Arboles Grandes**, **Capa 3 Vegetacion Lejana**, **Capa 2 Rocas** y **Capa 1 Siluetas**. Para colocar un árbol detrás del muro, pinta en cualquiera de esas capas posteriores; las piezas de **Capa 7 Pared Superior** comparten la profundidad del muro.
 
-Las piezas nuevas tienen la profundidad preparada en la paleta: un arbusto cercano se dibuja delante de un árbol cercano, incluso si los pintas en la misma capa. La vegetación existente mantiene su orden anterior.
-
-| Pieza nueva | Z Index final |
-|---|---:|
-| Árbol silueta | -80 |
-| Árbol posterior y arbustos posteriores | -60 |
-| Árbol cercano y frondoso | -50 |
-| Arbustos cercanos, redondo y ancho | -40 |
-| Brote | -35 |
-| Muro | -30 |
-| Arbustos con flores | -20 |
-| Roca | -10 |
-| Personajes | 0 |
-| Maleza del borde | 20 |
-
-## Editar lo que ya estaba colocado
-
-El dibujo previo se conserva dentro de **ComposicionExistente**, debajo de cada capa. Esto permite pintar adornos nuevos en la capa principal sin reemplazar las casillas del dibujo anterior.
-
-Por ejemplo, para quitar un arbusto que ya estaba en el fondo, despliega **05_ArbustosGrandes** y selecciona **ComposicionExistente**. En ese nodo puedes borrar o copiar las casillas anteriores como antes. Para editar la franja inferior, usa **10_MalezaInferior → ComposicionExistente**.
-
-Las fuentes **Composición existente** y **Fragmentos anteriores (solo composicion)** conservan el material del dibujo previo. Para añadir piezas enteras, usa **Piezas para pintar**.
-
-## Imágenes
-
-Se usan los PNG transparentes originales de `assets/art/fondos/vegetacion_editable/png/` y la paleta `paleta_vegetacion.png`, sin redimensionar ni suavizar el arte. El suelo y las colisiones del nivel conservan sus cambios anteriores.
+Las fuentes **Composicion colocada** y **Fragmentos colocados** conservan el dibujo existente en casillas reales de 8 píxeles. Puedes seleccionarlo y borrarlo desde su propia capa con el editor normal de TileMap. El clic derecho borra las casillas cubiertas por el pincel activo; para quitar un árbol entero, recorre su dibujo o usa una selección que lo abarque. No hay casillas invisibles de selección ni piezas grandes sostenidas por una sola casilla.

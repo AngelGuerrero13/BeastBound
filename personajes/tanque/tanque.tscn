@@ -6,5 +6,5 @@
 [node name="Tanque" unique_id=1382673604 instance=ExtResource("1_ltgak")]
 script = ExtResource("2_wd2uv")
 
-[node name="BarraVidaEnemigo" parent="." index="8" unique_id=26031977]
+[node name="Barra Vida Enemigo" parent="." index="8" unique_id=26031977]
 visible = false

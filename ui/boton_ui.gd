@@ -9,10 +9,11 @@ var margenes_texto := Vector2.ZERO
 
 
 func _ready() -> void:
-	var texto := get_node_or_null("Texto") as Label
+	var texto := get_node_or_null("Texto Boton") as Label
 	if texto != null:
 		margenes_texto = Vector2(texto.offset_top, texto.offset_bottom)
-	usar_frames(name)
+	if texture_normal == null:
+		usar_frames(String(name).trim_prefix("Boton "))
 	_actualizar_icono(false)
 	resized.connect(_centrar_pivote)
 	mouse_entered.connect(_entrar_cursor)
@@ -60,14 +61,14 @@ func _soltar() -> void:
 
 
 func _desplazar_texto(desplazamiento: float) -> void:
-	var texto := get_node_or_null("Texto") as Label
+	var texto := get_node_or_null("Texto Boton") as Label
 	if texto != null:
 		texto.offset_top = margenes_texto.x + desplazamiento
 		texto.offset_bottom = margenes_texto.y + desplazamiento
 
 
 func _actualizar_icono(presionado: bool) -> void:
-	var icono := get_node_or_null("IconoJugar") as TextureRect
+	var icono := get_node_or_null("Icono Jugar") as TextureRect
 	if icono != null:
 		icono.texture = RECURSOS_UI.icono_jugar(presionado)
 		icono.offset_top = 14.0 + (2.0 if presionado else 0.0)

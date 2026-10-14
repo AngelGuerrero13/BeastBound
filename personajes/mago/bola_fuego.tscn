@@ -33,16 +33,16 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="bolaFuego" type="Area2D" unique_id=414202563]
+[node name="Bola Fuego" type="Area2D" unique_id=414202563]
 collision_layer = 0
 collision_mask = 12
 script = ExtResource("1_pgaii")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1357159020]
+[node name="Colision Proyectil" type="CollisionShape2D" parent="." unique_id=1357159020]
 position = Vector2(-4, 0)
 shape = SubResource("RectangleShape2D_cww3w")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1808704032]
+[node name="Animacion Fuego" type="AnimatedSprite2D" parent="." unique_id=1808704032]
 position = Vector2(-7, 1)
 scale = Vector2(0.59375, 0.5625)
 sprite_frames = SubResource("SpriteFrames_vniob")

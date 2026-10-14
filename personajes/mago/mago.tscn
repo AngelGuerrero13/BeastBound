@@ -14,7 +14,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("personajeSprite:frame")
+tracks/0/path = NodePath("Imagen Personaje:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -48,31 +48,31 @@ desfase_horizontal_sprite = 8.0
 [node name="Sombra" parent="." index="0"]
 position = Vector2(0, 25)
 
-[node name="personajeSprite" parent="." index="1" unique_id=647587542]
+[node name="Imagen Personaje" parent="." index="1" unique_id=647587542]
 texture = ExtResource("4_idle")
 hframes = 5
 
-[node name="ColisionCuerpo" parent="." index="2"]
+[node name="Colision Cuerpo" parent="." index="2"]
 position = Vector2(0, 8)
 
-[node name="ColisonSombra" parent="." index="3"]
+[node name="Colision Sombra" parent="." index="3"]
 position = Vector2(0, 25)
 
-[node name="PuntoDisparo" type="Marker2D" parent="." index="4" unique_id=2094006370]
+[node name="Origen Disparo" type="Marker2D" parent="." index="4" unique_id=2094006370]
 position = Vector2(6, -11)
 
-[node name="AnimationPlayer" parent="." index="5" unique_id=1895968384]
+[node name="Animaciones Personaje" parent="." index="5" unique_id=1895968384]
 libraries/ = SubResource("AnimationLibrary_idle")
 autoplay = &"idle"
 speed_scale = 0.654
 
-[node name="BarraCarga" parent="." index="7" unique_id=511213222]
+[node name="Barra Ataque Cargado" parent="." index="7" unique_id=511213222]
 offset_left = -16.0
 offset_top = -26.0
 offset_right = 32.0
 offset_bottom = -9.0
 
-[node name="Icono" parent="HUD" parent_id_path=PackedInt32Array(1918061239) index="1" unique_id=192457262]
+[node name="Retrato Personaje" parent="Interfaz Jugador" parent_id_path=PackedInt32Array(1918061239) index="1" unique_id=192457262]
 offset_left = 24.0
 offset_top = 17.0
 offset_right = 72.0
@@ -80,8 +80,8 @@ offset_bottom = 65.0
 scale = Vector2(0.9, 0.9)
 texture = SubResource("AtlasTexture_gfrtm")
 
-[node name="ContenedorCorazones" parent="HUD" parent_id_path=PackedInt32Array(1918061239) index="3" unique_id=959955788]
+[node name="Corazones Vida" parent="Interfaz Jugador" parent_id_path=PackedInt32Array(1918061239) index="3" unique_id=959955788]
 offset_bottom = 39.0
 
-[node name="BarraVidaEnemigo" parent="." index="9" unique_id=26031977]
+[node name="Barra Vida Enemigo" parent="." index="9" unique_id=26031977]
 visible = false

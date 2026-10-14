@@ -30,16 +30,16 @@ var velocidad_vertical: float = 0.0
 var en_suelo: bool = true
 
 # --- NODOS HIJOS ---
-@onready var sprite: Sprite2D = $personajeSprite
-@onready var barra_carga: TextureProgressBar = $BarraCarga
+@onready var sprite: Sprite2D = $"Imagen Personaje"
+@onready var barra_carga: TextureProgressBar = $"Barra Ataque Cargado"
 @onready var sombra: Sprite2D = get_node_or_null("Sombra")
 
 # UI Jugador
-@onready var hud: CanvasLayer = $HUD
-@onready var corazones_ui: HBoxContainer = $HUD/ContenedorCorazones
+@onready var hud: CanvasLayer = $"Interfaz Jugador"
+@onready var corazones_ui: HBoxContainer = $"Interfaz Jugador/Corazones Vida"
 
 # UI Enemigo
-@onready var barra_vida_enemigo: TextureProgressBar = $BarraVidaEnemigo
+@onready var barra_vida_enemigo: TextureProgressBar = $"Barra Vida Enemigo"
 
 # --- VARIABLES DE CONTROL DE ATAQUE ---
 @export var tiempo_recarga_normal: float = 0.5 
@@ -65,8 +65,8 @@ func _ready() -> void:
 	else:
 		if hud: hud.visible = false
 		
-		if has_node("BarraCarga"):
-			$BarraCarga.visible = false
+		if has_node("Barra Ataque Cargado"):
+			$"Barra Ataque Cargado".visible = false
 		
 		if barra_vida_enemigo:
 			barra_vida_enemigo.visible = true
@@ -79,24 +79,21 @@ func actualizar_corazones() -> void:
 	if not es_jugador or not corazones_ui: 
 		return
 
-	for corazon in corazones_ui.get_children():
-		corazon.queue_free()
-
-	# Si vida_maxima es 6, esto da 3 contenedores a dibujar
-	var total_contenedores = vida_maxima / 2 
-
-	for i in range(total_contenedores):
-		var nuevo_icono = TextureRect.new()
-		
-		if vida >= (i * 2) + 2:
-			nuevo_icono.texture = textura_corazon_lleno
-		elif vida == (i * 2) + 1:
-			nuevo_icono.texture = textura_corazon_mitad
-		else:
-			nuevo_icono.texture = textura_corazon_vacio
-			
-		nuevo_icono.stretch_mode = TextureRect.STRETCH_KEEP
+	var total_contenedores := ceili(vida_maxima / 2.0)
+	# Conservar los controles editados en la escena; duplicar solo si aumenta la vida maxima.
+	while corazones_ui.get_child_count() < total_contenedores:
+		var nuevo_icono := corazones_ui.get_child(0).duplicate() as TextureRect
+		nuevo_icono.name = "Corazon %d" % (corazones_ui.get_child_count() + 1)
 		corazones_ui.add_child(nuevo_icono)
+	for i in corazones_ui.get_child_count():
+		var icono := corazones_ui.get_child(i) as TextureRect
+		icono.visible = i < total_contenedores
+		if vida >= (i * 2) + 2:
+			icono.texture = textura_corazon_lleno
+		elif vida == (i * 2) + 1:
+			icono.texture = textura_corazon_mitad
+		else:
+			icono.texture = textura_corazon_vacio
 
 # BUCLE DE INPUTS (Ataques y UI)
 func _process(delta: float) -> void:

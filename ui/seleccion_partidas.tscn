@@ -1,0 +1,407 @@
+[gd_scene format=3 uid="uid://dpejbhwxms0rl"]
+
+[ext_resource type="Texture2D" uid="uid://cqsg0drrsg0yw" path="res://assets/art/ui/partidas_rusticas/carteles.png" id="carteles"]
+[ext_resource type="Texture2D" uid="uid://nhtjtjw1ba5n" path="res://assets/art/ui/partidas_rusticas/pradera_soporte_v2.png" id="fondo"]
+[ext_resource type="Script" uid="uid://b7hpbful71apq" path="res://ui/seleccion_partidas.gd" id="script"]
+[ext_resource type="Theme" uid="uid://yrjkfcaf3t3y" path="res://ui/tema_partidas.tres" id="tema"]
+
+[sub_resource type="AtlasTexture" id="Pradera_Ancha"]
+atlas = ExtResource("fondo")
+region = Rect2(134, 0, 1395, 941)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Madera_1"]
+atlas = ExtResource("carteles")
+region = Rect2(0, 0, 1181, 433)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Madera_2"]
+atlas = ExtResource("carteles")
+region = Rect2(0, 433, 1181, 424)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Madera_3"]
+atlas = ExtResource("carteles")
+region = Rect2(0, 857, 1181, 433)
+filter_clip = true
+
+[node name="Seleccion Partidas" type="Control" unique_id=1109275306]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("tema")
+script = ExtResource("script")
+
+[node name="Fondo Pradera" type="TextureRect" parent="." unique_id=1838100099]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("Pradera_Ancha")
+expand_mode = 1
+
+[node name="Titulo Partidas" type="Label" parent="." unique_id=1686008719]
+layout_mode = 0
+offset_left = 205.0
+offset_top = 10.0
+offset_right = 435.0
+offset_bottom = 42.0
+theme_override_font_sizes/font_size = 28
+text = "TUS PARTIDAS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Carteles" type="Control" parent="." unique_id=5315798]
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+
+[node name="Cartel 1" type="Control" parent="Carteles" unique_id=802920439]
+editor_description = "Madera, enredadera, agujeros y nudos del cartel 1. Sus textos, progreso y boton son nodos independientes."
+anchors_preset = 0
+offset_left = 80.0
+offset_top = 34.0
+offset_right = 560.0
+offset_bottom = 133.0
+mouse_filter = 2
+
+[node name="Madera y Cuerdas" type="TextureRect" parent="Carteles/Cartel 1" unique_id=2010410824]
+layout_mode = 0
+offset_right = 480.0
+offset_bottom = 99.0
+mouse_filter = 2
+texture = SubResource("Madera_1")
+expand_mode = 1
+
+[node name="Nombre Equipo" type="Label" parent="Carteles/Cartel 1" unique_id=1065050737]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 31.0
+offset_right = 328.0
+offset_bottom = 55.0
+theme_override_font_sizes/font_size = 20
+text = "GUARDIANES DEL ALBA"
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="Detalle Partida" type="Label" parent="Carteles/Cartel 1" unique_id=1511205579]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 55.0
+offset_right = 247.333
+offset_bottom = 69.0
+theme_override_font_sizes/font_size = 12
+text = "NIVEL 3 · AVANCE: 62%"
+vertical_alignment = 1
+
+[node name="Barra Avance" type="ProgressBar" parent="Carteles/Cartel 1" unique_id=1304301392]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 74.0
+offset_right = 247.333
+offset_bottom = 87.0
+mouse_filter = 2
+value = 62.0
+show_percentage = false
+
+[node name="Nombre Nuevo" type="LineEdit" parent="Carteles/Cartel 1" unique_id=1191366393]
+visible = false
+layout_mode = 0
+offset_left = 86.0
+offset_top = 63.0
+offset_right = 248.0
+offset_bottom = 83.0
+theme_override_font_sizes/font_size = 12
+placeholder_text = "ESCRIBE UN NOMBRE..."
+max_length = 24
+context_menu_enabled = false
+
+[node name="Boton Partida" type="Button" parent="Carteles/Cartel 1" unique_id=186828563]
+layout_mode = 0
+offset_left = 312.0
+offset_top = 46.0
+offset_right = 400.0
+offset_bottom = 80.0
+theme_override_font_sizes/font_size = 16
+text = "JUGAR"
+
+[node name="Boton Eliminar" type="Button" parent="Carteles/Cartel 1" unique_id=344732125]
+layout_mode = 0
+offset_left = 416.0
+offset_top = 46.0
+offset_right = 442.0
+offset_bottom = 72.0
+tooltip_text = "Eliminar esta partida"
+theme_type_variation = &"Eliminar"
+theme_override_font_sizes/font_size = 16
+text = "X"
+
+[node name="Cartel 2" type="Control" parent="Carteles" unique_id=1074892912]
+editor_description = "Madera, enredadera, agujeros y nudos del cartel 2. Sus textos, progreso y boton son nodos independientes."
+anchors_preset = 0
+offset_left = 80.0
+offset_top = 133.0
+offset_right = 560.0
+offset_bottom = 232.0
+mouse_filter = 2
+
+[node name="Madera y Cuerdas" type="TextureRect" parent="Carteles/Cartel 2" unique_id=287116467]
+layout_mode = 0
+offset_right = 480.0
+offset_bottom = 99.0
+mouse_filter = 2
+texture = SubResource("Madera_2")
+expand_mode = 1
+
+[node name="Nombre Equipo" type="Label" parent="Carteles/Cartel 2" unique_id=658857505]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 31.0
+offset_right = 328.0
+offset_bottom = 55.0
+theme_override_font_sizes/font_size = 20
+text = "LOBOS DEL BOSQUE"
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="Detalle Partida" type="Label" parent="Carteles/Cartel 2" unique_id=391743782]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 55.0
+offset_right = 247.333
+offset_bottom = 69.0
+theme_override_font_sizes/font_size = 12
+text = "NIVEL 1 · AVANCE: 28%"
+vertical_alignment = 1
+
+[node name="Barra Avance" type="ProgressBar" parent="Carteles/Cartel 2" unique_id=1997090067]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 74.0
+offset_right = 247.333
+offset_bottom = 87.0
+mouse_filter = 2
+value = 28.0
+show_percentage = false
+
+[node name="Nombre Nuevo" type="LineEdit" parent="Carteles/Cartel 2" unique_id=846413075]
+visible = false
+layout_mode = 0
+offset_left = 86.0
+offset_top = 63.0
+offset_right = 248.0
+offset_bottom = 83.0
+theme_override_font_sizes/font_size = 12
+placeholder_text = "ESCRIBE UN NOMBRE..."
+max_length = 24
+context_menu_enabled = false
+
+[node name="Boton Partida" type="Button" parent="Carteles/Cartel 2" unique_id=655889233]
+layout_mode = 0
+offset_left = 312.0
+offset_top = 43.0
+offset_right = 400.0
+offset_bottom = 77.0
+theme_override_font_sizes/font_size = 16
+text = "JUGAR"
+
+[node name="Boton Eliminar" type="Button" parent="Carteles/Cartel 2" unique_id=1037109707]
+layout_mode = 0
+offset_left = 416.0
+offset_top = 51.0
+offset_right = 442.0
+offset_bottom = 77.0
+tooltip_text = "Eliminar esta partida"
+theme_type_variation = &"Eliminar"
+theme_override_font_sizes/font_size = 16
+text = "X"
+
+[node name="Cartel 3" type="Control" parent="Carteles" unique_id=1483605934]
+editor_description = "Madera, enredadera, agujeros y nudos del cartel 3. Sus textos, progreso y boton son nodos independientes."
+anchors_preset = 0
+offset_left = 80.0
+offset_top = 232.0
+offset_right = 560.0
+offset_bottom = 334.0
+mouse_filter = 2
+
+[node name="Madera y Cuerdas" type="TextureRect" parent="Carteles/Cartel 3" unique_id=1879645831]
+layout_mode = 0
+offset_right = 480.0
+offset_bottom = 102.0
+mouse_filter = 2
+texture = SubResource("Madera_3")
+expand_mode = 1
+
+[node name="Nombre Equipo" type="Label" parent="Carteles/Cartel 3" unique_id=512110113]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 31.0
+offset_right = 328.0
+offset_bottom = 55.0
+theme_override_font_sizes/font_size = 20
+text = "NUEVA PARTIDA"
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="Detalle Partida" type="Label" parent="Carteles/Cartel 3" unique_id=1665792156]
+visible = false
+layout_mode = 0
+offset_left = 86.0
+offset_top = 55.0
+offset_right = 247.333
+offset_bottom = 69.0
+theme_override_font_sizes/font_size = 12
+vertical_alignment = 1
+
+[node name="Barra Avance" type="ProgressBar" parent="Carteles/Cartel 3" unique_id=797057725]
+visible = false
+layout_mode = 0
+offset_left = 86.0
+offset_top = 74.0
+offset_right = 247.333
+offset_bottom = 87.0
+mouse_filter = 2
+show_percentage = false
+
+[node name="Nombre Nuevo" type="LineEdit" parent="Carteles/Cartel 3" unique_id=579586290]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 63.0
+offset_right = 248.0
+offset_bottom = 83.0
+theme_override_font_sizes/font_size = 12
+placeholder_text = "ESCRIBE UN NOMBRE..."
+max_length = 24
+context_menu_enabled = false
+
+[node name="Boton Partida" type="Button" parent="Carteles/Cartel 3" unique_id=1685045080]
+layout_mode = 0
+offset_left = 312.0
+offset_top = 48.0
+offset_right = 400.0
+offset_bottom = 82.0
+theme_override_font_sizes/font_size = 16
+text = "CREAR"
+
+[node name="Boton Eliminar" type="Button" parent="Carteles/Cartel 3" unique_id=653744084]
+visible = false
+layout_mode = 0
+offset_left = 302.0
+offset_top = 55.0
+offset_right = 328.0
+offset_bottom = 81.0
+tooltip_text = "Eliminar esta partida"
+theme_type_variation = &"Eliminar"
+theme_override_font_sizes/font_size = 16
+text = "X"
+
+[node name="Boton Volver" type="Button" parent="." unique_id=696046097]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 325.0
+offset_right = 112.0
+offset_bottom = 353.0
+text = "← VOLVER"
+
+[node name="Estado Partida" type="Label" parent="." unique_id=747526883]
+layout_mode = 0
+offset_left = 135.0
+offset_top = 334.0
+offset_right = 620.0
+offset_bottom = 354.0
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Confirmar Borrado" type="Control" parent="." unique_id=1443730216]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sombra Borrado" type="ColorRect" parent="Confirmar Borrado" unique_id=1263643372]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05, 0.025, 0.01, 0.75)
+
+[node name="Panel Borrado" type="Control" parent="Confirmar Borrado" unique_id=714011546]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -195.0
+offset_top = -100.0
+offset_right = 195.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Madera Borrado" type="TextureRect" parent="Confirmar Borrado/Panel Borrado" unique_id=1587067225]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("Madera_1")
+expand_mode = 1
+
+[node name="Titulo Borrado" type="Label" parent="Confirmar Borrado/Panel Borrado" unique_id=1355375243]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 54.0
+offset_right = 340.0
+offset_bottom = 80.0
+theme_override_font_sizes/font_size = 20
+text = "¿ELIMINAR PARTIDA?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Detalle Borrado" type="Label" parent="Confirmar Borrado/Panel Borrado" unique_id=1251740066]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 87.0
+offset_right = 340.0
+offset_bottom = 127.0
+theme_override_font_sizes/font_size = 14
+text = "SE ELIMINARÁ ESTA PARTIDA.
+PERDERÁS SU AVANCE GUARDADO."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Boton Cancelar" type="Button" parent="Confirmar Borrado/Panel Borrado" unique_id=1811631384]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 142.0
+offset_right = 185.0
+offset_bottom = 176.0
+text = "CANCELAR"
+
+[node name="Boton Eliminar" type="Button" parent="Confirmar Borrado/Panel Borrado" unique_id=1413437165]
+layout_mode = 0
+offset_left = 205.0
+offset_top = 142.0
+offset_right = 325.0
+offset_bottom = 176.0
+theme_type_variation = &"Eliminar"
+text = "ELIMINAR"

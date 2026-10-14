@@ -60,7 +60,7 @@ region = Rect2(-0.29074955, 2.0050716, 48.953724, 12.5348835)
 atlas = ExtResource("3_48g4r")
 region = Rect2(50.100906, 2.5720787, 44.761986, 10.866425)
 
-[node name="PersonajeBase" type="CharacterBody2D" unique_id=1382673604]
+[node name="Personaje Base" type="CharacterBody2D" unique_id=1382673604]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_yik7l")
@@ -72,19 +72,19 @@ textura_corazon_vacio = SubResource("AtlasTexture_0nfu7")
 position = Vector2(0, 9)
 texture = ExtResource("2_48g4r")
 
-[node name="personajeSprite" type="Sprite2D" parent="." unique_id=647587542]
+[node name="Imagen Personaje" type="Sprite2D" parent="." unique_id=647587542]
 
-[node name="ColisionCuerpo" type="CollisionShape2D" parent="." unique_id=1954197429]
+[node name="Colision Cuerpo" type="CollisionShape2D" parent="." unique_id=1954197429]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_3nda5")
 
-[node name="ColisonSombra" type="CollisionShape2D" parent="." unique_id=1812325256]
+[node name="Colision Sombra" type="CollisionShape2D" parent="." unique_id=1812325256]
 position = Vector2(0, 9)
 shape = SubResource("RectangleShape2D_2q5vh")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1895968384]
+[node name="Animaciones Personaje" type="AnimationPlayer" parent="." unique_id=1895968384]
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1096102892]
+[node name="Camara Personaje" type="Camera2D" parent="." unique_id=1096102892]
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
@@ -94,7 +94,7 @@ drag_top_margin = 0.4
 drag_right_margin = 0.3
 drag_bottom_margin = 0.4
 
-[node name="BarraCarga" type="TextureProgressBar" parent="." unique_id=511213222]
+[node name="Barra Ataque Cargado" type="TextureProgressBar" parent="." unique_id=511213222]
 offset_left = -7.0
 offset_top = -13.0
 offset_right = 41.0
@@ -106,9 +106,9 @@ texture_under = SubResource("AtlasTexture_vniob")
 texture_over = SubResource("AtlasTexture_mtclc")
 texture_progress = SubResource("AtlasTexture_8n3x1")
 
-[node name="HUD" type="CanvasLayer" parent="." unique_id=1918061239]
+[node name="Interfaz Jugador" type="CanvasLayer" parent="." unique_id=1918061239]
 
-[node name="Marco" type="TextureRect" parent="HUD" unique_id=163228078]
+[node name="Marco Retrato" type="TextureRect" parent="Interfaz Jugador" unique_id=163228078]
 offset_left = 2.0
 offset_top = 2.0
 offset_right = 110.0
@@ -116,13 +116,13 @@ offset_bottom = 105.0
 scale = Vector2(0.8, 0.8)
 texture = SubResource("AtlasTexture_ddouw")
 
-[node name="Icono" type="TextureRect" parent="HUD" unique_id=192457262]
+[node name="Retrato Personaje" type="TextureRect" parent="Interfaz Jugador" unique_id=192457262]
 offset_left = 34.0
 offset_top = 32.0
 offset_right = 78.0
 offset_bottom = 74.0
 
-[node name="MarcoVida" type="TextureRect" parent="HUD" unique_id=32185647]
+[node name="Marco Vida" type="TextureRect" parent="Interfaz Jugador" unique_id=32185647]
 offset_left = 103.0
 offset_top = 21.0
 offset_right = 257.0
@@ -130,29 +130,29 @@ offset_bottom = 90.0
 scale = Vector2(0.8, 0.8)
 texture = SubResource("AtlasTexture_p8cio")
 
-[node name="ContenedorCorazones" type="HBoxContainer" parent="HUD" unique_id=959955788]
+[node name="Corazones Vida" type="HBoxContainer" parent="Interfaz Jugador" unique_id=959955788]
 offset_left = 133.0
 offset_top = 23.000002
 offset_right = 182.0
 offset_bottom = 37.0
 scale = Vector2(1.5, 1.5)
 
-[node name="corazon" type="TextureRect" parent="HUD/ContenedorCorazones" unique_id=315410112]
+[node name="Corazon 1" type="TextureRect" parent="Interfaz Jugador/Corazones Vida" unique_id=315410112]
 layout_mode = 2
 texture = SubResource("AtlasTexture_vfwvo")
 stretch_mode = 2
 
-[node name="corazon2" type="TextureRect" parent="HUD/ContenedorCorazones" unique_id=431837684]
+[node name="Corazon 2" type="TextureRect" parent="Interfaz Jugador/Corazones Vida" unique_id=431837684]
 layout_mode = 2
 texture = SubResource("AtlasTexture_vfwvo")
 stretch_mode = 2
 
-[node name="corazon3" type="TextureRect" parent="HUD/ContenedorCorazones" unique_id=1311876801]
+[node name="Corazon 3" type="TextureRect" parent="Interfaz Jugador/Corazones Vida" unique_id=1311876801]
 layout_mode = 2
 texture = SubResource("AtlasTexture_vfwvo")
 stretch_mode = 2
 
-[node name="BarraVidaEnemigo" type="TextureProgressBar" parent="." unique_id=26031977]
+[node name="Barra Vida Enemigo" type="TextureProgressBar" parent="." unique_id=26031977]
 offset_left = -6.0
 offset_top = -17.0
 offset_right = 37.0

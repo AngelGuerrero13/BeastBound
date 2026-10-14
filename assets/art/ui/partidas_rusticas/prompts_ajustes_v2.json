@@ -1,0 +1,16 @@
+[
+  {
+    "output": "pradera_soporte_v2.png",
+    "tool": "image_gen.imagegen (integrado)",
+    "transparent_background": false,
+    "references": ["pradera_soporte.png", "carteles.png"],
+    "prompt": "Use case: precise-object-edit. Image 1 is the edit target: a 1672x941 pixel-art landscape with two wooden posts, a top wooden crossbeam and a blank red wooden title plate. Image 2 is only a style reference for its thick, dark-outlined beige hanging ropes. Edit ONLY the two short beige ropes wrapped around the top crossbeam in image 1. Match their dark brown/black outline thickness, squared pixel-art steps, tan shading and diagonal bands exactly to the ropes of image 2, so each rope joins seamlessly to the game's hanging wooden signs below. Keep the exact centers, widths, length and attachment points of the two existing ropes; reinforce their outlines without changing their positions. Preserve all wooden posts, crossbeam, blank title board, vines, flowers, sky, landscape and every other element from image 1. Keep its 16:9 composition, same framing, no text, no UI, no signs added in the sky. No new objects. A surgical rope-outline repair of the existing background, not a redesign. Keep the empty title board empty."
+  },
+  {
+    "output": "cartel_sin_cuerdas.png",
+    "tool": "image_gen.imagegen (integrado)",
+    "transparent_background": true,
+    "references": ["carteles.png"],
+    "prompt": "Use case: precise-object-edit. Asset type: one blank wooden game UI button on transparent background. The input is a sprite sheet with three red-orange wooden hanging signs. Return ONE horizontal blank wooden sign made from the same red-orange plank as the top sign, with the same stepped dark brown/black pixel outline and subtle wood grain. Remove all ropes, holes, knots, dangling vines and flowers completely. Shape: compact horizontal rectangular plank with gently chipped stepped corners and a consistent dark pixel border. Width to height ratio 4:1. Centered, front-facing, no perspective, no shadow outside the sprite, tightly framed with just a small transparent margin. Keep the same pixel art style and red-orange wooden palette of the reference. Empty interior, NO text, NO letters, NO icon, NO ropes, NO screws, no yellow plate, no scene or background. True alpha transparency around the entire plank. This blank plank will hold editable uppercase GUARDAR PARTIDA text in Godot."
+  }
+]

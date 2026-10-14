@@ -3,7 +3,7 @@ extends "res://personajes/personajeBase/personaje_base.gd"
 @export var escena_bola_magica: PackedScene
 
 # Busca el marcador invisible en la punta del bastón
-@onready var punto_disparo: Marker2D = $PuntoDisparo
+@onready var punto_disparo: Marker2D = $"Origen Disparo"
 
 func ejecutar_ataque_normal(objetivo: Node2D) -> void:
 	disparar_bola(objetivo, false)
