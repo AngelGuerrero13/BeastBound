@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bjp30gibi1pc"]
+
+[ext_resource type="PackedScene" uid="uid://di2623p60lpat" path="res://personajes/enemigoBasico/enemigo_basico.tscn" id="1_d5whp"]
+[ext_resource type="Script" uid="uid://fckqsu8g11tb" path="res://personajes/enemigoBasico/enemigos nivel 1/hongo_alto(nivel_1).gd" id="2_vfe3u"]
+[ext_resource type="Texture2D" uid="uid://cwa6jfdewjuhb" path="res://personajes/muñecoPrueba/hongo simple.png" id="3_n761y"]
+
+[node name="hongo_alto" unique_id=1382673604 instance=ExtResource("1_d5whp")]
+script = ExtResource("2_vfe3u")
+tiempo_anticipacion_cabezazo = 0.35
+velocidad = 200.0
+rango_ataque = 30.0
+textura_corazon_lleno = null
+textura_corazon_mitad = null
+textura_corazon_vacio = null
+
+[node name="Imagen Personaje" parent="." index="1" unique_id=647587542]
+scale = Vector2(1, 1)
+texture = ExtResource("3_n761y")
+
+[node name="Interfaz Jugador" parent="." index="7" unique_id=1918061239]
+visible = false
