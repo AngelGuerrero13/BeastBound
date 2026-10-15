@@ -2,9 +2,64 @@
 
 [ext_resource type="PackedScene" uid="uid://dc41qho565f7g" path="res://personajes/personajeBase/personaje_base.tscn" id="1_ltgak"]
 [ext_resource type="Script" uid="uid://v8j7mso6x6ly" path="res://personajes/tanque/tanque.gd" id="2_wd2uv"]
+[ext_resource type="Texture2D" uid="uid://ckavc3g0hykny" path="res://personajes/tanque/mapache.png" id="3_762t1"]
+[ext_resource type="Texture2D" uid="uid://c7dm7387yeim5" path="res://personajes/tanque/escudo god.png" id="4_toitm"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jdbdj"]
+radius = 5.0
+height = 20.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g3u5t"]
+size = Vector2(6, 88)
+
+[sub_resource type="Animation" id="Animation_toitm"]
+resource_name = "frame"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r21bf"]
+_data = {
+&"frame": SubResource("Animation_toitm")
+}
 
 [node name="Tanque" unique_id=1382673604 instance=ExtResource("1_ltgak")]
 script = ExtResource("2_wd2uv")
+velocidad_embestida = 800.0
+duracion_embestida_maxima = 0.35
+tiempo_maximo_carga_embestida = 1.0
+velocidad_escudo = 80.0
 
-[node name="Barra Vida Enemigo" parent="." index="8" unique_id=26031977]
+[node name="Sombra" parent="." index="0" unique_id=1873168614]
+visible = false
+
+[node name="Imagen Personaje" parent="." index="1" unique_id=647587542]
+scale = Vector2(0.828, 1)
+texture = ExtResource("3_762t1")
+
+[node name="hitbox ataque" type="Area2D" parent="." index="2" unique_id=437169241]
+
+[node name="colision  ataque" type="CollisionShape2D" parent="hitbox ataque" index="0" unique_id=1688251866]
+position = Vector2(-15, 11)
+shape = SubResource("CapsuleShape2D_jdbdj")
+
+[node name="EscudoReinhardt" type="Area2D" parent="." index="3" unique_id=950958209]
+
+[node name="Sprite2D" type="Sprite2D" parent="EscudoReinhardt" index="0" unique_id=1182509678]
+scale = Vector2(0.01083032, 0.15884477)
+texture = ExtResource("4_toitm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EscudoReinhardt" index="1" unique_id=285507069]
+shape = SubResource("RectangleShape2D_g3u5t")
+
+[node name="Animaciones Personaje" parent="." index="6" unique_id=1895968384]
+libraries/ = SubResource("AnimationLibrary_r21bf")
+
+[node name="Camara Personaje" parent="." index="7" unique_id=1096102892]
+visible = false
+
+[node name="Barra Ataque Cargado" parent="." index="8" unique_id=511213222]
+visible = false
+
+[node name="Interfaz Jugador" parent="." index="9" unique_id=1918061239]
+visible = false
+
+[node name="Barra Vida Enemigo" parent="." index="10" unique_id=26031977]
 visible = false
