@@ -59,6 +59,22 @@ assets/art/ui/cursor_patita/vista_frames.png.import
 assets/art/ui/cursor_patita/fuente_ladeada.png
 assets/art/ui/cursor_patita/fuente_ladeada.png.import
 
+# Tutorial: salidas de ImageGen, propuestas descartadas y vistas de prueba
+/assets/art/fondos/granero_tutorial/suelo/*_original*.png
+/assets/art/fondos/granero_tutorial/suelo/*_original*.png.import
+/assets/art/fondos/granero_tutorial/suelo/atlas_tierra_paja_v1.png
+/assets/art/fondos/granero_tutorial/suelo/atlas_tierra_paja_v1.png.import
+/assets/art/fondos/granero_tutorial/suelo/tierra_paja_v1.png
+/assets/art/fondos/granero_tutorial/suelo/tierra_paja_v1.png.import
+/assets/art/fondos/granero_tutorial/suelo/vista_atlas_v1.png
+/assets/art/fondos/granero_tutorial/suelo/vista_atlas_v1.png.import
+/assets/art/fondos/granero_tutorial/suelo/plantilla_tierra_paja_v1.tres
+/assets/art/fondos/granero_tutorial/suelo/prompt_atlas_v1.txt
+/assets/art/fondos/granero_tutorial/suelo/prompt_tierra_paja_v1.txt
+/niveles/tutorial/ideas_granero.tscn
+/niveles/tutorial/plantillas_granero.tscn
+/niveles/tutorial/plantilla_suelo.tscn
+
 # Archivos del sistema operativo
 Thumbs.db
 Desktop.ini
@@ -72,6 +88,6 @@ desktop.ini
 !.env.example
 export_credentials.cfg
 
-# Se conservan escenas, scripts, recursos, arte original, archivos .import,
-# identificadores .uid y export_presets.cfg para compartir el proyecto.
+# Se conservan escenas, scripts, recursos, arte fuente usado, archivos .import,
+# identificadores .uid y export_presets.cfg, salvo los borradores indicados arriba.
 
