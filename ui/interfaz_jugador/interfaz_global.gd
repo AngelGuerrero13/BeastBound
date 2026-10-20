@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-@export var h_box_container: HBoxContainer
+@onready var h_box_container: HBoxContainer = $Interfaces
 
 func _ready() -> void:
 	await get_tree().process_frame
