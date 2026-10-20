@@ -1,9 +1,9 @@
 [gd_scene format=4 uid="uid://btbx3x03l1cxj"]
 
 [ext_resource type="Texture2D" uid="uid://b5o2bic3uhxqd" path="res://assets/art/fondos/MagicMarketFondo/Tilesets/TilesetFloor.png" id="1_280kd"]
-[ext_resource type="PackedScene" uid="uid://808rvxcuw4kj" path="res://personajes/mago/mago.tscn" id="3_280kd"]
 [ext_resource type="PackedScene" uid="uid://c25l87wx35bf1" path="res://personajes/muñecoPrueba/muñeco_prueba.tscn" id="4_cww3w"]
 [ext_resource type="Script" uid="uid://ckq7yr4pty45h" path="res://niveles/nivel 1/nivel_1.gd" id="5_nivel_largo"]
+[ext_resource type="PackedScene" uid="uid://bcenw2rnuxqwv" path="res://niveles/spawn/puntos_spawn.tscn" id="15_lhl8s"]
 [ext_resource type="Texture2D" uid="uid://dxmjfgxeu67q5" path="res://assets/art/fondos/vegetacion_editable/color_fondo.png" id="veg_1_kqmcu"]
 [ext_resource type="TileSet" uid="uid://bdw3i5g2yicp7" path="res://assets/art/fondos/vegetacion_editable/01_Siluetas.tres" id="veg_2_a4jit"]
 [ext_resource type="TileSet" uid="uid://caxovbijxlqms" path="res://assets/art/fondos/vegetacion_editable/02_Rocas.tres" id="veg_3_towlq"]
@@ -15,6 +15,18 @@
 [ext_resource type="TileSet" uid="uid://omtg8kqqrt0m" path="res://assets/art/fondos/vegetacion_editable/08_ArbustosConFlores.tres" id="veg_9_crbbs"]
 [ext_resource type="TileSet" uid="uid://ct6f4uwe31wgn" path="res://assets/art/fondos/vegetacion_editable/09_Piedras.tres" id="veg_10_grube"]
 [ext_resource type="TileSet" uid="uid://b06hmalywha0n" path="res://assets/art/fondos/vegetacion_editable/10_MalezaInferior.tres" id="veg_11_jcd2d"]
+
+[sub_resource type="Gradient" id="Gradient_punto_polen"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_polen"]
+gradient = SubResource("Gradient_punto_polen")
+width = 2
+height = 2
+
+[sub_resource type="Gradient" id="Gradient_desvanecer_polen"]
+offsets = PackedFloat32Array(0, 0.2, 0.8, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cww3w"]
 texture = ExtResource("1_280kd")
@@ -142,18 +154,6 @@ size = Vector2(4843.5, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lateral"]
 size = Vector2(16, 300)
 
-[sub_resource type="Gradient" id="Gradient_punto_polen"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_polen"]
-gradient = SubResource("Gradient_punto_polen")
-width = 2
-height = 2
-
-[sub_resource type="Gradient" id="Gradient_desvanecer_polen"]
-offsets = PackedFloat32Array(0, 0.2, 0.8, 1)
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_salida"]
 size = Vector2(32, 168)
 
@@ -161,19 +161,18 @@ size = Vector2(32, 168)
 script = ExtResource("5_nivel_largo")
 siguiente_nivel = "res://niveles/nivel 2/nivel 2.tscn"
 
-[node name="Ambiente" type="Node2D" parent="."]
+[node name="Ambiente" type="Node2D" parent="." unique_id=1051767340]
 
-[node name="Polen Suave" type="CPUParticles2D" parent="Ambiente"]
+[node name="Polen Suave" type="CPUParticles2D" parent="Ambiente" unique_id=1235128077]
 editor_description = "Polen dorado claro, detras de los personajes. Cantidad repartida por todo el nivel; velocidad de 1 a 2.5 px/s. Textura de 2 px, escala de 0.65 a 1.05 y opacidad maxima del 62%."
 z_index = -1
 position = Vector2(2400, 30)
 amount = 360
+texture = SubResource("GradientTexture2D_polen")
 lifetime = 28.0
 preprocess = 28.0
 randomness = 0.7
 lifetime_randomness = 0.2
-local_coords = false
-texture = SubResource("GradientTexture2D_polen")
 emission_shape = 3
 emission_rect_extents = Vector2(2400, 110)
 direction = Vector2(-1, -0.25)
@@ -315,8 +314,8 @@ rendering_quadrant_size = 8
 collision_enabled = false
 navigation_enabled = false
 
-[node name="Mago" parent="." unique_id=1382673604 instance=ExtResource("3_280kd")]
-position = Vector2(90, 79)
+[node name="PuntosSpawn" parent="." unique_id=1222723644 instance=ExtResource("15_lhl8s")]
+position = Vector2(18, 93)
 
 [node name="Limites Nivel" type="Node2D" parent="." unique_id=849471331]
 editor_description = "Colisiones que impiden salir del camino. Los dibujos se editan por separado en Fondo."
@@ -367,7 +366,7 @@ position = Vector2(3360, 96)
 [node name="Oleada 5 Bosque Abierto" type="Marker2D" parent="Puntos Oleadas" unique_id=538785822]
 position = Vector2(4320, 96)
 
-[node name="Camara Nivel" type="Camera2D" parent="."]
+[node name="Camara Nivel" type="Camera2D" parent="." unique_id=53130753]
 editor_description = "Sigue al jugador mas adelantado. Anticipacion y suavizado se ajustan en el nodo Nivel 1."
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
@@ -375,13 +374,13 @@ drag_vertical_enabled = true
 drag_top_margin = 0.4
 drag_bottom_margin = 0.4
 
-[node name="Salida Derecha" type="Area2D" parent="."]
+[node name="Salida Derecha" type="Area2D" parent="." unique_id=1145922088]
 editor_description = "Al atravesar el extremo derecho se entra al Nivel 2. Destino editable en la raiz: Siguiente Nivel."
 position = Vector2(4824, 100)
 collision_layer = 0
 collision_mask = 2
 
-[node name="Colision Salida" type="CollisionShape2D" parent="Salida Derecha"]
+[node name="Colision Salida" type="CollisionShape2D" parent="Salida Derecha" unique_id=756222085]
 shape = SubResource("RectangleShape2D_salida")
 
 [connection signal="body_entered" from="Salida Derecha" to="." method="_salir_del_nivel"]

@@ -2,8 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dc41qho565f7g" path="res://personajes/personajeBase/personaje_base.tscn" id="1_ltgak"]
 [ext_resource type="Script" uid="uid://v8j7mso6x6ly" path="res://personajes/tanque/tanque.gd" id="2_wd2uv"]
-[ext_resource type="Texture2D" uid="uid://ckavc3g0hykny" path="res://personajes/tanque/mapache.png" id="3_762t1"]
-[ext_resource type="Texture2D" uid="uid://c7dm7387yeim5" path="res://personajes/tanque/escudo god.png" id="4_toitm"]
+[ext_resource type="Texture2D" uid="uid://21ooqhid0p0m" path="res://assets/art/personajes/hongo simple.png" id="3_762t1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jdbdj"]
 radius = 5.0
@@ -44,7 +43,6 @@ shape = SubResource("CapsuleShape2D_jdbdj")
 
 [node name="Sprite2D" type="Sprite2D" parent="EscudoReinhardt" index="0" unique_id=1182509678]
 scale = Vector2(0.01083032, 0.15884477)
-texture = ExtResource("4_toitm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EscudoReinhardt" index="1" unique_id=285507069]
 shape = SubResource("RectangleShape2D_g3u5t")

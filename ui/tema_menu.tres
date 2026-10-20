@@ -1,7 +1,7 @@
 [gd_resource type="Theme" format=3 uid="uid://3sqk08dminil"]
 
-[ext_resource type="FontFile" uid="uid://negtr5vjjpng" path="res://assets/art/ui/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="fuente"]
-[ext_resource type="Texture2D" uid="uid://c4m0wyrn73wiq" path="res://assets/art/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="panel"]
+[ext_resource type="FontFile" uid="uid://negtr5vjjpng" path="res://assets/art/ui/Sprout Lands - UI Pack - Basic pack/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="fuente"]
+[ext_resource type="Texture2D" uid="uid://c4m0wyrn73wiq" path="res://assets/art/ui/Sprout Lands - UI Pack - Basic pack/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="panel"]
 
 [sub_resource type="AtlasTexture" id="BotonNormal"]
 atlas = ExtResource("panel")

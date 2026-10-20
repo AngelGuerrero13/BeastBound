@@ -6,6 +6,8 @@ signal ha_muerto()
 
 @export var es_jugador: bool = true
 
+@export var prefijo_input: String = "p1"
+
 # --- ESTADÍSTICAS BASE ---
 @export var vida_maxima: int = 6
 @export var vida: int = 6
@@ -53,13 +55,13 @@ var ya_disparo_cargado: bool = false
 func _ready() -> void:
 	
 	if barra_carga:
-		barra_carga.visible = false          # Empieza invisible
-		barra_carga.value = 0.0              # Empieza vacía
-		barra_carga.max_value = tiempo_requerido # Se ajusta exactamente a los 3 segundos
+		barra_carga.visible = false
+		barra_carga.value = 0.0
+		barra_carga.max_value = tiempo_requerido
 		barra_carga.step = 0.01
-		
-	# Configurar barras de vida según quién sea
+
 	if es_jugador:
+		add_to_group("Jugador")
 		if barra_vida_enemigo: barra_vida_enemigo.visible = false
 		actualizar_corazones()
 	else:
@@ -102,7 +104,7 @@ func _process(delta: float) -> void:
 		return
 	
 	# 1. ATAQUE NORMAL
-	if Input.is_action_just_pressed("ataque_normal"):
+	if Input.is_action_just_pressed(prefijo_input + "_ataque_normal"):
 		if puede_atacar_normal:
 			puede_atacar_normal = false 
 			ejecutar_ataque_normal(obtener_enemigo_objetivo()) 
@@ -111,7 +113,7 @@ func _process(delta: float) -> void:
 			puede_atacar_normal = true
 			
 	# 2. ATAQUE CARGADO
-	if Input.is_action_pressed("ataque_cargado"):
+	if Input.is_action_pressed(prefijo_input + "_ataque_cargado"):
 		esta_cargando = true
 		if barra_carga: barra_carga.visible = true 
 		
@@ -143,7 +145,12 @@ func manejar_movimiento() -> void:
 	if not es_jugador:
 		return
 	
-	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	var input_dir = Input.get_vector(
+		prefijo_input + "_izquierda", 
+		prefijo_input + "_derecha", 
+		prefijo_input + "_arriba", 
+		prefijo_input + "_abajo"
+	)
 	velocity = input_dir * velocidad
 	
 	if sprite != null:
@@ -172,7 +179,7 @@ func manejar_gravedad_y_salto(delta: float) -> void:
 			velocidad_vertical = 0.0
 			en_suelo = true
 	else:
-		if es_jugador and Input.is_action_just_pressed("ui_accept"):
+		if es_jugador and Input.is_action_just_pressed(prefijo_input + "_salto"):
 			saltar()
 			
 	# Desplaza el sprite visualmente hacia arriba/abajo basándose en la altura

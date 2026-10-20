@@ -77,6 +77,8 @@ func _seleccionar(espacio: int) -> void:
 		resultado = Partidas.abrir(espacio)
 	if resultado != OK:
 		mensaje.text = "NO SE PUDO ABRIR LA PARTIDA. INTENTA DE NUEVO."
+	else:
+		Ajustes.cambiar_escena("res://ui/seleccion_personaje/seleccion_personaje.tscn")
 
 
 func _pedir_borrado(espacio: int) -> void:

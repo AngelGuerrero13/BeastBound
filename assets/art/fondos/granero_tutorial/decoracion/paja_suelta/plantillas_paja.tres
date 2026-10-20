@@ -1,6 +1,6 @@
-[gd_resource type="TileSet" load_steps=11 format=3]
+[gd_resource type="TileSet" format=3 uid="uid://8cr53e07jb5l"]
 
-[ext_resource type="Texture2D" path="res://assets/art/fondos/granero_tutorial/decoracion/paja_suelta/paja_suelta.png" id="paja"]
+[ext_resource type="Texture2D" uid="uid://csmxddtm3th6u" path="res://assets/art/fondos/granero_tutorial/decoracion/paja_suelta/paja_suelta.png" id="paja"]
 
 [sub_resource type="TileMapPattern" id="Patron_0"]
 resource_name = "Briznas Cruzadas"

@@ -4,11 +4,15 @@ extends Node2D
 @onready var boton: Button = $"Interfaz Tutorial/Boton Avanzar"
 @onready var mensaje: Label = $"Interfaz Tutorial/Estado Tutorial"
 
+@onready var spawner_jugadores = $PuntosSpawn
 
 func _ready() -> void:
+	spawner_jugadores.generar_jugadores()
+	
 	boton.hide()
 	boton.disabled = true
 	Partidas.estado_pendiente = {}
+	
 	for heredada in find_children("*", "Camera2D", true, false):
 		if heredada != camara:
 			heredada.enabled = false
@@ -18,7 +22,6 @@ func _ready() -> void:
 	camara.make_current()
 	camara.reset_smoothing()
 
-
 func _process(_delta: float) -> void:
 	_actualizar_camara()
 	if not boton.disabled:
@@ -26,10 +29,13 @@ func _process(_delta: float) -> void:
 	var segundos := ceili($"Tiempo Practica".time_left)
 	mensaje.text = "PRACTICA TUS HABILIDADES · %02d:%02d" % [floori(segundos / 60.0), segundos % 60]
 
-
 func _actualizar_camara() -> void:
-	camara.position.x = $Mago.position.x + 24.0
-
+	var jugadores_en_pantalla = get_tree().get_nodes_in_group("Jugador")
+	
+	if jugadores_en_pantalla.size() > 0:
+		var jugador_principal = jugadores_en_pantalla[0]
+		
+		camara.global_position = jugador_principal.global_position
 
 func _habilitar_salida() -> void:
 	$"Tiempo Practica".stop()

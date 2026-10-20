@@ -1,7 +1,7 @@
 [gd_resource type="Theme" format=3 uid="uid://yrjkfcaf3t3y"]
 
 [ext_resource type="Texture2D" uid="uid://cvyenepqe6k74" path="res://assets/art/ui/partidas_rusticas/boton_madera.png" id="boton"]
-[ext_resource type="FontFile" uid="uid://negtr5vjjpng" path="res://assets/art/ui/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="fuente"]
+[ext_resource type="FontFile" uid="uid://negtr5vjjpng" path="res://assets/art/ui/Sprout Lands - UI Pack - Basic pack/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="fuente"]
 
 [sub_resource type="AtlasTexture" id="Placa"]
 atlas = ExtResource("boton")

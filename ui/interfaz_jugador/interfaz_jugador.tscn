@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://ddkvw5u4b6boi"]
+
+[ext_resource type="Texture2D" uid="uid://c4m0wyrn73wiq" path="res://assets/art/ui/Sprout Lands - UI Pack - Basic pack/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="1_hw4ng"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hw4ng"]
+atlas = ExtResource("1_hw4ng")
+region = Rect2(199.31131, 99.760895, 34.521545, 40.11966)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ywy8n"]
+atlas = ExtResource("1_hw4ng")
+region = Rect2(498.47278, 128.23145, 46.76538, 45.91475)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4guwc"]
+atlas = ExtResource("1_hw4ng")
+region = Rect2(578.022, 113.030396, 13.431885, 14.569641)
+
+[node name="Interfaz Jugador" type="Control" unique_id=550894863]
+custom_minimum_size = Vector2(150, 70)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Interfaz" type="CanvasLayer" parent="." unique_id=158724522]
+
+[node name="Marco Retrato" type="TextureRect" parent="Interfaz" unique_id=2001056937]
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 80.74999
+offset_bottom = 80.74999
+scale = Vector2(0.8, 0.8)
+texture = SubResource("AtlasTexture_hw4ng")
+
+[node name="Retrato Personaje" type="TextureRect" parent="Interfaz" unique_id=725070931]
+offset_left = 18.0
+offset_top = 20.0
+offset_right = 48.0
+offset_bottom = 48.0
+
+[node name="Marco Vida" type="TextureRect" parent="Interfaz" unique_id=1238127862]
+offset_left = 60.0
+offset_top = 11.0
+offset_right = 178.74998
+offset_bottom = 67.24999
+scale = Vector2(0.8, 0.8)
+texture = SubResource("AtlasTexture_ywy8n")
+
+[node name="Corazones Vida" type="HBoxContainer" parent="Interfaz" unique_id=529568621]
+offset_left = 73.0
+offset_top = 12.0
+offset_right = 120.0
+offset_bottom = 26.0
+scale = Vector2(1.5, 1.5)
+
+[node name="Corazon 1" type="TextureRect" parent="Interfaz/Corazones Vida" unique_id=2014135302]
+layout_mode = 2
+texture = SubResource("AtlasTexture_4guwc")
+stretch_mode = 2
+
+[node name="Corazon 2" type="TextureRect" parent="Interfaz/Corazones Vida" unique_id=121398996]
+layout_mode = 2
+texture = SubResource("AtlasTexture_4guwc")
+stretch_mode = 2
+
+[node name="Corazon 3" type="TextureRect" parent="Interfaz/Corazones Vida" unique_id=1147413355]
+layout_mode = 2
+texture = SubResource("AtlasTexture_4guwc")
+stretch_mode = 2
