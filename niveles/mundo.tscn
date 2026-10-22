@@ -1,20 +1,16 @@
 [gd_scene format=3 uid="uid://b7ny33jmwvcqt"]
 
 [ext_resource type="PackedScene" uid="uid://btbx3x03l1cxj" path="res://niveles/nivel 1/nivel 1.tscn" id="1_2q5vh"]
-[ext_resource type="Script" path="res://niveles/mundo.gd" id="2_guardado"]
-[ext_resource type="PackedScene" path="res://niveles/nivel 2/nivel 2.tscn" id="3_nivel_2"]
+[ext_resource type="PackedScene" uid="uid://ekvk3ftdwj0w" path="res://niveles/tutorial/tutorial.tscn" id="2_dpjaa"]
+[ext_resource type="Script" uid="uid://c8xtbgh2ayog2" path="res://niveles/mundo.gd" id="2_guardado"]
+[ext_resource type="PackedScene" uid="uid://cf8qr4gwr7dl2" path="res://ui/interfaz_jugador/interfaz_global.tscn" id="5_gsl08"]
 
 [node name="Mundo" type="Node2D" unique_id=1230376621]
 script = ExtResource("2_guardado")
 
+[node name="Tutorial" parent="." unique_id=1340016319 instance=ExtResource("2_dpjaa")]
+siguiente_nivel = "uid://btbx3x03l1cxj"
+
 [node name="Nivel 1" parent="." unique_id=76547120 instance=ExtResource("1_2q5vh")]
-position = Vector2(-17, 183)
 
-[node name="Nivel 2" parent="." instance=ExtResource("3_nivel_2")]
-editor_description = "Nivel editable con suelo, personajes, limites, camara y marcadores. Se activa al cruzar la salida del Nivel 1."
-process_mode = 4
-visible = false
-position = Vector2(-17, 183)
-
-[editable path="Nivel 1"]
-[editable path="Nivel 2"]
+[node name="Interfaz Global" parent="." unique_id=1176805796 instance=ExtResource("5_gsl08")]

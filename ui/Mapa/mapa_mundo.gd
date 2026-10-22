@@ -42,7 +42,11 @@ func _process(_delta: float) -> void:
 
 func entrar_al_nivel() -> void:
 	if indice_actual < escenas_niveles.size() and escenas_niveles[indice_actual] != null:
-		get_tree().change_scene_to_packed(escenas_niveles[indice_actual])
+		var escena_seleccionada = escenas_niveles[indice_actual]
+		
+		Partidas.estado_pendiente["nivel_ruta"] = escena_seleccionada.resource_path
+		
+		get_tree().change_scene_to_file("res://niveles/mundo.tscn")
 	else:
 		print("Error: No se asigno una escena para el nivel ", indice_actual, " en el Inspector.")
 

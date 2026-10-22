@@ -2,7 +2,6 @@
 
 [ext_resource type="TileSet" uid="uid://bnjjvaki671q" path="res://assets/art/fondos/granero_tutorial/ideas/plantillas_granero.tres" id="3_l1cfw"]
 [ext_resource type="PackedScene" uid="uid://bcenw2rnuxqwv" path="res://niveles/spawn/puntos_spawn.tscn" id="6_g15cp"]
-[ext_resource type="PackedScene" uid="uid://cf8qr4gwr7dl2" path="res://ui/interfaz_jugador/interfaz_global.tscn" id="8_ve4wd"]
 [ext_resource type="TileSet" uid="uid://14wbbpwyxpfs" path="res://assets/art/fondos/granero_tutorial/decoracion/plantillas_decoracion.tres" id="9_rc8g0"]
 [ext_resource type="TileSet" uid="uid://8cr53e07jb5l" path="res://assets/art/fondos/granero_tutorial/decoracion/paja_suelta/plantillas_paja.tres" id="paja_suelta"]
 [ext_resource type="Script" uid="uid://cptw56102m5o5" path="res://niveles/tutorial/tutorial.gd" id="script"]
@@ -238,8 +237,6 @@ grow_vertical = 0
 theme = ExtResource("tema")
 theme_override_font_sizes/font_size = 14
 text = "AVANZAR AL NIVEL 1"
-
-[node name="Interfaz Global" parent="." unique_id=1176805796 instance=ExtResource("8_ve4wd")]
 
 [connection signal="timeout" from="Tiempo Practica" to="." method="_habilitar_salida"]
 [connection signal="pressed" from="Interfaz Tutorial/Boton Avanzar" to="." method="_avanzar"]

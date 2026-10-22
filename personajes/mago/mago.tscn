@@ -29,10 +29,6 @@ _data = {
 &"idle": SubResource("Animation_idle")
 }
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gfrtm"]
-atlas = ExtResource("5_1d17s")
-region = Rect2(0, 0, 33.192474, 33.222958)
-
 [node name="Mago" unique_id=1382673604 groups=["Jugador"] instance=ExtResource("1_bq4yt")]
 collision_layer = 2
 collision_mask = 13
@@ -43,6 +39,7 @@ velocidad_ataque = 4.0
 rango_ataque = 1.0
 desfase_horizontal_sprite = 8.0
 fuerza_salto = 200.0
+retrato = ExtResource("5_1d17s")
 tiempo_requerido = 2.0
 
 [node name="Sombra" parent="." index="0" unique_id=1873168614]
@@ -72,16 +69,5 @@ offset_top = -26.0
 offset_right = 32.0
 offset_bottom = -9.0
 
-[node name="Retrato Personaje" parent="Interfaz Jugador" parent_id_path=PackedInt32Array(1918061239) index="1" unique_id=192457262]
-offset_left = 24.0
-offset_top = 17.0
-offset_right = 72.0
-offset_bottom = 65.0
-scale = Vector2(0.9, 0.9)
-texture = SubResource("AtlasTexture_gfrtm")
-
-[node name="Corazones Vida" parent="Interfaz Jugador" parent_id_path=PackedInt32Array(1918061239) index="3" unique_id=959955788]
-offset_bottom = 39.0
-
-[node name="Barra Vida Enemigo" parent="." index="9" unique_id=26031977]
+[node name="Barra Vida Enemigo" parent="." index="8" unique_id=26031977]
 visible = false

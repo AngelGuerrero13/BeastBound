@@ -1,28 +1,35 @@
 extends CanvasLayer
 
-@onready var h_box_container: HBoxContainer = $Interfaces
+@onready var huds: Array[Node] = $Interfaces.get_children()
+
+var vinculados: Array[Node] = []
 
 func _ready() -> void:
-	await get_tree().process_frame
-	
-	var paneles_hud = h_box_container.get_children()
-	
-	for panel in paneles_hud:
-		panel.visible = false
-		
-	var lista_jugadores = get_tree().get_nodes_in_group("Jugador")
-	
-	for jugador in lista_jugadores:
-		if "prefijo_input" in jugador:
-			var numero_jugador = int(jugador.prefijo_input.get_slice("p", 1))
-			var indice = numero_jugador - 1
+	for h in huds:
+		h.hide() 
+
+func _process(_delta: float) -> void:
+	var actuales: Array = []
+	for j in get_tree().get_nodes_in_group("Jugador"):
+		if j.es_jugador and not j.is_queued_for_deletion() and j.can_process():
+			actuales.append(j)
+
+	var hay_nuevo := false
+	for j in actuales:
+		if not vinculados.has(j):
+			hay_nuevo = true
+			break
+	if hay_nuevo:
+		vincular_jugadores(actuales)
+
+func vincular_jugadores(jugadores: Array) -> void:
+	jugadores.sort_custom(func(a, b): return a.prefijo_input < b.prefijo_input)
+	for i in huds.size():
+		if i < jugadores.size():
+			huds[i].vincular(jugadores[i])
+		else:
+			huds[i].hide()
 			
-			if indice >= 0 and indice < paneles_hud.size():
-				var panel_asignado = paneles_hud[indice]
-				panel_asignado.visible = true
-				
-				if jugador.has_signal("vida_cambiada"):
-					jugador.vida_cambiada.connect(func(nueva_vida):
-						if panel_asignado.has_method("actualizar_corazones"):
-							panel_asignado.actualizar_corazones(nueva_vida, jugador.vida_maxima)
-					)
+	vinculados.clear()
+	for j in jugadores:
+		vinculados.append(j)

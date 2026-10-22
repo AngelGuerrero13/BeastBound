@@ -51,12 +51,11 @@ func _salir_del_nivel(cuerpo: Node2D) -> void:
 	call_deferred("_cambiar_nivel")
 
 func _cambiar_nivel() -> void:
-	var mundo := get_tree().current_scene
+	var mundo := get_parent()
 	var resultado: Error
-	if mundo.has_method("ir_al_nivel"):
-		resultado = mundo.ir_al_nivel(siguiente_nivel)
+	if mundo.has_method("ir_al_siguiente_nivel"):
+		resultado = mundo.ir_al_siguiente_nivel()
 	else:
-		# Permitir probar la salida con F6 desde la escena del nivel.
 		resultado = Ajustes.cambiar_escena(siguiente_nivel)
 	if resultado != OK:
 		cambiando_nivel = false
