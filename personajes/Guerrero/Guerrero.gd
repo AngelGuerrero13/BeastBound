@@ -15,6 +15,8 @@ var nivel_agilidad: int = 0
 var nivel_resistencia: int = 0
 
 func _ready() -> void:
+	super._ready()
+	
 	vida_maxima = 10
 	vida = 10
 	dano = 1

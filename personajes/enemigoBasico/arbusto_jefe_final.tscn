@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://dcsc42p762drd"]
+
+[ext_resource type="PackedScene" uid="uid://dc41qho565f7g" path="res://personajes/personajeBase/personaje_base.tscn" id="1_4g8of"]
+[ext_resource type="Script" uid="uid://ro4umpecc7by" path="res://personajes/enemigoBasico/arbusto_jefe_final.gd" id="2_4g8of"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4g8of"]
+size = Vector2(640, 360)
+
+[node name="Arbusto Jefe Final nivel 1" unique_id=1382673604 instance=ExtResource("1_4g8of")]
+script = ExtResource("2_4g8of")
+distancia_patruya = 100.0
+rango_deteccion = 70.0
+dano_raices = 2
+dano_espinas = 1
+dano_ramas = 3
+es_jugador = false
+vida_maxima = 30
+vida = 30
+velocidad = 100.0
+textura_corazon_lleno = null
+textura_corazon_mitad = null
+textura_corazon_vacio = null
+
+[node name="Area2D" type="Area2D" parent="." index="0" unique_id=1256746236]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0" unique_id=657450715]
+shape = SubResource("RectangleShape2D_4g8of")
+disabled = true
