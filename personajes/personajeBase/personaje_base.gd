@@ -6,6 +6,8 @@ signal ha_muerto()
 
 @export var es_jugador: bool = true
 
+@export var prefijo_input: String = "p1"
+
 # --- ESTADÍSTICAS BASE ---
 @export var vida_maxima: int = 6
 @export var vida: int = 6
@@ -15,11 +17,6 @@ signal ha_muerto()
 @export var rango_ataque: float = 2.0 
 @export var sprite_mira_izquierda: bool = true 
 @export var desfase_horizontal_sprite: float = 0.0
-
-# --- SPRITES DE CORAZONES ---
-@export var textura_corazon_lleno: Texture2D
-@export var textura_corazon_mitad: Texture2D
-@export var textura_corazon_vacio: Texture2D
 
 # --- FÍSICAS Y SALTO (Beat 'em up) ---
 @export var fuerza_salto: float = 400.0
@@ -35,8 +32,7 @@ var en_suelo: bool = true
 @onready var sombra: Sprite2D = get_node_or_null("Sombra")
 
 # UI Jugador
-@onready var hud: CanvasLayer = $"Interfaz Jugador"
-@onready var corazones_ui: HBoxContainer = $"Interfaz Jugador/Corazones Vida"
+@export var retrato: Texture2D
 
 # UI Enemigo
 @onready var barra_vida_enemigo: TextureProgressBar = $"Barra Vida Enemigo"
@@ -53,17 +49,15 @@ var ya_disparo_cargado: bool = false
 func _ready() -> void:
 	
 	if barra_carga:
-		barra_carga.visible = false          # Empieza invisible
-		barra_carga.value = 0.0              # Empieza vacía
-		barra_carga.max_value = tiempo_requerido # Se ajusta exactamente a los 3 segundos
+		barra_carga.visible = false
+		barra_carga.value = 0.0
+		barra_carga.max_value = tiempo_requerido
 		barra_carga.step = 0.01
-		
-	# Configurar barras de vida según quién sea
+
 	if es_jugador:
+		add_to_group("Jugador")
 		if barra_vida_enemigo: barra_vida_enemigo.visible = false
-		actualizar_corazones()
 	else:
-		if hud: hud.visible = false
 		
 		if has_node("Barra Ataque Cargado"):
 			$"Barra Ataque Cargado".visible = false
@@ -75,26 +69,6 @@ func _ready() -> void:
 			
 	actualizar_offset_horizontal()
 
-func actualizar_corazones() -> void:
-	if not es_jugador or not corazones_ui: 
-		return
-
-	var total_contenedores := ceili(vida_maxima / 2.0)
-	# Conservar los controles editados en la escena; duplicar solo si aumenta la vida maxima.
-	while corazones_ui.get_child_count() < total_contenedores:
-		var nuevo_icono := corazones_ui.get_child(0).duplicate() as TextureRect
-		nuevo_icono.name = "Corazon %d" % (corazones_ui.get_child_count() + 1)
-		corazones_ui.add_child(nuevo_icono)
-	for i in corazones_ui.get_child_count():
-		var icono := corazones_ui.get_child(i) as TextureRect
-		icono.visible = i < total_contenedores
-		if vida >= (i * 2) + 2:
-			icono.texture = textura_corazon_lleno
-		elif vida == (i * 2) + 1:
-			icono.texture = textura_corazon_mitad
-		else:
-			icono.texture = textura_corazon_vacio
-
 # BUCLE DE INPUTS (Ataques y UI)
 func _process(delta: float) -> void:
 	
@@ -102,7 +76,7 @@ func _process(delta: float) -> void:
 		return
 	
 	# 1. ATAQUE NORMAL
-	if Input.is_action_just_pressed("ataque_normal"):
+	if Input.is_action_just_pressed(prefijo_input + "_ataque_normal"):
 		if puede_atacar_normal:
 			puede_atacar_normal = false 
 			ejecutar_ataque_normal(obtener_enemigo_objetivo()) 
@@ -111,7 +85,7 @@ func _process(delta: float) -> void:
 			puede_atacar_normal = true
 			
 	# 2. ATAQUE CARGADO
-	if Input.is_action_pressed("ataque_cargado"):
+	if Input.is_action_pressed(prefijo_input + "_ataque_cargado"):
 		esta_cargando = true
 		if barra_carga: barra_carga.visible = true 
 		
@@ -143,7 +117,12 @@ func manejar_movimiento() -> void:
 	if not es_jugador:
 		return
 	
-	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	var input_dir = Input.get_vector(
+		prefijo_input + "_izquierda", 
+		prefijo_input + "_derecha", 
+		prefijo_input + "_arriba", 
+		prefijo_input + "_abajo"
+	)
 	velocity = input_dir * velocidad
 	
 	if sprite != null:
@@ -172,7 +151,7 @@ func manejar_gravedad_y_salto(delta: float) -> void:
 			velocidad_vertical = 0.0
 			en_suelo = true
 	else:
-		if es_jugador and Input.is_action_just_pressed("ui_accept"):
+		if es_jugador and Input.is_action_just_pressed(prefijo_input + "_salto"):
 			saltar()
 			
 	# Desplaza el sprite visualmente hacia arriba/abajo basándose en la altura
@@ -222,8 +201,6 @@ func recibir_dano(cantidad: int) -> void:
 	
 	if not es_jugador and barra_vida_enemigo:
 		barra_vida_enemigo.value = vida
-	
-	actualizar_corazones()
 	
 	if vida <= 0:
 		morir()

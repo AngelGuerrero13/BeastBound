@@ -10,6 +10,7 @@ var pantalla_completa := true
 var introduccion_vista := false
 var capa_pausa: CanvasLayer
 
+var jugadores_seleccionados: Dictionary = {}
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -28,14 +29,12 @@ func _ready() -> void:
 	_aplicar_audio()
 	_aplicar_pantalla()
 
-
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel") and not event.is_echo():
 		var escena := get_tree().current_scene
 		if escena != null and escena.scene_file_path != MENU and escena.scene_file_path != "res://ui/seleccion_partidas.tscn" and capa_pausa == null:
 			get_viewport().set_input_as_handled()
 			_pausar()
-
 
 func _pausar() -> void:
 	capa_pausa = CanvasLayer.new()
@@ -48,13 +47,11 @@ func _pausar() -> void:
 	add_child(capa_pausa)
 	capa_pausa.add_child(menu)
 
-
 func reanudar() -> void:
 	if is_instance_valid(capa_pausa):
 		capa_pausa.queue_free()
 	capa_pausa = null
 	get_tree().paused = false
-
 
 func cambiar_escena(ruta: String) -> Error:
 	var resultado := get_tree().change_scene_to_file(ruta)
@@ -62,21 +59,17 @@ func cambiar_escena(ruta: String) -> Error:
 		reanudar()
 	return resultado
 
-
 func establecer_volumen(clave: String, valor: float) -> void:
 	volumenes[clave] = clampf(valor, 0.0, 100.0)
 	_aplicar_audio()
-
 
 func establecer_silencio(valor: bool) -> void:
 	silenciado = valor
 	_aplicar_audio()
 
-
 func establecer_pantalla_completa(valor: bool) -> void:
 	pantalla_completa = valor
 	_aplicar_pantalla()
-
 
 func _aplicar_audio() -> void:
 	for clave in BUSES:
@@ -84,12 +77,10 @@ func _aplicar_audio() -> void:
 		AudioServer.set_bus_volume_db(indice, linear_to_db(maxf(float(volumenes[clave]) / 100.0, 0.0001)))
 		AudioServer.set_bus_mute(indice, float(volumenes[clave]) == 0.0 or (clave == "general" and silenciado))
 
-
 func _aplicar_pantalla() -> void:
 	if DisplayServer.get_name() == "headless":
 		return
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if pantalla_completa else DisplayServer.WINDOW_MODE_WINDOWED)
-
 
 func guardar() -> Error:
 	var config := ConfigFile.new()

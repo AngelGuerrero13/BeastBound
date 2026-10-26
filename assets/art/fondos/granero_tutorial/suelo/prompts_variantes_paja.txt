@@ -1,0 +1,29 @@
+Herramienta: ImageGen integrado.
+Referencia: tierra_paja_continua_v2.png, suelo aprobado del tutorial.
+Salidas originales conservadas. Versiones de juego: 480 x 144 px, normalizadas a 480 x 160 con vecino mas cercano y recorte vertical de 8 px por extremo.
+Patrones completos de 30 x 9 tiles de 16 px en plantilla_tierra_paja_v2.tres. Suelo Continuo conserva la opcion original; las tres nuevas son variantes de suelo, no objetos de decoracion. La continuidad se conserva dentro de cada patron completo; no se garantiza la union al azar entre recortes de diferentes variantes ni la repeticion exterior.
+
+Paja Rala
+Use case: precise-object-edit.
+Asset type: continuous FLOOR TEXTURE for BeastBound's barn tutorial. This is for THE WALKABLE GROUND, not separate objects or props.
+Input image: EDIT TARGET, the already approved continuous brown-earth-and-scattered-straw ground. Preserve its warm muted brown soil palette, orthographic ground plane, low-resolution crisp pixel-art style, scale and broad calm lighting. Keep dirt tones as close to the reference as possible.
+Produce one full-bleed wide 3:1 image of ground. Uniform scale, no perspective, horizon or vignette. Crisp simple stepped pixel clusters. The reference image represents approximately 480x160 logical game pixels; avoid adding finer details. Straw is dried FLAT onto the ground, short ochre strokes with no thickness or volume, integrated into the dirt. All changes should be straw density and distribution over the same earth base.
+Critical: ONE uninterrupted natural floor. No square compartments, tile borders, checkerboard, panels, sprite sheet layout, sample swatches or grid. No buildings, wooden planks, plants, crops, tufts of standing grass, hay bales, sacks, bundles tied with rope, tools, characters, UI, labels, lettering, borders or watermark. No objects casting dimensional shadows. Do not turn the floor into a prop sheet.
+Variation: Keep the floor mostly bare earth (about 85%). Add small relaxed patches of sparse dry straw, each irregular and different from the next, distributed naturally. Little short strokes and a few slightly larger flat patches, lots of open earth and broad clear areas. Quiet low-contrast variation for lightly straw-covered ground.
+
+Paja Media
+Use case: precise-object-edit.
+Asset type: continuous FLOOR TEXTURE for BeastBound's barn tutorial. This is for THE WALKABLE GROUND, not separate objects or props.
+Input image: EDIT TARGET, the already approved continuous brown-earth-and-scattered-straw ground. Preserve its warm muted brown soil palette, orthographic ground plane, low-resolution crisp pixel-art style, scale and broad calm lighting. Keep dirt tones as close to the reference as possible.
+Produce one full-bleed wide 3:1 image of ground. Uniform scale, no perspective, horizon or vignette. Crisp simple stepped pixel clusters. The reference image represents approximately 480x160 logical game pixels; avoid adding finer details. Straw is dried FLAT onto the ground, short ochre strokes with no thickness or volume, integrated into the dirt. All changes should be straw density and distribution over the same earth base.
+Critical: ONE uninterrupted natural floor. No square compartments, tile borders, checkerboard, panels, sprite sheet layout, sample swatches or grid. No buildings, wooden planks, plants, crops, tufts of standing grass, hay bales, sacks, bundles tied with rope, tools, characters, UI, labels, lettering, borders or watermark. No objects casting dimensional shadows. Do not turn the floor into a prop sheet.
+Variation: Cover about 45% of the soil with loosely scattered flat straw. Several broad softly irregular straw areas blend into clear brown earth without abrupt edges. Short overlapping ochre pixel strokes. Open walking space remains readable. The distribution must look organic with uneven thinning along every straw patch; no rectangular sections.
+
+Paja Abundante
+Use case: precise-object-edit.
+Asset type: continuous FLOOR TEXTURE for BeastBound's barn tutorial. This is for THE WALKABLE GROUND, not separate objects or props.
+Input image: EDIT TARGET, the already approved continuous brown-earth-and-scattered-straw ground. Preserve its warm muted brown soil palette, orthographic ground plane, low-resolution crisp pixel-art style, scale and broad calm lighting. Keep dirt tones as close to the reference as possible.
+Produce one full-bleed wide 3:1 image of ground. Uniform scale, no perspective, horizon or vignette. Crisp simple stepped pixel clusters. The reference image represents approximately 480x160 logical game pixels; avoid adding finer details. Straw is dried FLAT onto the ground, short ochre strokes with no thickness or volume, integrated into the dirt. All changes should be straw density and distribution over the same earth base.
+Critical: ONE uninterrupted natural floor. No square compartments, tile borders, checkerboard, panels, sprite sheet layout, sample swatches or grid. No buildings, wooden planks, plants, crops, tufts of standing grass, hay bales, sacks, bundles tied with rope, tools, characters, UI, labels, lettering, borders or watermark. No objects casting dimensional shadows. Do not turn the floor into a prop sheet.
+Variation: Create a straw-covered barn FLOOR: about 75% flat dry golden-ochre straw and about 25% glimpses of the same brown dirt through irregular openings. Many short interwoven flat strokes, natural uneven density, a few worn bare earth openings. Keep the straw subdued warm tan and muted ochre, with restrained highlights. No raised hay piles: this is a flat continuous carpet of loose straw on the ground.
+

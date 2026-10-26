@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://ddkvw5u4b6boi"]
+
+[ext_resource type="Texture2D" uid="uid://c4m0wyrn73wiq" path="res://assets/art/ui/Sprout Lands - UI Pack - Basic pack/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="1_hw4ng"]
+[ext_resource type="Script" uid="uid://qrukxf2uhi33" path="res://ui/interfaz_jugador/interfaz_jugador.gd" id="1_ywy8n"]
+[ext_resource type="Texture2D" uid="uid://c4m0wyrn73wiq" path="res://assets/art/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="2_4guwc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1d17s"]
+atlas = ExtResource("2_4guwc")
+region = Rect2(580.0169, 114.94835, 9.069763, 10.138649)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6prrr"]
+atlas = ExtResource("2_4guwc")
+region = Rect2(595.9534, 114.047905, 9.582031, 11.670403)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sjlm8"]
+atlas = ExtResource("2_4guwc")
+region = Rect2(611.9561, 115.00081, 9.077026, 10.035118)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hw4ng"]
+atlas = ExtResource("1_hw4ng")
+region = Rect2(199.31131, 99.760895, 34.521545, 40.11966)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b58qb"]
+atlas = ExtResource("2_4guwc")
+region = Rect2(503.6479, 131.06854, 36.35022, 41.119095)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r6eng"]
+content_margin_left = 7.0
+content_margin_top = 2.0
+content_margin_right = 8.0
+content_margin_bottom = 33.0
+texture = SubResource("AtlasTexture_b58qb")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4guwc"]
+atlas = ExtResource("2_4guwc")
+region = Rect2(579.98663, 115.10048, 9.169373, 10.029037)
+
+[node name="Interfaz Jugador" type="Control" unique_id=550894863]
+custom_minimum_size = Vector2(150, 70)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ywy8n")
+textura_corazon_lleno = SubResource("AtlasTexture_1d17s")
+textura_corazon_mitad = SubResource("AtlasTexture_6prrr")
+textura_corazon_vacio = SubResource("AtlasTexture_sjlm8")
+
+[node name="Interfaz" type="Control" parent="." unique_id=1785840728]
+anchors_preset = 0
+
+[node name="Marco Retrato" type="TextureRect" parent="Interfaz" unique_id=2001056937]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 80.74999
+offset_bottom = 80.74999
+scale = Vector2(0.8, 0.8)
+texture = SubResource("AtlasTexture_hw4ng")
+
+[node name="Retrato Personaje" type="TextureRect" parent="Interfaz" unique_id=725070931]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 20.0
+offset_right = 48.0
+offset_bottom = 48.0
+
+[node name="Marco Vida" type="PanelContainer" parent="Interfaz" unique_id=257602111]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 13.0
+offset_right = 103.74999
+offset_bottom = 66.74999
+scale = Vector2(0.8, 0.8)
+theme_override_styles/panel = SubResource("StyleBoxTexture_r6eng")
+
+[node name="Corazones Vida" type="HBoxContainer" parent="Interfaz/Marco Vida" unique_id=529568621]
+layout_mode = 2
+
+[node name="Corazon 1" type="TextureRect" parent="Interfaz/Marco Vida/Corazones Vida" unique_id=2014135302]
+custom_minimum_size = Vector2(18, 15)
+layout_mode = 2
+texture = SubResource("AtlasTexture_4guwc")
+expand_mode = 1
+stretch_mode = 5

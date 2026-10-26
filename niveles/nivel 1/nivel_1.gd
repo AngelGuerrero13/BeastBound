@@ -6,16 +6,28 @@ extends Node2D
 @export_range(1.0, 30.0, 0.5) var suavizado_camara: float = 12.0
 
 @onready var camara: Camera2D = $"Camara Nivel"
+@onready var spawner_jugadores = $PuntosSpawn
+
 var jugador_seguido: Node2D
 var cambiando_nivel := false
 
 func _ready() -> void:
-	set_meta("inicio_avance", $Mago.global_position.x)
+	spawner_jugadores.generar_jugadores()
+	
+	var posicion_inicial_x = 0.0
+	var lista_jugadores = get_tree().get_nodes_in_group("Jugador")
+	
+	if lista_jugadores.size() > 0:
+		posicion_inicial_x = lista_jugadores[0].global_position.x
+		
+	set_meta("inicio_avance", posicion_inicial_x)
+	
 	var suelo: TileMapLayer = $"Fondo/Suelo Pasto"
 	var area: Rect2i = suelo.get_used_rect()
 	var tamano_tile: Vector2i = suelo.tile_set.tile_size
+	
 	camara.position_smoothing_speed = suavizado_camara
-	# Actualizar el objetivo antes de que la cámara calcule la vista.
+
 	process_priority = 10
 	camara.process_priority = 20
 	camara.limit_left = roundi(suelo.to_global(Vector2(area.position * tamano_tile)).x)
@@ -39,12 +51,11 @@ func _salir_del_nivel(cuerpo: Node2D) -> void:
 	call_deferred("_cambiar_nivel")
 
 func _cambiar_nivel() -> void:
-	var mundo := get_tree().current_scene
+	var mundo := get_parent()
 	var resultado: Error
-	if mundo.has_method("ir_al_nivel"):
-		resultado = mundo.ir_al_nivel(siguiente_nivel)
+	if mundo.has_method("ir_al_siguiente_nivel"):
+		resultado = mundo.ir_al_siguiente_nivel()
 	else:
-		# Permitir probar la salida con F6 desde la escena del nivel.
 		resultado = Ajustes.cambiar_escena(siguiente_nivel)
 	if resultado != OK:
 		cambiando_nivel = false

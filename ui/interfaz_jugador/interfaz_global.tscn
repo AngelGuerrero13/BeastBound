@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cf8qr4gwr7dl2"]
+
+[ext_resource type="Script" uid="uid://1eiml1owj551" path="res://ui/interfaz_jugador/interfaz_global.gd" id="1_brio1"]
+[ext_resource type="PackedScene" uid="uid://ddkvw5u4b6boi" path="res://ui/interfaz_jugador/interfaz_jugador.tscn" id="2_c1n1b"]
+
+[node name="Interfaz Global" type="CanvasLayer" unique_id=1176805796]
+script = ExtResource("1_brio1")
+
+[node name="Interfaces" type="HBoxContainer" parent="." unique_id=1806248627]
+offset_right = 732.0
+offset_bottom = 107.0
+theme_override_constants/separation = 10
+
+[node name="Interfaz Jugador" parent="Interfaces" unique_id=2126253305 instance=ExtResource("2_c1n1b")]
+layout_mode = 2
+
+[node name="Interfaz Jugador2" parent="Interfaces" unique_id=553880317 instance=ExtResource("2_c1n1b")]
+layout_mode = 2
+
+[node name="Interfaz Jugador3" parent="Interfaces" unique_id=1301056106 instance=ExtResource("2_c1n1b")]
+layout_mode = 2
+
+[node name="Interfaz Jugador4" parent="Interfaces" unique_id=1553130935 instance=ExtResource("2_c1n1b")]
+layout_mode = 2

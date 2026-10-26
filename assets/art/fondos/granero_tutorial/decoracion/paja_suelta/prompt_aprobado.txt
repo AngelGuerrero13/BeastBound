@@ -1,0 +1,21 @@
+Solo vista previa: no instalada ni referenciada en Godot.
+Atlas 96 x 48 px: ocho celdas de 24 x 24. Mago: fotograma 48 x 48; dibujo visible 32 x 38. La comparacion muestra el sprite y las piezas a la misma escala nativa, ampliados ambos 6 veces con vecino mas cercano. Fondo marron solo en la comparacion; el atlas conserva alpha.
+Herramienta: ImageGen integrado.
+
+Use case: stylized-concept.
+Asset type: preview-only MINI ATLAS of eight tiny FLAT DRY STRAW GROUND DECALS for a low-resolution pixel-art game.
+Reference 1 is the EXACT player sprite, a frog wizard: frame is 48x48 native pixels, visible character 32 pixels wide and 38 pixels tall. This is the pixel-density and scale reference ONLY. Do not draw the wizard in your output. Reference 2 is the existing ground: muted straw colors ONLY, no dirt background in your output.
+Make a truly transparent sprite atlas, 4 equal columns by 2 equal rows. It represents exactly 96x48 NATIVE GAME PIXELS, with each equal cell exactly 24x24 game pixels. Render visibly pixelated with solid square logical pixels. Each straw blade MUST be only ONE GAME PIXEL THICK and 3-7 pixels long; sparse simple steps, never rounded or thick. Each decal occupies roughly 8-18 pixels wide and 4-10 pixels high, much smaller than the wizard. Leave at least 3 logical pixels fully transparent on all four edges of every cell.
+Eight simple irregular layouts, left to right:
+1: three short broken dry straw strokes crossing loosely, about 8x5 pixels.
+2: five little scattered dry straw strokes, about 10x7.
+3: a thin horizontal loose scatter, about 16x5.
+4: a light diagonal scatter, about 10x9.
+5: a loose small fan of seven straw strokes, about 12x8.
+6: a ragged low oval of 10-12 strokes, about 17x9, many transparent gaps between strokes.
+7: a loose curved arc of isolated short strokes, about 14x9.
+8: irregular sparse scatter of 8-10 short dry stalks and a few detached fragments, about 17x10.
+These are tiny flat ground marks, NOT hay bundles or elevated piles. Only scattered thin dry straw. NO central filled brown lump, no solid mass, no thick wood-like rods, no bark, no shading around each strand, no outlines or bevels, no volume, no shadows, no ties or knots, no wheat heads or tall grass. Do not use geometric icons, perfectly regular stars or perfect rings.
+Use 3 subdued flat colors: light muted tan for most straw, restrained ochre for some strokes, a few lighter beige pixels. Same pixel scale as the frog wizard sprite. Ultra-simple readable low-resolution RPG pixels, not a detailed illustration. No subpixel noise, no fine grain, no antialiasing or smooth curves. No RED, magenta, green, neon yellow or colored fringes.
+True alpha transparency around and BETWEEN the separate straw strokes. No soil, backdrop, brown rectangles, floor panels, grid lines, labels, numbers, text, borders, watermarks or frame. Canvas is one compact 2:1 atlas only, without a mockup or comparison layout.
+

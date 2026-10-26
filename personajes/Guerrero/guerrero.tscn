@@ -3,6 +3,5 @@
 [ext_resource type="PackedScene" uid="uid://dc41qho565f7g" path="res://personajes/personajeBase/personaje_base.tscn" id="1_d0xoe"]
 
 [node name="Guerrero" unique_id=1382673604 instance=ExtResource("1_d0xoe")]
-textura_corazon_lleno = null
-textura_corazon_mitad = null
-textura_corazon_vacio = null
+vida_maxima = 10
+vida = 10

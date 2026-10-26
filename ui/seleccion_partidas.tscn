@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://dpejbhwxms0rl"]
 
 [ext_resource type="Texture2D" uid="uid://dj6dw5p128ijl" path="res://assets/art/ui/partidas_editables/paisaje.png" id="paisaje"]
-[ext_resource type="TileSet" path="res://assets/art/ui/partidas_editables/plantillas.tres" id="plantillas"]
+[ext_resource type="TileSet" uid="uid://b2cpwa02qs2l3" path="res://assets/art/ui/partidas_editables/plantillas.tres" id="plantillas"]
 [ext_resource type="Script" uid="uid://b7hpbful71apq" path="res://ui/seleccion_partidas.gd" id="script"]
 [ext_resource type="Texture2D" uid="uid://ddrgv77t7vmj8" path="res://assets/art/ui/partidas_editables/tabla_1.png" id="tabla_borrado"]
 [ext_resource type="Theme" uid="uid://yrjkfcaf3t3y" path="res://ui/tema_partidas.tres" id="tema"]

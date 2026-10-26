@@ -1,8 +1,10 @@
 # Decoración editable del granero
 
+La mini plantilla aprobada esta en **Fondo → Suelo → Paja Suelta** de `tutorial.tscn`. Selecciona esa capa y abre **TileMap → Patrones**: contiene ocho formas transparentes de 24 × 24 px, a la escala del Mago, para pintarlas sobre el suelo existente. La capa comienza vacia y usa celdas de 8 px para colocar las piezas. La muestra completa se guarda junto al suelo en **Fondo → Plantillas → Atlas Suelo → Paja Suelta**; activa el ojo de Plantillas para verla. El PNG aprobado es `assets/art/fondos/granero_tutorial/decoracion/paja_suelta/paja_suelta.png` y sus patrones estan en `plantillas_paja.tres`.
+
 Abre `res://niveles/tutorial/tutorial.tscn`. La pared activa es **Fondo → Pared Granero**, opción 2, con ventanas al bosque. Se quitaron los dos textos de la esquina superior derecha y se conservó el suelo de paja.
 
-En **Decoracion Granero** están las cinco TileMapLayer:
+En **Fondo → Decoracion Granero** están las cinco TileMapLayer:
 
 | Capa | Muestras colocadas |
 | --- | --- |

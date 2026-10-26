@@ -1,0 +1,359 @@
+[gd_scene format=3 uid="uid://c823qw7gicyog"]
+
+[ext_resource type="Script" uid="uid://nbeptw8bw7ba" path="res://ui/panel_jugador/panel_jugador.gd" id="1_ncw5h"]
+[ext_resource type="FontFile" uid="uid://bjejslilhfrgo" path="res://assets/art/fuentes/alagard.ttf" id="2_h8ghk"]
+[ext_resource type="Texture2D" uid="uid://drkv6x6jm4hyy" path="res://assets/art/ui/Botones⁄teclas/gdb-playstation-2.png" id="3_ohv1j"]
+[ext_resource type="Texture2D" uid="uid://ds2oa20ygnq64" path="res://assets/art/ui/Botones⁄teclas/gdb-switch-2.png" id="4_a1iiy"]
+[ext_resource type="Texture2D" uid="uid://cdrl4d8st1cys" path="res://assets/art/ui/Botones⁄teclas/gdb-keyboard-2.png" id="5_d5i03"]
+[ext_resource type="Texture2D" uid="uid://c2er2bn8krx8t" path="res://assets/art/ui/Botones⁄teclas/gdb-xbox-2.png" id="6_uphlk"]
+[ext_resource type="Texture2D" uid="uid://hn5ch4gv6jwh" path="res://assets/art/ui/panel_jugador/seleccionPersonaje.png" id="7_f7r70"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cwkua"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kxc0x"]
+atlas = ExtResource("7_f7r70")
+region = Rect2(26.638962, 137.27731, 205.80713, 112.74777)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kxc0x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r6eng"]
+atlas = ExtResource("7_f7r70")
+region = Rect2(299.50986, 273.53812, 23.054596, 16.677795)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u03n3"]
+atlas = ExtResource("7_f7r70")
+region = Rect2(299.5698, 311.77213, 22.782349, 16.640045)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b58qb"]
+atlas = ExtResource("7_f7r70")
+region = Rect2(503.3465, 9.374212, 82.10559, 127.15186)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2roir"]
+atlas = ExtResource("3_ohv1j")
+region = Rect2(48, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uymwu"]
+atlas = ExtResource("3_ohv1j")
+region = Rect2(64, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7kbuw"]
+atlas = ExtResource("3_ohv1j")
+region = Rect2(80, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_igxw8"]
+atlas = ExtResource("3_ohv1j")
+region = Rect2(96, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xgbq3"]
+atlas = ExtResource("4_a1iiy")
+region = Rect2(48, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cdr10"]
+atlas = ExtResource("4_a1iiy")
+region = Rect2(64, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xn6dy"]
+atlas = ExtResource("4_a1iiy")
+region = Rect2(80, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kn2mb"]
+atlas = ExtResource("4_a1iiy")
+region = Rect2(96, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ncw5h"]
+atlas = ExtResource("5_d5i03")
+region = Rect2(240, 64, 40, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8ghk"]
+atlas = ExtResource("5_d5i03")
+region = Rect2(240, 176, 40, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ohv1j"]
+atlas = ExtResource("5_d5i03")
+region = Rect2(240, 288, 40, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a1iiy"]
+atlas = ExtResource("5_d5i03")
+region = Rect2(240, 400, 40, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4snm6"]
+atlas = ExtResource("6_uphlk")
+region = Rect2(48, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mjiqc"]
+atlas = ExtResource("6_uphlk")
+region = Rect2(64, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hi753"]
+atlas = ExtResource("6_uphlk")
+region = Rect2(80, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ebseb"]
+atlas = ExtResource("6_uphlk")
+region = Rect2(96, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r6eng"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2roir")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uymwu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7kbuw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_igxw8")
+}],
+"loop": 1,
+"name": &"ps",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xgbq3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cdr10")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xn6dy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kn2mb")
+}],
+"loop": 1,
+"name": &"switch",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ncw5h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8ghk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ohv1j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a1iiy")
+}],
+"loop": 1,
+"name": &"teclado",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4snm6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mjiqc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hi753")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ebseb")
+}],
+"loop": 1,
+"name": &"xbox",
+"speed": 5.0
+}]
+
+[node name="PanelJugador" type="Control" unique_id=1792951741]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 250.0
+offset_bottom = 360.0
+script = ExtResource("1_ncw5h")
+
+[node name="Fondo" type="TextureRect" parent="." unique_id=1374682525]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VistaPersonaje" type="Control" parent="." unique_id=86791289]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -150.0
+offset_right = 100.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Imagen" type="TextureRect" parent="VistaPersonaje" unique_id=256722263]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -51.0
+offset_top = -65.0
+offset_right = 52.0
+offset_bottom = 53.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_cwkua")
+
+[node name="MarcoNombre" type="TextureRect" parent="VistaPersonaje" unique_id=493260631]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -67.0
+offset_top = -63.0
+offset_right = 68.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = SubResource("AtlasTexture_kxc0x")
+expand_mode = 1
+
+[node name="Nombre" type="Label" parent="VistaPersonaje/MarcoNombre" unique_id=1051965994]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_h8ghk")
+label_settings = SubResource("LabelSettings_kxc0x")
+
+[node name="FlechaArriba" type="TextureRect" parent="VistaPersonaje" unique_id=1586872926]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -11.5
+offset_right = 11.5
+offset_bottom = 20.0
+grow_horizontal = 2
+texture = SubResource("AtlasTexture_r6eng")
+
+[node name="FlechaAbajo" type="TextureRect" parent="VistaPersonaje" unique_id=412099799]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -11.0
+offset_top = -84.0
+offset_right = 11.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = SubResource("AtlasTexture_u03n3")
+
+[node name="MensajeListo" type="Label" parent="VistaPersonaje" unique_id=1912481020]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Marco" type="TextureRect" parent="." unique_id=1998567718]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -68.0
+offset_top = -134.0
+offset_right = 68.0
+offset_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_b58qb")
+
+[node name="ContenedorUnirse" type="VBoxContainer" parent="." unique_id=1898140568]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.492
+anchor_top = 0.41000003
+anchor_right = 0.492
+anchor_bottom = 0.41000003
+offset_left = -43.0
+offset_top = -27.600006
+offset_right = 45.0
+offset_bottom = 27.399994
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MensajePresiona" type="Label" parent="ContenedorUnirse" unique_id=176242092]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_h8ghk")
+text = "Presiona"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="IconoBoton" type="Control" parent="ContenedorUnirse" unique_id=1264419817]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="AnimacionBotones" type="AnimatedSprite2D" parent="ContenedorUnirse/IconoBoton" unique_id=1963468493]
+position = Vector2(8, 8)
+sprite_frames = SubResource("SpriteFrames_r6eng")
+animation = &"xbox"
+frame_progress = 0.43837276
+
+[node name="MensajeUnirse" type="Label" parent="ContenedorUnirse" unique_id=1822443887]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_h8ghk")
+text = "para unirse"
+
+[node name="ContenedorListo" type="VBoxContainer" parent="." unique_id=1758964262]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.64400005
+anchor_right = 0.5
+anchor_bottom = 0.64400005
+offset_left = -20.0
+offset_top = -41.840027
+offset_right = 20.0
+offset_bottom = -1.8400269
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MensajeListo" type="Label" parent="ContenedorListo" unique_id=1325156531]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_h8ghk")
+text = "Listo"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="IconoBoton" type="Control" parent="ContenedorListo" unique_id=1055537702]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="AnimacionBotones" type="AnimatedSprite2D" parent="ContenedorListo/IconoBoton" unique_id=1907604064]
+position = Vector2(8, 8)
+sprite_frames = SubResource("SpriteFrames_r6eng")
+animation = &"teclado"
+frame_progress = 0.54919547
