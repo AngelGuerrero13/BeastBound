@@ -75,6 +75,9 @@ assets/art/ui/cursor_patita/fuente_ladeada.png.import
 /niveles/tutorial/plantillas_granero.tscn
 /niveles/tutorial/plantilla_suelo.tscn
 
+# Soporte anterior de la selección de partidas, conservado como referencia local
+/ui/seleccion_partidas/arco.tscn
+
 # Archivos del sistema operativo
 Thumbs.db
 Desktop.ini

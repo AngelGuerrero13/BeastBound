@@ -1,0 +1,93 @@
+[gd_scene format=4]
+
+[ext_resource type="Texture2D" path="res://assets/art/ui/partidas_editables/maderas_musgo/madera_1.png" id="madera"]
+[ext_resource type="Theme" uid="uid://yrjkfcaf3t3y" path="res://ui/tema_partidas.tres" id="tema"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_madera"]
+atlas = ExtResource("madera")
+region = Rect2(0, 120, 2172, 460)
+
+[node name="Cartel 1" type="Control" unique_id=802920439]
+editor_description = "Tabla y controles editables. Cambia la textura del nodo Tabla para reemplazar la madera."
+anchors_preset = 0
+offset_left = 80.0
+offset_top = 16.0
+offset_right = 560.0
+offset_bottom = 115.0
+mouse_filter = 2
+theme = ExtResource("tema")
+
+[node name="Tabla" type="TextureRect" parent="." unique_id=577718356]
+editor_description = "Imagen de la madera editable desde Texture en el Inspector."
+texture_filter = 1
+layout_mode = 0
+offset_top = 14.0
+offset_right = 480.0
+offset_bottom = 106.0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_madera")
+expand_mode = 1
+
+[node name="Nombre Equipo" type="Label" parent="." unique_id=1065050737]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 31.0
+offset_right = 328.0
+offset_bottom = 55.0
+theme_override_font_sizes/font_size = 20
+text = "GUARDIANES DEL ALBA"
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="Detalle Partida" type="Label" parent="." unique_id=1511205579]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 55.0
+offset_right = 247.333
+offset_bottom = 69.0
+theme_override_font_sizes/font_size = 12
+text = "NIVEL 3 · AVANCE: 62%"
+vertical_alignment = 1
+
+[node name="Barra Avance" type="ProgressBar" parent="." unique_id=1304301392]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 74.0
+offset_right = 247.333
+offset_bottom = 87.0
+mouse_filter = 2
+value = 62.0
+show_percentage = false
+
+[node name="Nombre Nuevo" type="LineEdit" parent="." unique_id=1191366393]
+visible = false
+layout_mode = 0
+offset_left = 86.0
+offset_top = 63.0
+offset_right = 248.0
+offset_bottom = 83.0
+theme_override_font_sizes/font_size = 12
+placeholder_text = "ESCRIBE UN NOMBRE..."
+max_length = 24
+context_menu_enabled = false
+
+[node name="Boton Partida" type="Button" parent="." unique_id=186828563]
+layout_mode = 0
+offset_left = 312.0
+offset_top = 46.0
+offset_right = 400.0
+offset_bottom = 80.0
+theme_override_font_sizes/font_size = 16
+text = "JUGAR"
+
+[node name="Boton Eliminar" type="Button" parent="." unique_id=344732125]
+layout_mode = 0
+offset_left = 416.0
+offset_top = 46.0
+offset_right = 442.0
+offset_bottom = 72.0
+tooltip_text = "Eliminar esta partida"
+theme_type_variation = &"Eliminar"
+theme_override_font_sizes/font_size = 16
+text = "X"
+

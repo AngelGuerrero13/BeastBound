@@ -57,7 +57,7 @@ Abre `personajes/personajeBase/personaje_base.tscn` para cambios compartidos por
 
 ## Menús
 
-La selección de partidas se edita en `ui/seleccion_partidas.tscn`. **Fondo Pradera** usa `assets/art/ui/partidas_editables/paisaje.png`, sin arco ni cuerdas. **Arco** contiene dos palos, travesaño, placa del título y dos amarres en capas independientes, sin plantas colocadas. En **Carteles → Cartel 1 / Cartel 2 / Cartel 3**, la tabla, cada cuerda, cada nudo y sus adornos son también capas separadas. Al seleccionar una **Capa**, abre **TileMap → Patrones**: las 31 plantillas (incluidos 15 adornos naturales) de `assets/art/ui/partidas_editables/plantillas.tres` permiten pintar piezas completas, igual que en Nivel 1. La cuadrícula es de 4 píxeles. Más detalles en `assets/art/ui/partidas_editables/COMO_EDITAR.md`. Los textos, barras, campos y botones siguen siendo controles editables y el script carga las partidas reales al iniciar.
+La pantalla completa se abre en `ui/seleccion_partidas.tscn`. **Fondo** usa `assets/art/ui/partidas_editables/fondo_pradera/pradera_base.png`. **Animacion del Fondo** contiene las hojas y el nodo **Animacion Viento**; selecciona ese nodo y reproduce **Viento** desde el panel Animación para previsualizarlo. La animación no se reproduce automáticamente mientras espera aprobación. Los carteles se editan por separado en `ui/seleccion_partidas/cartel_1.tscn`, `cartel_2.tscn` y `cartel_3.tscn`. Cada nodo **Tabla** muestra una imagen editable en `assets/art/ui/partidas_editables/maderas_musgo/`. Las plantillas antiguas se conservan en `assets/art/ui/partidas_editables/plantillas.tres`, pero ya no se cargan en los carteles.
 
 Abre `ui/menu_principal.tscn`:
 
@@ -69,7 +69,7 @@ Abre `ui/menu_principal.tscn`:
 
 Para previsualizar una ventana, activa **Visible** en Ventanas Menu y en el panel deseado; desactiva los otros dos paneles. Al ejecutar, el script muestra el panel elegido. Los ajustes se sincronizan con los datos guardados.
 
-Abre `ui/seleccion_partidas.tscn`: **Carteles → Cartel 1 / Cartel 2 / Cartel 3** contiene los controles editables de cada partida. **Boton Volver** está en la raíz.
+En `ui/seleccion_partidas.tscn`, **Carteles → Cartel 1 / Cartel 2 / Cartel 3** identifica las tres escenas independientes. Abre la escena de cada cartel para editar sus controles; **Boton Volver** está en la raíz de la pantalla principal.
 
 Usa **F6** para probar la escena abierta o **F5** para iniciar desde el menú principal. Los scripts mantienen las transiciones, el comportamiento, los ajustes y las partidas. Se conserva la ruta guardada `Nivel 1/Mago` para que las partidas anteriores sigan cargando.
 
