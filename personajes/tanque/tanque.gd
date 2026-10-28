@@ -32,7 +32,7 @@ func manejar_movimiento() -> void:
 	if not es_jugador:
 		return
 		
-	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	var input_dir = obtener_direccion_movimiento()
 	var delta = get_physics_process_delta_time()
 	
 	# Leemos la acción heredada y la tecla del escudo
@@ -85,7 +85,7 @@ func manejar_movimiento() -> void:
 			
 	else:
 		# Llama a la variable "velocidad" heredada de personaje_base.gd
-		velocity = input_dir * velocidad
+		super.manejar_movimiento()
 		if input_dir != Vector2.ZERO:
 			orientar_personaje_y_escudo(input_dir)
 
@@ -102,14 +102,7 @@ func ejecutar_embestida() -> void:
 
 # Agrupamos la lógica visual para mantener la herencia limpia
 func orientar_personaje_y_escudo(dir: Vector2) -> void:
-	if sprite != null:
-		if sprite_mira_izquierda:
-			sprite.flip_h = dir.x > 0
-		else:
-			sprite.flip_h = dir.x < 0
-			
-		# Llamamos al método que ya existe en el script base
-		actualizar_offset_horizontal() 
+	orientar_sprite(dir)
 
 	# Movemos el escudo junto con el mapache
 	if escudo_nodo:

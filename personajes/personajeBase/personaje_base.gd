@@ -8,11 +8,15 @@ signal ha_muerto()
 
 @export var prefijo_input: String = "p1"
 
+
 # --- ESTADÍSTICAS BASE ---
 @export var vida_maxima: int = 6
 @export var vida: int = 6
 @export var velocidad: float = 200.0 
 @export var dano: int = 1
+# 0.30 equivale a un 30 % de reducción; por defecto los demás no reducen daño.
+@export_range(0.0, 1.0, 0.01) var reduccion_dano: float = 0.0
+var fraccion_dano: float = 0.0
 @export var velocidad_ataque: float = 5.0
 @export var rango_ataque: float = 2.0 
 @export var sprite_mira_izquierda: bool = true 
@@ -27,15 +31,15 @@ var velocidad_vertical: float = 0.0
 var en_suelo: bool = true
 
 # --- NODOS HIJOS ---
-@onready var sprite: Sprite2D = $"Imagen Personaje"
-@onready var barra_carga: TextureProgressBar = $"Barra Ataque Cargado"
+@onready var sprite = get_node_or_null("Imagen Personaje") if has_node("Imagen Personaje") else get_node_or_null("Imagen Raton")
+@onready var barra_carga: TextureProgressBar = get_node_or_null("Barra Ataque Cargado")
 @onready var sombra: Sprite2D = get_node_or_null("Sombra")
 
 # UI Jugador
 @export var retrato: Texture2D
 
 # UI Enemigo
-@onready var barra_vida_enemigo: TextureProgressBar = $"Barra Vida Enemigo"
+@onready var barra_vida_enemigo: TextureProgressBar = get_node_or_null("Barra Vida Enemigo")
 
 # --- VARIABLES DE CONTROL DE ATAQUE ---
 @export var tiempo_recarga_normal: float = 0.5 
@@ -117,21 +121,26 @@ func manejar_movimiento() -> void:
 	if not es_jugador:
 		return
 	
-	var input_dir = Input.get_vector(
-		prefijo_input + "_izquierda", 
-		prefijo_input + "_derecha", 
-		prefijo_input + "_arriba", 
-		prefijo_input + "_abajo"
-	)
-	velocity = input_dir * velocidad
-	
-	if sprite != null:
-		if input_dir.x != 0:
-			if sprite_mira_izquierda:
-				sprite.flip_h = input_dir.x > 0
-			else:
-				sprite.flip_h = input_dir.x < 0
-			actualizar_offset_horizontal()
+	mover_en_direccion(obtener_direccion_movimiento())
+
+func obtener_prefijo_movimiento() -> String:
+	return prefijo_input
+
+func obtener_direccion_movimiento() -> Vector2:
+	var prefijo := obtener_prefijo_movimiento()
+	if prefijo.is_empty():
+		return Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	return Input.get_vector(prefijo + "_izquierda", prefijo + "_derecha",
+		prefijo + "_arriba", prefijo + "_abajo")
+
+func mover_en_direccion(direccion: Vector2) -> void:
+	velocity = direccion.limit_length() * velocidad
+	orientar_sprite(direccion)
+
+func orientar_sprite(direccion: Vector2) -> void:
+	if sprite != null and direccion.x != 0.0:
+		sprite.flip_h = direccion.x > 0 if sprite_mira_izquierda else direccion.x < 0
+		actualizar_offset_horizontal()
 
 func actualizar_offset_horizontal() -> void:
 	if sprite == null or desfase_horizontal_sprite == 0.0:
@@ -194,10 +203,24 @@ func ejecutar_ataque_cargado(objetivo) -> void:
 func obtener_enemigo_objetivo() -> Node2D:
 	return null
 
+func calcular_dano_recibido(cantidad: int) -> int:
+	if cantidad <= 0:
+		return 0
+	# Acumular fracciones conserva la defensa incluso frente a golpes de un punto.
+	var total := cantidad * (1.0 - clampf(reduccion_dano, 0.0, 1.0)) + fraccion_dano
+	var entero := floori(total + 0.000001)
+	fraccion_dano = maxf(0.0, total - entero)
+	return entero
+
 func recibir_dano(cantidad: int) -> void:
-	vida -= cantidad
+	if cantidad <= 0 or vida <= 0:
+		return
+	var dano_recibido := calcular_dano_recibido(cantidad)
+	if dano_recibido == 0:
+		return
+	vida = maxi(0, vida - dano_recibido)
 	vida_cambiada.emit(vida)
-	print(name, " recibió ", cantidad, " de daño. Vida restante: ", vida)
+	print(name, " recibió ", dano_recibido, " de daño. Vida restante: ", vida)
 	
 	if not es_jugador and barra_vida_enemigo:
 		barra_vida_enemigo.value = vida

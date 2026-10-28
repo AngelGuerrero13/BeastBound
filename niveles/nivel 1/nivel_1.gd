@@ -15,7 +15,7 @@ func _ready() -> void:
 	spawner_jugadores.generar_jugadores()
 	
 	var posicion_inicial_x = 0.0
-	var lista_jugadores = get_tree().get_nodes_in_group("Jugador")
+	var lista_jugadores = spawner_jugadores.jugadores_generados
 	
 	if lista_jugadores.size() > 0:
 		posicion_inicial_x = lista_jugadores[0].global_position.x

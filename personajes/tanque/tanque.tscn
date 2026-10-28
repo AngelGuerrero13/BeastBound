@@ -21,6 +21,7 @@ _data = {
 
 [node name="Tanque" unique_id=1382673604 instance=ExtResource("1_ltgak")]
 script = ExtResource("2_wd2uv")
+reduccion_dano = 0.3
 velocidad_embestida = 800.0
 duracion_embestida_maxima = 0.35
 tiempo_maximo_carga_embestida = 1.0
