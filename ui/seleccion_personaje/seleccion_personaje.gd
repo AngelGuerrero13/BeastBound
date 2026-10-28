@@ -1,8 +1,9 @@
 extends Control
 
+const MAPA = "res://ui/Mapa/mapa_mundo.tscn"
+
 @onready var paneles = $Paneles.get_children()
 
-@onready var timer_inicio = $TimerInicio
 @onready var mensaje_inicio = $MensajeInicio
 
 @onready var icono_aceptar_global = $BotonAceptar/AnimacionBotones1
@@ -11,12 +12,12 @@ extends Control
 var jugadores_activos = []
 var jugadores_listos = {}
 
-var texto_base_mensaje = ""
+var inicio_pendiente = false
+var carga_iniciada = false
 
 func _ready():
-	texto_base_mensaje = mensaje_inicio.text
+	carga_iniciada = ResourceLoader.load_threaded_request(MAPA, "PackedScene") == OK
 	mensaje_inicio.hide()
-	timer_inicio.timeout.connect(_on_timer_timeout)
 	
 	for panel in paneles:
 		panel.jugador_salio.connect(_on_jugador_salio)
@@ -30,33 +31,42 @@ func _ready():
 		actualizar_iconos_globales(-1)
 
 func _process(_delta):
-	if not timer_inicio.is_stopped():
-		mensaje_inicio.text = texto_base_mensaje + str(ceil(timer_inicio.time_left))
+	if inicio_pendiente:
+		var estado = ResourceLoader.load_threaded_get_status(MAPA) if carga_iniciada else ResourceLoader.THREAD_LOAD_INVALID_RESOURCE
+		if estado == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
+			return
+		var resultado: Error
+		if estado == ResourceLoader.THREAD_LOAD_LOADED:
+			resultado = get_tree().change_scene_to_packed(ResourceLoader.load_threaded_get(MAPA))
+			if resultado == OK:
+				Ajustes.reanudar()
+		else:
+			resultado = Ajustes.cambiar_escena(MAPA)
+		if resultado != OK:
+			inicio_pendiente = false
+			mensaje_inicio.text = "No se pudo cargar el mapa"
+			set_process_input(true)
+			for panel in paneles:
+				panel.set_process_input(true)
 
 func comprobar_inicio_juego():
 	if jugadores_activos.size() > 0 and jugadores_listos.size() == jugadores_activos.size():
-		mensaje_inicio.show()
-		timer_inicio.start()
-	else:
-		timer_inicio.stop()
-		mensaje_inicio.hide()
+		iniciar_juego()
 
-func _on_timer_timeout():
+func iniciar_juego():
 	Ajustes.jugadores_seleccionados = jugadores_listos.duplicate()
-	Ajustes.cambiar_escena("res://ui/Mapa/mapa_mundo.tscn")
+	inicio_pendiente = true
+	mensaje_inicio.text = "Cargando mapa..."
+	mensaje_inicio.show()
+	set_process_input(false)
+	for panel in paneles:
+		panel.set_process_input(false)
 
 func _input(event):
 	if event is InputEventKey:
 		actualizar_iconos_globales(-1)
 	elif event is InputEventJoypadButton or event is InputEventJoypadMotion:
 		actualizar_iconos_globales(event.device)
-	
-	if event.is_action_pressed("ui_accept"):
-		if not timer_inicio.is_stopped():
-			if timer_inicio.time_left < (timer_inicio.wait_time - 0.5):
-				timer_inicio.stop()
-				_on_timer_timeout()
-				return
 	
 	for i in range(1, 5):
 		var prefijo = "p" + str(i)

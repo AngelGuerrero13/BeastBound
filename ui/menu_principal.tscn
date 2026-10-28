@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" path="res://ui/icono_jugar.tres" id="7_icono_jugar"]
 [ext_resource type="Texture2D" uid="uid://ce3kkqtv53f36" path="res://assets/art/ui/partidas_rusticas/cartel_sin_cuerdas.png" id="madera_guardar"]
 [ext_resource type="Theme" uid="uid://yrjkfcaf3t3y" path="res://ui/tema_partidas.tres" id="tema_carteles"]
+[ext_resource type="PackedScene" path="res://ui/ajustes_pausa.tscn" id="ajustes_menu"]
+[ext_resource type="PackedScene" path="res://ui/ajustes_menu.tscn" id="libro_ajustes"]
 
 [sub_resource type="AtlasTexture" id="JugarNormal"]
 atlas = ExtResource("6_botones")
@@ -28,16 +30,6 @@ filter_clip = true
 [sub_resource type="AtlasTexture" id="ConfiguracionPresionado"]
 atlas = ExtResource("6_botones")
 region = Rect2(672, 64, 32, 32)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="ControlesNormal"]
-atlas = ExtResource("6_botones")
-region = Rect2(640, 96, 32, 32)
-filter_clip = true
-
-[sub_resource type="AtlasTexture" id="ControlesPresionado"]
-atlas = ExtResource("6_botones")
-region = Rect2(672, 96, 32, 32)
 filter_clip = true
 
 [sub_resource type="AtlasTexture" id="CreditosNormal"]
@@ -155,7 +147,7 @@ theme_override_constants/separation = 18
 custom_minimum_size = Vector2(192, 64)
 layout_mode = 2
 size_flags_horizontal = 4
-focus_neighbor_bottom = NodePath("../Accesos Menu/Grupo Configuracion/Boton Configuracion")
+focus_neighbor_bottom = NodePath("../Accesos Menu/Grupo Ajustes/Boton Ajustes")
 mouse_default_cursor_shape = 2
 texture_normal = SubResource("JugarNormal")
 texture_pressed = SubResource("JugarPresionado")
@@ -195,20 +187,21 @@ expand_mode = 1
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 16
+alignment = 1
 
-[node name="Grupo Configuracion" type="VBoxContainer" parent="Centro Menu/Margen Interior/Botones Menu/Accesos Menu" unique_id=2010744532]
+[node name="Grupo Ajustes" type="VBoxContainer" parent="Centro Menu/Margen Interior/Botones Menu/Accesos Menu" unique_id=2010744532]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 4
 
-[node name="Boton Configuracion" type="TextureButton" parent="Centro Menu/Margen Interior/Botones Menu/Accesos Menu/Grupo Configuracion" unique_id=1163721805]
+[node name="Boton Ajustes" type="TextureButton" parent="Centro Menu/Margen Interior/Botones Menu/Accesos Menu/Grupo Ajustes" unique_id=1163721805]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 focus_neighbor_left = NodePath("../../Grupo Salir/Boton Salir")
 focus_neighbor_top = NodePath("../../../Boton Jugar")
-focus_neighbor_right = NodePath("../../Grupo Controles/Boton Controles")
+focus_neighbor_right = NodePath("../../Grupo Creditos/Boton Creditos")
 mouse_default_cursor_shape = 2
 texture_normal = SubResource("ConfiguracionNormal")
 texture_pressed = SubResource("ConfiguracionPresionado")
@@ -217,7 +210,7 @@ ignore_texture_size = true
 stretch_mode = 5
 script = ExtResource("4")
 
-[node name="Etiqueta Boton" type="Label" parent="Centro Menu/Margen Interior/Botones Menu/Accesos Menu/Grupo Configuracion" unique_id=934130610]
+[node name="Etiqueta Boton" type="Label" parent="Centro Menu/Margen Interior/Botones Menu/Accesos Menu/Grupo Ajustes" unique_id=934130610]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.96, 0.84, 1)
 theme_override_colors/font_shadow_color = Color(0.2, 0.13, 0.08, 1)
@@ -226,38 +219,6 @@ theme_override_constants/shadow_offset_y = 1
 theme_override_fonts/font = ExtResource("5")
 theme_override_font_sizes/font_size = 14
 text = "AJUSTES"
-horizontal_alignment = 1
-
-[node name="Grupo Controles" type="VBoxContainer" parent="Centro Menu/Margen Interior/Botones Menu/Accesos Menu" unique_id=123878689]
-custom_minimum_size = Vector2(80, 0)
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/separation = 4
-
-[node name="Boton Controles" type="TextureButton" parent="Centro Menu/Margen Interior/Botones Menu/Accesos Menu/Grupo Controles" unique_id=473155221]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-size_flags_horizontal = 4
-focus_neighbor_left = NodePath("../../Grupo Configuracion/Boton Configuracion")
-focus_neighbor_top = NodePath("../../../Boton Jugar")
-focus_neighbor_right = NodePath("../../Grupo Creditos/Boton Creditos")
-mouse_default_cursor_shape = 2
-texture_normal = SubResource("ControlesNormal")
-texture_pressed = SubResource("ControlesPresionado")
-texture_hover = SubResource("ControlesNormal")
-ignore_texture_size = true
-stretch_mode = 5
-script = ExtResource("4")
-
-[node name="Etiqueta Boton" type="Label" parent="Centro Menu/Margen Interior/Botones Menu/Accesos Menu/Grupo Controles" unique_id=77409989]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.96, 0.84, 1)
-theme_override_colors/font_shadow_color = Color(0.2, 0.13, 0.08, 1)
-theme_override_constants/shadow_offset_x = 1
-theme_override_constants/shadow_offset_y = 1
-theme_override_fonts/font = ExtResource("5")
-theme_override_font_sizes/font_size = 14
-text = "CONTROLES"
 horizontal_alignment = 1
 
 [node name="Grupo Creditos" type="VBoxContainer" parent="Centro Menu/Margen Interior/Botones Menu/Accesos Menu" unique_id=4189999]
@@ -270,7 +231,7 @@ theme_override_constants/separation = 4
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
-focus_neighbor_left = NodePath("../../Grupo Controles/Boton Controles")
+focus_neighbor_left = NodePath("../../Grupo Ajustes/Boton Ajustes")
 focus_neighbor_top = NodePath("../../../Boton Jugar")
 focus_neighbor_right = NodePath("../../Grupo Salir/Boton Salir")
 mouse_default_cursor_shape = 2
@@ -304,7 +265,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 focus_neighbor_left = NodePath("../../Grupo Creditos/Boton Creditos")
 focus_neighbor_top = NodePath("../../../Boton Jugar")
-focus_neighbor_right = NodePath("../../Grupo Configuracion/Boton Configuracion")
+focus_neighbor_right = NodePath("../../Grupo Ajustes/Boton Ajustes")
 mouse_default_cursor_shape = 2
 texture_normal = SubResource("SalirNormal")
 texture_pressed = SubResource("SalirPresionado")
@@ -380,6 +341,10 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.015, 0.035, 0.04, 0.86)
 
+[node name="Libro Ajustes" parent="." instance=ExtResource("libro_ajustes")]
+visible = false
+layout_mode = 1
+
 [node name="Centro Ventana" type="CenterContainer" parent="Ventanas Menu" unique_id=295815149]
 layout_mode = 1
 anchors_preset = 15
@@ -403,202 +368,9 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Configuracion" type="VBoxContainer" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana" unique_id=2008453765]
-editor_description = "Activa Visible en Ventanas Menu y en este panel para previsualizarlo en el editor."
-layout_mode = 2
-theme_override_constants/separation = 6
-
-[node name="Titulo Ventana" type="Label" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Configuracion" unique_id=308303929]
-layout_mode = 2
-theme_override_font_sizes/font_size = 22
-text = "Configuración"
-horizontal_alignment = 1
-
-[node name="Separador Titulo" type="HSeparator" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Configuracion" unique_id=492151110]
-layout_mode = 2
-
-[node name="Volumen General" type="HBoxContainer" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Configuracion" unique_id=143444628]
-layout_mode = 2
-
-[node name="Etiqueta Volumen" type="Label" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Configuracion/Volumen General" unique_id=1456448496]
-custom_minimum_size = Vector2(130, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "Volumen general"
-
-[node name="Deslizador Volumen" type="HSlider" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Configuracion/Volumen General" unique_id=948812818]
-custom_minimum_size = Vector2(150, 24)
-layout_mode = 2
-size_flags_horizontal = 3
-value = 100.0
-
-[node name="Porcentaje Volumen" type="Label" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Configuracion/Volumen General" unique_id=224739423]
-custom_minimum_size = Vector2(42, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "100%"
-horizontal_alignment = 2
-
-[node name="Volumen Musica" type="HBoxContainer" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Configuracion" unique_id=1221018197]
-layout_mode = 2
-
-[node name="Etiqueta Volumen" type="Label" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Configuracion/Volumen Musica" unique_id=1819400527]
-custom_minimum_size = Vector2(130, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "Música"
-
-[node name="Deslizador Volumen" type="HSlider" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Configuracion/Volumen Musica" unique_id=1976988381]
-custom_minimum_size = Vector2(150, 24)
-layout_mode = 2
-size_flags_horizontal = 3
-value = 100.0
-
-[node name="Porcentaje Volumen" type="Label" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Configuracion/Volumen Musica" unique_id=368598228]
-custom_minimum_size = Vector2(42, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "100%"
-horizontal_alignment = 2
-
-[node name="Volumen Efectos" type="HBoxContainer" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Configuracion" unique_id=1534833041]
-layout_mode = 2
-
-[node name="Etiqueta Volumen" type="Label" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Configuracion/Volumen Efectos" unique_id=2121281586]
-custom_minimum_size = Vector2(130, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "Efectos"
-
-[node name="Deslizador Volumen" type="HSlider" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Configuracion/Volumen Efectos" unique_id=944240727]
-custom_minimum_size = Vector2(150, 24)
-layout_mode = 2
-size_flags_horizontal = 3
-value = 100.0
-
-[node name="Porcentaje Volumen" type="Label" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Configuracion/Volumen Efectos" unique_id=94453711]
-custom_minimum_size = Vector2(42, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "100%"
-horizontal_alignment = 2
-
-[node name="Opciones Generales" type="HBoxContainer" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Configuracion" unique_id=1138468018]
-layout_mode = 2
-theme_override_constants/separation = 16
-
-[node name="Silenciar Audio" type="CheckButton" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Configuracion/Opciones Generales" unique_id=2096115143]
-layout_mode = 2
-text = "Silenciar todo el audio"
-
-[node name="Pantalla Completa" type="CheckButton" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Configuracion/Opciones Generales" unique_id=1707146300]
-layout_mode = 2
-text = "Pantalla completa"
-
-[node name="Estado Ajustes" type="Label" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Configuracion" unique_id=1589412698]
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "Los cambios se aplican al instante."
-
-[node name="Boton Volver" type="Button" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Configuracion" unique_id=1242039838]
-custom_minimum_size = Vector2(0, 32)
-layout_mode = 2
-text = "Guardar y volver"
-icon = SubResource("IconoVolver")
-expand_icon = true
-
-[node name="Controles" type="VBoxContainer" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana" unique_id=1677856903]
-editor_description = "Activa Visible en Ventanas Menu y en este panel para previsualizarlo en el editor."
+[node name="Ajustes" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana" instance=ExtResource("ajustes_menu")]
 visible = false
 layout_mode = 2
-theme_override_constants/separation = 6
-
-[node name="Titulo Ventana" type="Label" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Controles" unique_id=2093298805]
-layout_mode = 2
-theme_override_font_sizes/font_size = 22
-text = "Controles"
-horizontal_alignment = 1
-
-[node name="Separador Titulo" type="HSeparator" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Controles" unique_id=2013228002]
-layout_mode = 2
-
-[node name="Tabla Controles" type="GridContainer" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Controles" unique_id=1022940159]
-layout_mode = 2
-theme_override_constants/h_separation = 28
-theme_override_constants/v_separation = 9
-columns = 2
-
-[node name="Accion Movimiento" type="Label" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Controles/Tabla Controles" unique_id=1339407762]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "Moverse"
-
-[node name="Tecla Movimiento" type="Label" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Controles/Tabla Controles" unique_id=130348641]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "W A S D / Flechas"
-
-[node name="Accion Salto" type="Label" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Controles/Tabla Controles" unique_id=1728651726]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "Saltar"
-
-[node name="Tecla Salto" type="Label" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Controles/Tabla Controles" unique_id=1376128223]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "Espacio / Enter"
-
-[node name="Accion Apuntado" type="Label" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Controles/Tabla Controles" unique_id=1517390915]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "Apuntar"
-
-[node name="Tecla Apuntado" type="Label" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Controles/Tabla Controles" unique_id=701205101]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "Mover el ratón"
-
-[node name="Accion Ataque Normal" type="Label" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Controles/Tabla Controles" unique_id=561066157]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "Ataque normal"
-
-[node name="Tecla Ataque Normal" type="Label" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Controles/Tabla Controles" unique_id=1485246031]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "Clic izquierdo"
-
-[node name="Accion Ataque Cargado" type="Label" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Controles/Tabla Controles" unique_id=2032305900]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "Ataque cargado"
-
-[node name="Tecla Ataque Cargado" type="Label" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Controles/Tabla Controles" unique_id=1588710305]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "Mantener clic derecho"
-
-[node name="Accion Pausa" type="Label" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Controles/Tabla Controles" unique_id=39110905]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "Pausar / Volver"
-
-[node name="Tecla Pausa" type="Label" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Controles/Tabla Controles" unique_id=83157787]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "Escape"
-
-[node name="Ayuda Menus" type="Label" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Controles" unique_id=2073780596]
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "Menús: ratón o flechas y Enter."
-
-[node name="Boton Volver" type="Button" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana/Controles" unique_id=1990830252]
-custom_minimum_size = Vector2(0, 32)
-layout_mode = 2
-text = "Volver"
-icon = SubResource("IconoVolver")
-expand_icon = true
 
 [node name="Creditos" type="VBoxContainer" parent="Ventanas Menu/Centro Ventana/Panel Ventana/Margen Interior/Contenido Ventana" unique_id=762547231]
 editor_description = "Activa Visible en Ventanas Menu y en este panel para previsualizarlo en el editor."

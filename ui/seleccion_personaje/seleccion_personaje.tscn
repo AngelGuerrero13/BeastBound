@@ -331,10 +331,6 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TimerInicio" type="Timer" parent="." unique_id=871969361]
-wait_time = 5.0
-one_shot = true
-
 [node name="MensajeInicio" type="Label" parent="." unique_id=1310881915]
 layout_mode = 0
 offset_left = 432.0
@@ -342,7 +338,7 @@ offset_top = 320.0
 offset_right = 637.0
 offset_bottom = 359.0
 theme_override_fonts/font = ExtResource("3_dvq7m")
-text = "La partida inicia en: "
+text = "Cargando mapa..."
 horizontal_alignment = 1
 vertical_alignment = 1
 

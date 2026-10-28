@@ -1,0 +1,231 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://ui/ajustes_pausa.gd" id="script"]
+[ext_resource type="Theme" path="res://ui/tema_menu.tres" id="tema"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="botones"]
+
+[sub_resource type="AtlasTexture" id="IconoVolver"]
+atlas = ExtResource("botones")
+region = Rect2(672, 224, 16, 16)
+filter_clip = true
+
+[node name="Ajustes" type="VBoxContainer"]
+editor_description = "Ajustes y controles editables. Las pestañas se muestran dentro del menú."
+custom_minimum_size = Vector2(350, 0)
+offset_right = 396.0
+offset_bottom = 280.0
+theme = ExtResource("tema")
+theme_override_constants/separation = 6
+script = ExtResource("script")
+
+[node name="Titulo" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Ajustes"
+horizontal_alignment = 1
+
+[node name="Secciones" type="TabContainer" parent="."]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_vertical = 3
+tab_alignment = 1
+
+[node name="Audio y Pantalla" type="VBoxContainer" parent="Secciones" unique_id=2008453765]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+
+[node name="Volumen General" type="HBoxContainer" parent="Secciones/Audio y Pantalla" unique_id=143444628]
+layout_mode = 2
+
+
+[node name="Etiqueta Volumen" type="Label" parent="Secciones/Audio y Pantalla/Volumen General" unique_id=1456448496]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Volumen general"
+
+
+[node name="Deslizador Volumen" type="HSlider" parent="Secciones/Audio y Pantalla/Volumen General" unique_id=948812818]
+custom_minimum_size = Vector2(150, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+value = 100.0
+
+
+[node name="Porcentaje Volumen" type="Label" parent="Secciones/Audio y Pantalla/Volumen General" unique_id=224739423]
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "100%"
+horizontal_alignment = 2
+
+
+[node name="Volumen Musica" type="HBoxContainer" parent="Secciones/Audio y Pantalla" unique_id=1221018197]
+layout_mode = 2
+
+
+[node name="Etiqueta Volumen" type="Label" parent="Secciones/Audio y Pantalla/Volumen Musica" unique_id=1819400527]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Música"
+
+
+[node name="Deslizador Volumen" type="HSlider" parent="Secciones/Audio y Pantalla/Volumen Musica" unique_id=1976988381]
+custom_minimum_size = Vector2(150, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+value = 100.0
+
+
+[node name="Porcentaje Volumen" type="Label" parent="Secciones/Audio y Pantalla/Volumen Musica" unique_id=368598228]
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "100%"
+horizontal_alignment = 2
+
+
+[node name="Volumen Efectos" type="HBoxContainer" parent="Secciones/Audio y Pantalla" unique_id=1534833041]
+layout_mode = 2
+
+
+[node name="Etiqueta Volumen" type="Label" parent="Secciones/Audio y Pantalla/Volumen Efectos" unique_id=2121281586]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Efectos"
+
+
+[node name="Deslizador Volumen" type="HSlider" parent="Secciones/Audio y Pantalla/Volumen Efectos" unique_id=944240727]
+custom_minimum_size = Vector2(150, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+value = 100.0
+
+
+[node name="Porcentaje Volumen" type="Label" parent="Secciones/Audio y Pantalla/Volumen Efectos" unique_id=94453711]
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "100%"
+horizontal_alignment = 2
+
+
+[node name="Opciones Generales" type="HBoxContainer" parent="Secciones/Audio y Pantalla" unique_id=1138468018]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+
+[node name="Silenciar Audio" type="CheckButton" parent="Secciones/Audio y Pantalla/Opciones Generales" unique_id=2096115143]
+layout_mode = 2
+text = "Silenciar todo el audio"
+
+
+[node name="Pantalla Completa" type="CheckButton" parent="Secciones/Audio y Pantalla/Opciones Generales" unique_id=1707146300]
+layout_mode = 2
+text = "Pantalla completa"
+
+
+[node name="Estado Ajustes" type="Label" parent="Secciones/Audio y Pantalla" unique_id=1589412698]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Los cambios se aplican al instante."
+
+[node name="Controles" type="VBoxContainer" parent="Secciones" unique_id=1677856903]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+
+[node name="Tabla Controles" type="GridContainer" parent="Secciones/Controles" unique_id=1022940159]
+layout_mode = 2
+theme_override_constants/h_separation = 28
+theme_override_constants/v_separation = 9
+columns = 2
+
+
+[node name="Accion Movimiento" type="Label" parent="Secciones/Controles/Tabla Controles" unique_id=1339407762]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Moverse"
+
+
+[node name="Tecla Movimiento" type="Label" parent="Secciones/Controles/Tabla Controles" unique_id=130348641]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "W A S D / Flechas"
+
+
+[node name="Accion Salto" type="Label" parent="Secciones/Controles/Tabla Controles" unique_id=1728651726]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Saltar"
+
+
+[node name="Tecla Salto" type="Label" parent="Secciones/Controles/Tabla Controles" unique_id=1376128223]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Espacio / Enter"
+
+
+[node name="Accion Apuntado" type="Label" parent="Secciones/Controles/Tabla Controles" unique_id=1517390915]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Apuntar"
+
+
+[node name="Tecla Apuntado" type="Label" parent="Secciones/Controles/Tabla Controles" unique_id=701205101]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Mover el ratón"
+
+
+[node name="Accion Ataque Normal" type="Label" parent="Secciones/Controles/Tabla Controles" unique_id=561066157]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Ataque normal"
+
+
+[node name="Tecla Ataque Normal" type="Label" parent="Secciones/Controles/Tabla Controles" unique_id=1485246031]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Clic izquierdo"
+
+
+[node name="Accion Ataque Cargado" type="Label" parent="Secciones/Controles/Tabla Controles" unique_id=2032305900]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Ataque cargado"
+
+
+[node name="Tecla Ataque Cargado" type="Label" parent="Secciones/Controles/Tabla Controles" unique_id=1588710305]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Mantener clic derecho"
+
+
+[node name="Accion Pausa" type="Label" parent="Secciones/Controles/Tabla Controles" unique_id=39110905]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Pausar / Volver"
+
+
+[node name="Tecla Pausa" type="Label" parent="Secciones/Controles/Tabla Controles" unique_id=83157787]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Escape"
+
+
+[node name="Ayuda Menus" type="Label" parent="Secciones/Controles" unique_id=2073780596]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Menús: ratón o flechas y Enter."
+
+[node name="Boton Volver" type="Button" parent="." unique_id=1242039838]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+text = "Guardar y volver"
+icon = SubResource("IconoVolver")
+expand_icon = true
+

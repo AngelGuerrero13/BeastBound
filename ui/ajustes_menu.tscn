@@ -1,0 +1,763 @@
+[gd_scene load_steps=22 format=3]
+
+[ext_resource type="Script" path="res://ui/ajustes_menu.gd" id="script"]
+[ext_resource type="FontFile" path="res://assets/art/fuentes/alagard.ttf" id="fuente"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/libro_ajustes/audio.png" id="audio"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/libro_ajustes/pantalla.png" id="pantalla"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/libro_ajustes/controles.png" id="controles"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/libro_ajustes/libro_base.png" id="libro"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/libro_ajustes/flecha_transparente.png" id="flechas"]
+[ext_resource type="Shader" path="res://ui/tinta_pagina.gdshader" id="tinta"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/libro_ajustes/marco_audio.png" id="marco_audio"]
+
+[sub_resource type="ShaderMaterial" id="MaterialTinta"]
+shader = ExtResource("tinta")
+
+[sub_resource type="AtlasTexture" id="DibujoAudio"]
+atlas = ExtResource("audio")
+region = Rect2(150, 110, 610, 680)
+
+[sub_resource type="AtlasTexture" id="DibujoPantalla"]
+atlas = ExtResource("pantalla")
+region = Rect2(150, 110, 610, 680)
+
+[sub_resource type="AtlasTexture" id="DibujoControles"]
+atlas = ExtResource("controles")
+region = Rect2(150, 110, 610, 680)
+
+[sub_resource type="AtlasTexture" id="FlechaAnterior"]
+atlas = ExtResource("flechas")
+region = Rect2(385, 270, 625, 600)
+
+[sub_resource type="AtlasTexture" id="FlechaSiguiente"]
+atlas = ExtResource("flechas")
+region = Rect2(385, 270, 625, 600)
+
+[sub_resource type="StyleBoxFlat" id="Boton"]
+bg_color = Color(0.95, 0.86, 0.68, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.55, 0.33, 0.14, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_left = 3
+corner_radius_bottom_right = 3
+content_margin_left = 4.0
+content_margin_top = 1.0
+content_margin_right = 4.0
+content_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id="Hover"]
+bg_color = Color(1, 0.94, 0.78, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.7, 0.43, 0.13, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_left = 3
+corner_radius_bottom_right = 3
+
+[sub_resource type="StyleBoxEmpty" id="Vacio"]
+
+[sub_resource type="StyleBoxFlat" id="Pista"]
+bg_color = Color(0.66, 0.52, 0.35, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_left = 3
+corner_radius_bottom_right = 3
+content_margin_top = 3.0
+content_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxFlat" id="Progreso"]
+bg_color = Color(0.1, 0.29, 0.23, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_left = 3
+corner_radius_bottom_right = 3
+content_margin_top = 3.0
+content_margin_bottom = 3.0
+
+[sub_resource type="ButtonGroup" id="GrupoPantalla"]
+
+[node name="Libro Ajustes" type="Control"]
+editor_description = "Libro del menú principal. Fondos y controles editables por página."
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("script")
+
+[node name="Libro" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("libro")
+expand_mode = 1
+
+[node name="Dibujo Audio" type="TextureRect" parent="."]
+material = SubResource("MaterialTinta")
+layout_mode = 0
+offset_left = 57.4
+offset_top = 42.1
+offset_right = 290.9
+offset_bottom = 302.3
+mouse_filter = 2
+texture = SubResource("DibujoAudio")
+expand_mode = 1
+
+[node name="Dibujo Pantalla" type="TextureRect" parent="."]
+visible = false
+material = SubResource("MaterialTinta")
+layout_mode = 0
+offset_left = 57.4
+offset_top = 42.1
+offset_right = 290.9
+offset_bottom = 302.3
+mouse_filter = 2
+texture = SubResource("DibujoPantalla")
+expand_mode = 1
+
+[node name="Dibujo Controles" type="TextureRect" parent="."]
+visible = false
+material = SubResource("MaterialTinta")
+layout_mode = 0
+offset_left = 57.4
+offset_top = 42.1
+offset_right = 290.9
+offset_bottom = 302.3
+mouse_filter = 2
+texture = SubResource("DibujoControles")
+expand_mode = 1
+
+[node name="Pagina Audio" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Pagina Pantalla" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Pagina Controles" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Marco Titulo" type="TextureRect" parent="Pagina Audio"]
+layout_mode = 0
+offset_left = 370.0
+offset_top = 69.0
+offset_right = 584.0
+offset_bottom = 112.0
+mouse_filter = 2
+texture = ExtResource("marco_audio")
+expand_mode = 1
+
+[node name="Titulo" type="Label" parent="Pagina Audio"]
+layout_mode = 0
+offset_left = 408.0
+offset_top = 75.0
+offset_right = 546.0
+offset_bottom = 102.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_font_sizes/font_size = 22
+text = "AUDIO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Titulo" type="Label" parent="Pagina Pantalla"]
+layout_mode = 0
+offset_left = 355.0
+offset_top = 65.0
+offset_right = 600.0
+offset_bottom = 94.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_font_sizes/font_size = 22
+text = "PANTALLA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Titulo" type="Label" parent="Pagina Controles"]
+layout_mode = 0
+offset_left = 355.0
+offset_top = 65.0
+offset_right = 600.0
+offset_bottom = 94.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_font_sizes/font_size = 22
+text = "CONTROLES"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Etiqueta General" type="Label" parent="Pagina Audio"]
+layout_mode = 0
+offset_left = 374.0
+offset_top = 119.0
+offset_right = 564.0
+offset_bottom = 137.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_font_sizes/font_size = 12
+text = "GENERAL"
+vertical_alignment = 1
+
+[node name="Volumen General" type="HSlider" parent="Pagina Audio"]
+layout_mode = 0
+offset_left = 377.0
+offset_top = 139.0
+offset_right = 523.0
+offset_bottom = 159.0
+focus_mode = 2
+theme_override_styles/slider = SubResource("Pista")
+theme_override_styles/grabber_area = SubResource("Progreso")
+theme_override_styles/grabber_area_highlight = SubResource("Progreso")
+max_value = 100.0
+value = 80.0
+
+[node name="Porcentaje General" type="Label" parent="Pagina Audio"]
+layout_mode = 0
+offset_left = 527.0
+offset_top = 139.0
+offset_right = 564.0
+offset_bottom = 158.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_font_sizes/font_size = 10
+text = "80%"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Etiqueta Musica" type="Label" parent="Pagina Audio"]
+layout_mode = 0
+offset_left = 374.0
+offset_top = 170.0
+offset_right = 564.0
+offset_bottom = 188.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_font_sizes/font_size = 12
+text = "MÚSICA"
+vertical_alignment = 1
+
+[node name="Volumen Musica" type="HSlider" parent="Pagina Audio"]
+layout_mode = 0
+offset_left = 377.0
+offset_top = 190.0
+offset_right = 523.0
+offset_bottom = 210.0
+focus_mode = 2
+theme_override_styles/slider = SubResource("Pista")
+theme_override_styles/grabber_area = SubResource("Progreso")
+theme_override_styles/grabber_area_highlight = SubResource("Progreso")
+max_value = 100.0
+value = 80.0
+
+[node name="Porcentaje Musica" type="Label" parent="Pagina Audio"]
+layout_mode = 0
+offset_left = 527.0
+offset_top = 190.0
+offset_right = 564.0
+offset_bottom = 209.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_font_sizes/font_size = 10
+text = "80%"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Etiqueta Efectos" type="Label" parent="Pagina Audio"]
+layout_mode = 0
+offset_left = 374.0
+offset_top = 221.0
+offset_right = 564.0
+offset_bottom = 239.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_font_sizes/font_size = 12
+text = "EFECTOS"
+vertical_alignment = 1
+
+[node name="Volumen Efectos" type="HSlider" parent="Pagina Audio"]
+layout_mode = 0
+offset_left = 377.0
+offset_top = 241.0
+offset_right = 523.0
+offset_bottom = 261.0
+focus_mode = 2
+theme_override_styles/slider = SubResource("Pista")
+theme_override_styles/grabber_area = SubResource("Progreso")
+theme_override_styles/grabber_area_highlight = SubResource("Progreso")
+max_value = 100.0
+value = 80.0
+
+[node name="Porcentaje Efectos" type="Label" parent="Pagina Audio"]
+layout_mode = 0
+offset_left = 527.0
+offset_top = 241.0
+offset_right = 564.0
+offset_bottom = 260.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_font_sizes/font_size = 10
+text = "80%"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Completa" type="CheckBox" parent="Pagina Pantalla"]
+layout_mode = 0
+offset_left = 380.0
+offset_top = 122.0
+offset_right = 590.0
+offset_bottom = 154.0
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_colors/font_hover_color = Color(0.45, 0.23, 0.08, 1)
+button_group = SubResource("GrupoPantalla")
+text = "PANTALLA COMPLETA"
+
+[node name="Ventana" type="CheckBox" parent="Pagina Pantalla"]
+layout_mode = 0
+offset_left = 380.0
+offset_top = 164.0
+offset_right = 590.0
+offset_bottom = 196.0
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_colors/font_hover_color = Color(0.45, 0.23, 0.08, 1)
+button_group = SubResource("GrupoPantalla")
+text = "VENTANA"
+
+[node name="Sin Bordes" type="CheckBox" parent="Pagina Pantalla"]
+layout_mode = 0
+offset_left = 380.0
+offset_top = 206.0
+offset_right = 590.0
+offset_bottom = 238.0
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_colors/font_hover_color = Color(0.45, 0.23, 0.08, 1)
+button_group = SubResource("GrupoPantalla")
+text = "VENTANA SIN BORDES"
+
+[node name="Accion Arriba" type="Label" parent="Pagina Controles"]
+layout_mode = 0
+offset_left = 361.0
+offset_top = 103.0
+offset_right = 461.0
+offset_bottom = 124.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_font_sizes/font_size = 11
+text = "Arriba"
+vertical_alignment = 1
+
+[node name="Tecla Arriba" type="Button" parent="Pagina Controles"]
+layout_mode = 0
+offset_left = 463.0
+offset_top = 103.0
+offset_right = 525.0
+offset_bottom = 124.0
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_colors/font_hover_color = Color(0.24, 0.1, 0.03, 1)
+theme_override_styles/normal = SubResource("Boton")
+theme_override_styles/hover = SubResource("Hover")
+theme_override_styles/pressed = SubResource("Hover")
+theme_override_styles/focus = SubResource("Hover")
+text = "—"
+
+[node name="Cambiar Arriba" type="Button" parent="Pagina Controles"]
+layout_mode = 0
+offset_left = 532.0
+offset_top = 103.0
+offset_right = 590.0
+offset_bottom = 124.0
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_colors/font_hover_color = Color(0.24, 0.1, 0.03, 1)
+theme_override_styles/normal = SubResource("Boton")
+theme_override_styles/hover = SubResource("Hover")
+theme_override_styles/pressed = SubResource("Hover")
+theme_override_styles/focus = SubResource("Hover")
+text = "Cambiar"
+
+[node name="Accion Abajo" type="Label" parent="Pagina Controles"]
+layout_mode = 0
+offset_left = 361.0
+offset_top = 127.0
+offset_right = 461.0
+offset_bottom = 148.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_font_sizes/font_size = 11
+text = "Abajo"
+vertical_alignment = 1
+
+[node name="Tecla Abajo" type="Button" parent="Pagina Controles"]
+layout_mode = 0
+offset_left = 463.0
+offset_top = 127.0
+offset_right = 525.0
+offset_bottom = 148.0
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_colors/font_hover_color = Color(0.24, 0.1, 0.03, 1)
+theme_override_styles/normal = SubResource("Boton")
+theme_override_styles/hover = SubResource("Hover")
+theme_override_styles/pressed = SubResource("Hover")
+theme_override_styles/focus = SubResource("Hover")
+text = "—"
+
+[node name="Cambiar Abajo" type="Button" parent="Pagina Controles"]
+layout_mode = 0
+offset_left = 532.0
+offset_top = 127.0
+offset_right = 590.0
+offset_bottom = 148.0
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_colors/font_hover_color = Color(0.24, 0.1, 0.03, 1)
+theme_override_styles/normal = SubResource("Boton")
+theme_override_styles/hover = SubResource("Hover")
+theme_override_styles/pressed = SubResource("Hover")
+theme_override_styles/focus = SubResource("Hover")
+text = "Cambiar"
+
+[node name="Accion Izquierda" type="Label" parent="Pagina Controles"]
+layout_mode = 0
+offset_left = 361.0
+offset_top = 151.0
+offset_right = 461.0
+offset_bottom = 172.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_font_sizes/font_size = 11
+text = "Izquierda"
+vertical_alignment = 1
+
+[node name="Tecla Izquierda" type="Button" parent="Pagina Controles"]
+layout_mode = 0
+offset_left = 463.0
+offset_top = 151.0
+offset_right = 525.0
+offset_bottom = 172.0
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_colors/font_hover_color = Color(0.24, 0.1, 0.03, 1)
+theme_override_styles/normal = SubResource("Boton")
+theme_override_styles/hover = SubResource("Hover")
+theme_override_styles/pressed = SubResource("Hover")
+theme_override_styles/focus = SubResource("Hover")
+text = "—"
+
+[node name="Cambiar Izquierda" type="Button" parent="Pagina Controles"]
+layout_mode = 0
+offset_left = 532.0
+offset_top = 151.0
+offset_right = 590.0
+offset_bottom = 172.0
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_colors/font_hover_color = Color(0.24, 0.1, 0.03, 1)
+theme_override_styles/normal = SubResource("Boton")
+theme_override_styles/hover = SubResource("Hover")
+theme_override_styles/pressed = SubResource("Hover")
+theme_override_styles/focus = SubResource("Hover")
+text = "Cambiar"
+
+[node name="Accion Derecha" type="Label" parent="Pagina Controles"]
+layout_mode = 0
+offset_left = 361.0
+offset_top = 175.0
+offset_right = 461.0
+offset_bottom = 196.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_font_sizes/font_size = 11
+text = "Derecha"
+vertical_alignment = 1
+
+[node name="Tecla Derecha" type="Button" parent="Pagina Controles"]
+layout_mode = 0
+offset_left = 463.0
+offset_top = 175.0
+offset_right = 525.0
+offset_bottom = 196.0
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_colors/font_hover_color = Color(0.24, 0.1, 0.03, 1)
+theme_override_styles/normal = SubResource("Boton")
+theme_override_styles/hover = SubResource("Hover")
+theme_override_styles/pressed = SubResource("Hover")
+theme_override_styles/focus = SubResource("Hover")
+text = "—"
+
+[node name="Cambiar Derecha" type="Button" parent="Pagina Controles"]
+layout_mode = 0
+offset_left = 532.0
+offset_top = 175.0
+offset_right = 590.0
+offset_bottom = 196.0
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_colors/font_hover_color = Color(0.24, 0.1, 0.03, 1)
+theme_override_styles/normal = SubResource("Boton")
+theme_override_styles/hover = SubResource("Hover")
+theme_override_styles/pressed = SubResource("Hover")
+theme_override_styles/focus = SubResource("Hover")
+text = "Cambiar"
+
+[node name="Accion Salto" type="Label" parent="Pagina Controles"]
+layout_mode = 0
+offset_left = 361.0
+offset_top = 199.0
+offset_right = 461.0
+offset_bottom = 220.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_font_sizes/font_size = 11
+text = "Saltar"
+vertical_alignment = 1
+
+[node name="Tecla Salto" type="Button" parent="Pagina Controles"]
+layout_mode = 0
+offset_left = 463.0
+offset_top = 199.0
+offset_right = 525.0
+offset_bottom = 220.0
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_colors/font_hover_color = Color(0.24, 0.1, 0.03, 1)
+theme_override_styles/normal = SubResource("Boton")
+theme_override_styles/hover = SubResource("Hover")
+theme_override_styles/pressed = SubResource("Hover")
+theme_override_styles/focus = SubResource("Hover")
+text = "—"
+
+[node name="Cambiar Salto" type="Button" parent="Pagina Controles"]
+layout_mode = 0
+offset_left = 532.0
+offset_top = 199.0
+offset_right = 590.0
+offset_bottom = 220.0
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_colors/font_hover_color = Color(0.24, 0.1, 0.03, 1)
+theme_override_styles/normal = SubResource("Boton")
+theme_override_styles/hover = SubResource("Hover")
+theme_override_styles/pressed = SubResource("Hover")
+theme_override_styles/focus = SubResource("Hover")
+text = "Cambiar"
+
+[node name="Accion Ataque" type="Label" parent="Pagina Controles"]
+layout_mode = 0
+offset_left = 361.0
+offset_top = 223.0
+offset_right = 461.0
+offset_bottom = 244.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_font_sizes/font_size = 11
+text = "Ataque"
+vertical_alignment = 1
+
+[node name="Tecla Ataque" type="Button" parent="Pagina Controles"]
+layout_mode = 0
+offset_left = 463.0
+offset_top = 223.0
+offset_right = 525.0
+offset_bottom = 244.0
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_colors/font_hover_color = Color(0.24, 0.1, 0.03, 1)
+theme_override_styles/normal = SubResource("Boton")
+theme_override_styles/hover = SubResource("Hover")
+theme_override_styles/pressed = SubResource("Hover")
+theme_override_styles/focus = SubResource("Hover")
+text = "—"
+
+[node name="Cambiar Ataque" type="Button" parent="Pagina Controles"]
+layout_mode = 0
+offset_left = 532.0
+offset_top = 223.0
+offset_right = 590.0
+offset_bottom = 244.0
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_colors/font_hover_color = Color(0.24, 0.1, 0.03, 1)
+theme_override_styles/normal = SubResource("Boton")
+theme_override_styles/hover = SubResource("Hover")
+theme_override_styles/pressed = SubResource("Hover")
+theme_override_styles/focus = SubResource("Hover")
+text = "Cambiar"
+
+[node name="Accion Cargado" type="Label" parent="Pagina Controles"]
+layout_mode = 0
+offset_left = 361.0
+offset_top = 247.0
+offset_right = 461.0
+offset_bottom = 268.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_font_sizes/font_size = 11
+text = "Ataque cargado"
+vertical_alignment = 1
+
+[node name="Tecla Cargado" type="Button" parent="Pagina Controles"]
+layout_mode = 0
+offset_left = 463.0
+offset_top = 247.0
+offset_right = 525.0
+offset_bottom = 268.0
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_colors/font_hover_color = Color(0.24, 0.1, 0.03, 1)
+theme_override_styles/normal = SubResource("Boton")
+theme_override_styles/hover = SubResource("Hover")
+theme_override_styles/pressed = SubResource("Hover")
+theme_override_styles/focus = SubResource("Hover")
+text = "—"
+
+[node name="Cambiar Cargado" type="Button" parent="Pagina Controles"]
+layout_mode = 0
+offset_left = 532.0
+offset_top = 247.0
+offset_right = 590.0
+offset_bottom = 268.0
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_colors/font_hover_color = Color(0.24, 0.1, 0.03, 1)
+theme_override_styles/normal = SubResource("Boton")
+theme_override_styles/hover = SubResource("Hover")
+theme_override_styles/pressed = SubResource("Hover")
+theme_override_styles/focus = SubResource("Hover")
+text = "Cambiar"
+
+[node name="Ayuda" type="Label" parent="Pagina Controles"]
+layout_mode = 0
+offset_left = 360.0
+offset_top = 275.0
+offset_right = 596.0
+offset_bottom = 299.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_font_sizes/font_size = 10
+text = "Jugador 1 · Esc cancela"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Estado" type="Label" parent="."]
+layout_mode = 0
+offset_left = 175.0
+offset_top = 298.0
+offset_right = 465.0
+offset_bottom = 316.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_font_sizes/font_size = 10
+theme_override_colors/font_color = Color(1, 0.92, 0.74, 1)
+horizontal_alignment = 1
+
+[node name="Boton Anterior" type="TextureButton" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 12.0
+offset_top = 322.0
+offset_right = 40.0
+offset_bottom = 349.0
+focus_mode = 2
+texture_normal = SubResource("FlechaAnterior")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Boton Siguiente" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 600.0
+offset_top = 322.0
+offset_right = 628.0
+offset_bottom = 349.0
+focus_mode = 2
+texture_normal = SubResource("FlechaSiguiente")
+ignore_texture_size = true
+stretch_mode = 0
+flip_h = true
+
+[node name="Boton Volver" type="Button" parent="."]
+layout_mode = 0
+offset_left = 242.0
+offset_top = 324.0
+offset_right = 398.0
+offset_bottom = 349.0
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
+theme_override_colors/font_hover_color = Color(0.24, 0.1, 0.03, 1)
+theme_override_styles/normal = SubResource("Boton")
+theme_override_styles/hover = SubResource("Hover")
+theme_override_styles/pressed = SubResource("Hover")
+theme_override_styles/focus = SubResource("Hover")
+text = "VOLVER AL MENÚ PRINCIPAL"
+theme_override_font_sizes/font_size = 10
+

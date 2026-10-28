@@ -69,22 +69,20 @@ func _comprobar() -> void:
 	assert(menu.get_node("Centro Menu/Margen Interior/Botones Menu/Boton Jugar/Icono Jugar").texture != null)
 	menu.animacion_introduccion.kill()
 	menu._mostrar_menu()
-	for abrir in [menu._configuracion, menu._controles, menu._creditos]:
-		abrir.call()
-		await process_frame
-		await process_frame
-		assert(menu.modal.visible)
-		var panel: Control = menu.contenido.get_node(menu.ventana_actual)
-		assert(panel.visible)
-		var ventana: Control = menu.get_node("Ventanas Menu/Centro Ventana/Panel Ventana")
-		assert(menu.get_global_rect().encloses(ventana.get_global_rect()), "La ventana debe caber en pantalla: " + menu.ventana_actual)
-		assert(panel.get_node("Boton Volver").icon != null)
-		if menu.ventana_actual == "Configuracion":
-			var fila: HBoxContainer = panel.get_node("Volumen General")
-			fila.get_node("Deslizador Volumen").value = 37
-			assert(root.get_node("Ajustes").volumenes.general == 37)
-			assert(fila.get_node("Porcentaje Volumen").text == "37%")
-		menu._cerrar_modal()
-		assert(not menu.modal.visible)
+	menu._ajustes()
+	await process_frame
+	assert(menu.libro_ajustes.visible)
+	menu.libro_ajustes.get_node("Pagina Audio/Volumen General").value = 37
+	assert(root.get_node("Ajustes").volumenes.general == 37)
+	assert(menu.libro_ajustes.get_node("Pagina Audio/Porcentaje General").text == "37%")
+	menu._cerrar_modal()
+	assert(not menu.libro_ajustes.visible)
+	menu._creditos()
+	await process_frame
+	assert(menu.modal.visible and menu.contenido.get_node("Creditos").visible)
+	var ventana: Control = menu.get_node("Ventanas Menu/Centro Ventana/Panel Ventana")
+	assert(menu.get_global_rect().encloses(ventana.get_global_rect()))
+	menu._cerrar_modal()
+	assert(not menu.modal.visible)
 	print("PASS: 13 escenas, tutorial editable, paredes, camara, animaciones, corazones y ventanas del menu.")
 	quit()

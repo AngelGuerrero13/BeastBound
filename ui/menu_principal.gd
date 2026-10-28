@@ -12,7 +12,8 @@ const SELECCION_PARTIDAS := "res://ui/seleccion_partidas.tscn"
 
 var boton_anterior: Control
 var ventana_actual := ""
-@onready var estado_guardado: Label = contenido.get_node("Configuracion/Estado Ajustes")
+@onready var panel_ajustes = contenido.get_node("Ajustes")
+@onready var libro_ajustes = $"Libro Ajustes"
 var introduccion_activa := false
 var mostrando_menu := false
 var progreso_introduccion := 0.0
@@ -21,23 +22,11 @@ var animacion_menu: Tween
 
 
 func _ready() -> void:
-	for ventana in contenido.get_children():
-		ventana.get_node("Boton Volver").pressed.connect(_cerrar_modal)
-	var configuracion := contenido.get_node("Configuracion")
-	var filas := {"general": "Volumen General", "musica": "Volumen Musica", "efectos": "Volumen Efectos"}
-	for clave in filas:
-		var fila: HBoxContainer = configuracion.get_node(filas[clave])
-		var deslizador: HSlider = fila.get_node("Deslizador Volumen")
-		var porcentaje: Label = fila.get_node("Porcentaje Volumen")
-		deslizador.value_changed.connect(func(valor: float) -> void:
-			Ajustes.establecer_volumen(clave, valor)
-			porcentaje.text = "%d%%" % valor
-		)
-	configuracion.get_node("Opciones Generales/Silenciar Audio").toggled.connect(Ajustes.establecer_silencio)
-	configuracion.get_node("Opciones Generales/Pantalla Completa").toggled.connect(Ajustes.establecer_pantalla_completa)
+	panel_ajustes.cerrar_solicitado.connect(_terminar_cierre_modal)
+	libro_ajustes.cerrar_solicitado.connect(_terminar_cierre_modal)
+	contenido.get_node("Creditos/Boton Volver").pressed.connect(_cerrar_modal)
 	_boton_menu("Jugar").pressed.connect(_jugar)
-	_boton_menu("Configuracion").pressed.connect(_configuracion)
-	_boton_menu("Controles").pressed.connect(_controles)
+	_boton_menu("Ajustes").pressed.connect(_ajustes)
 	_boton_menu("Creditos").pressed.connect(_creditos)
 	_boton_menu("Salir").pressed.connect(_salir)
 	_boton_menu("GuardarPartida").pressed.connect(_guardar_partida)
@@ -134,7 +123,7 @@ func _input(event: InputEvent) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel") and not event.is_echo():
 		get_viewport().set_input_as_handled()
-		if modal.visible:
+		if modal.visible or libro_ajustes.visible:
 			_cerrar_modal()
 		elif modo_pausa:
 			Ajustes.reanudar()
@@ -178,11 +167,17 @@ func _abrir_modal(ventana: String) -> void:
 
 
 func _cerrar_modal() -> void:
-	if ventana_actual == "Configuracion":
-		if Ajustes.guardar() != OK:
-			estado_guardado.text = "No se pudieron guardar los ajustes. Intenta de nuevo."
-			return
+	if ventana_actual == "Libro Ajustes":
+		libro_ajustes.guardar_y_cerrar()
+	elif ventana_actual == "Ajustes":
+		panel_ajustes.guardar_y_cerrar()
+	else:
+		_terminar_cierre_modal()
+
+
+func _terminar_cierre_modal() -> void:
 	modal.hide()
+	libro_ajustes.hide()
 	ventana_actual = ""
 	for boton in _opciones_menu():
 		boton.focus_mode = Control.FOCUS_ALL
@@ -190,23 +185,17 @@ func _cerrar_modal() -> void:
 		boton_anterior.grab_focus()
 
 
-func _configuracion() -> void:
-	var configuracion := contenido.get_node("Configuracion")
-	var filas := {"general": "Volumen General", "musica": "Volumen Musica", "efectos": "Volumen Efectos"}
-	for clave in filas:
-		var fila := configuracion.get_node(filas[clave])
-		fila.get_node("Deslizador Volumen").set_value_no_signal(Ajustes.volumenes[clave])
-		fila.get_node("Porcentaje Volumen").text = "%d%%" % Ajustes.volumenes[clave]
-	configuracion.get_node("Opciones Generales/Silenciar Audio").set_pressed_no_signal(Ajustes.silenciado)
-	configuracion.get_node("Opciones Generales/Pantalla Completa").set_pressed_no_signal(Ajustes.pantalla_completa)
-	estado_guardado.text = "Los cambios se aplican al instante."
-	_abrir_modal("Configuracion")
-	configuracion.get_node("Volumen General/Deslizador Volumen").grab_focus()
-
-
-func _controles() -> void:
-	_abrir_modal("Controles")
-	contenido.get_node("Controles/Boton Volver").grab_focus()
+func _ajustes() -> void:
+	if modo_pausa:
+		_abrir_modal("Ajustes")
+		panel_ajustes.abrir()
+	else:
+		boton_anterior = get_viewport().gui_get_focus_owner()
+		ventana_actual = "Libro Ajustes"
+		for boton in _opciones_menu():
+			boton.focus_mode = Control.FOCUS_NONE
+		libro_ajustes.show()
+		libro_ajustes.abrir()
 
 
 func _creditos() -> void:
