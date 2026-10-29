@@ -10,14 +10,14 @@
 script = ExtResource("1_opn3k")
 escenas_personajes = Array[PackedScene]([ExtResource("4_pdd5j"), ExtResource("2_ylejk"), ExtResource("3_qk2oj"), ExtResource("5_78yij")])
 
-[node name="Spawn1" type="Marker2D" parent="." unique_id=1116887051]
-position = Vector2(1, 1)
+[node name="Inicio Jugador 1" type="Marker2D" parent="." unique_id=1116887051]
+position = Vector2(46, 25)
 
-[node name="Spawn2" type="Marker2D" parent="." unique_id=2115316019]
-position = Vector2(4, 1)
+[node name="Inicio Jugador 2" type="Marker2D" parent="." unique_id=2115316019]
+position = Vector2(94, 25)
 
-[node name="Spawn3" type="Marker2D" parent="." unique_id=102140855]
-position = Vector2(1, 4)
+[node name="Inicio Jugador 3" type="Marker2D" parent="." unique_id=102140855]
+position = Vector2(46, 65)
 
-[node name="Spawn4" type="Marker2D" parent="." unique_id=1059058207]
-position = Vector2(4, 4)
+[node name="Inicio Jugador 4" type="Marker2D" parent="." unique_id=1059058207]
+position = Vector2(94, 65)
