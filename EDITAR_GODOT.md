@@ -65,7 +65,7 @@ Abre `ui/menu_principal.tscn`:
 - **Centro Menu → Margen Interior → Botones Menu**: Boton Jugar, Accesos Menu y Boton Guardar Partida.
 - **Boton Jugar → Icono Jugar**: textura guardada en `ui/icono_jugar.tres`, extraída de la lámina original para verse también en el editor.
 - **Accesos Menu**: grupos de ajustes, créditos y salida. Cada uno tiene su botón y Etiqueta Boton. **Jugar** está sobre ellos.
-- **Libro Ajustes**: abre `ui/ajustes_menu.tscn` para editar las páginas **Audio**, **Pantalla** y **Controles**, sus ilustraciones, flechas y botón de volver. El nodo **Libro** mantiene el mismo fondo y las ilustraciones están en `assets/art/ui/libro_ajustes/`. Para ver otra página en el editor, muestra su nodo **Dibujo** y su nodo **Pagina** y oculta los demás.
+- **Libro Ajustes**: abre `ui/ajustes_menu.tscn` para editar las páginas **Audio**, **Pantalla** y **Controles**, sus ilustraciones, marcadores y botón de volver. Los tres botones están bajo **Marcadores**. El nodo **Libro** mantiene el mismo fondo y las ilustraciones están en `assets/art/ui/libro_ajustes/`. Para ver otra página en el editor, muestra su nodo **Dibujo** y su nodo **Pagina** y oculta los demás.
 - **Ventanas Menu → Centro Ventana → Panel Ventana → Margen Interior → Contenido Ventana**: Créditos y los ajustes de pausa. Estos últimos se editan en `ui/ajustes_pausa.tscn`.
 
 Para previsualizar una ventana, activa **Visible** en Ventanas Menu y en el panel deseado; desactiva el otro panel. Al ejecutar, el script muestra el panel elegido. Los ajustes se sincronizan con los datos guardados.

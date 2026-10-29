@@ -10,7 +10,7 @@ Abre las escenas haciendo doble clic desde **Sistema de Archivos → ui**. Sus n
 
 Para probar la pantalla abierta usa **F6**. Para probar el recorrido completo desde el inicio usa **F5**; `project.godot` tiene `menu_principal.tscn` como escena principal. Los scripts siguen gestionando guardar y cargar datos, mientras estos botones y su distribución se editan desde los nodos.
 
-Las texturas de Jugar y los accesos secundarios están en la escena. La escena `ajustes_menu.tscn` contiene el libro del menú principal, con tres páginas y controles editables. El nodo **Libro** utiliza un fondo común de `assets/art/ui/libro_ajustes/`. Para previsualizar otra página, muestra su nodo **Dibujo** y su nodo **Pagina** y oculta los anteriores. Créditos permanece en `menu_principal.tscn` y los ajustes de pausa conservan su escena `ajustes_pausa.tscn`.
+Las texturas de Jugar y los accesos secundarios están en la escena. La escena `ajustes_menu.tscn` contiene el libro del menú principal, con tres páginas y controles editables. Los botones bajo **Marcadores** abren directamente cada página. El nodo **Libro** utiliza un fondo común de `assets/art/ui/libro_ajustes/`. Para previsualizar otra página, muestra su nodo **Dibujo** y su nodo **Pagina** y oculta los anteriores. Créditos permanece en `menu_principal.tscn` y los ajustes de pausa conservan su escena `ajustes_pausa.tscn`.
 
 El menú es una escena de interfaz (`Control`), no un nivel. `menu_principal.tscn` es la escena principal del proyecto. Ejecuta con **F6** esa escena para ver el menú, o con **F5** para iniciar el juego completo.
 

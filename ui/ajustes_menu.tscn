@@ -1,17 +1,32 @@
-[gd_scene load_steps=22 format=3]
+[gd_scene load_steps=34 format=3]
 
 [ext_resource type="Script" path="res://ui/ajustes_menu.gd" id="script"]
 [ext_resource type="FontFile" path="res://assets/art/fuentes/alagard.ttf" id="fuente"]
 [ext_resource type="Texture2D" path="res://assets/art/ui/libro_ajustes/audio.png" id="audio"]
-[ext_resource type="Texture2D" path="res://assets/art/ui/libro_ajustes/pantalla.png" id="pantalla"]
-[ext_resource type="Texture2D" path="res://assets/art/ui/libro_ajustes/controles.png" id="controles"]
-[ext_resource type="Texture2D" path="res://assets/art/ui/libro_ajustes/libro_base.png" id="libro"]
-[ext_resource type="Texture2D" path="res://assets/art/ui/libro_ajustes/flecha_transparente.png" id="flechas"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/libro_ajustes/pantalla_sin_marcadores.png" id="pantalla"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/libro_ajustes/controles_sin_marcadores.png" id="controles"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/libro_ajustes/libro_sin_marcadores.png" id="libro"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/libro_ajustes/marcador_audio_compacto.png" id="marcador_audio"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/libro_ajustes/marcador_pantalla_compacto.png" id="marcador_pantalla"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/libro_ajustes/marcador_controles_compacto.png" id="marcador_controles"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/libro_ajustes/simbolo_audio.svg" id="simbolo_audio"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/libro_ajustes/simbolo_pantalla.svg" id="simbolo_pantalla"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/libro_ajustes/simbolo_controles.svg" id="simbolo_controles"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/libro_ajustes/simbolo_estrella.svg" id="simbolo_estrella"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/libro_ajustes/simbolo_luna.svg" id="simbolo_luna"]
 [ext_resource type="Shader" path="res://ui/tinta_pagina.gdshader" id="tinta"]
+[ext_resource type="Shader" path="res://ui/borde_pagina.gdshader" id="borde_pagina"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/libro_ajustes/casilla_vacia.svg" id="casilla_vacia"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/libro_ajustes/casilla_marcada.svg" id="casilla_marcada"]
 [ext_resource type="Texture2D" path="res://assets/art/ui/libro_ajustes/marco_audio.png" id="marco_audio"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/libro_ajustes/nota_pegada.png" id="nota"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/libro_ajustes/nota_controles.png" id="nota_controles"]
 
 [sub_resource type="ShaderMaterial" id="MaterialTinta"]
 shader = ExtResource("tinta")
+
+[sub_resource type="ShaderMaterial" id="MaterialBorde"]
+shader = ExtResource("borde_pagina")
 
 [sub_resource type="AtlasTexture" id="DibujoAudio"]
 atlas = ExtResource("audio")
@@ -25,13 +40,27 @@ region = Rect2(150, 110, 610, 680)
 atlas = ExtResource("controles")
 region = Rect2(150, 110, 610, 680)
 
-[sub_resource type="AtlasTexture" id="FlechaAnterior"]
-atlas = ExtResource("flechas")
-region = Rect2(385, 270, 625, 600)
+[sub_resource type="AtlasTexture" id="MarcadorAudio"]
+atlas = ExtResource("marcador_audio")
+region = Rect2(460, 180, 529, 721)
+filter_clip = true
 
-[sub_resource type="AtlasTexture" id="FlechaSiguiente"]
-atlas = ExtResource("flechas")
-region = Rect2(385, 270, 625, 600)
+[sub_resource type="AtlasTexture" id="MarcadorPantalla"]
+atlas = ExtResource("marcador_pantalla")
+region = Rect2(436, 160, 577, 793)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="MarcadorControles"]
+atlas = ExtResource("marcador_controles")
+region = Rect2(520, 316, 405, 545)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="BordeIzquierdo"]
+atlas = ExtResource("libro")
+region = Rect2(248, 84, 223, 31)
+filter_clip = true
+
+[sub_resource type="ButtonGroup" id="GrupoMarcadores"]
 
 [sub_resource type="StyleBoxFlat" id="Boton"]
 bg_color = Color(0.95, 0.86, 0.68, 1)
@@ -168,6 +197,78 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="Papel Bajo Nota" type="Polygon2D" parent="Pagina Audio"]
+editor_description = "Muestra el mismo pergamino del libro para cubrir la nota incompleta de la ilustración."
+texture = ExtResource("libro")
+polygon = PackedVector2Array(212, 252, 291, 260, 291, 303, 211, 303)
+uv = PackedVector2Array(553.85, 658.7, 760.2375, 679.6111, 760.2375, 792.0083, 551.2375, 792.0083)
+
+[node name="Nota" type="TextureRect" parent="Pagina Audio"]
+editor_description = "Nota completa pegada bajo el hacha. Sobresale ligeramente del borde inferior de la hoja."
+layout_mode = 0
+offset_left = 209.0
+offset_top = 246.0
+offset_right = 311.0
+offset_bottom = 320.0
+rotation = -0.035
+pivot_offset = Vector2(51, 37)
+mouse_filter = 2
+texture = ExtResource("nota")
+expand_mode = 1
+
+[node name="Escritura" type="Label" parent="Pagina Audio/Nota"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 20.0
+offset_right = 90.0
+offset_bottom = 64.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_colors/font_color = Color(0.36, 0.18, 0.08, 1)
+theme_override_font_sizes/font_size = 8
+theme_override_constants/line_spacing = 3
+text = "Croac croac.
+Crocroac croac.
+Croac, croac."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Papel Bajo Nota" type="Polygon2D" parent="Pagina Controles"]
+editor_description = "Cubre solo el contorno de la nota antigua y su cinta, sin borrar el dibujo de la lanza."
+texture = ExtResource("libro")
+polygon = PackedVector2Array(139.6992, 239.1632, 151.1828, 236.4847, 163.0492, 229.5971, 172.2361, 229.5971, 218.9361, 232.2756, 231.568, 237.25, 235.7787, 290.4379, 145.8238, 298.4735, 143.1443, 270.1576, 136.2541, 260.5915, 140.4648, 256.765)
+uv = PackedVector2Array(364.9641, 625.1461, 394.965, 618.1447, 425.966, 600.1412, 449.9667, 600.1412, 571.9705, 607.1426, 604.9715, 620.1451, 615.9718, 759.1725, 380.9646, 780.1766, 373.9644, 706.1621, 355.9638, 681.1571, 366.9642, 671.1552)
+
+[node name="Nota" type="TextureRect" parent="Pagina Controles"]
+editor_description = "Nota distinta con cinta central y esquina doblada. Sobresale un poco de la hoja."
+layout_mode = 0
+offset_left = 139.0
+offset_top = 245.0
+offset_right = 233.0
+offset_bottom = 317.0
+rotation = 0.025
+pivot_offset = Vector2(47, 36)
+mouse_filter = 2
+texture = ExtResource("nota_controles")
+expand_mode = 1
+
+[node name="Escritura" type="Label" parent="Pagina Controles/Nota"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 19.0
+offset_right = 85.0
+offset_bottom = 61.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("fuente")
+theme_override_colors/font_color = Color(0.36, 0.18, 0.08, 1)
+theme_override_font_sizes/font_size = 8
+theme_override_constants/line_spacing = 3
+text = "Croac croac
+crocroac croac
+croac croaac."
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Marco Titulo" type="TextureRect" parent="Pagina Audio"]
 layout_mode = 0
 offset_left = 370.0
@@ -192,12 +293,22 @@ text = "AUDIO"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Marco Titulo" type="TextureRect" parent="Pagina Pantalla"]
+layout_mode = 0
+offset_left = 370.0
+offset_top = 69.0
+offset_right = 584.0
+offset_bottom = 112.0
+mouse_filter = 2
+texture = ExtResource("marco_audio")
+expand_mode = 1
+
 [node name="Titulo" type="Label" parent="Pagina Pantalla"]
 layout_mode = 0
-offset_left = 355.0
-offset_top = 65.0
-offset_right = 600.0
-offset_bottom = 94.0
+offset_left = 408.0
+offset_top = 75.0
+offset_right = 546.0
+offset_bottom = 102.0
 mouse_filter = 2
 theme_override_fonts/font = ExtResource("fuente")
 theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
@@ -206,12 +317,22 @@ text = "PANTALLA"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Marco Titulo" type="TextureRect" parent="Pagina Controles"]
+layout_mode = 0
+offset_left = 370.0
+offset_top = 57.0
+offset_right = 584.0
+offset_bottom = 100.0
+mouse_filter = 2
+texture = ExtResource("marco_audio")
+expand_mode = 1
+
 [node name="Titulo" type="Label" parent="Pagina Controles"]
 layout_mode = 0
-offset_left = 355.0
-offset_top = 65.0
-offset_right = 600.0
-offset_bottom = 94.0
+offset_left = 390.0
+offset_top = 63.0
+offset_right = 564.0
+offset_bottom = 90.0
 mouse_filter = 2
 theme_override_fonts/font = ExtResource("fuente")
 theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
@@ -342,25 +463,46 @@ vertical_alignment = 1
 
 [node name="Completa" type="CheckBox" parent="Pagina Pantalla"]
 layout_mode = 0
-offset_left = 380.0
+offset_left = 378.0
 offset_top = 122.0
 offset_right = 590.0
 offset_bottom = 154.0
 theme_override_fonts/font = ExtResource("fuente")
 theme_override_font_sizes/font_size = 13
+theme_override_constants/h_separation = 9
+theme_override_icons/radio_checked = ExtResource("casilla_marcada")
+theme_override_icons/radio_unchecked = ExtResource("casilla_vacia")
+theme_override_icons/radio_checked_disabled = ExtResource("casilla_marcada")
+theme_override_icons/radio_unchecked_disabled = ExtResource("casilla_vacia")
+theme_override_styles/normal = SubResource("Vacio")
+theme_override_styles/hover = SubResource("Vacio")
+theme_override_styles/pressed = SubResource("Vacio")
+theme_override_styles/hover_pressed = SubResource("Vacio")
+theme_override_styles/focus = SubResource("Vacio")
 theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
 theme_override_colors/font_hover_color = Color(0.45, 0.23, 0.08, 1)
+button_pressed = true
 button_group = SubResource("GrupoPantalla")
 text = "PANTALLA COMPLETA"
 
 [node name="Ventana" type="CheckBox" parent="Pagina Pantalla"]
 layout_mode = 0
-offset_left = 380.0
+offset_left = 378.0
 offset_top = 164.0
 offset_right = 590.0
 offset_bottom = 196.0
 theme_override_fonts/font = ExtResource("fuente")
 theme_override_font_sizes/font_size = 13
+theme_override_constants/h_separation = 9
+theme_override_icons/radio_checked = ExtResource("casilla_marcada")
+theme_override_icons/radio_unchecked = ExtResource("casilla_vacia")
+theme_override_icons/radio_checked_disabled = ExtResource("casilla_marcada")
+theme_override_icons/radio_unchecked_disabled = ExtResource("casilla_vacia")
+theme_override_styles/normal = SubResource("Vacio")
+theme_override_styles/hover = SubResource("Vacio")
+theme_override_styles/pressed = SubResource("Vacio")
+theme_override_styles/hover_pressed = SubResource("Vacio")
+theme_override_styles/focus = SubResource("Vacio")
 theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
 theme_override_colors/font_hover_color = Color(0.45, 0.23, 0.08, 1)
 button_group = SubResource("GrupoPantalla")
@@ -368,12 +510,22 @@ text = "VENTANA"
 
 [node name="Sin Bordes" type="CheckBox" parent="Pagina Pantalla"]
 layout_mode = 0
-offset_left = 380.0
+offset_left = 378.0
 offset_top = 206.0
 offset_right = 590.0
 offset_bottom = 238.0
 theme_override_fonts/font = ExtResource("fuente")
 theme_override_font_sizes/font_size = 13
+theme_override_constants/h_separation = 9
+theme_override_icons/radio_checked = ExtResource("casilla_marcada")
+theme_override_icons/radio_unchecked = ExtResource("casilla_vacia")
+theme_override_icons/radio_checked_disabled = ExtResource("casilla_marcada")
+theme_override_icons/radio_unchecked_disabled = ExtResource("casilla_vacia")
+theme_override_styles/normal = SubResource("Vacio")
+theme_override_styles/hover = SubResource("Vacio")
+theme_override_styles/pressed = SubResource("Vacio")
+theme_override_styles/hover_pressed = SubResource("Vacio")
+theme_override_styles/focus = SubResource("Vacio")
 theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
 theme_override_colors/font_hover_color = Color(0.45, 0.23, 0.08, 1)
 button_group = SubResource("GrupoPantalla")
@@ -381,9 +533,9 @@ text = "VENTANA SIN BORDES"
 
 [node name="Accion Arriba" type="Label" parent="Pagina Controles"]
 layout_mode = 0
-offset_left = 361.0
+offset_left = 386.0
 offset_top = 103.0
-offset_right = 461.0
+offset_right = 473.0
 offset_bottom = 124.0
 mouse_filter = 2
 theme_override_fonts/font = ExtResource("fuente")
@@ -394,9 +546,9 @@ vertical_alignment = 1
 
 [node name="Tecla Arriba" type="Button" parent="Pagina Controles"]
 layout_mode = 0
-offset_left = 463.0
+offset_left = 475.0
 offset_top = 103.0
-offset_right = 525.0
+offset_right = 537.0
 offset_bottom = 124.0
 theme_override_fonts/font = ExtResource("fuente")
 theme_override_font_sizes/font_size = 11
@@ -406,29 +558,14 @@ theme_override_styles/normal = SubResource("Boton")
 theme_override_styles/hover = SubResource("Hover")
 theme_override_styles/pressed = SubResource("Hover")
 theme_override_styles/focus = SubResource("Hover")
-text = "—"
-
-[node name="Cambiar Arriba" type="Button" parent="Pagina Controles"]
-layout_mode = 0
-offset_left = 532.0
-offset_top = 103.0
-offset_right = 590.0
-offset_bottom = 124.0
-theme_override_fonts/font = ExtResource("fuente")
-theme_override_font_sizes/font_size = 11
-theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
-theme_override_colors/font_hover_color = Color(0.24, 0.1, 0.03, 1)
-theme_override_styles/normal = SubResource("Boton")
-theme_override_styles/hover = SubResource("Hover")
-theme_override_styles/pressed = SubResource("Hover")
-theme_override_styles/focus = SubResource("Hover")
-text = "Cambiar"
+text = "W"
+clip_text = true
 
 [node name="Accion Abajo" type="Label" parent="Pagina Controles"]
 layout_mode = 0
-offset_left = 361.0
+offset_left = 386.0
 offset_top = 127.0
-offset_right = 461.0
+offset_right = 473.0
 offset_bottom = 148.0
 mouse_filter = 2
 theme_override_fonts/font = ExtResource("fuente")
@@ -439,9 +576,9 @@ vertical_alignment = 1
 
 [node name="Tecla Abajo" type="Button" parent="Pagina Controles"]
 layout_mode = 0
-offset_left = 463.0
+offset_left = 475.0
 offset_top = 127.0
-offset_right = 525.0
+offset_right = 537.0
 offset_bottom = 148.0
 theme_override_fonts/font = ExtResource("fuente")
 theme_override_font_sizes/font_size = 11
@@ -451,29 +588,14 @@ theme_override_styles/normal = SubResource("Boton")
 theme_override_styles/hover = SubResource("Hover")
 theme_override_styles/pressed = SubResource("Hover")
 theme_override_styles/focus = SubResource("Hover")
-text = "—"
-
-[node name="Cambiar Abajo" type="Button" parent="Pagina Controles"]
-layout_mode = 0
-offset_left = 532.0
-offset_top = 127.0
-offset_right = 590.0
-offset_bottom = 148.0
-theme_override_fonts/font = ExtResource("fuente")
-theme_override_font_sizes/font_size = 11
-theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
-theme_override_colors/font_hover_color = Color(0.24, 0.1, 0.03, 1)
-theme_override_styles/normal = SubResource("Boton")
-theme_override_styles/hover = SubResource("Hover")
-theme_override_styles/pressed = SubResource("Hover")
-theme_override_styles/focus = SubResource("Hover")
-text = "Cambiar"
+text = "S"
+clip_text = true
 
 [node name="Accion Izquierda" type="Label" parent="Pagina Controles"]
 layout_mode = 0
-offset_left = 361.0
+offset_left = 386.0
 offset_top = 151.0
-offset_right = 461.0
+offset_right = 473.0
 offset_bottom = 172.0
 mouse_filter = 2
 theme_override_fonts/font = ExtResource("fuente")
@@ -484,9 +606,9 @@ vertical_alignment = 1
 
 [node name="Tecla Izquierda" type="Button" parent="Pagina Controles"]
 layout_mode = 0
-offset_left = 463.0
+offset_left = 475.0
 offset_top = 151.0
-offset_right = 525.0
+offset_right = 537.0
 offset_bottom = 172.0
 theme_override_fonts/font = ExtResource("fuente")
 theme_override_font_sizes/font_size = 11
@@ -496,29 +618,14 @@ theme_override_styles/normal = SubResource("Boton")
 theme_override_styles/hover = SubResource("Hover")
 theme_override_styles/pressed = SubResource("Hover")
 theme_override_styles/focus = SubResource("Hover")
-text = "—"
-
-[node name="Cambiar Izquierda" type="Button" parent="Pagina Controles"]
-layout_mode = 0
-offset_left = 532.0
-offset_top = 151.0
-offset_right = 590.0
-offset_bottom = 172.0
-theme_override_fonts/font = ExtResource("fuente")
-theme_override_font_sizes/font_size = 11
-theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
-theme_override_colors/font_hover_color = Color(0.24, 0.1, 0.03, 1)
-theme_override_styles/normal = SubResource("Boton")
-theme_override_styles/hover = SubResource("Hover")
-theme_override_styles/pressed = SubResource("Hover")
-theme_override_styles/focus = SubResource("Hover")
-text = "Cambiar"
+text = "A"
+clip_text = true
 
 [node name="Accion Derecha" type="Label" parent="Pagina Controles"]
 layout_mode = 0
-offset_left = 361.0
+offset_left = 386.0
 offset_top = 175.0
-offset_right = 461.0
+offset_right = 473.0
 offset_bottom = 196.0
 mouse_filter = 2
 theme_override_fonts/font = ExtResource("fuente")
@@ -529,9 +636,9 @@ vertical_alignment = 1
 
 [node name="Tecla Derecha" type="Button" parent="Pagina Controles"]
 layout_mode = 0
-offset_left = 463.0
+offset_left = 475.0
 offset_top = 175.0
-offset_right = 525.0
+offset_right = 537.0
 offset_bottom = 196.0
 theme_override_fonts/font = ExtResource("fuente")
 theme_override_font_sizes/font_size = 11
@@ -541,29 +648,14 @@ theme_override_styles/normal = SubResource("Boton")
 theme_override_styles/hover = SubResource("Hover")
 theme_override_styles/pressed = SubResource("Hover")
 theme_override_styles/focus = SubResource("Hover")
-text = "—"
-
-[node name="Cambiar Derecha" type="Button" parent="Pagina Controles"]
-layout_mode = 0
-offset_left = 532.0
-offset_top = 175.0
-offset_right = 590.0
-offset_bottom = 196.0
-theme_override_fonts/font = ExtResource("fuente")
-theme_override_font_sizes/font_size = 11
-theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
-theme_override_colors/font_hover_color = Color(0.24, 0.1, 0.03, 1)
-theme_override_styles/normal = SubResource("Boton")
-theme_override_styles/hover = SubResource("Hover")
-theme_override_styles/pressed = SubResource("Hover")
-theme_override_styles/focus = SubResource("Hover")
-text = "Cambiar"
+text = "D"
+clip_text = true
 
 [node name="Accion Salto" type="Label" parent="Pagina Controles"]
 layout_mode = 0
-offset_left = 361.0
+offset_left = 386.0
 offset_top = 199.0
-offset_right = 461.0
+offset_right = 473.0
 offset_bottom = 220.0
 mouse_filter = 2
 theme_override_fonts/font = ExtResource("fuente")
@@ -574,9 +666,9 @@ vertical_alignment = 1
 
 [node name="Tecla Salto" type="Button" parent="Pagina Controles"]
 layout_mode = 0
-offset_left = 463.0
+offset_left = 475.0
 offset_top = 199.0
-offset_right = 525.0
+offset_right = 537.0
 offset_bottom = 220.0
 theme_override_fonts/font = ExtResource("fuente")
 theme_override_font_sizes/font_size = 11
@@ -586,29 +678,14 @@ theme_override_styles/normal = SubResource("Boton")
 theme_override_styles/hover = SubResource("Hover")
 theme_override_styles/pressed = SubResource("Hover")
 theme_override_styles/focus = SubResource("Hover")
-text = "—"
-
-[node name="Cambiar Salto" type="Button" parent="Pagina Controles"]
-layout_mode = 0
-offset_left = 532.0
-offset_top = 199.0
-offset_right = 590.0
-offset_bottom = 220.0
-theme_override_fonts/font = ExtResource("fuente")
-theme_override_font_sizes/font_size = 11
-theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
-theme_override_colors/font_hover_color = Color(0.24, 0.1, 0.03, 1)
-theme_override_styles/normal = SubResource("Boton")
-theme_override_styles/hover = SubResource("Hover")
-theme_override_styles/pressed = SubResource("Hover")
-theme_override_styles/focus = SubResource("Hover")
-text = "Cambiar"
+text = "Espacio"
+clip_text = true
 
 [node name="Accion Ataque" type="Label" parent="Pagina Controles"]
 layout_mode = 0
-offset_left = 361.0
+offset_left = 386.0
 offset_top = 223.0
-offset_right = 461.0
+offset_right = 473.0
 offset_bottom = 244.0
 mouse_filter = 2
 theme_override_fonts/font = ExtResource("fuente")
@@ -619,9 +696,9 @@ vertical_alignment = 1
 
 [node name="Tecla Ataque" type="Button" parent="Pagina Controles"]
 layout_mode = 0
-offset_left = 463.0
+offset_left = 475.0
 offset_top = 223.0
-offset_right = 525.0
+offset_right = 537.0
 offset_bottom = 244.0
 theme_override_fonts/font = ExtResource("fuente")
 theme_override_font_sizes/font_size = 11
@@ -631,29 +708,14 @@ theme_override_styles/normal = SubResource("Boton")
 theme_override_styles/hover = SubResource("Hover")
 theme_override_styles/pressed = SubResource("Hover")
 theme_override_styles/focus = SubResource("Hover")
-text = "—"
-
-[node name="Cambiar Ataque" type="Button" parent="Pagina Controles"]
-layout_mode = 0
-offset_left = 532.0
-offset_top = 223.0
-offset_right = 590.0
-offset_bottom = 244.0
-theme_override_fonts/font = ExtResource("fuente")
-theme_override_font_sizes/font_size = 11
-theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
-theme_override_colors/font_hover_color = Color(0.24, 0.1, 0.03, 1)
-theme_override_styles/normal = SubResource("Boton")
-theme_override_styles/hover = SubResource("Hover")
-theme_override_styles/pressed = SubResource("Hover")
-theme_override_styles/focus = SubResource("Hover")
-text = "Cambiar"
+text = "Click izq"
+clip_text = true
 
 [node name="Accion Cargado" type="Label" parent="Pagina Controles"]
 layout_mode = 0
-offset_left = 361.0
+offset_left = 386.0
 offset_top = 247.0
-offset_right = 461.0
+offset_right = 473.0
 offset_bottom = 268.0
 mouse_filter = 2
 theme_override_fonts/font = ExtResource("fuente")
@@ -664,9 +726,9 @@ vertical_alignment = 1
 
 [node name="Tecla Cargado" type="Button" parent="Pagina Controles"]
 layout_mode = 0
-offset_left = 463.0
+offset_left = 475.0
 offset_top = 247.0
-offset_right = 525.0
+offset_right = 537.0
 offset_bottom = 268.0
 theme_override_fonts/font = ExtResource("fuente")
 theme_override_font_sizes/font_size = 11
@@ -676,37 +738,8 @@ theme_override_styles/normal = SubResource("Boton")
 theme_override_styles/hover = SubResource("Hover")
 theme_override_styles/pressed = SubResource("Hover")
 theme_override_styles/focus = SubResource("Hover")
-text = "—"
-
-[node name="Cambiar Cargado" type="Button" parent="Pagina Controles"]
-layout_mode = 0
-offset_left = 532.0
-offset_top = 247.0
-offset_right = 590.0
-offset_bottom = 268.0
-theme_override_fonts/font = ExtResource("fuente")
-theme_override_font_sizes/font_size = 11
-theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
-theme_override_colors/font_hover_color = Color(0.24, 0.1, 0.03, 1)
-theme_override_styles/normal = SubResource("Boton")
-theme_override_styles/hover = SubResource("Hover")
-theme_override_styles/pressed = SubResource("Hover")
-theme_override_styles/focus = SubResource("Hover")
-text = "Cambiar"
-
-[node name="Ayuda" type="Label" parent="Pagina Controles"]
-layout_mode = 0
-offset_left = 360.0
-offset_top = 275.0
-offset_right = 596.0
-offset_bottom = 299.0
-mouse_filter = 2
-theme_override_fonts/font = ExtResource("fuente")
-theme_override_colors/font_color = Color(0.28, 0.13, 0.07, 1)
-theme_override_font_sizes/font_size = 10
-text = "Jugador 1 · Esc cancela"
-horizontal_alignment = 1
-vertical_alignment = 1
+text = "Click der"
+clip_text = true
 
 [node name="Estado" type="Label" parent="."]
 layout_mode = 0
@@ -720,29 +753,162 @@ theme_override_font_sizes/font_size = 10
 theme_override_colors/font_color = Color(1, 0.92, 0.74, 1)
 horizontal_alignment = 1
 
-[node name="Boton Anterior" type="TextureButton" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 12.0
-offset_top = 322.0
-offset_right = 40.0
-offset_bottom = 349.0
-focus_mode = 2
-texture_normal = SubResource("FlechaAnterior")
-ignore_texture_size = true
-stretch_mode = 0
+[node name="Marcadores Decorativos" type="Control" parent="."]
+editor_description = "Estrella y luna decorativas; no cambian de página."
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
-[node name="Boton Siguiente" type="TextureButton" parent="."]
+[node name="Estrella" type="TextureRect" parent="Marcadores Decorativos"]
+self_modulate = Color(0.65, 0.8, 0.6, 1)
 layout_mode = 0
-offset_left = 600.0
-offset_top = 322.0
-offset_right = 628.0
-offset_bottom = 349.0
+offset_left = 100.0
+offset_top = 1.0
+offset_right = 130.0
+offset_bottom = 43.0
+mouse_filter = 2
+texture = SubResource("MarcadorPantalla")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Simbolo" type="TextureRect" parent="Marcadores Decorativos/Estrella"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 10.5
+offset_right = 24.0
+offset_bottom = 28.5
+mouse_filter = 2
+texture = ExtResource("simbolo_estrella")
+expand_mode = 1
+
+[node name="Luna" type="TextureRect" parent="Marcadores Decorativos"]
+self_modulate = Color(0.8, 0.8, 0.8, 1)
+layout_mode = 0
+offset_left = 145.0
+offset_top = 1.0
+offset_right = 175.0
+offset_bottom = 43.0
+mouse_filter = 2
+texture = SubResource("MarcadorControles")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Simbolo" type="TextureRect" parent="Marcadores Decorativos/Luna"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 10.5
+offset_right = 24.0
+offset_bottom = 28.5
+mouse_filter = 2
+texture = ExtResource("simbolo_luna")
+expand_mode = 1
+
+[node name="Borde Sobre Decoracion" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 95.0
+offset_top = 32.0
+offset_right = 180.0
+offset_bottom = 44.0
+mouse_filter = 2
+texture = SubResource("BordeIzquierdo")
+expand_mode = 1
+
+[node name="Marcadores" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Audio" type="TextureButton" parent="Marcadores"]
+self_modulate = Color(0.63, 0.78, 0.73, 1)
+layout_mode = 0
+offset_left = 476.0
+offset_top = 11.0
+offset_right = 506.0
+offset_bottom = 53.0
 focus_mode = 2
-texture_normal = SubResource("FlechaSiguiente")
+focus_neighbor_left = NodePath("../Controles")
+focus_neighbor_right = NodePath("../Pantalla")
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("GrupoMarcadores")
+texture_normal = SubResource("MarcadorAudio")
 ignore_texture_size = true
-stretch_mode = 0
-flip_h = true
+stretch_mode = 5
+
+[node name="Simbolo" type="TextureRect" parent="Marcadores/Audio"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 10.5
+offset_right = 24.0
+offset_bottom = 28.5
+mouse_filter = 2
+texture = ExtResource("simbolo_audio")
+expand_mode = 1
+
+[node name="Pantalla" type="TextureButton" parent="Marcadores"]
+layout_mode = 0
+offset_left = 516.0
+offset_top = 11.0
+offset_right = 546.0
+offset_bottom = 53.0
+focus_mode = 2
+focus_neighbor_left = NodePath("../Audio")
+focus_neighbor_right = NodePath("../Controles")
+toggle_mode = true
+button_group = SubResource("GrupoMarcadores")
+texture_normal = SubResource("MarcadorPantalla")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Simbolo" type="TextureRect" parent="Marcadores/Pantalla"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 10.5
+offset_right = 24.0
+offset_bottom = 28.5
+mouse_filter = 2
+texture = ExtResource("simbolo_pantalla")
+expand_mode = 1
+
+[node name="Controles" type="TextureButton" parent="Marcadores"]
+layout_mode = 0
+offset_left = 556.0
+offset_top = 11.0
+offset_right = 586.0
+offset_bottom = 53.0
+focus_mode = 2
+focus_neighbor_left = NodePath("../Pantalla")
+focus_neighbor_right = NodePath("../Audio")
+toggle_mode = true
+button_group = SubResource("GrupoMarcadores")
+texture_normal = SubResource("MarcadorControles")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Simbolo" type="TextureRect" parent="Marcadores/Controles"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 10.5
+offset_right = 24.0
+offset_bottom = 28.5
+mouse_filter = 2
+texture = ExtResource("simbolo_controles")
+expand_mode = 1
+
+[node name="Borde Sobre Marcadores" type="Polygon2D" parent="."]
+editor_description = "El material extrae el pergamino de la textura original para cubrir las bases de los marcadores hasta el último píxel del borde."
+material = SubResource("MaterialBorde")
+texture = ExtResource("libro")
+polygon = PackedVector2Array(470.04785, 37.87566, 590.62201, 37.87566, 590.62201, 57.38576, 470.04785, 57.38576)
+uv = PackedVector2Array(1228, 99, 1543, 99, 1543, 150, 1228, 150)
 
 [node name="Boton Volver" type="Button" parent="."]
 layout_mode = 0

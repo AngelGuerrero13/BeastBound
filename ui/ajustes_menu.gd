@@ -16,6 +16,8 @@ const VOLUMENES := {"General": "general", "Musica": "musica", "Efectos": "efecto
 
 @onready var dibujos := [$"Dibujo Audio", $"Dibujo Pantalla", $"Dibujo Controles"]
 @onready var paginas := [$"Pagina Audio", $"Pagina Pantalla", $"Pagina Controles"]
+@onready var marcadores := [$"Marcadores/Audio", $"Marcadores/Pantalla", $"Marcadores/Controles"]
+@onready var tintes_marcadores := marcadores.map(func(marcador: TextureButton) -> Color: return marcador.self_modulate)
 @onready var estado: Label = $Estado
 var pagina := 0
 var accion_pendiente := ""
@@ -30,11 +32,9 @@ func _ready() -> void:
 		var casilla: CheckBox = paginas[1].get_node(nombre)
 		casilla.toggled.connect(_cambiar_pantalla.bind(nombre))
 	for nombre in ACCIONES:
-		var boton: Button = paginas[2].get_node("Cambiar " + nombre)
-		boton.pressed.connect(_esperar_control.bind(nombre))
 		paginas[2].get_node("Tecla " + nombre).pressed.connect(_esperar_control.bind(nombre))
-	$"Boton Anterior".pressed.connect(_cambiar_pagina.bind(-1))
-	$"Boton Siguiente".pressed.connect(_cambiar_pagina.bind(1))
+	for i in range(marcadores.size()):
+		marcadores[i].pressed.connect(_cambiar_pagina.bind(i))
 	$"Boton Volver".pressed.connect(guardar_y_cerrar)
 
 
@@ -70,10 +70,10 @@ func _cambiar_pantalla(activo: bool, nombre: String) -> void:
 		Ajustes.establecer_modo_pantalla(MODOS[nombre])
 
 
-func _cambiar_pagina(direccion: int) -> void:
+func _cambiar_pagina(indice: int) -> void:
 	accion_pendiente = ""
 	estado.text = ""
-	_mostrar_pagina(clampi(pagina + direccion, 0, 2))
+	_mostrar_pagina(indice)
 	dibujos[pagina].modulate.a = 0.65
 	paginas[pagina].modulate.a = 0.65
 	var transicion := create_tween().set_parallel(true)
@@ -86,8 +86,8 @@ func _mostrar_pagina(indice: int) -> void:
 	for i in range(3):
 		dibujos[i].visible = i == pagina
 		paginas[i].visible = i == pagina
-	$"Boton Anterior".visible = pagina > 0
-	$"Boton Siguiente".visible = pagina < 2
+		marcadores[i].set_pressed_no_signal(i == pagina)
+		marcadores[i].self_modulate = tintes_marcadores[i] * (Color.WHITE if i == pagina else Color(0.75, 0.75, 0.75, 1.0))
 
 
 func _esperar_control(nombre: String) -> void:
@@ -106,6 +106,11 @@ func _input(evento: InputEvent) -> void:
 			return
 		_asignar(evento)
 	elif evento is InputEventMouseButton and evento.pressed:
+		for marcador in marcadores:
+			if marcador.get_global_rect().has_point(evento.position):
+				accion_pendiente = ""
+				estado.text = ""
+				return
 		get_viewport().set_input_as_handled()
 		_asignar(evento)
 
@@ -131,7 +136,20 @@ func _actualizar_controles() -> void:
 		var texto := "Sin asignar"
 		for evento in InputMap.action_get_events(ACCIONES[nombre]):
 			if evento is InputEventKey or evento is InputEventMouseButton:
-				texto = evento.as_text().replace(" (Physical)", "")
+				texto = evento.as_text().replace(" (Physical)", "").replace(" - Physical", "")
+				if evento is InputEventKey:
+					var traducciones := {"Space": "Espacio", "Escape": "Escape", "Enter": "Intro", "Backspace": "Retroceso", "Delete": "Suprimir", "Insert": "Insertar", "Home": "Inicio", "End": "Fin", "Page Up": "Re Pág", "Page Down": "Av Pág", "Up": "Arriba", "Down": "Abajo", "Left": "Izquierda", "Right": "Derecha", "Shift": "Mayús"}
+					for ingles in traducciones:
+						texto = texto.replace(ingles, traducciones[ingles])
+				if evento is InputEventMouseButton:
+					if evento.button_index == MOUSE_BUTTON_LEFT:
+						texto = "Click izq"
+					elif evento.button_index == MOUSE_BUTTON_RIGHT:
+						texto = "Click der"
+					elif evento.button_index == MOUSE_BUTTON_MIDDLE:
+						texto = "Ratón central"
+					else:
+						texto = "Ratón %d" % evento.button_index
 				break
 		paginas[2].get_node("Tecla " + nombre).text = texto
 
