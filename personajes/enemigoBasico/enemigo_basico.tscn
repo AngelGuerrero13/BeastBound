@@ -4,10 +4,14 @@
 [ext_resource type="Script" uid="uid://dvscof1fabqgi" path="res://personajes/enemigoBasico/enemigo_basico.gd" id="2_p27fw"]
 [ext_resource type="Texture2D" uid="uid://ddopshrdhm58v" path="res://icon.svg" id="3_p27fw"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4vuwf"]
+size = Vector2(9, 5)
+
 [node name="Enemigo Basico" unique_id=1382673604 instance=ExtResource("1_6l8mp")]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("2_p27fw")
+distancia_ataque_melee = 40.0
 es_jugador = false
 velocidad = 100.0
 
@@ -16,9 +20,21 @@ position = Vector2(-5.9604645e-08, 1)
 scale = Vector2(0.10156249, 0.10351564)
 texture = ExtResource("3_p27fw")
 
-[node name="Barra Ataque Cargado" parent="." index="6" unique_id=511213222]
+[node name="Barra Ataque Cargado" parent="." index="5" unique_id=511213222]
 visible = false
 
-[node name="Barra Vida Enemigo" parent="." index="8" unique_id=26031977]
+[node name="Barra Vida Enemigo" parent="." index="6" unique_id=26031977]
 offset_top = -14.0
 offset_bottom = 4.0
+
+[node name="AreaDeteccion" type="Area2D" parent="." index="7" unique_id=1027424982]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaDeteccion" index="0" unique_id=885380396]
+position = Vector2(-0.99993896, 1.0000305)
+scale = Vector2(50.035, 50.035)
+shape = SubResource("RectangleShape2D_4vuwf")
+
+[connection signal="body_entered" from="AreaDeteccion" to="." method="_on_area_deteccion_body_entered"]
+[connection signal="body_exited" from="AreaDeteccion" to="." method="_on_area_deteccion_body_exited"]

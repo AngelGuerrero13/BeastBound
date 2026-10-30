@@ -3,14 +3,10 @@ extends "res://personajes/enemigoBasico/enemigo_basico.gd"
 
 # Nodos exclusivos de este hongo
 @onready var zona_impacto: Area2D = $ZonaImpacto
-@onready var hitbox_cabezazo: CollisionShape2D = $ZonaImpacto/HitboxCabezazo
+@onready var hitbox_cabezazo: CollisionShape2D = $ZonaImpacto/CollisionShape2D
 
 func _ready() -> void:
-	super() # Configura UI y hace la búsqueda global del padre
-	
-	# TRUCO DE HERENCIA: Le borramos el objetivo que el padre acaba de encontrar.
-	# Esto hace que el hongo nazca quieto y no se mueva hasta que pises su Area2D.
-	jugador_objetivo = null 
+	super()
 	
 	if hitbox_cabezazo:
 		hitbox_cabezazo.disabled = true
@@ -46,3 +42,6 @@ func ejecutar_ataque_normal(_objetivo) -> void:
 	await get_tree().create_timer(0.1).timeout
 	if hitbox_cabezazo:
 		hitbox_cabezazo.disabled = true
+		
+func buscar_jugador_cercano() -> void:
+	pass

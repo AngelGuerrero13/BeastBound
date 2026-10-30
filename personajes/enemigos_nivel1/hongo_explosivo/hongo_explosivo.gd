@@ -13,10 +13,6 @@ func ejecutar_ataque_normal(_objetivo) -> void:
 func iniciar_detonacion() -> void:
 	detonando = true
 	
-	# TRUCO DE HERENCIA: Al vaciar esta variable, el _physics_process del padre 
-	# frena al enemigo en seco y le sigue aplicando gravedad por nosotros.
-	jugador_objetivo = null 
-	
 	var parpadeos = 5
 	var tiempo_por_parpadeo = tiempo_detonacion / (parpadeos * 2.0)
 	

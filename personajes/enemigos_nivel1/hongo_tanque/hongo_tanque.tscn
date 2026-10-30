@@ -3,6 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://di2623p60lpat" path="res://personajes/enemigoBasico/enemigo_basico.tscn" id="1_0j34q"]
 [ext_resource type="Script" uid="uid://c80dsxodm6tqo" path="res://personajes/enemigos_nivel1/hongo_tanque/hongo_tanque.gd" id="2_ntd21"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mnmdw"]
+size = Vector2(7, 3)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_g3u5t"]
 
 [node name="Hongo tanque" unique_id=1382673604 instance=ExtResource("1_0j34q")]
@@ -10,8 +13,6 @@ script = ExtResource("2_ntd21")
 velocidad_embestida = 600.0
 distancia_activacion_embestida = 170.0
 tiempo_recarga_embestida = 4.0
-distancia_ataque_melee = 40.0
-distancia_vision = 400.0
 vida_maxima = 20
 vida = 20
 velocidad = 80.0
@@ -26,11 +27,11 @@ visible = false
 [node name="Colision Sombra" parent="." index="3" unique_id=1812325256]
 visible = false
 
-[node name="Camara Personaje" parent="." index="5" unique_id=1096102892]
+[node name="Barra Vida Enemigo" parent="." index="6" unique_id=26031977]
 visible = false
 
-[node name="Barra Vida Enemigo" parent="." index="7" unique_id=26031977]
-visible = false
+[node name="CollisionShape2D" parent="AreaDeteccion" parent_id_path=PackedInt32Array(1027424982) index="0" unique_id=885380396]
+shape = SubResource("RectangleShape2D_mnmdw")
 
 [node name="AreaEmbestida" type="Area2D" parent="." index="8" unique_id=986379505]
 

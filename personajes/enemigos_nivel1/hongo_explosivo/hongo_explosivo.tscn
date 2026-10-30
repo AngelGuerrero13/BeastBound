@@ -1,30 +1,26 @@
-[gd_scene format=3 uid="uid://dq8es0xqtfs0k"]
+[gd_scene format=3 uid="uid://cls33u2m5qch8"]
 
-[ext_resource type="PackedScene" uid="uid://bjp30gibi1pc" path="res://personajes/enemigos_nivel1/hongo_cac/hongo_CaC(nivel1).tscn" id="1_hexqn"]
+[ext_resource type="PackedScene" uid="uid://di2623p60lpat" path="res://personajes/enemigoBasico/enemigo_basico.tscn" id="1_f5fxi"]
 [ext_resource type="Script" uid="uid://cgj4j7b7s0jx5" path="res://personajes/enemigos_nivel1/hongo_explosivo/hongo_explosivo.gd" id="2_hexqn"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_g3u5t"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p27fw"]
+size = Vector2(7, 5)
 
-[node name="hongo_explosivo" unique_id=1382673604 instance=ExtResource("1_hexqn")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_hexqn"]
+
+[node name="HongoExplosivo" unique_id=1382673604 instance=ExtResource("1_f5fxi")]
 script = ExtResource("2_hexqn")
 tiempo_detonacion = 1.5
 dano_explosion = 5
-rango_ataque = 2.0
 
-[node name="Sombra" parent="." index="0" unique_id=1873168614]
-visible = false
+[node name="CollisionShape2D" parent="AreaDeteccion" parent_id_path=PackedInt32Array(1027424982) index="0" unique_id=885380396]
+position = Vector2(1.000001, 1.0000305)
+shape = SubResource("RectangleShape2D_p27fw")
 
-[node name="Colision Cuerpo" parent="." index="2" unique_id=1954197429]
-visible = false
+[node name="AreaExplosion" type="Area2D" parent="." index="8" unique_id=134583068]
+collision_layer = 0
+collision_mask = 2
 
-[node name="Colision Sombra" parent="." index="3" unique_id=1812325256]
-visible = false
-
-[node name="Camara Personaje" parent="." index="5" unique_id=1096102892]
-visible = false
-
-[node name="area_explosion" type="Area2D" parent="." index="8" unique_id=220636741]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="area_explosion" index="0" unique_id=1200872675]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaExplosion" index="0" unique_id=333070002]
 scale = Vector2(5.4, 5.4)
-shape = SubResource("CircleShape2D_g3u5t")
+shape = SubResource("CircleShape2D_hexqn")

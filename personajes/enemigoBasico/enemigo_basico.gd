@@ -2,7 +2,6 @@ extends "res://personajes/personajeBase/personaje_base.gd"
 
 @export_group("IA del Enemigo")
 @export var distancia_ataque_melee: float = 40.0
-@export var distancia_vision: float = 400.0
 
 var jugador_objetivo: Node2D = null
 var diccionario_cooldowns: Dictionary = {}
@@ -20,24 +19,27 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		return
 		
-	buscar_jugador_cercano()
-	
 	if jugador_objetivo and is_instance_valid(jugador_objetivo):
 		var distancia = global_position.distance_to(jugador_objetivo.global_position)
+		var ataque_elegido = decidir_ataque(distancia)
 		
-		if distancia <= distancia_vision:
-			var ataque_elegido = decidir_ataque(distancia)
-			
-			if ataque_elegido != "":
-				iniciar_ataque(ataque_elegido)
-			else:
-				mover_hacia_objetivo(distancia)
+		if ataque_elegido != "":
+			iniciar_ataque(ataque_elegido)
 		else:
-			velocity.x = 0 
+			mover_hacia_objetivo(distancia)
 	else:
 		velocity.x = 0
 		
 	move_and_slide()
+
+# --- SISTEMA DE DETECCIÓN POR ÁREA ---
+func _on_area_deteccion_body_entered(body: Node2D) -> void:
+	if body.is_in_group("Jugador"):
+		jugador_objetivo = body
+
+func _on_area_deteccion_body_exited(body: Node2D) -> void:
+	if body == jugador_objetivo:
+		jugador_objetivo = null
 
 func decidir_ataque(distancia: float) -> String:
 	if distancia <= distancia_ataque_melee and puede_atacar_normal:
@@ -57,18 +59,6 @@ func iniciar_ataque(ataque: String) -> void:
 		var tiempo_restante = max(0.0, tiempo_recarga_normal - 0.3)
 		await get_tree().create_timer(tiempo_restante).timeout
 		puede_atacar_normal = true
-
-func buscar_jugador_cercano() -> void:
-	var jugadores = get_tree().get_nodes_in_group("Jugador")
-	var distancia_minima = INF
-	jugador_objetivo = null
-	
-	for j in jugadores:
-		if is_instance_valid(j) and j.vida > 0:
-			var dist = global_position.distance_to(j.global_position)
-			if dist < distancia_minima:
-				distancia_minima = dist
-				jugador_objetivo = j
 
 func mover_hacia_objetivo(distancia: float) -> void:
 	if distancia > distancia_ataque_melee:
