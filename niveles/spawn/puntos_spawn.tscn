@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://bcenw2rnuxqwv"]
 
 [ext_resource type="Script" uid="uid://byxghq6b50ck0" path="res://niveles/spawn/puntos_spawn.gd" id="1_opn3k"]
-[ext_resource type="PackedScene" uid="uid://808rvxcuw4kj" path="res://personajes/mago/mago.tscn" id="2_ylejk"]
-[ext_resource type="PackedScene" uid="uid://dkydis3odnibg" path="res://personajes/Guerrero/guerrero.tscn" id="3_qk2oj"]
-[ext_resource type="PackedScene" uid="uid://dwwlweg4viks" path="res://personajes/tanque/tanque.tscn" id="4_pdd5j"]
+[ext_resource type="PackedScene" uid="uid://808rvxcuw4kj" path="res://personajes/clases_jugador/mago/mago.tscn" id="2_ylejk"]
+[ext_resource type="PackedScene" uid="uid://dkydis3odnibg" path="res://personajes/clases_jugador/Guerrero/guerrero.tscn" id="3_qk2oj"]
+[ext_resource type="PackedScene" uid="uid://dwwlweg4viks" path="res://personajes/clases_jugador/tanque/tanque.tscn" id="4_pdd5j"]
 [ext_resource type="PackedScene" uid="uid://c25l87wx35bf1" path="res://personajes/muñecoPrueba/muñeco_prueba.tscn" id="5_78yij"]
 
 [node name="PuntosSpawn" type="Node2D" unique_id=1222723644]

@@ -1,9 +1,9 @@
 [gd_scene format=4 uid="uid://btbx3x03l1cxj"]
 
 [ext_resource type="Texture2D" uid="uid://b5o2bic3uhxqd" path="res://assets/art/fondos/MagicMarketFondo/Tilesets/TilesetFloor.png" id="1_280kd"]
-[ext_resource type="PackedScene" uid="uid://c25l87wx35bf1" path="res://personajes/muñecoPrueba/muñeco_prueba.tscn" id="4_cww3w"]
 [ext_resource type="Script" uid="uid://ckq7yr4pty45h" path="res://niveles/nivel 1/nivel_1.gd" id="5_nivel_largo"]
 [ext_resource type="PackedScene" uid="uid://bcenw2rnuxqwv" path="res://niveles/spawn/puntos_spawn.tscn" id="15_lhl8s"]
+[ext_resource type="PackedScene" uid="uid://cmgs18jfyukj0" path="res://personajes/enemigos_nivel1/hongo_tirador/hongo_tirador.tscn" id="16_lhl8s"]
 [ext_resource type="Texture2D" uid="uid://dxmjfgxeu67q5" path="res://assets/art/fondos/vegetacion_editable/color_fondo.png" id="veg_1_kqmcu"]
 [ext_resource type="TileSet" uid="uid://bdw3i5g2yicp7" path="res://assets/art/fondos/vegetacion_editable/01_Siluetas.tres" id="veg_2_a4jit"]
 [ext_resource type="TileSet" uid="uid://caxovbijxlqms" path="res://assets/art/fondos/vegetacion_editable/02_Rocas.tres" id="veg_3_towlq"]
@@ -346,9 +346,6 @@ position = Vector2(4808, 100)
 shape = SubResource("RectangleShape2D_lateral")
 disabled = true
 
-[node name="Muñeco Prueba" parent="." unique_id=1909748044 instance=ExtResource("4_cww3w")]
-position = Vector2(303, 83)
-
 [node name="Puntos Oleadas" type="Node2D" parent="." unique_id=630833374]
 
 [node name="Oleada 1 Salida" type="Marker2D" parent="Puntos Oleadas" unique_id=585632687]
@@ -382,5 +379,8 @@ collision_mask = 2
 
 [node name="Colision Salida" type="CollisionShape2D" parent="Salida Derecha" unique_id=756222085]
 shape = SubResource("RectangleShape2D_salida")
+
+[node name="HongoTirador" parent="." unique_id=1382673604 instance=ExtResource("16_lhl8s")]
+position = Vector2(241, 105)
 
 [connection signal="body_entered" from="Salida Derecha" to="." method="_salir_del_nivel"]
