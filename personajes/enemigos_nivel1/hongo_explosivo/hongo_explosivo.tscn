@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://dq8es0xqtfs0k"]
+
+[ext_resource type="PackedScene" uid="uid://bjp30gibi1pc" path="res://personajes/enemigos_nivel1/hongo_cac/hongo_CaC(nivel1).tscn" id="1_hexqn"]
+[ext_resource type="Script" uid="uid://cgj4j7b7s0jx5" path="res://personajes/enemigos_nivel1/hongo_explosivo/hongo_explosivo.gd" id="2_hexqn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g3u5t"]
+
+[node name="hongo_explosivo" unique_id=1382673604 instance=ExtResource("1_hexqn")]
+script = ExtResource("2_hexqn")
+tiempo_detonacion = 1.5
+dano_explosion = 5
+rango_ataque = 2.0
+
+[node name="Sombra" parent="." index="0" unique_id=1873168614]
+visible = false
+
+[node name="Colision Cuerpo" parent="." index="2" unique_id=1954197429]
+visible = false
+
+[node name="Colision Sombra" parent="." index="3" unique_id=1812325256]
+visible = false
+
+[node name="Camara Personaje" parent="." index="5" unique_id=1096102892]
+visible = false
+
+[node name="area_explosion" type="Area2D" parent="." index="8" unique_id=220636741]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="area_explosion" index="0" unique_id=1200872675]
+scale = Vector2(5.4, 5.4)
+shape = SubResource("CircleShape2D_g3u5t")
