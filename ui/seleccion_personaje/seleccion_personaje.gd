@@ -1,6 +1,6 @@
 extends Control
 
-const MAPA = "res://ui/Mapa/mapa_mundo.tscn"
+const CARGA = preload("res://ui/carga.tscn")
 
 @onready var paneles = $Paneles.get_children()
 
@@ -13,10 +13,8 @@ var jugadores_activos = []
 var jugadores_listos = {}
 
 var inicio_pendiente = false
-var carga_iniciada = false
 
 func _ready():
-	carga_iniciada = ResourceLoader.load_threaded_request(MAPA, "PackedScene") == OK
 	mensaje_inicio.hide()
 	
 	for panel in paneles:
@@ -30,30 +28,13 @@ func _ready():
 	else:
 		actualizar_iconos_globales(-1)
 
-func _process(_delta):
-	if inicio_pendiente:
-		var estado = ResourceLoader.load_threaded_get_status(MAPA) if carga_iniciada else ResourceLoader.THREAD_LOAD_INVALID_RESOURCE
-		if estado == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
-			return
-		var resultado: Error
-		if estado == ResourceLoader.THREAD_LOAD_LOADED:
-			resultado = get_tree().change_scene_to_packed(ResourceLoader.load_threaded_get(MAPA))
-			if resultado == OK:
-				Ajustes.reanudar()
-		else:
-			resultado = Ajustes.cambiar_escena(MAPA)
-		if resultado != OK:
-			inicio_pendiente = false
-			mensaje_inicio.text = "No se pudo cargar el mapa"
-			set_process_input(true)
-			for panel in paneles:
-				panel.set_process_input(true)
-
 func comprobar_inicio_juego():
 	if jugadores_activos.size() > 0 and jugadores_listos.size() == jugadores_activos.size():
 		iniciar_juego()
 
 func iniciar_juego():
+	if inicio_pendiente:
+		return
 	Ajustes.jugadores_seleccionados = jugadores_listos.duplicate()
 	inicio_pendiente = true
 	mensaje_inicio.text = "Cargando mapa..."
@@ -61,6 +42,15 @@ func iniciar_juego():
 	set_process_input(false)
 	for panel in paneles:
 		panel.set_process_input(false)
+	var resultado := get_tree().change_scene_to_packed(CARGA)
+	if resultado == OK:
+		Ajustes.reanudar()
+	else:
+		inicio_pendiente = false
+		mensaje_inicio.text = "No se pudo abrir la pantalla de carga"
+		set_process_input(true)
+		for panel in paneles:
+			panel.set_process_input(true)
 
 func _input(event):
 	if event is InputEventKey:

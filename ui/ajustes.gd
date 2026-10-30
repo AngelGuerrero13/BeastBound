@@ -44,7 +44,7 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel") and not event.is_echo():
 		var escena := get_tree().current_scene
-		if escena != null and escena.scene_file_path != MENU and escena.scene_file_path != "res://ui/seleccion_partidas.tscn" and capa_pausa == null:
+		if escena != null and escena.scene_file_path not in [MENU, "res://ui/seleccion_partidas.tscn", "res://ui/carga.tscn"] and capa_pausa == null:
 			get_viewport().set_input_as_handled()
 			_pausar()
 

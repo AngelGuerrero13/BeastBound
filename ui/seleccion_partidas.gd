@@ -3,7 +3,9 @@ extends Control
 @onready var espacios: Control = $Carteles
 @onready var mensaje: Label = $"Estado Partida"
 @onready var confirmacion: Control = $"Confirmar Borrado"
+@onready var mensaje_carga: Label = $"Mensaje Carga"
 var espacio_por_borrar := 0
+var cargando_partida := false
 
 
 func _ready() -> void:
@@ -63,7 +65,7 @@ func _nombre_enviado(_texto: String, espacio: int) -> void:
 
 
 func _seleccionar(espacio: int) -> void:
-	if confirmacion.visible:
+	if confirmacion.visible or cargando_partida:
 		return
 	var resultado: Error = OK
 	if not Partidas.existe(espacio):
@@ -74,15 +76,24 @@ func _seleccionar(espacio: int) -> void:
 			return
 		resultado = Partidas.crear(espacio, campo.text)
 	if resultado == OK:
+		cargando_partida = true
+		mensaje_carga.show()
+		# Dibujar el aviso antes de abrir los recursos de la partida.
+		if DisplayServer.get_name() == "headless":
+			await get_tree().process_frame
+		else:
+			await RenderingServer.frame_post_draw
 		resultado = Partidas.abrir(espacio)
+		if resultado == OK:
+			resultado = Ajustes.cambiar_escena("res://ui/seleccion_personaje/seleccion_personaje.tscn")
 	if resultado != OK:
+		cargando_partida = false
+		mensaje_carga.hide()
 		mensaje.text = "NO SE PUDO ABRIR LA PARTIDA. INTENTA DE NUEVO."
-	else:
-		Ajustes.cambiar_escena("res://ui/seleccion_personaje/seleccion_personaje.tscn")
 
 
 func _pedir_borrado(espacio: int) -> void:
-	if not Partidas.existe(espacio):
+	if cargando_partida or not Partidas.existe(espacio):
 		return
 	espacio_por_borrar = espacio
 	var nombre: String = espacios.get_child(espacio - 1).get_node("Nombre Equipo").text
@@ -113,6 +124,8 @@ func _confirmar_borrado() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if cargando_partida:
+		return
 	if event.is_action_pressed("ui_cancel") and not event.is_echo():
 		get_viewport().set_input_as_handled()
 		if confirmacion.visible:
@@ -122,6 +135,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _volver() -> void:
+	if cargando_partida:
+		return
 	var resultado := Ajustes.cambiar_escena(Ajustes.MENU)
 	if resultado != OK:
 		mensaje.text = "NO SE PUDO VOLVER AL MENÚ. INTENTA DE NUEVO."

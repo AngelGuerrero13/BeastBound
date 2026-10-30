@@ -91,6 +91,15 @@ assets/art/ui/cursor_patita/fuente_ladeada.png.import
 /assets/art/ui/libro_ajustes/marcador_*_arriba.png
 /assets/art/ui/libro_ajustes/marcador_*_arriba.png.import
 
+# Diseños del padre y la hija: referencias locales pendientes de usar
+/assets/art/personajes/perrita/
+/assets/art/personajes/perro_padre/
+
+# Pantalla de carga: propuestas descartadas y textos de generación, conservados localmente
+/assets/art/fondos/carga/casa_*.png
+/assets/art/fondos/carga/casa_*.png.import
+/assets/art/fondos/carga/prompt*.txt
+
 # Archivos del sistema operativo
 Thumbs.db
 Desktop.ini

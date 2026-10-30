@@ -1,0 +1,101 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://ui/carga.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/art/fondos/carga/fondo_carga_aprobado.png" id="2_fondo"]
+[ext_resource type="FontFile" path="res://assets/art/fuentes/alagard.ttf" id="3_fuente"]
+[ext_resource type="Theme" path="res://ui/tema_partidas.tres" id="4_tema"]
+
+[sub_resource type="AtlasTexture" id="Fondo_panoramico"]
+resource_name = "Encuadre Orilla"
+atlas = ExtResource("2_fondo")
+region = Rect2(0, 548.625, 1254, 705.375)
+
+[sub_resource type="StyleBoxFlat" id="Placa_carga"]
+content_margin_left = 8.0
+content_margin_top = 5.0
+content_margin_right = 8.0
+content_margin_bottom = 5.0
+bg_color = Color(0.09, 0.14, 0.12, 0.86)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.7, 0.66, 0.41, 0.8)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_left = 3
+corner_radius_bottom_right = 3
+anti_aliasing = false
+
+[node name="Pantalla Carga" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_filter = 1
+theme = ExtResource("4_tema")
+script = ExtResource("1_script")
+
+[node name="Fondo" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("Fondo_panoramico")
+expand_mode = 1
+
+[node name="Panel Carga" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -112.0
+offset_top = -58.0
+offset_right = -12.0
+offset_bottom = -12.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Placa_carga")
+
+[node name="Estado" type="VBoxContainer" parent="Panel Carga"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Texto Estado" type="Label" parent="Panel Carga/Estado"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.96, 0.8, 1)
+theme_override_fonts/font = ExtResource("3_fuente")
+theme_override_font_sizes/font_size = 12
+text = "Cargando..."
+horizontal_alignment = 2
+autowrap_mode = 2
+
+[node name="Porcentaje" type="Label" parent="Panel Carga/Estado"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.96, 0.8, 1)
+theme_override_fonts/font = ExtResource("3_fuente")
+theme_override_font_sizes/font_size = 20
+text = "0 %"
+horizontal_alignment = 2
+
+[node name="Boton Volver" type="Button" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = -44.0
+offset_right = 132.0
+offset_bottom = -12.0
+grow_vertical = 0
+text = "Volver"
