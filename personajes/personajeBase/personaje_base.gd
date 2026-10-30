@@ -46,6 +46,7 @@ var en_suelo: bool = true
 @export var tiempo_requerido: float = 3.0   
 
 var puede_atacar_normal: bool = true
+var esta_atacando: bool = false
 var esta_cargando: bool = false
 var tiempo_cargado: float = 0.0          
 var ya_disparo_cargado: bool = false     
@@ -83,10 +84,12 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed(prefijo_input + "_ataque_normal"):
 		if puede_atacar_normal:
 			puede_atacar_normal = false 
+			esta_atacando = true
 			ejecutar_ataque_normal(obtener_enemigo_objetivo()) 
 			
 			await get_tree().create_timer(tiempo_recarga_normal).timeout
 			puede_atacar_normal = true
+			esta_atacando = false
 			
 	# 2. ATAQUE CARGADO
 	if Input.is_action_pressed(prefijo_input + "_ataque_cargado"):
@@ -119,6 +122,10 @@ func _physics_process(delta: float) -> void:
 func manejar_movimiento() -> void:
 	
 	if not es_jugador:
+		return
+		
+	if esta_atacando or esta_cargando:
+		mover_en_direccion(Vector2.ZERO)
 		return
 	
 	mover_en_direccion(obtener_direccion_movimiento())

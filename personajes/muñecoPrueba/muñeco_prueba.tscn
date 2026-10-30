@@ -11,25 +11,22 @@ vida_maxima = 50
 vida = 50
 desfase_horizontal_sprite = 12.0
 
-[node name="Sombra" parent="." index="0"]
+[node name="Sombra" parent="." index="0" unique_id=1873168614]
 position = Vector2(0, 23)
 
 [node name="Imagen Personaje" parent="." index="1" unique_id=647587542]
 position = Vector2(12, 0)
 texture = ExtResource("2_2g0vp")
 
-[node name="Colision Cuerpo" parent="." index="2"]
+[node name="Colision Cuerpo" parent="." index="2" unique_id=1954197429]
 position = Vector2(0, 10)
 
-[node name="Colision Sombra" parent="." index="3"]
+[node name="Colision Sombra" parent="." index="3" unique_id=1812325256]
 position = Vector2(0, 23)
 
 [node name="Barra Ataque Cargado" parent="." index="6" unique_id=511213222]
 visible = false
 
-[node name="Interfaz Jugador" parent="." index="7" unique_id=1918061239]
-visible = false
-
-[node name="Barra Vida Enemigo" parent="." index="8" unique_id=26031977]
+[node name="Barra Vida Enemigo" parent="." index="7" unique_id=26031977]
 offset_top = -24.0
 offset_bottom = -6.0

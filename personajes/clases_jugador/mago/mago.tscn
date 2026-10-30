@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://808rvxcuw4kj"]
 
 [ext_resource type="PackedScene" uid="uid://dc41qho565f7g" path="res://personajes/personajeBase/personaje_base.tscn" id="1_bq4yt"]
-[ext_resource type="Script" uid="uid://tw6jqb838bcg" path="res://personajes/mago/mago.gd" id="2_wiglv"]
-[ext_resource type="PackedScene" uid="uid://diajepkcfeqnr" path="res://personajes/mago/bola_fuego.tscn" id="3_wiglv"]
+[ext_resource type="Script" uid="uid://tw6jqb838bcg" path="res://personajes/clases_jugador/mago/mago.gd" id="2_wiglv"]
+[ext_resource type="PackedScene" uid="uid://diajepkcfeqnr" path="res://personajes/clases_jugador/mago/bola_fuego.tscn" id="3_wiglv"]
 [ext_resource type="Texture2D" uid="uid://bdfau4kl8pnu3" path="res://assets/art/personajes/mago/mago_idle.png" id="4_idle"]
 [ext_resource type="Texture2D" uid="uid://qhui7wogoctr" path="res://assets/art/personajes/mago/ranafoto.png" id="5_1d17s"]
 

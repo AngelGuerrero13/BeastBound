@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cmgs18jfyukj0"]
+
+[ext_resource type="PackedScene" uid="uid://di2623p60lpat" path="res://personajes/enemigoBasico/enemigo_basico.tscn" id="1_x7bua"]
+[ext_resource type="Script" uid="uid://o37l5t0ad73g" path="res://personajes/enemigos_nivel1/hongo_tirador/hongo_tirador.gd" id="2_t1k1l"]
+[ext_resource type="PackedScene" uid="uid://26vo14i720ld" path="res://personajes/enemigos_nivel1/hongo_tirador/hongito(proyectil).tscn" id="3_i4kn1"]
+
+[node name="HongoTirador" unique_id=1382673604 instance=ExtResource("1_x7bua")]
+script = ExtResource("2_t1k1l")
+escena_espora = ExtResource("3_i4kn1")
+distancia_huida = 150.0
+distancia_disparo_max = 350.0
+tiempo_recarga_espora = 2.5
+distancia_ataque_melee = 40.0
+distancia_vision = 400.0

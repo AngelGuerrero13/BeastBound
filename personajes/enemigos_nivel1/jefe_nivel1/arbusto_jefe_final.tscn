@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dcsc42p762drd"]
 
 [ext_resource type="PackedScene" uid="uid://dc41qho565f7g" path="res://personajes/personajeBase/personaje_base.tscn" id="1_4g8of"]
-[ext_resource type="Script" uid="uid://ro4umpecc7by" path="res://personajes/enemigoBasico/arbusto_jefe_final.gd" id="2_4g8of"]
+[ext_resource type="Script" uid="uid://ro4umpecc7by" path="res://personajes/enemigos_nivel1/jefe_nivel1/arbusto_jefe_final.gd" id="2_4g8of"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4g8of"]
 size = Vector2(640, 360)

@@ -23,6 +23,6 @@ func disparar_bola(objetivo: Node2D, es_cargada: bool) -> void:
 		var direccion_hacia_raton = get_global_mouse_position() - punto_disparo.global_position
 		
 		# Le enviamos toda la información al script de la bola
-		nueva_bola.configurar(objetivo, es_cargada, direccion_hacia_raton)
+		nueva_bola.configurar_bola(objetivo, es_cargada, direccion_hacia_raton)
 	else:
 		print("Error: La escena de la bola mágica no ha sido asignada en el Inspector del Mago.")

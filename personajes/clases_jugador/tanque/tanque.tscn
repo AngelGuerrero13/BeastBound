@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dwwlweg4viks"]
 
 [ext_resource type="PackedScene" uid="uid://dc41qho565f7g" path="res://personajes/personajeBase/personaje_base.tscn" id="1_ltgak"]
-[ext_resource type="Script" uid="uid://v8j7mso6x6ly" path="res://personajes/tanque/tanque.gd" id="2_wd2uv"]
+[ext_resource type="Script" uid="uid://v8j7mso6x6ly" path="res://personajes/clases_jugador/tanque/tanque.gd" id="2_wd2uv"]
 [ext_resource type="Texture2D" uid="uid://21ooqhid0p0m" path="res://assets/art/personajes/hongo simple.png" id="3_762t1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jdbdj"]
@@ -21,11 +21,11 @@ _data = {
 
 [node name="Tanque" unique_id=1382673604 instance=ExtResource("1_ltgak")]
 script = ExtResource("2_wd2uv")
-reduccion_dano = 0.3
 velocidad_embestida = 800.0
 duracion_embestida_maxima = 0.35
 tiempo_maximo_carga_embestida = 1.0
 velocidad_escudo = 80.0
+reduccion_dano = 0.3
 
 [node name="Sombra" parent="." index="0" unique_id=1873168614]
 visible = false
@@ -57,8 +57,5 @@ visible = false
 [node name="Barra Ataque Cargado" parent="." index="8" unique_id=511213222]
 visible = false
 
-[node name="Interfaz Jugador" parent="." index="9" unique_id=1918061239]
-visible = false
-
-[node name="Barra Vida Enemigo" parent="." index="10" unique_id=26031977]
+[node name="Barra Vida Enemigo" parent="." index="9" unique_id=26031977]
 visible = false
