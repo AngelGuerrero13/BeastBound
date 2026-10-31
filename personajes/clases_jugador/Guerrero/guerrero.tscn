@@ -1,7 +1,26 @@
 [gd_scene format=3 uid="uid://dkydis3odnibg"]
 
 [ext_resource type="PackedScene" uid="uid://dc41qho565f7g" path="res://personajes/personajeBase/personaje_base.tscn" id="1_d0xoe"]
+[ext_resource type="Texture2D" uid="uid://dqwklqpd7t0ju" path="res://assets/art/personajes/guerrero/Nutria.png" id="2_hgg11"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_py2p6"]
+size = Vector2(39, 40)
 
 [node name="Guerrero" unique_id=1382673604 instance=ExtResource("1_d0xoe")]
 vida_maxima = 10
 vida = 10
+retrato = ExtResource("2_hgg11")
+
+[node name="Imagen Personaje" parent="." index="1" unique_id=647587542]
+texture = ExtResource("2_hgg11")
+
+[node name="Colision Cuerpo" parent="." index="2" unique_id=1954197429]
+position = Vector2(2.5, 4)
+shape = SubResource("RectangleShape2D_py2p6")
+
+[node name="Barra Ataque Cargado" parent="." index="5" unique_id=511213222]
+offset_top = -25.000002
+offset_bottom = -8.000002
+
+[node name="Barra Vida Enemigo" parent="." index="6" unique_id=26031977]
+visible = false

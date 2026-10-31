@@ -12,10 +12,10 @@ var prefijo_input = ""
 var device_id = -1
 
 var lista_personajes = [
-	["Mapache","Tanque",preload("res://assets/art/personajes/mago/RanaPrueba.png")],
+	["Mapache","Tanque",preload("res://assets/art/personajes/Mapache/Mapacheee.png")],
 	["Sapo","Mago",preload("res://assets/art/personajes/mago/ranafoto.png")],
-	["Nutria","Guerrero",preload("res://assets/art/personajes/hongo simple.png")],
-	["Ratón","Tirador",preload("res://icon.svg")]
+	["Nutria","Guerrero",preload("res://assets/art/personajes/guerrero/Nutria.png")],
+	["Ratón","Tirador",preload("res://assets/art/personajes/tirador/raton.png")]
 ]
 
 # Contenedor del botón

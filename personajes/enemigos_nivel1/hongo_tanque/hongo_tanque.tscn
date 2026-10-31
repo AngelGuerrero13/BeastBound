@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://di2623p60lpat" path="res://personajes/enemigoBasico/enemigo_basico.tscn" id="1_0j34q"]
 [ext_resource type="Script" uid="uid://c80dsxodm6tqo" path="res://personajes/enemigos_nivel1/hongo_tanque/hongo_tanque.gd" id="2_ntd21"]
+[ext_resource type="Texture2D" uid="uid://cdrxn4f1axudj" path="res://assets/art/personajes/enemigos/nivel 1/tanque/HongoMalvadoo.png" id="3_8c0j1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mnmdw"]
 size = Vector2(7, 3)
@@ -21,6 +22,11 @@ rango_ataque = 30.0
 [node name="Sombra" parent="." index="0" unique_id=1873168614]
 visible = false
 
+[node name="Imagen Personaje" parent="." index="1" unique_id=647587542]
+position = Vector2(-1, -11.000001)
+scale = Vector2(1.5, 1.394)
+texture = ExtResource("3_8c0j1")
+
 [node name="Colision Cuerpo" parent="." index="2" unique_id=1954197429]
 visible = false
 
@@ -31,6 +37,7 @@ visible = false
 visible = false
 
 [node name="CollisionShape2D" parent="AreaDeteccion" parent_id_path=PackedInt32Array(1027424982) index="0" unique_id=885380396]
+position = Vector2(-5.9604645e-08, 1.1920929e-07)
 shape = SubResource("RectangleShape2D_mnmdw")
 
 [node name="AreaEmbestida" type="Area2D" parent="." index="8" unique_id=986379505]

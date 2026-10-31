@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://bdfau4kl8pnu3" path="res://assets/art/personajes/mago/mago_idle.png" id="4_idle"]
 [ext_resource type="Texture2D" uid="uid://qhui7wogoctr" path="res://assets/art/personajes/mago/ranafoto.png" id="5_1d17s"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gt76d"]
+size = Vector2(32, 39)
+
 [sub_resource type="Animation" id="Animation_idle"]
 resource_name = "idle"
 length = 0.5
@@ -50,7 +53,8 @@ texture = ExtResource("4_idle")
 hframes = 5
 
 [node name="Colision Cuerpo" parent="." index="2" unique_id=1954197429]
-position = Vector2(0, 8)
+position = Vector2(-8, 3.5)
+shape = SubResource("RectangleShape2D_gt76d")
 
 [node name="Colision Sombra" parent="." index="3" unique_id=1812325256]
 position = Vector2(0, 25)
@@ -63,11 +67,11 @@ libraries/ = SubResource("AnimationLibrary_idle")
 autoplay = &"idle"
 speed_scale = 0.654
 
-[node name="Barra Ataque Cargado" parent="." index="7" unique_id=511213222]
+[node name="Barra Ataque Cargado" parent="." index="6" unique_id=511213222]
 offset_left = -16.0
 offset_top = -26.0
 offset_right = 32.0
 offset_bottom = -9.0
 
-[node name="Barra Vida Enemigo" parent="." index="8" unique_id=26031977]
+[node name="Barra Vida Enemigo" parent="." index="7" unique_id=26031977]
 visible = false

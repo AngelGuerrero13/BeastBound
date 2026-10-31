@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://di2623p60lpat" path="res://personajes/enemigoBasico/enemigo_basico.tscn" id="1_f5fxi"]
 [ext_resource type="Script" uid="uid://cgj4j7b7s0jx5" path="res://personajes/enemigos_nivel1/hongo_explosivo/hongo_explosivo.gd" id="2_hexqn"]
+[ext_resource type="Texture2D" uid="uid://dwsfp4rrjh0nc" path="res://assets/art/personajes/enemigos/nivel 1/explosivo/Honguito1.png" id="3_q7dsk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p27fw"]
 size = Vector2(7, 5)
@@ -13,11 +14,20 @@ script = ExtResource("2_hexqn")
 tiempo_detonacion = 1.5
 dano_explosion = 5
 
-[node name="CollisionShape2D" parent="AreaDeteccion" parent_id_path=PackedInt32Array(1027424982) index="0" unique_id=885380396]
+[node name="Imagen Personaje" parent="." index="1" unique_id=647587542]
+position = Vector2(-2.3841858e-07, -9)
+scale = Vector2(0.716, 0.7)
+texture = ExtResource("3_q7dsk")
+
+[node name="AreaDeteccion" parent="." index="7" unique_id=1027424982]
+visible = false
+
+[node name="CollisionShape2D" parent="AreaDeteccion" index="0" unique_id=885380396]
 position = Vector2(1.000001, 1.0000305)
 shape = SubResource("RectangleShape2D_p27fw")
 
 [node name="AreaExplosion" type="Area2D" parent="." index="8" unique_id=134583068]
+visible = false
 collision_layer = 0
 collision_mask = 2
 

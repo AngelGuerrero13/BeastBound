@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bcenw2rnuxqwv" path="res://niveles/spawn/puntos_spawn.tscn" id="15_lhl8s"]
 [ext_resource type="PackedScene" uid="uid://bjp30gibi1pc" path="res://personajes/enemigos_nivel1/hongo_cac/hongo_CaC(nivel1).tscn" id="16_ethxb"]
 [ext_resource type="PackedScene" uid="uid://cls33u2m5qch8" path="res://personajes/enemigos_nivel1/hongo_explosivo/hongo_explosivo.tscn" id="16_lhl8s"]
+[ext_resource type="PackedScene" uid="uid://boaiy5jhvwiia" path="res://personajes/enemigos_nivel1/hongo_tanque/hongo_tanque.tscn" id="17_ethxb"]
 [ext_resource type="Texture2D" uid="uid://dxmjfgxeu67q5" path="res://assets/art/fondos/vegetacion_editable/color_fondo.png" id="veg_1_kqmcu"]
 [ext_resource type="TileSet" uid="uid://bdw3i5g2yicp7" path="res://assets/art/fondos/vegetacion_editable/01_Siluetas.tres" id="veg_2_a4jit"]
 [ext_resource type="TileSet" uid="uid://caxovbijxlqms" path="res://assets/art/fondos/vegetacion_editable/02_Rocas.tres" id="veg_3_towlq"]
@@ -386,5 +387,8 @@ position = Vector2(851, 98)
 
 [node name="HongoExplosivo" parent="." unique_id=1382673604 instance=ExtResource("16_lhl8s")]
 position = Vector2(475, 90)
+
+[node name="Hongo tanque" parent="." unique_id=54463201 instance=ExtResource("17_ethxb")]
+position = Vector2(1264, 107)
 
 [connection signal="body_entered" from="Salida Derecha" to="." method="_salir_del_nivel"]

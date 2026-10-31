@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dc41qho565f7g" path="res://personajes/personajeBase/personaje_base.tscn" id="1_ltgak"]
 [ext_resource type="Script" uid="uid://v8j7mso6x6ly" path="res://personajes/clases_jugador/tanque/tanque.gd" id="2_wd2uv"]
-[ext_resource type="Texture2D" uid="uid://21ooqhid0p0m" path="res://assets/art/personajes/hongo simple.png" id="3_762t1"]
+[ext_resource type="Texture2D" uid="uid://cdbax5geswvb6" path="res://assets/art/personajes/Mapache/Mapacheee.png" id="3_kluja"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jdbdj"]
 radius = 5.0
@@ -10,6 +10,9 @@ height = 20.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g3u5t"]
 size = Vector2(6, 88)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kluja"]
+size = Vector2(37, 43)
 
 [sub_resource type="Animation" id="Animation_toitm"]
 resource_name = "frame"
@@ -25,13 +28,22 @@ velocidad_embestida = 800.0
 duracion_embestida_maxima = 0.35
 tiempo_maximo_carga_embestida = 1.0
 velocidad_escudo = 80.0
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+reduccion_dano = 0.3
+retrato = ExtResource("3_kluja")
+=======
+>>>>>>> 6d8d7e99adb9b6276a66656cf4a6a26faa1328a1
+>>>>>>> Stashed changes
 
 [node name="Sombra" parent="." index="0" unique_id=1873168614]
 visible = false
 
 [node name="Imagen Personaje" parent="." index="1" unique_id=647587542]
-scale = Vector2(0.828, 1)
-texture = ExtResource("3_762t1")
+position = Vector2(3.5640001, 0)
+scale = Vector2(0.97650003, 1)
+texture = ExtResource("3_kluja")
 
 [node name="hitbox ataque" type="Area2D" parent="." index="2" unique_id=437169241]
 
@@ -47,14 +59,18 @@ scale = Vector2(0.01083032, 0.15884477)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EscudoReinhardt" index="1" unique_id=285507069]
 shape = SubResource("RectangleShape2D_g3u5t")
 
+[node name="Colision Cuerpo" parent="." index="4" unique_id=1954197429]
+position = Vector2(3.5, 2.5)
+shape = SubResource("RectangleShape2D_kluja")
+
+[node name="Colision Sombra" parent="." index="5" unique_id=1812325256]
+position = Vector2(2, 25)
+
 [node name="Animaciones Personaje" parent="." index="6" unique_id=1895968384]
 libraries/ = SubResource("AnimationLibrary_r21bf")
 
-[node name="Camara Personaje" parent="." index="7" unique_id=1096102892]
+[node name="Barra Ataque Cargado" parent="." index="7" unique_id=511213222]
 visible = false
 
-[node name="Barra Ataque Cargado" parent="." index="8" unique_id=511213222]
-visible = false
-
-[node name="Barra Vida Enemigo" parent="." index="9" unique_id=26031977]
+[node name="Barra Vida Enemigo" parent="." index="8" unique_id=26031977]
 visible = false

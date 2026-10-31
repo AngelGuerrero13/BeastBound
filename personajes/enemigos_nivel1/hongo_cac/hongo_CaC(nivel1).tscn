@@ -23,12 +23,6 @@ visible = false
 scale = Vector2(1, 1)
 texture = ExtResource("3_n761y")
 
-[node name="Colision Cuerpo" parent="." index="2" unique_id=1954197429]
-visible = false
-
-[node name="Colision Sombra" parent="." index="3" unique_id=1812325256]
-visible = false
-
 [node name="CollisionShape2D" parent="AreaDeteccion" parent_id_path=PackedInt32Array(1027424982) index="0" unique_id=885380396]
 position = Vector2(1, 2.4999962)
 shape = SubResource("CircleShape2D_p27fw")
