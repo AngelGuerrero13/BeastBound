@@ -1,0 +1,28 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://personajes/personajeBase/personaje_base.tscn" id="1_base"]
+[ext_resource type="Script" path="res://personajes/clases_jugador/Tirador/tirador.gd" id="2_tirador"]
+[ext_resource type="PackedScene" path="res://personajes/clases_jugador/raton_tirador/flecha_raton.tscn" id="3_flecha"]
+
+[sub_resource type="SpriteFrames" id="Animaciones"]
+animations = [{"frames": [{"duration": 1.0, "texture": null}], "loop": true, "name": &"reposo", "speed": 6.0}, {"frames": [{"duration": 1.0, "texture": null}], "loop": true, "name": &"caminar", "speed": 10.0}, {"frames": [{"duration": 1.0, "texture": null}], "loop": true, "name": &"caminar_arriba", "speed": 10.0}, {"frames": [{"duration": 1.0, "texture": null}], "loop": true, "name": &"caminar_abajo", "speed": 10.0}, {"frames": [{"duration": 1.0, "texture": null}], "loop": false, "name": &"atacar", "speed": 10.0}]
+
+[node name="Raton Tirador" instance=ExtResource("1_base")]
+editor_description = "Movimiento y vida heredados de PersonajeBase; arco en Tirador. Coloca los sprites en Imagen Personaje/Animacion Raton > Sprite Frames. Esta escena no utiliza el script antiguo raton_tirador.gd."
+texture_filter = 1
+collision_layer = 2
+collision_mask = 13
+motion_mode = 1
+script = ExtResource("2_tirador")
+velocidad = 100.0
+sprite_mira_izquierda = false
+escena_flecha = ExtResource("3_flecha")
+
+[node name="Animacion Raton" type="AnimatedSprite2D" parent="Imagen Personaje"]
+editor_description = "Añade tus cuadros a las animaciones reposo, caminar, caminar_arriba, caminar_abajo y atacar. Cada una tiene un cuadro vacío preparado."
+sprite_frames = SubResource("Animaciones")
+animation = &"reposo"
+autoplay = "reposo"
+
+[node name="Origen Flecha" type="Marker2D" parent="."]
+position = Vector2(0, -12)

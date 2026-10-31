@@ -17,28 +17,26 @@ var nivel_resistencia: int = 0
 func _ready() -> void:
 	super._ready()
 	
-	vida_maxima = 10
-	vida = 10
-	dano = 1
-	velocidad = 230.0
-	tiempo_recarga_normal = 0.25
-	rango_ataque = 55.0
 	
 	if barra_carga:
 		barra_carga.visible = true
 		barra_carga.max_value = tiempo_requerido * 2.0
 		barra_carga.value = energia_actual
 
-func _process(delta: float) -> void:
+# La base carga por tiempo. Esta clase conserva su entrada propia por energía.
+# No llamar a super._process aquí: activaría dos sistemas de ataque distintos.
+func _process(_delta: float) -> void:
 	if not es_jugador:
 		return
 		
 	if Input.is_action_just_pressed(prefijo_input + "_ataque_normal"):
 		if puede_atacar_normal:
 			puede_atacar_normal = false
+			esta_atacando = true
 			ejecutar_ataque_normal(obtener_enemigo_objetivo())
 			await get_tree().create_timer(tiempo_recarga_normal).timeout
 			puede_atacar_normal = true
+			esta_atacando = false
 			
 	if Input.is_action_just_pressed(prefijo_input + "_ataque_cargado"):
 		if energia_actual >= tiempo_requerido:
@@ -46,7 +44,7 @@ func _process(delta: float) -> void:
 			actualizar_hud_carga()
 			ejecutar_ataque_cargado(obtener_enemigo_objetivo())
 			
-	if Input.is_action_just_pressed(prefijo_input + "_habilidad_definitiva"):
+	if InputMap.has_action(prefijo_input + "_habilidad_definitiva") and Input.is_action_just_pressed(prefijo_input + "_habilidad_definitiva"):
 		var carga_definitiva = tiempo_requerido * 2.0
 		if energia_actual >= carga_definitiva:
 			energia_actual -= carga_definitiva
@@ -55,12 +53,8 @@ func _process(delta: float) -> void:
 
 func ejecutar_ataque_normal(objetivo) -> void:
 	if objetivo and objetivo.has_method("recibir_dano"):
-		objetivo.recibir_dano(dano)
+		super.ejecutar_ataque_normal(objetivo)
 		acumular_energia(carga_por_golpe)
-
-func ejecutar_ataque_cargado(objetivo) -> void:
-	if objetivo and objetivo.has_method("recibir_dano"):
-		objetivo.recibir_dano(dano * 2)
 
 func ejecutar_habilidad_definitiva(objetivo) -> void:
 	var dano_definitiva = int(dano * multiplicador_dano_definitiva)
@@ -120,3 +114,5 @@ func mejorar_agilidad() -> bool:
 		velocidad += 15.0
 		return true
 	return false
+
+

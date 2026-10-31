@@ -3,10 +3,19 @@
 [ext_resource type="PackedScene" uid="uid://dc41qho565f7g" path="res://personajes/personajeBase/personaje_base.tscn" id="1_d0xoe"]
 [ext_resource type="Texture2D" uid="uid://dqwklqpd7t0ju" path="res://assets/art/personajes/guerrero/Nutria.png" id="2_hgg11"]
 
+[ext_resource type="Script" path="res://personajes/clases_jugador/Guerrero/Guerrero.gd" id="2_guerrero"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_py2p6"]
 size = Vector2(39, 40)
 
+
+
 [node name="Guerrero" unique_id=1382673604 instance=ExtResource("1_d0xoe")]
+script = ExtResource("2_guerrero")
+velocidad = 230.0
+dano = 1
+tiempo_recarga_normal = 0.25
+rango_ataque = 55.0
 vida_maxima = 10
 vida = 10
 retrato = ExtResource("2_hgg11")

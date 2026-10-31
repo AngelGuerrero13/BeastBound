@@ -32,11 +32,12 @@ func manejar_movimiento() -> void:
 	if not es_jugador:
 		return
 
-	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	# La dirección solo se lee aquí para apuntar la embestida.
+	var input_dir := Vector2.ZERO
 	var delta = get_physics_process_delta_time()
 
 	# Leemos la acción heredada y la tecla del escudo
-	var accion_embestida = Input.is_action_pressed("ataque_cargado")
+	var accion_embestida = Input.is_action_pressed(prefijo_input + "_ataque_cargado")
 	var c_presionada = Input.is_physical_key_pressed(KEY_C)
 
 	# 0. FASE DE ESCUDO
@@ -55,6 +56,8 @@ func manejar_movimiento() -> void:
 	if accion_embestida and not esta_embistiendo and not escudo_activo:
 		esta_cargando_embestida = true
 		nivel_de_carga += delta
+		input_dir = Input.get_vector(prefijo_input + "_izquierda", prefijo_input + "_derecha",
+			prefijo_input + "_arriba", prefijo_input + "_abajo")
 		velocity = Vector2.ZERO # El tanque se planta en el suelo
 
 		if input_dir != Vector2.ZERO:
@@ -78,16 +81,15 @@ func manejar_movimiento() -> void:
 
 		velocity = dir_final * velocidad_embestida
 
-	elif escudo_activo:
-		velocity = input_dir * velocidad_escudo
-		if input_dir != Vector2.ZERO:
-			orientar_personaje_y_escudo(input_dir)
-
 	else:
-		# Llama a la variable "velocidad" heredada de personaje_base.gd
-		velocity = input_dir * velocidad
-		if input_dir != Vector2.ZERO:
-			orientar_personaje_y_escudo(input_dir)
+		# El desplazamiento, orientación y bloqueo al atacar pertenecen a la base.
+		# El escudo solo cambia la velocidad durante esta llamada.
+		var velocidad_normal := velocidad
+		if escudo_activo:
+			velocidad = velocidad_escudo
+		super.manejar_movimiento()
+		velocidad = velocidad_normal
+		actualizar_posicion_escudo()
 
 func ejecutar_embestida() -> void:
 	esta_embistiendo = true
@@ -111,10 +113,9 @@ func orientar_personaje_y_escudo(dir: Vector2) -> void:
 		# Llamamos al método que ya existe en el script base
 		actualizar_offset_horizontal()
 
-	# Movemos el escudo junto con el mapache
-	if escudo_nodo:
-		var distancia_escudo = 45.0
-		if dir.x < 0:
-			escudo_nodo.position.x = -distancia_escudo
-		else:
-			escudo_nodo.position.x = distancia_escudo
+	actualizar_posicion_escudo()
+
+func actualizar_posicion_escudo() -> void:
+	if escudo_nodo and sprite:
+		var mira_izquierda: bool = not sprite.flip_h if sprite_mira_izquierda else sprite.flip_h
+		escudo_nodo.position.x = -45.0 if mira_izquierda else 45.0
