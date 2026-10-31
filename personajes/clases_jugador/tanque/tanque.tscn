@@ -28,14 +28,8 @@ velocidad_embestida = 800.0
 duracion_embestida_maxima = 0.35
 tiempo_maximo_carga_embestida = 1.0
 velocidad_escudo = 80.0
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 reduccion_dano = 0.3
 retrato = ExtResource("3_kluja")
-=======
->>>>>>> 6d8d7e99adb9b6276a66656cf4a6a26faa1328a1
->>>>>>> Stashed changes
 
 [node name="Sombra" parent="." index="0" unique_id=1873168614]
 visible = false

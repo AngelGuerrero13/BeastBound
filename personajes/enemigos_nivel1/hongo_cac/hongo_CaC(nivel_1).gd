@@ -2,7 +2,7 @@ extends "res://personajes/enemigoBasico/enemigo_basico.gd"
 @export var tiempo_anticipacion_cabezazo: float = 0.35 # Pausa de tensión antes del impacto
 
 @onready var zona_impacto: Area2D = $ZonaImpacto
-@onready var hitbox_cabezazo: CollisionShape2D = $ZonaImpacto/CollisionShape2D
+@onready var hitbox_cabezazo: CollisionShape2D = $ZonaImpacto/HitboxCabezazo
 
 func _ready() -> void:
 	super()
