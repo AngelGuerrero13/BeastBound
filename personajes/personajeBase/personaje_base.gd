@@ -8,51 +8,47 @@ signal ha_muerto()
 
 @export var prefijo_input: String = "p1"
 
-
 # --- ESTADÍSTICAS BASE ---
 @export var vida_maxima: int = 6
 @export var vida: int = 6
-@export var velocidad: float = 200.0 
+@export var velocidad: float = 200.0
 @export var dano: int = 1
-# 0.30 equivale a un 30 % de reducción; por defecto los demás no reducen daño.
-@export_range(0.0, 1.0, 0.01) var reduccion_dano: float = 0.0
-var fraccion_dano: float = 0.0
 @export var velocidad_ataque: float = 5.0
-@export var rango_ataque: float = 2.0 
-@export var sprite_mira_izquierda: bool = true 
+@export var rango_ataque: float = 2.0
+@export var sprite_mira_izquierda: bool = true
 @export var desfase_horizontal_sprite: float = 0.0
 
 # --- FÍSICAS Y SALTO (Beat 'em up) ---
 @export var fuerza_salto: float = 400.0
 @export var gravedad: float = 980.0
 
-var altura: float = 0.0 
+var altura: float = 0.0
 var velocidad_vertical: float = 0.0
 var en_suelo: bool = true
 
 # --- NODOS HIJOS ---
-@onready var sprite = get_node_or_null("Imagen Personaje") if has_node("Imagen Personaje") else get_node_or_null("Imagen Raton")
-@onready var barra_carga: TextureProgressBar = get_node_or_null("Barra Ataque Cargado")
+@onready var sprite: Sprite2D = $"Imagen Personaje"
+@onready var barra_carga: TextureProgressBar = $"Barra Ataque Cargado"
 @onready var sombra: Sprite2D = get_node_or_null("Sombra")
 
 # UI Jugador
 @export var retrato: Texture2D
 
 # UI Enemigo
-@onready var barra_vida_enemigo: TextureProgressBar = get_node_or_null("Barra Vida Enemigo")
+@onready var barra_vida_enemigo: TextureProgressBar = $"Barra Vida Enemigo"
 
 # --- VARIABLES DE CONTROL DE ATAQUE ---
-@export var tiempo_recarga_normal: float = 0.5 
-@export var tiempo_requerido: float = 3.0   
+@export var tiempo_recarga_normal: float = 0.5
+@export var tiempo_requerido: float = 3.0
 
 var puede_atacar_normal: bool = true
 var esta_atacando: bool = false
 var esta_cargando: bool = false
-var tiempo_cargado: float = 0.0          
-var ya_disparo_cargado: bool = false     
+var tiempo_cargado: float = 0.0
+var ya_disparo_cargado: bool = false
 
 func _ready() -> void:
-	
+
 	if barra_carga:
 		barra_carga.visible = false
 		barra_carga.value = 0.0
@@ -63,91 +59,86 @@ func _ready() -> void:
 		add_to_group("Jugador")
 		if barra_vida_enemigo: barra_vida_enemigo.visible = false
 	else:
-		
+
 		if has_node("Barra Ataque Cargado"):
 			$"Barra Ataque Cargado".visible = false
-		
+
 		if barra_vida_enemigo:
 			barra_vida_enemigo.visible = true
 			barra_vida_enemigo.max_value = vida_maxima
 			barra_vida_enemigo.value = vida
-			
+
 	actualizar_offset_horizontal()
 
 # BUCLE DE INPUTS (Ataques y UI)
 func _process(delta: float) -> void:
-	
+
 	if not es_jugador:
 		return
-	
+
 	# 1. ATAQUE NORMAL
 	if Input.is_action_just_pressed(prefijo_input + "_ataque_normal"):
 		if puede_atacar_normal:
-			puede_atacar_normal = false 
+			puede_atacar_normal = false
 			esta_atacando = true
-			ejecutar_ataque_normal(obtener_enemigo_objetivo()) 
-			
+			ejecutar_ataque_normal(obtener_enemigo_objetivo())
+
 			await get_tree().create_timer(tiempo_recarga_normal).timeout
 			puede_atacar_normal = true
 			esta_atacando = false
-			
+
 	# 2. ATAQUE CARGADO
 	if Input.is_action_pressed(prefijo_input + "_ataque_cargado"):
 		esta_cargando = true
-		if barra_carga: barra_carga.visible = true 
-		
+		if barra_carga: barra_carga.visible = true
+
 		if not ya_disparo_cargado:
 			tiempo_cargado += delta
-			if barra_carga: barra_carga.value = tiempo_cargado 
-			
+			if barra_carga: barra_carga.value = tiempo_cargado
+
 			if tiempo_cargado >= tiempo_requerido:
 				ejecutar_ataque_cargado(obtener_enemigo_objetivo())
-				ya_disparo_cargado = true 
+				ya_disparo_cargado = true
 	else:
 		esta_cargando = false
 		tiempo_cargado = 0.0
 		ya_disparo_cargado = false
 		if barra_carga:
-			barra_carga.visible = false 
+			barra_carga.visible = false
 			barra_carga.value = 0.0
 
 # BUCLE DE FÍSICAS (Movimiento y Gravedad)
 func _physics_process(delta: float) -> void:
 	manejar_movimiento()
 	manejar_gravedad_y_salto(delta)
-	
+
 	# Mueve la caja de colisión en las 8 direcciones (X, Y)
 	move_and_slide()
 
 func manejar_movimiento() -> void:
-	
+
 	if not es_jugador:
 		return
-		
+
 	if esta_atacando or esta_cargando:
-		mover_en_direccion(Vector2.ZERO)
+		velocity = Vector2.ZERO
 		return
-	
-	mover_en_direccion(obtener_direccion_movimiento())
 
-func obtener_prefijo_movimiento() -> String:
-	return prefijo_input
+	var input_dir = Input.get_vector(
+		prefijo_input + "_izquierda",
+		prefijo_input + "_derecha",
+		prefijo_input + "_arriba",
+		prefijo_input + "_abajo"
+	)
+	velocity = input_dir * velocidad
 
-func obtener_direccion_movimiento() -> Vector2:
-	var prefijo := obtener_prefijo_movimiento()
-	if prefijo.is_empty():
-		return Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	return Input.get_vector(prefijo + "_izquierda", prefijo + "_derecha",
-		prefijo + "_arriba", prefijo + "_abajo")
-
-func mover_en_direccion(direccion: Vector2) -> void:
-	velocity = direccion.limit_length() * velocidad
-	orientar_sprite(direccion)
-
-func orientar_sprite(direccion: Vector2) -> void:
-	if sprite != null and direccion.x != 0.0:
-		sprite.flip_h = direccion.x > 0 if sprite_mira_izquierda else direccion.x < 0
-		actualizar_offset_horizontal()
+	if sprite != null:
+		if input_dir.x != 0:
+			if sprite_mira_izquierda:
+				sprite.flip_h = input_dir.x > 0
+			else:
+				sprite.flip_h = input_dir.x < 0
+			actualizar_offset_horizontal()
 
 func actualizar_offset_horizontal() -> void:
 	if sprite == null or desfase_horizontal_sprite == 0.0:
@@ -161,7 +152,7 @@ func manejar_gravedad_y_salto(delta: float) -> void:
 	if not en_suelo:
 		velocidad_vertical -= gravedad * delta
 		altura += velocidad_vertical * delta
-		
+
 		if altura <= 0.0:
 			altura = 0.0
 			velocidad_vertical = 0.0
@@ -169,11 +160,11 @@ func manejar_gravedad_y_salto(delta: float) -> void:
 	else:
 		if es_jugador and Input.is_action_just_pressed(prefijo_input + "_salto"):
 			saltar()
-			
+
 	# Desplaza el sprite visualmente hacia arriba/abajo basándose en la altura
 	if sprite:
 		sprite.position.y = -altura
-		
+
 	# Efecto de sombra: la sombra se achica levemente al saltar alto
 	if sombra:
 		var escala_sombra = max(0.5, 1.0 - (altura / 350.0))
@@ -198,9 +189,9 @@ func ejecutar_ataque_normal(objetivo) -> void:
 func ejecutar_ataque_cargado(objetivo) -> void:
 	if not es_jugador:
 		return
-	
+
 	if objetivo:
-		var dano_cargado = dano * 2 
+		var dano_cargado = dano * 2
 		print(name, " realiza un ataque CARGADO a ", objetivo.name, " por ", dano_cargado, " de daño.")
 		if objetivo.has_method("recibir_dano"):
 			objetivo.recibir_dano(dano_cargado)
@@ -210,28 +201,14 @@ func ejecutar_ataque_cargado(objetivo) -> void:
 func obtener_enemigo_objetivo() -> Node2D:
 	return null
 
-func calcular_dano_recibido(cantidad: int) -> int:
-	if cantidad <= 0:
-		return 0
-	# Acumular fracciones conserva la defensa incluso frente a golpes de un punto.
-	var total := cantidad * (1.0 - clampf(reduccion_dano, 0.0, 1.0)) + fraccion_dano
-	var entero := floori(total + 0.000001)
-	fraccion_dano = maxf(0.0, total - entero)
-	return entero
-
 func recibir_dano(cantidad: int) -> void:
-	if cantidad <= 0 or vida <= 0:
-		return
-	var dano_recibido := calcular_dano_recibido(cantidad)
-	if dano_recibido == 0:
-		return
-	vida = maxi(0, vida - dano_recibido)
+	vida -= cantidad
 	vida_cambiada.emit(vida)
-	print(name, " recibió ", dano_recibido, " de daño. Vida restante: ", vida)
-	
+	print(name, " recibió ", cantidad, " de daño. Vida restante: ", vida)
+
 	if not es_jugador and barra_vida_enemigo:
 		barra_vida_enemigo.value = vida
-	
+
 	if vida <= 0:
 		morir()
 

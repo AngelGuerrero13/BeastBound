@@ -1,6 +1,13 @@
-extends "res://personajes/personajeBase/personaje_base.gd"
+extends CharacterBody2D
 
+signal vida_cambiada(nueva_vida: int)
+signal ha_muerto()
 
+@export var velocidad: float = 100.0
+@export var vida_maxima: int = 6
+@export var vida: int = 6
+@export var dano: int = 1
+@export var es_jugador: bool = true
 @export var tiempo_invulnerable: float = 0.6
 @export var escena_flecha: PackedScene
 @export var corazon_lleno: Texture2D
@@ -17,25 +24,7 @@ var flecha_lanzada := false
 @onready var corazones: HBoxContainer = $"Interfaz Jugador/Corazones Vida"
 @onready var hud: CanvasLayer = $"Interfaz Jugador"
 
-func _init() -> void:
-	velocidad = 100.0
-	prefijo_input = ""
-
-# El arquero conserva su ataque por animación; no usa el ataque cargado de la base.
-func _process(_delta: float) -> void:
-	pass
-
-func manejar_gravedad_y_salto(_delta: float) -> void:
-	pass # El ratón no tenía salto; se conserva ese comportamiento.
-
-func manejar_movimiento() -> void:
-	if muerto or atacando or not es_jugador:
-		velocity = Vector2.ZERO
-		return
-	super.manejar_movimiento()
-
 func _ready() -> void:
-	super()
 	imagen.animation_changed.connect(_actualizar_color)
 	_actualizar_color()
 	vida = clampi(vida, 0, vida_maxima)
@@ -60,7 +49,8 @@ func _physics_process(delta: float) -> void:
 		atacar(get_global_mouse_position() - (global_position + Vector2(0, -20)))
 		return
 	var direccion := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down") if es_jugador else Vector2.ZERO
-	super._physics_process(delta)
+	velocity = direccion * velocidad
+	move_and_slide()
 	if get_real_velocity().length_squared() <= 0.01:
 		reproducir_reposo()
 	elif absf(direccion.x) >= absf(direccion.y):
@@ -105,7 +95,7 @@ func _al_terminar_animacion() -> void:
 func recibir_dano(cantidad: int) -> void:
 	if muerto or cantidad <= 0 or invulnerabilidad > 0.0:
 		return
-	vida = maxi(0, vida - calcular_dano_recibido(cantidad))
+	vida = maxi(0, vida - cantidad)
 	invulnerabilidad = tiempo_invulnerable
 	actualizar_corazones()
 	vida_cambiada.emit(vida)

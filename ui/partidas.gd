@@ -132,8 +132,7 @@ func aplicar_estado(mundo: Node2D) -> void:
 			continue
 		jugador.global_position = datos.posicion
 		jugador.vida = clampi(datos.vida, 1, jugador.vida_maxima)
-		if jugador.has_method("actualizar_corazones"):
-			jugador.actualizar_corazones()
+		jugador.actualizar_corazones()
 	estado_pendiente = {}
 
 

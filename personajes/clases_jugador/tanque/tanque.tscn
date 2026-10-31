@@ -25,7 +25,6 @@ velocidad_embestida = 800.0
 duracion_embestida_maxima = 0.35
 tiempo_maximo_carga_embestida = 1.0
 velocidad_escudo = 80.0
-reduccion_dano = 0.3
 
 [node name="Sombra" parent="." index="0" unique_id=1873168614]
 visible = false
