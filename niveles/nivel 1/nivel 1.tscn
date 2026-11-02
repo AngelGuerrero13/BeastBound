@@ -327,7 +327,7 @@ editor_description = "Colisiones que impiden salir del camino. Los dibujos se ed
 collision_mask = 0
 
 [node name="Colision Superior" type="CollisionShape2D" parent="Limites Nivel/Pared Superior" unique_id=2008038970]
-position = Vector2(2369, 8)
+position = Vector2(2369, 37)
 shape = SubResource("RectangleShape2D_vniob")
 
 [node name="Pared Inferior" type="StaticBody2D" parent="Limites Nivel" unique_id=643306684]
