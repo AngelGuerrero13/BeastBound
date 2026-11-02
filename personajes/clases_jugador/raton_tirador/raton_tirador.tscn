@@ -4,25 +4,62 @@
 [ext_resource type="Script" path="res://personajes/clases_jugador/Tirador/tirador.gd" id="2_tirador"]
 [ext_resource type="PackedScene" path="res://personajes/clases_jugador/raton_tirador/flecha_raton.tscn" id="3_flecha"]
 
+[ext_resource type="Texture2D" path="res://assets/art/personajes/tirador/raton.png" id="4_imagen"]
+
 [sub_resource type="SpriteFrames" id="Animaciones"]
-animations = [{"frames": [{"duration": 1.0, "texture": null}], "loop": true, "name": &"reposo", "speed": 6.0}, {"frames": [{"duration": 1.0, "texture": null}], "loop": true, "name": &"caminar", "speed": 10.0}, {"frames": [{"duration": 1.0, "texture": null}], "loop": true, "name": &"caminar_arriba", "speed": 10.0}, {"frames": [{"duration": 1.0, "texture": null}], "loop": true, "name": &"caminar_abajo", "speed": 10.0}, {"frames": [{"duration": 1.0, "texture": null}], "loop": false, "name": &"atacar", "speed": 10.0}]
+animations = [{"frames": [{"duration": 1.0, "texture": ExtResource("4_imagen")}], "loop": true, "name": &"reposo", "speed": 6.0}, {"frames": [{"duration": 1.0, "texture": ExtResource("4_imagen")}], "loop": true, "name": &"caminar", "speed": 10.0}, {"frames": [{"duration": 1.0, "texture": ExtResource("4_imagen")}], "loop": true, "name": &"caminar_arriba", "speed": 10.0}, {"frames": [{"duration": 1.0, "texture": ExtResource("4_imagen")}], "loop": true, "name": &"caminar_abajo", "speed": 10.0}, {"frames": [{"duration": 1.0, "texture": ExtResource("4_imagen")}], "loop": false, "name": &"atacar", "speed": 10.0}]
+
+[sub_resource type="Animation" id="Visual_reposo"]
+resource_name = "reposo"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Imagen Personaje/Animacion Raton:position")
+tracks/0/interp = 0
+tracks/0/keys = {"times": PackedFloat32Array(0.0, 0.6, 1.2), "transitions": PackedFloat32Array(1, 1, 1), "update": 0, "values": [Vector2(0, -15), Vector2(0, -15.5), Vector2(0, -15)]}
+
+[sub_resource type="Animation" id="Visual_caminar"]
+resource_name = "caminar"
+length = 0.32
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Imagen Personaje/Animacion Raton:position")
+tracks/0/interp = 0
+tracks/0/keys = {"times": PackedFloat32Array(0.0, 0.08, 0.16, 0.24, 0.32), "transitions": PackedFloat32Array(1, 1, 1, 1, 1), "update": 0, "values": [Vector2(0, -15), Vector2(0, -16), Vector2(0, -15), Vector2(0, -16), Vector2(0, -15)]}
+
+[sub_resource type="Animation" id="Visual_atacar"]
+resource_name = "atacar"
+length = 0.2
+loop_mode = 0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Imagen Personaje/Animacion Raton:position")
+tracks/0/interp = 0
+tracks/0/keys = {"times": PackedFloat32Array(0.0, 0.1, 0.2), "transitions": PackedFloat32Array(1, 1, 1), "update": 0, "values": [Vector2(0, -15), Vector2(0, -16), Vector2(0, -15)]}
+
+[sub_resource type="AnimationLibrary" id="Visuales"]
+_data = {&"reposo": SubResource("Visual_reposo"), &"caminar": SubResource("Visual_caminar"), &"atacar": SubResource("Visual_atacar")}
 
 [node name="Raton Tirador" instance=ExtResource("1_base")]
-editor_description = "Movimiento y vida heredados de PersonajeBase; arco en Tirador. Coloca los sprites en Imagen Personaje/Animacion Raton > Sprite Frames. Esta escena no utiliza el script antiguo raton_tirador.gd."
+editor_description = "Movimiento y vida heredados de PersonajeBase; arco en Tirador. Imagen original visible; balanceo en Animaciones Personaje y cuadros en Imagen Personaje/Animacion Raton > Sprite Frames. Esta escena no utiliza el script antiguo raton_tirador.gd."
 texture_filter = 1
 collision_layer = 2
 collision_mask = 13
 motion_mode = 1
 script = ExtResource("2_tirador")
+retrato = ExtResource("4_imagen")
 velocidad = 100.0
 sprite_mira_izquierda = false
 escena_flecha = ExtResource("3_flecha")
 
 [node name="Animacion Raton" type="AnimatedSprite2D" parent="Imagen Personaje"]
-editor_description = "Añade tus cuadros a las animaciones reposo, caminar, caminar_arriba, caminar_abajo y atacar. Cada una tiene un cuadro vacío preparado."
+editor_description = "Usa el mismo ratón de la selección. Puedes sustituir sus cuadros en Sprite Frames; el desplazamiento y el salto pertenecen a la clase base."
+position = Vector2(0, -15)
 sprite_frames = SubResource("Animaciones")
 animation = &"reposo"
 autoplay = "reposo"
 
-[node name="Origen Flecha" type="Marker2D" parent="."]
+[node name="Animaciones Personaje" parent="."]
+libraries/ = SubResource("Visuales")
+
+[node name="Origen Flecha" type="Marker2D" parent="Imagen Personaje"]
 position = Vector2(0, -12)

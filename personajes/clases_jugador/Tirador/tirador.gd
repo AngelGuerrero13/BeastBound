@@ -2,18 +2,23 @@ extends "res://personajes/personajeBase/personaje_base.gd"
 
 @export var escena_flecha: PackedScene
 @onready var animacion_raton: AnimatedSprite2D = $"Imagen Personaje/Animacion Raton"
-@onready var origen_flecha: Marker2D = $"Origen Flecha"
+@onready var animaciones_visuales: AnimationPlayer = $"Animaciones Personaje"
+@onready var origen_flecha: Marker2D = $"Imagen Personaje/Origen Flecha"
 
 func _ready() -> void:
 	super()
 	animacion_raton.play("reposo")
+	animaciones_visuales.play("reposo")
 
 func _physics_process(delta: float) -> void:
 	# El movimiento, el salto y la orientación siguen perteneciendo a la base.
 	super(delta)
 	animacion_raton.flip_h = sprite.flip_h
-	if esta_atacando:
+	if esta_atacando or (animaciones_visuales.current_animation == "atacar" and animaciones_visuales.is_playing()):
 		return
+	var visual := "reposo" if velocity.is_zero_approx() else "caminar"
+	if animaciones_visuales.current_animation != visual:
+		animaciones_visuales.play(visual)
 	if velocity.is_zero_approx():
 		animacion_raton.play("reposo")
 	elif absf(velocity.y) > absf(velocity.x):
@@ -29,6 +34,7 @@ func ejecutar_ataque_cargado(_objetivo: Node2D) -> void:
 
 func disparar_flecha(dano_disparo: int) -> void:
 	animacion_raton.play("atacar")
+	animaciones_visuales.play("atacar")
 	if escena_flecha == null:
 		return
 	var flecha := escena_flecha.instantiate() as Area2D

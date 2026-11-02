@@ -77,3 +77,17 @@ Usa **F6** para probar la escena abierta o **F5** para iniciar desde el menú pr
 La selección usa carteles de 480 píxeles de ancho. En cada **Cartel**, **Boton Eliminar** es la X rojiza: visible en los dos ejemplos guardados y oculta en el espacio vacío. La confirmación también es editable en la raíz: **Confirmar Borrado → Panel Borrado**, con **Titulo Borrado**, **Detalle Borrado**, **Boton Cancelar** y **Boton Eliminar**. Activa Visible de Confirmar Borrado para previsualizarla y vuelve a ocultarla antes de guardar. **Madera Borrado** usa la tabla limpia `partidas_editables/tabla_1.png`. El estilo Eliminar está en **ui/tema_partidas.tres**.
 
 La barra de progreso mide dos tercios del ancho anterior. **Detalle Partida** se oculta en los espacios vacíos. El cartel de guardar se edita en **menu_principal.tscn → Centro Menu → Margen Interior → Botones Menu → Boton Guardar Partida**; sus estilos usan **cartel_sin_cuerdas.png** y su texto es GUARDAR PARTIDA. Ese PNG y sus prompts están en **assets/art/ui/partidas_rusticas**.
+
+
+## Ratón tirador integrado
+
+La selección de Ratón (índice 3) de `niveles/spawn/puntos_spawn.tscn` instancia `personajes/clases_jugador/raton_tirador/raton_tirador.tscn`. Ya no instancia el muñeco de prueba. El mismo spawner se usa en Tutorial y Nivel 1.
+
+El script activo es `personajes/clases_jugador/Tirador/tirador.gd`, que hereda de `personajes/personajeBase/personaje_base.gd` y llama a su física. La base conserva los controles por prefijo de jugador, movimiento, salto, vida y bloqueo al atacar. El script antiguo `raton_tirador.gd` no está conectado a la escena.
+
+- **Imagen Personaje → Animacion Raton**: usa `assets/art/personajes/tirador/raton.png`, la misma imagen de la selección. Sprite Frames conserva las entradas para reposo, caminar, caminar_arriba, caminar_abajo y atacar con textura visible. La imagen disponible es una pose; el movimiento visual actual es un balanceo, no una secuencia nueva de pasos dibujados.
+- **Animaciones Personaje**: animaciones editables de reposo, caminar y atacar; solo desplazan la imagen hija y no cambian el movimiento físico heredado.
+- **Imagen Personaje → Origen Flecha**: origen del disparo que acompaña al salto.
+- En `flecha_raton.tscn`, **Imagen Flecha → Asta Flecha / Punta Flecha** son polígonos editables que hacen visible el proyectil.
+
+La prueba `tests/raton_integracion_check.gd` comprueba herencia, texturas visibles, aparición desde la selección 3, movimiento en cuatro direcciones, controles P2 independientes de P1, salto, daño, disparo y cambio de Tutorial a Nivel 1. Ejecútala con APPDATA en una carpeta aislada `test-appdata`.
