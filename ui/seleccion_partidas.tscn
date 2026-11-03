@@ -10,6 +10,13 @@
 [ext_resource type="PackedScene" path="res://ui/seleccion_partidas/cartel_2.tscn" id="cartel_2"]
 [ext_resource type="PackedScene" path="res://ui/seleccion_partidas/cartel_3.tscn" id="cartel_3"]
 
+[ext_resource type="Shader" path="res://assets/art/ui/partidas_editables/fondo_pradera/brisa_pradera.gdshader" id="brisa"]
+
+[sub_resource type="ShaderMaterial" id="PraderaAnimada"]
+shader = ExtResource("brisa")
+shader_parameter/brisa = 1.85
+shader_parameter/corriente = 1.7
+
 [sub_resource type="Animation" id="Animation_viento"]
 resource_name = "Viento"
 length = 8.0
@@ -51,6 +58,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+material = SubResource("PraderaAnimada")
 texture = ExtResource("paisaje")
 expand_mode = 1
 
@@ -65,6 +73,7 @@ region_enabled = true
 region_rect = Rect2(340, 260, 770, 600)
 
 [node name="Animacion Viento" type="AnimationPlayer" parent="Animacion del Fondo"]
+autoplay = "Viento"
 libraries/ = SubResource("AnimationLibrary_viento")
 
 [node name="Carteles" type="Control" parent="." unique_id=5315798]
