@@ -7,15 +7,14 @@ var jugador_objetivo: Node2D = null
 var diccionario_cooldowns: Dictionary = {}
 
 func _ready() -> void:
-	super()
 	es_jugador = false
+	super()
 
 func _physics_process(delta: float) -> void:
-	manejar_gravedad_y_salto(delta)
 	gestionar_cooldowns(delta)
 	
 	if esta_atacando or vida <= 0:
-		velocity.x = 0
+		velocity = Vector2.ZERO
 		move_and_slide()
 		return
 		
@@ -28,11 +27,10 @@ func _physics_process(delta: float) -> void:
 		else:
 			mover_hacia_objetivo(distancia)
 	else:
-		velocity.x = 0
+		velocity = Vector2.ZERO
 		
 	move_and_slide()
 
-# --- SISTEMA DE DETECCIÓN POR ÁREA ---
 func _on_area_deteccion_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Jugador"):
 		jugador_objetivo = body
@@ -53,22 +51,22 @@ func iniciar_ataque(ataque: String) -> void:
 		
 		ejecutar_ataque_normal(jugador_objetivo)
 		
-		await get_tree().create_timer(0.3).timeout
+		await get_tree().create_timer(0.6).timeout
 		esta_atacando = false
 		
-		var tiempo_restante = max(0.0, tiempo_recarga_normal - 0.3)
+		var tiempo_restante = max(0.0, tiempo_recarga_normal - 0.6)
 		await get_tree().create_timer(tiempo_restante).timeout
 		puede_atacar_normal = true
 
 func mover_hacia_objetivo(distancia: float) -> void:
 	if distancia > distancia_ataque_melee:
 		var direccion = (jugador_objetivo.global_position - global_position).normalized()
-		velocity.x = direccion.x * velocidad
+		velocity = direccion * velocidad   # <- ahora usa x e y
 		if sprite:
-			sprite.flip_h = direccion.x < 0
+			sprite.flip_h = direccion.x < 0 if sprite_mira_izquierda else direccion.x > 0
 			actualizar_offset_horizontal()
 	else:
-		velocity.x = 0
+		velocity = Vector2.ZERO
 
 func gestionar_cooldowns(delta: float) -> void:
 	for habilidad in diccionario_cooldowns.keys():

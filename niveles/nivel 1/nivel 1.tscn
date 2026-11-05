@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b5o2bic3uhxqd" path="res://assets/art/fondos/MagicMarketFondo/Tilesets/TilesetFloor.png" id="1_280kd"]
 [ext_resource type="Script" uid="uid://ckq7yr4pty45h" path="res://niveles/nivel 1/nivel_1.gd" id="5_nivel_largo"]
+[ext_resource type="Script" uid="uid://c2ge3rp2ujpig" path="res://niveles/nivel 1/gestor_oleadas.gd" id="15_0m6eq"]
 [ext_resource type="PackedScene" uid="uid://bcenw2rnuxqwv" path="res://niveles/spawn/puntos_spawn.tscn" id="15_lhl8s"]
 [ext_resource type="PackedScene" uid="uid://bjp30gibi1pc" path="res://personajes/enemigos_nivel1/hongo_cac/hongo_CaC(nivel1).tscn" id="16_ethxb"]
 [ext_resource type="PackedScene" uid="uid://cls33u2m5qch8" path="res://personajes/enemigos_nivel1/hongo_explosivo/hongo_explosivo.tscn" id="16_lhl8s"]
@@ -349,21 +350,31 @@ position = Vector2(4808, 100)
 shape = SubResource("RectangleShape2D_lateral")
 disabled = true
 
-[node name="Puntos Oleadas" type="Node2D" parent="." unique_id=630833374]
+[node name="GestorOleadas" type="Node2D" parent="." unique_id=630833374]
+script = ExtResource("15_0m6eq")
+hongo_cac = ExtResource("16_ethxb")
+hongo_explosivo = ExtResource("16_lhl8s")
+hongo_tanque = ExtResource("17_ethxb")
+hongo_tirador = ExtResource("18_k44xh")
+oleada_1_enemigos = Array[PackedScene]([ExtResource("16_ethxb"), ExtResource("16_ethxb"), ExtResource("16_ethxb"), ExtResource("16_ethxb"), ExtResource("16_ethxb")])
 
-[node name="Oleada 1 Salida" type="Marker2D" parent="Puntos Oleadas" unique_id=585632687]
+[node name="TimerOleada" type="Timer" parent="GestorOleadas" unique_id=958809910]
+
+[node name="PuntosSpawn" type="Node2D" parent="GestorOleadas" unique_id=609606285]
+
+[node name="Oleada 1 Salida" type="Marker2D" parent="GestorOleadas/PuntosSpawn" unique_id=585632687]
 position = Vector2(480, 96)
 
-[node name="Oleada 2 Entrada Bosque" type="Marker2D" parent="Puntos Oleadas" unique_id=1743274904]
+[node name="Oleada 2 Entrada Bosque" type="Marker2D" parent="GestorOleadas/PuntosSpawn" unique_id=1743274904]
 position = Vector2(1440, 96)
 
-[node name="Oleada 3 Bosque Frondoso" type="Marker2D" parent="Puntos Oleadas" unique_id=2120200664]
+[node name="Oleada 3 Bosque Frondoso" type="Marker2D" parent="GestorOleadas/PuntosSpawn" unique_id=2120200664]
 position = Vector2(2400, 96)
 
-[node name="Oleada 4 Salida Bosque" type="Marker2D" parent="Puntos Oleadas" unique_id=1973764475]
+[node name="Oleada 4 Salida Bosque" type="Marker2D" parent="GestorOleadas/PuntosSpawn" unique_id=1973764475]
 position = Vector2(3360, 96)
 
-[node name="Oleada 5 Bosque Abierto" type="Marker2D" parent="Puntos Oleadas" unique_id=538785822]
+[node name="Oleada 5 Bosque Abierto" type="Marker2D" parent="GestorOleadas/PuntosSpawn" unique_id=538785822]
 position = Vector2(4320, 96)
 
 [node name="Camara Nivel" type="Camera2D" parent="." unique_id=53130753]
@@ -382,17 +393,5 @@ collision_mask = 2
 
 [node name="Colision Salida" type="CollisionShape2D" parent="Salida Derecha" unique_id=756222085]
 shape = SubResource("RectangleShape2D_salida")
-
-[node name="hongo_CaC" parent="." unique_id=320244251 instance=ExtResource("16_ethxb")]
-position = Vector2(851, 98)
-
-[node name="HongoExplosivo" parent="." unique_id=1382673604 instance=ExtResource("16_lhl8s")]
-position = Vector2(475, 90)
-
-[node name="Hongo tanque" parent="." unique_id=54463201 instance=ExtResource("17_ethxb")]
-position = Vector2(1264, 107)
-
-[node name="HongoTirador" parent="." unique_id=1413673720 instance=ExtResource("18_k44xh")]
-position = Vector2(1741, 92)
 
 [connection signal="body_entered" from="Salida Derecha" to="." method="_salir_del_nivel"]

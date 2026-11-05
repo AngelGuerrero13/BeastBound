@@ -114,5 +114,3 @@ func mejorar_agilidad() -> bool:
 		velocidad += 15.0
 		return true
 	return false
-
-

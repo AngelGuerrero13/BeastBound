@@ -36,4 +36,4 @@ func explotar() -> void:
 			if cuerpo.is_in_group("Jugador") and cuerpo.has_method("recibir_dano"):
 				cuerpo.recibir_dano(dano_explosion)
 				
-	morir() # Función de personaje_base.gd
+	morir()
