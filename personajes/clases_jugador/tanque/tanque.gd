@@ -1,121 +1,121 @@
 extends "res://personajes/personajeBase/personaje_base.gd"
 
+@export var tiempo_anticipacion_golpe := 0.15
+@export var velocidad_embestida := 400.0
+@export var duracion_embestida_maxima := 0.25
+@export var tiempo_maximo_carga := 1.0
+@export var duracion_escudo := 4.0
+@export var recarga_escudo := 10.0
+@export var velocidad_escudo := 80.0
+@export var duracion_aturdimiento := 1.5
 
-# --- VARIABLES DE LA EMBESTIDA ---
-@export var velocidad_embestida: float = 800.0
-@export var duracion_embestida_maxima: float = 0.35
-@export var tiempo_maximo_carga_embestida: float = 1.0
+var esta_embistiendo := false
+var escudo_activo := false
+var escudo_disponible := true
+var direccion_embestida := Vector2.ZERO
+var dano_embestida := 1
+var golpeados: Array = []
 
-var esta_cargando_embestida: bool = false
-var esta_embistiendo: bool = false
-var nivel_de_carga: float = 0.0
-var direccion_embestida: Vector2 = Vector2.ZERO
-
-# --- VARIABLES DEL ESCUDO (REINHARDT) ---
-@export var velocidad_escudo: float = 80.0
-var escudo_activo: bool = false
-@onready var escudo_nodo: Area2D = get_node_or_null("EscudoReinhardt")
-@onready var colision_escudo: CollisionShape2D = get_node_or_null("EscudoReinhardt/CollisionShape2D")
+@onready var frente: Node2D = $Frente
+@onready var zona_golpe: Area2D = $Frente/ZonaGolpe
+@onready var escudo: Area2D = $Frente/EscudoReinhardt
 
 func _ready() -> void:
-	# Ejecuta el _ready() de personaje_base.gd para configurar la UI y las barras de vida
 	super()
+	barra_carga.max_value = tiempo_maximo_carga
+	poner_escudo(false)
+	escudo.area_entered.connect(_on_escudo_area_entered)
 
-	# Aseguramos que el escudo nazca apagado
-	if escudo_nodo:
-		escudo_nodo.visible = false
-		if colision_escudo:
-			colision_escudo.disabled = true
+func _process(delta: float) -> void:
+	super(delta)
+	if es_jugador and escudo_disponible and not (esta_cargando or esta_embistiendo or esta_atacando) \
+			and Input.is_action_just_pressed(prefijo_input + "_ataque_definitivo"):
+		activar_escudo()
 
-# Sobrescribimos SOLO el movimiento; la gravedad y las físicas las sigue manejando la base
-func manejar_movimiento() -> void:
-	if not es_jugador:
-		return
-
-	# La dirección solo se lee aquí para apuntar la embestida.
-	var input_dir := Vector2.ZERO
-	var delta = get_physics_process_delta_time()
-
-	# Leemos la acción heredada y la tecla del escudo
-	var accion_embestida = Input.is_action_pressed(prefijo_input + "_ataque_cargado")
-	var c_presionada = Input.is_physical_key_pressed(KEY_C)
-
-	# 0. FASE DE ESCUDO
-	if c_presionada and not esta_embistiendo and not esta_cargando_embestida:
-		escudo_activo = true
-		if escudo_nodo:
-			escudo_nodo.visible = true
-			if colision_escudo: colision_escudo.disabled = false
-	else:
-		escudo_activo = false
-		if escudo_nodo:
-			escudo_nodo.visible = false
-			if colision_escudo: colision_escudo.disabled = true
-
-	# 1. FASE DE CARGA EMBESTIDA
-	if accion_embestida and not esta_embistiendo and not escudo_activo:
-		esta_cargando_embestida = true
-		nivel_de_carga += delta
-		input_dir = Input.get_vector(prefijo_input + "_izquierda", prefijo_input + "_derecha",
-			prefijo_input + "_arriba", prefijo_input + "_abajo")
-		velocity = Vector2.ZERO # El tanque se planta en el suelo
-
-		if input_dir != Vector2.ZERO:
-			direccion_embestida = input_dir
-			orientar_personaje_y_escudo(input_dir)
-		return
-
-	# 2. EJECUCIÓN DE EMBESTIDA (Al soltar el botón)
-	elif esta_cargando_embestida and not accion_embestida:
-		esta_cargando_embestida = false
-		ejecutar_embestida()
-
-	# 3. APLICACIÓN DE VELOCIDADES
+func _physics_process(delta: float) -> void:
+	super(delta)
+	frente.scale.x = obtener_direccion_frente().x
 	if esta_embistiendo:
-		var dir_final = direccion_embestida
-		if dir_final == Vector2.ZERO:
-			if sprite_mira_izquierda:
-				dir_final = Vector2.RIGHT if sprite.flip_h else Vector2.LEFT
-			else:
-				dir_final = Vector2.LEFT if sprite.flip_h else Vector2.RIGHT
+		for c in zona_golpe.get_overlapping_bodies():
+			if es_enemigo(c) and not golpeados.has(c):
+				golpeados.append(c)
+				c.recibir_dano(dano_embestida)
+				if c.has_method("aturdir"):
+					c.aturdir(duracion_aturdimiento)
 
-		velocity = dir_final * velocidad_embestida
+func manejar_movimiento() -> void:
+	if esta_embistiendo:
+		velocity = direccion_embestida * velocidad_embestida
+		return
+	var normal = velocidad
+	if escudo_activo: velocidad = velocidad_escudo
+	super()
+	velocidad = normal
 
-	else:
-		# El desplazamiento, orientación y bloqueo al atacar pertenecen a la base.
-		# El escudo solo cambia la velocidad durante esta llamada.
-		var velocidad_normal := velocidad
-		if escudo_activo:
-			velocidad = velocidad_escudo
-		super.manejar_movimiento()
-		velocidad = velocidad_normal
-		actualizar_posicion_escudo()
+# Golpe de escudo
+func manejar_ataque_normal() -> void:
+	if not (esta_cargando or esta_embistiendo or escudo_activo):
+		super()
 
-func ejecutar_embestida() -> void:
+func ejecutar_ataque_normal(_o) -> void:
+	await get_tree().create_timer(tiempo_anticipacion_golpe).timeout
+	for c in zona_golpe.get_overlapping_bodies():
+		if es_enemigo(c): c.recibir_dano(dano)
+
+# Embestida (se carga y se lanza al soltar)
+func manejar_ataque_cargado(delta: float) -> void:
+	if esta_embistiendo: return
+	var presionado = Input.is_action_pressed(prefijo_input + "_ataque_cargado")
+	if presionado and not escudo_activo and not esta_atacando:
+		esta_cargando = true
+		tiempo_cargado = min(tiempo_cargado + delta, tiempo_maximo_carga)
+		barra_carga.visible = true
+		barra_carga.value = tiempo_cargado
+		var dir = Input.get_vector(prefijo_input + "_izquierda", prefijo_input + "_derecha",
+			prefijo_input + "_arriba", prefijo_input + "_abajo")
+		if dir != Vector2.ZERO:
+			direccion_embestida = dir
+			voltear_hacia(dir.x)
+	elif esta_cargando:
+		esta_cargando = false
+		barra_carga.visible = false
+		ejecutar_ataque_cargado(null)
+
+func ejecutar_ataque_cargado(_o) -> void:
+	var porcentaje = clamp(tiempo_cargado / tiempo_maximo_carga, 0.2, 1.0)
+	tiempo_cargado = 0.0
+	if direccion_embestida == Vector2.ZERO:
+		direccion_embestida = obtener_direccion_frente()
+	direccion_embestida = direccion_embestida.normalized()
+	dano_embestida = max(1, int(ceil(dano * 2 * porcentaje)))
+	golpeados.clear()
 	esta_embistiendo = true
-	var porcentaje_carga = clamp(nivel_de_carga / tiempo_maximo_carga_embestida, 0.2, 1.0)
-	var duracion_final = duracion_embestida_maxima * porcentaje_carga
-	nivel_de_carga = 0.0
-
-	await get_tree().create_timer(duracion_final).timeout
-
+	await get_tree().create_timer(duracion_embestida_maxima * porcentaje).timeout
 	esta_embistiendo = false
 	direccion_embestida = Vector2.ZERO
 
-# Agrupamos la lógica visual para mantener la herencia limpia
-func orientar_personaje_y_escudo(dir: Vector2) -> void:
-	if sprite != null:
-		if sprite_mira_izquierda:
-			sprite.flip_h = dir.x > 0
-		else:
-			sprite.flip_h = dir.x < 0
+# Escudo
+func activar_escudo() -> void:
+	escudo_activo = true
+	escudo_disponible = false
+	poner_escudo(true)
+	await get_tree().create_timer(duracion_escudo).timeout
+	escudo_activo = false
+	poner_escudo(false)
+	await get_tree().create_timer(recarga_escudo).timeout
+	escudo_disponible = true
 
-		# Llamamos al método que ya existe en el script base
-		actualizar_offset_horizontal()
+func poner_escudo(activo: bool) -> void:
+	escudo.visible = activo
+	escudo.get_node("CollisionShape2D").set_deferred("disabled", not activo)
 
-	actualizar_posicion_escudo()
+func recibir_dano(cantidad: int) -> void:
+	if not escudo_activo:
+		super(cantidad)
 
-func actualizar_posicion_escudo() -> void:
-	if escudo_nodo and sprite:
-		var mira_izquierda: bool = not sprite.flip_h if sprite_mira_izquierda else sprite.flip_h
-		escudo_nodo.position.x = -45.0 if mira_izquierda else 45.0
+func _on_escudo_area_entered(area: Area2D) -> void:
+	if escudo_activo and "disparado_por_jugador" in area and area.disparado_por_jugador != es_jugador:
+		area.queue_free()
+
+func es_enemigo(c: Node) -> bool:
+	return c != self and c.has_method("recibir_dano") and "es_jugador" in c and c.es_jugador != es_jugador

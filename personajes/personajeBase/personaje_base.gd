@@ -72,22 +72,22 @@ func _ready() -> void:
 
 # BUCLE DE INPUTS (Ataques y UI)
 func _process(delta: float) -> void:
-
 	if not es_jugador:
 		return
+	manejar_ataque_normal()
+	manejar_ataque_cargado(delta)
 
-	# 1. ATAQUE NORMAL
-	if Input.is_action_just_pressed(prefijo_input + "_ataque_normal"):
-		if puede_atacar_normal:
-			puede_atacar_normal = false
-			esta_atacando = true
-			ejecutar_ataque_normal(obtener_enemigo_objetivo())
+func manejar_ataque_normal() -> void:
+	if Input.is_action_just_pressed(prefijo_input + "_ataque_normal") and puede_atacar_normal:
+		puede_atacar_normal = false
+		esta_atacando = true
+		ejecutar_ataque_normal(obtener_enemigo_objetivo())
 
-			await get_tree().create_timer(tiempo_recarga_normal).timeout
-			puede_atacar_normal = true
-			esta_atacando = false
+		await get_tree().create_timer(tiempo_recarga_normal).timeout
+		puede_atacar_normal = true
+		esta_atacando = false
 
-	# 2. ATAQUE CARGADO
+func manejar_ataque_cargado(delta: float) -> void:
 	if Input.is_action_pressed(prefijo_input + "_ataque_cargado"):
 		esta_cargando = true
 		if barra_carga: barra_carga.visible = true
@@ -107,12 +107,9 @@ func _process(delta: float) -> void:
 			barra_carga.visible = false
 			barra_carga.value = 0.0
 
-# BUCLE DE FÍSICAS (Movimiento y Gravedad)
 func _physics_process(delta: float) -> void:
 	manejar_movimiento()
 	manejar_gravedad_y_salto(delta)
-
-	# Mueve la caja de colisión en las 8 direcciones (X, Y)
 	move_and_slide()
 
 func manejar_movimiento() -> void:
@@ -132,13 +129,7 @@ func manejar_movimiento() -> void:
 	)
 	velocity = input_dir * velocidad
 
-	if sprite != null:
-		if input_dir.x != 0:
-			if sprite_mira_izquierda:
-				sprite.flip_h = input_dir.x > 0
-			else:
-				sprite.flip_h = input_dir.x < 0
-			actualizar_offset_horizontal()
+	voltear_hacia(input_dir.x)
 
 func actualizar_offset_horizontal() -> void:
 	if sprite == null or desfase_horizontal_sprite == 0.0:
@@ -147,6 +138,19 @@ func actualizar_offset_horizontal() -> void:
 		sprite.position.x = -desfase_horizontal_sprite
 	else:
 		sprite.position.x = desfase_horizontal_sprite
+
+func voltear_hacia(dir_x: float) -> void:
+	if sprite == null or dir_x == 0.0:
+		return
+	var hacia_derecha = dir_x > 0.0
+	sprite.flip_h = (hacia_derecha == sprite_mira_izquierda)
+	actualizar_offset_horizontal()
+
+func obtener_direccion_frente() -> Vector2:
+	if sprite == null:
+		return Vector2.RIGHT
+	var mira_derecha = (sprite.flip_h == sprite_mira_izquierda)
+	return Vector2.RIGHT if mira_derecha else Vector2.LEFT
 
 func manejar_gravedad_y_salto(delta: float) -> void:
 	if not en_suelo:
@@ -161,11 +165,9 @@ func manejar_gravedad_y_salto(delta: float) -> void:
 		if es_jugador and Input.is_action_just_pressed(prefijo_input + "_salto"):
 			saltar()
 
-	# Desplaza el sprite visualmente hacia arriba/abajo basándose en la altura
 	if sprite:
 		sprite.position.y = -altura
 
-	# Efecto de sombra: la sombra se achica levemente al saltar alto
 	if sombra:
 		var escala_sombra = max(0.5, 1.0 - (altura / 350.0))
 		sombra.scale = Vector2(escala_sombra, escala_sombra)

@@ -13,13 +13,14 @@ size = Vector2(7, 5)
 script = ExtResource("2_hexqn")
 tiempo_detonacion = 1.5
 dano_explosion = 5
+duracion_ataque = 0.6
 
 [node name="Imagen Personaje" parent="." index="1" unique_id=647587542]
 position = Vector2(-2.3841858e-07, -9)
 scale = Vector2(0.716, 0.7)
 texture = ExtResource("3_q7dsk")
 
-[node name="AreaDeteccion" parent="." index="7" unique_id=1027424982]
+[node name="AreaDeteccion" parent="." index="6" unique_id=1027424982]
 visible = false
 
 [node name="CollisionShape2D" parent="AreaDeteccion" index="0" unique_id=885380396]

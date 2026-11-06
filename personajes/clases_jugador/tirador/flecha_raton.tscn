@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://dq2yvmfoklqc0"]
+
+[ext_resource type="Script" uid="uid://cj3fv4pjsp7dn" path="res://personajes/clases_jugador/tirador/flecha_raton.gd" id="1_2010l"]
+
+[sub_resource type="SpriteFrames" id="Animaciones"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}],
+"loop": 1,
+"name": &"volar",
+"speed": 10.0
+}]
+
+[node name="Flecha Raton" type="Area2D" unique_id=1466687007]
+editor_description = "Asta y Punta son nodos editables dentro de Imagen Flecha. Movimiento y colisión heredados del proyectil base."
+texture_filter = 1
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_2010l")
+
+[node name="Imagen Flecha" type="AnimatedSprite2D" parent="." unique_id=564810317]
+sprite_frames = SubResource("Animaciones")
+animation = &"volar"
+autoplay = "volar"
+
+[node name="Asta Flecha" type="Polygon2D" parent="Imagen Flecha" unique_id=1837630038]
+color = Color(0.64, 0.43, 0.24, 1)
+polygon = PackedVector2Array(-6, -1, 3, -1, 3, 1, -6, 1)
+
+[node name="Punta Flecha" type="Polygon2D" parent="Imagen Flecha" unique_id=981136129]
+color = Color(0.82, 0.85, 0.86, 1)
+polygon = PackedVector2Array(2, -3, 7, 0, 2, 3)
+
+[node name="Colision Flecha" type="CollisionPolygon2D" parent="." unique_id=927757931]
+position = Vector2(1, 0)
+polygon = PackedVector2Array(1, -3, 6, 0, 1, 3, 1, 1, -7, 1, -7, -1, 1, -1)

@@ -1,0 +1,130 @@
+[gd_scene format=3 uid="uid://6srspn60wss1"]
+
+[ext_resource type="PackedScene" uid="uid://dc41qho565f7g" path="res://personajes/personajeBase/personaje_base.tscn" id="1_5qkhx"]
+[ext_resource type="Script" uid="uid://3yrkmnh1isiw" path="res://personajes/clases_jugador/tirador/tirador.gd" id="2_5qkhx"]
+[ext_resource type="PackedScene" uid="uid://dq2yvmfoklqc0" path="res://personajes/clases_jugador/tirador/flecha_raton.tscn" id="3_h0gl3"]
+[ext_resource type="Texture2D" uid="uid://ccoxfio774tdn" path="res://assets/art/personajes/tirador/raton.png" id="3_mycs7"]
+
+[sub_resource type="SpriteFrames" id="Animaciones"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_mycs7")
+}],
+"loop": 0,
+"name": &"atacar",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_mycs7")
+}],
+"loop": 1,
+"name": &"caminar",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_mycs7")
+}],
+"loop": 1,
+"name": &"caminar_abajo",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_mycs7")
+}],
+"loop": 1,
+"name": &"caminar_arriba",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_mycs7")
+}],
+"loop": 1,
+"name": &"reposo",
+"speed": 6.0
+}]
+
+[sub_resource type="Animation" id="Visual_atacar"]
+resource_name = "atacar"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Imagen Personaje/Animacion Raton:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -15), Vector2(0, -16), Vector2(0, -15)]
+}
+
+[sub_resource type="Animation" id="Visual_caminar"]
+resource_name = "caminar"
+length = 0.32
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Imagen Personaje/Animacion Raton:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.08, 0.16, 0.24, 0.32),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -15), Vector2(0, -16), Vector2(0, -15), Vector2(0, -16), Vector2(0, -15)]
+}
+
+[sub_resource type="Animation" id="Visual_reposo"]
+resource_name = "reposo"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Imagen Personaje/Animacion Raton:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -15), Vector2(0, -15.5), Vector2(0, -15)]
+}
+
+[sub_resource type="AnimationLibrary" id="Visuales"]
+_data = {
+&"atacar": SubResource("Visual_atacar"),
+&"caminar": SubResource("Visual_caminar"),
+&"reposo": SubResource("Visual_reposo")
+}
+
+[node name="Raton Tirador" unique_id=84063767 instance=ExtResource("1_5qkhx")]
+texture_filter = 1
+collision_layer = 2
+collision_mask = 13
+motion_mode = 1
+script = ExtResource("2_5qkhx")
+escena_flecha = ExtResource("3_h0gl3")
+angulo_flechas_cargado = 15.0
+multiplicador_dano_cargado = 1.0
+retrato = ExtResource("3_mycs7")
+
+[node name="Animacion Raton" type="AnimatedSprite2D" parent="Imagen Personaje" parent_id_path=PackedInt32Array(647587542) index="0" unique_id=1693731078]
+editor_description = "Usa el mismo ratón de la selección. Puedes sustituir sus cuadros en Sprite Frames; el desplazamiento y el salto pertenecen a la clase base."
+position = Vector2(0, -15)
+sprite_frames = SubResource("Animaciones")
+animation = &"reposo"
+autoplay = "reposo"
+
+[node name="Origen Disparo" type="Marker2D" parent="." index="2" unique_id=335342781]
+position = Vector2(0, -12)
+
+[node name="Animaciones Personaje" parent="." index="5" unique_id=1895968384]
+libraries/ = SubResource("Visuales")

@@ -11,7 +11,6 @@ func _ready() -> void:
 	hitbox_cabezazo.set_deferred("disabled", true)
 
 func ejecutar_ataque_normal(objetivo) -> void:
-	# Voltear la zona hacia donde está el jugador
 	if objetivo:
 		zona_impacto.scale.x = -1 if objetivo.global_position.x < global_position.x else 1
 	
@@ -20,6 +19,17 @@ func ejecutar_ataque_normal(objetivo) -> void:
 	if vida <= 0:
 		return
 	
+	hitbox_cabezazo.set_deferred("disabled", false)
+	
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	
+	for cuerpo in zona_impacto.get_overlapping_bodies():
+		if cuerpo != self and cuerpo.is_in_group("Jugador") and cuerpo.has_method("recibir_dano"):
+			cuerpo.recibir_dano(dano)
+	
+	await get_tree().create_timer(0.1).timeout
+	hitbox_cabezazo.set_deferred("disabled", true)
 	hitbox_cabezazo.set_deferred("disabled", false)
 	
 	await get_tree().physics_frame

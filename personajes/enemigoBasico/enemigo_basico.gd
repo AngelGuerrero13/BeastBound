@@ -2,6 +2,7 @@ extends "res://personajes/personajeBase/personaje_base.gd"
 
 @export_group("IA del Enemigo")
 @export var distancia_ataque_melee: float = 40.0
+@export var duracion_ataque: float = 0.6
 
 var jugador_objetivo: Node2D = null
 var diccionario_cooldowns: Dictionary = {}
@@ -51,20 +52,18 @@ func iniciar_ataque(ataque: String) -> void:
 		
 		ejecutar_ataque_normal(jugador_objetivo)
 		
-		await get_tree().create_timer(0.6).timeout
+		await get_tree().create_timer(duracion_ataque).timeout
 		esta_atacando = false
 		
-		var tiempo_restante = max(0.0, tiempo_recarga_normal - 0.6)
+		var tiempo_restante = max(0.0, tiempo_recarga_normal - duracion_ataque)
 		await get_tree().create_timer(tiempo_restante).timeout
 		puede_atacar_normal = true
 
 func mover_hacia_objetivo(distancia: float) -> void:
 	if distancia > distancia_ataque_melee:
 		var direccion = (jugador_objetivo.global_position - global_position).normalized()
-		velocity = direccion * velocidad   # <- ahora usa x e y
-		if sprite:
-			sprite.flip_h = direccion.x < 0 if sprite_mira_izquierda else direccion.x > 0
-			actualizar_offset_horizontal()
+		velocity = direccion * velocidad
+		voltear_hacia(direccion.x)
 	else:
 		velocity = Vector2.ZERO
 
@@ -78,3 +77,9 @@ func aplicar_cooldown(habilidad: String, tiempo: float) -> void:
 
 func habilidad_disponible(habilidad: String) -> bool:
 	return not diccionario_cooldowns.has(habilidad) or diccionario_cooldowns[habilidad] <= 0
+
+func aturdir(duracion: float) -> void:
+	esta_atacando = true
+	await get_tree().create_timer(duracion).timeout
+	if vida > 0:
+		esta_atacando = false

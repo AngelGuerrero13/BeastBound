@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cls33u2m5qch8" path="res://personajes/enemigos_nivel1/hongo_explosivo/hongo_explosivo.tscn" id="16_lhl8s"]
 [ext_resource type="PackedScene" uid="uid://boaiy5jhvwiia" path="res://personajes/enemigos_nivel1/hongo_tanque/hongo_tanque.tscn" id="17_ethxb"]
 [ext_resource type="PackedScene" uid="uid://cmgs18jfyukj0" path="res://personajes/enemigos_nivel1/hongo_tirador/hongo_tirador.tscn" id="18_k44xh"]
+[ext_resource type="Script" uid="uid://dav1n2nuc8e1l" path="res://niveles/nivel 1/emboscada.gd" id="20_5tjnx"]
 [ext_resource type="Texture2D" uid="uid://dxmjfgxeu67q5" path="res://assets/art/fondos/vegetacion_editable/color_fondo.png" id="veg_1_kqmcu"]
 [ext_resource type="TileSet" uid="uid://bdw3i5g2yicp7" path="res://assets/art/fondos/vegetacion_editable/01_Siluetas.tres" id="veg_2_a4jit"]
 [ext_resource type="TileSet" uid="uid://caxovbijxlqms" path="res://assets/art/fondos/vegetacion_editable/02_Rocas.tres" id="veg_3_towlq"]
@@ -157,6 +158,11 @@ size = Vector2(4843.5, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lateral"]
 size = Vector2(16, 300)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5tjnx"]
+size = Vector2(20, 164)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r6eng"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_salida"]
 size = Vector2(32, 168)
@@ -356,7 +362,7 @@ hongo_cac = ExtResource("16_ethxb")
 hongo_explosivo = ExtResource("16_lhl8s")
 hongo_tanque = ExtResource("17_ethxb")
 hongo_tirador = ExtResource("18_k44xh")
-oleada_1_enemigos = Array[PackedScene]([ExtResource("16_ethxb"), ExtResource("16_ethxb"), ExtResource("16_ethxb"), ExtResource("16_ethxb"), ExtResource("16_ethxb")])
+oleada_1_enemigos = Array[PackedScene]([ExtResource("16_ethxb")])
 
 [node name="TimerOleada" type="Timer" parent="GestorOleadas" unique_id=958809910]
 
@@ -376,6 +382,53 @@ position = Vector2(3360, 96)
 
 [node name="Oleada 5 Bosque Abierto" type="Marker2D" parent="GestorOleadas/PuntosSpawn" unique_id=538785822]
 position = Vector2(4320, 96)
+
+[node name="Emboscadas" type="Node2D" parent="GestorOleadas" unique_id=1821227469]
+
+[node name="Emboscada 1" type="Area2D" parent="GestorOleadas/Emboscadas" unique_id=1069386654 node_paths=PackedStringArray("punto_spawn")]
+position = Vector2(787, 104)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("20_5tjnx")
+enemigos = Array[PackedScene]([ExtResource("16_lhl8s")])
+punto_spawn = NodePath("PuntoSpawn")
+
+[node name="AreaActivacion" type="CollisionShape2D" parent="GestorOleadas/Emboscadas/Emboscada 1" unique_id=865348496]
+position = Vector2(25, 24)
+shape = SubResource("RectangleShape2D_5tjnx")
+
+[node name="PuntoSpawn" type="Marker2D" parent="GestorOleadas/Emboscadas/Emboscada 1" unique_id=688051815]
+position = Vector2(-144, 0)
+
+[node name="Emboscada 2" type="Area2D" parent="GestorOleadas/Emboscadas" unique_id=63223563]
+visible = false
+position = Vector2(761, -207)
+script = ExtResource("20_5tjnx")
+
+[node name="AreaActivacion" type="CollisionShape2D" parent="GestorOleadas/Emboscadas/Emboscada 2" unique_id=688914494]
+visible = false
+shape = SubResource("RectangleShape2D_5tjnx")
+
+[node name="PuntoSpawn" type="Marker2D" parent="GestorOleadas/Emboscadas/Emboscada 2" unique_id=1586566988]
+visible = false
+
+[node name="Emboscada 3" type="Area2D" parent="GestorOleadas/Emboscadas" unique_id=1336868852]
+visible = false
+position = Vector2(761, -207)
+script = ExtResource("20_5tjnx")
+
+[node name="AreaActivacion" type="CollisionShape2D" parent="GestorOleadas/Emboscadas/Emboscada 3" unique_id=2005404922]
+visible = false
+shape = SubResource("RectangleShape2D_5tjnx")
+
+[node name="PuntoSpawn" type="Marker2D" parent="GestorOleadas/Emboscadas/Emboscada 3" unique_id=647293611]
+visible = false
+
+[node name="ZonaSalida" type="Area2D" parent="GestorOleadas" unique_id=1516229905]
+position = Vector2(1136, -214)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GestorOleadas/ZonaSalida" unique_id=1867388212]
+shape = SubResource("RectangleShape2D_r6eng")
 
 [node name="Camara Nivel" type="Camera2D" parent="." unique_id=53130753]
 editor_description = "Sigue al jugador mas adelantado. Anticipacion y suavizado se ajustan en el nodo Nivel 1."

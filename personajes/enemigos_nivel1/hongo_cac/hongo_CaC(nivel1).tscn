@@ -14,8 +14,10 @@ radius = 10.552878
 script = ExtResource("2_vfe3u")
 tiempo_anticipacion = 0.35
 distancia_ataque_melee = 60.0
+duracion_ataque = 0.6
 velocidad = 200.0
 rango_ataque = 30.0
+tiempo_recarga_normal = 2.0
 
 [node name="Sombra" parent="." index="0" unique_id=1873168614]
 visible = false

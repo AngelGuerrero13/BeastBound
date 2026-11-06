@@ -1,13 +1,14 @@
 extends "res://personajes/enemigoBasico/enemigo_basico.gd"
+
 var detonando: bool = false
 @export var tiempo_detonacion: float = 1.5
-@export var dano_explosion: int = 5 
+@export var dano_explosion: int = 5
 
 @onready var area_explosion: Area2D = $AreaExplosion
 
-# El padre dispara esto automáticamente al entrar en el rango de ataque
-func ejecutar_ataque_normal(_objetivo) -> void:
-	if not detonando:
+func iniciar_ataque(ataque: String) -> void:
+	if ataque == "ataque_normal" and not detonando:
+		esta_atacando = true
 		iniciar_detonacion()
 
 func iniciar_detonacion() -> void:
@@ -17,7 +18,7 @@ func iniciar_detonacion() -> void:
 	var tiempo_por_parpadeo = tiempo_detonacion / (parpadeos * 2.0)
 	
 	for i in range(parpadeos):
-		if not is_instance_valid(sprite): return 
+		if not is_instance_valid(sprite): return
 		
 		sprite.modulate = Color.RED
 		await get_tree().create_timer(tiempo_por_parpadeo).timeout
@@ -31,9 +32,8 @@ func iniciar_detonacion() -> void:
 
 func explotar() -> void:
 	if area_explosion:
-		var cuerpos = area_explosion.get_overlapping_bodies()
-		for cuerpo in cuerpos:
-			if cuerpo.is_in_group("Jugador") and cuerpo.has_method("recibir_dano"):
+		for cuerpo in area_explosion.get_overlapping_bodies():
+			if cuerpo != self and cuerpo.is_in_group("Jugador") and cuerpo.has_method("recibir_dano"):
 				cuerpo.recibir_dano(dano_explosion)
 				
 	morir()

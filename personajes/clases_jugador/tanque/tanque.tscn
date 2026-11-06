@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dc41qho565f7g" path="res://personajes/personajeBase/personaje_base.tscn" id="1_ltgak"]
 [ext_resource type="Script" uid="uid://v8j7mso6x6ly" path="res://personajes/clases_jugador/tanque/tanque.gd" id="2_wd2uv"]
 [ext_resource type="Texture2D" uid="uid://cdbax5geswvb6" path="res://assets/art/personajes/Mapache/Mapacheee.png" id="3_kluja"]
+[ext_resource type="Texture2D" uid="uid://ddopshrdhm58v" path="res://icon.svg" id="4_nkr18"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jdbdj"]
 radius = 5.0
@@ -24,13 +25,18 @@ _data = {
 
 [node name="Tanque" unique_id=1382673604 instance=ExtResource("1_ltgak")]
 collision_layer = 2
-collision_mask = 1
+collision_mask = 13
 script = ExtResource("2_wd2uv")
-velocidad_embestida = 800.0
-duracion_embestida_maxima = 0.35
-tiempo_maximo_carga_embestida = 1.0
+tiempo_anticipacion_golpe = 0.15
+velocidad_embestida = 400.0
+duracion_embestida_maxima = 0.25
+tiempo_maximo_carga = 1.0
+duracion_escudo = 4.0
+recarga_escudo = 10.0
 velocidad_escudo = 80.0
-reduccion_dano = 0.3
+duracion_aturdimiento = 1.5
+vida_maxima = 10
+vida = 10
 retrato = ExtResource("3_kluja")
 
 [node name="Sombra" parent="." index="0" unique_id=1873168614]
@@ -41,33 +47,38 @@ position = Vector2(3.5640001, 0)
 scale = Vector2(0.97650003, 1)
 texture = ExtResource("3_kluja")
 
-[node name="hitbox ataque" type="Area2D" parent="." index="2" unique_id=437169241]
+[node name="Frente" type="Node2D" parent="." index="2" unique_id=238770987]
 
-[node name="colision  ataque" type="CollisionShape2D" parent="hitbox ataque" index="0" unique_id=1688251866]
-position = Vector2(-15, 11)
+[node name="ZonaGolpe" type="Area2D" parent="Frente" index="0" unique_id=437169241]
+position = Vector2(23, 9)
+
+[node name="colision  ataque" type="CollisionShape2D" parent="Frente/ZonaGolpe" index="0" unique_id=1688251866]
 shape = SubResource("CapsuleShape2D_jdbdj")
 
-[node name="EscudoReinhardt" type="Area2D" parent="." index="3" unique_id=950958209]
+[node name="EscudoReinhardt" type="Area2D" parent="Frente" index="1" unique_id=950958209]
+position = Vector2(23, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="EscudoReinhardt" index="0" unique_id=1182509678]
-scale = Vector2(0.01083032, 0.15884477)
+[node name="Sprite2D" type="Sprite2D" parent="Frente/EscudoReinhardt" index="0" unique_id=1182509678]
+position = Vector2(0, 3.8146973e-06)
+scale = Vector2(0.046874996, 0.6875)
+texture = ExtResource("4_nkr18")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EscudoReinhardt" index="1" unique_id=285507069]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Frente/EscudoReinhardt" index="1" unique_id=285507069]
 shape = SubResource("RectangleShape2D_g3u5t")
 
-[node name="Colision Cuerpo" parent="." index="4" unique_id=1954197429]
+[node name="Colision Cuerpo" parent="." index="3" unique_id=1954197429]
 position = Vector2(2, 21)
 shape = SubResource("RectangleShape2D_kluja")
 
-[node name="Colision Sombra" parent="." index="5" unique_id=1812325256]
-disabled = true
+[node name="Colision Sombra" parent="." index="4" unique_id=1812325256]
 position = Vector2(2, 25)
+disabled = true
 
-[node name="Animaciones Personaje" parent="." index="6" unique_id=1895968384]
+[node name="Animaciones Personaje" parent="." index="5" unique_id=1895968384]
 libraries/ = SubResource("AnimationLibrary_r21bf")
 
-[node name="Barra Ataque Cargado" parent="." index="7" unique_id=511213222]
+[node name="Barra Ataque Cargado" parent="." index="6" unique_id=511213222]
 visible = false
 
-[node name="Barra Vida Enemigo" parent="." index="8" unique_id=26031977]
+[node name="Barra Vida Enemigo" parent="." index="7" unique_id=26031977]
 visible = false
