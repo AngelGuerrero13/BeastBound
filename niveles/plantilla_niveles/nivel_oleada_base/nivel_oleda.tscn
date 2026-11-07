@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://cmqp6jbsvf4wj"]
+
+[ext_resource type="PackedScene" uid="uid://c70rple81urpg" path="res://niveles/plantilla_niveles/nivel_base/nivel_base.tscn" id="1_no06l"]
+[ext_resource type="PackedScene" uid="uid://bcenw2rnuxqwv" path="res://niveles/spawn/puntos_spawn.tscn" id="2_d8j2u"]
+[ext_resource type="Script" uid="uid://c2ge3rp2ujpig" path="res://niveles/plantilla_niveles/nivel_oleada_base/gestor_oleadas.gd" id="3_prlw1"]
+[ext_resource type="PackedScene" uid="uid://bjp30gibi1pc" path="res://personajes/enemigos_nivel1/hongo_cac/hongo_CaC(nivel1).tscn" id="4_uo5nh"]
+[ext_resource type="PackedScene" uid="uid://cls33u2m5qch8" path="res://personajes/enemigos_nivel1/hongo_explosivo/hongo_explosivo.tscn" id="5_8qdhu"]
+[ext_resource type="PackedScene" uid="uid://boaiy5jhvwiia" path="res://personajes/enemigos_nivel1/hongo_tanque/hongo_tanque.tscn" id="6_qvilj"]
+[ext_resource type="PackedScene" uid="uid://cmgs18jfyukj0" path="res://personajes/enemigos_nivel1/hongo_tirador/hongo_tirador.tscn" id="7_m8gam"]
+[ext_resource type="Script" uid="uid://dav1n2nuc8e1l" path="res://niveles/plantilla_niveles/nivel_oleada_base/emboscada.gd" id="8_tvxd2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ov55q"]
+size = Vector2(20, 164)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e1ec4"]
+size = Vector2(20, 137)
+
+[node name="NivelOleda" unique_id=76547120 instance=ExtResource("1_no06l")]
+
+[node name="PuntosSpawn" parent="." index="2" unique_id=1222723644 instance=ExtResource("2_d8j2u")]
+position = Vector2(18, 93)
+
+[node name="GestorOleadas" type="Node2D" parent="." index="4" unique_id=61592127]
+script = ExtResource("3_prlw1")
+hongo_cac = ExtResource("4_uo5nh")
+hongo_explosivo = ExtResource("5_8qdhu")
+hongo_tanque = ExtResource("6_qvilj")
+hongo_tirador = ExtResource("7_m8gam")
+oleada_1_enemigos = Array[PackedScene]([ExtResource("4_uo5nh")])
+
+[node name="TimerOleada" type="Timer" parent="GestorOleadas" index="0" unique_id=1529336608]
+
+[node name="PuntosSpawn" type="Node2D" parent="GestorOleadas" index="1" unique_id=1544035452]
+
+[node name="Oleada 1 Salida" type="Marker2D" parent="GestorOleadas/PuntosSpawn" index="0" unique_id=1574004044]
+position = Vector2(480, 96)
+
+[node name="Oleada 2 Entrada Bosque" type="Marker2D" parent="GestorOleadas/PuntosSpawn" index="1" unique_id=1942845206]
+position = Vector2(1440, 96)
+
+[node name="Oleada 3 Bosque Frondoso" type="Marker2D" parent="GestorOleadas/PuntosSpawn" index="2" unique_id=1044929416]
+position = Vector2(2400, 96)
+
+[node name="Oleada 4 Salida Bosque" type="Marker2D" parent="GestorOleadas/PuntosSpawn" index="3" unique_id=1918500049]
+position = Vector2(3360, 96)
+
+[node name="Oleada 5 Bosque Abierto" type="Marker2D" parent="GestorOleadas/PuntosSpawn" index="4" unique_id=1925955709]
+position = Vector2(4320, 96)
+
+[node name="Emboscadas" type="Node2D" parent="GestorOleadas" index="2" unique_id=360792914]
+
+[node name="Emboscada 1" type="Area2D" parent="GestorOleadas/Emboscadas" index="0" unique_id=739327426 node_paths=PackedStringArray("punto_spawn")]
+position = Vector2(787, 104)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("8_tvxd2")
+enemigos = Array[PackedScene]([ExtResource("5_8qdhu")])
+punto_spawn = NodePath("PuntoSpawn")
+
+[node name="AreaActivacion" type="CollisionShape2D" parent="GestorOleadas/Emboscadas/Emboscada 1" index="0" unique_id=268176818]
+position = Vector2(25, 24)
+shape = SubResource("RectangleShape2D_ov55q")
+
+[node name="PuntoSpawn" type="Marker2D" parent="GestorOleadas/Emboscadas/Emboscada 1" index="1" unique_id=1201942678]
+position = Vector2(-144, 0)
+
+[node name="Emboscada 2" type="Area2D" parent="GestorOleadas/Emboscadas" index="1" unique_id=202051366]
+visible = false
+position = Vector2(761, -207)
+script = ExtResource("8_tvxd2")
+
+[node name="AreaActivacion" type="CollisionShape2D" parent="GestorOleadas/Emboscadas/Emboscada 2" index="0" unique_id=839317855]
+visible = false
+shape = SubResource("RectangleShape2D_ov55q")
+
+[node name="PuntoSpawn" type="Marker2D" parent="GestorOleadas/Emboscadas/Emboscada 2" index="1" unique_id=1105941415]
+visible = false
+
+[node name="Emboscada 3" type="Area2D" parent="GestorOleadas/Emboscadas" index="2" unique_id=1391179913]
+visible = false
+position = Vector2(761, -207)
+script = ExtResource("8_tvxd2")
+
+[node name="AreaActivacion" type="CollisionShape2D" parent="GestorOleadas/Emboscadas/Emboscada 3" index="0" unique_id=1036715267]
+visible = false
+shape = SubResource("RectangleShape2D_ov55q")
+
+[node name="PuntoSpawn" type="Marker2D" parent="GestorOleadas/Emboscadas/Emboscada 3" index="1" unique_id=1306223896]
+visible = false
+
+[node name="ZonaSalida" type="Area2D" parent="GestorOleadas" index="3" unique_id=100756854]
+position = Vector2(4767, 101)
+collision_layer = 0
+collision_mask = 2
+
+[node name="AreaActivacion" type="CollisionShape2D" parent="GestorOleadas/ZonaSalida" index="0" unique_id=80546213]
+position = Vector2(0, 12.5)
+shape = SubResource("RectangleShape2D_e1ec4")

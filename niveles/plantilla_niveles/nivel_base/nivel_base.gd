@@ -7,6 +7,7 @@ extends Node2D
 
 @onready var camara: Camera2D = $"Camara Nivel"
 @onready var spawner_jugadores = $PuntosSpawn
+@export var suelo: TileMapLayer
 
 var jugador_seguido: Node2D
 var cambiando_nivel := false
@@ -22,16 +23,23 @@ func _ready() -> void:
 		
 	set_meta("inicio_avance", posicion_inicial_x)
 	
-	var suelo: TileMapLayer = $"Fondo/Suelo Pasto"
-	var area: Rect2i = suelo.get_used_rect()
-	var tamano_tile: Vector2i = suelo.tile_set.tile_size
+	print("DEBUG nivel: ", scene_file_path, " | suelo = ", suelo)
+	
+	if suelo == null:
+		suelo = find_child("Suelo Pasto", true, false) as TileMapLayer
+	
+	if suelo:
+		var area: Rect2i = suelo.get_used_rect()
+		var tamano_tile: Vector2i = suelo.tile_set.tile_size
+		camara.limit_left = roundi(suelo.to_global(Vector2(area.position * tamano_tile)).x)
+		camara.limit_right = roundi(suelo.to_global(Vector2(area.end * tamano_tile)).x)
+	else:
+		push_warning("Nivel '%s': falta asignar la capa de suelo." % name)
 	
 	camara.position_smoothing_speed = suavizado_camara
 
 	process_priority = 10
 	camara.process_priority = 20
-	camara.limit_left = roundi(suelo.to_global(Vector2(area.position * tamano_tile)).x)
-	camara.limit_right = roundi(suelo.to_global(Vector2(area.end * tamano_tile)).x)
 	for heredada in find_children("*", "Camera2D", true, false):
 		if heredada != camara:
 			heredada.enabled = false

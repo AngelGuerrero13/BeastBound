@@ -1,8 +1,8 @@
 [gd_scene format=4]
 
 [ext_resource type="Texture2D" uid="uid://b5o2bic3uhxqd" path="res://assets/art/fondos/MagicMarketFondo/Tilesets/TilesetFloor.png" id="1_280kd"]
-[ext_resource type="PackedScene" uid="uid://808rvxcuw4kj" path="res://personajes/mago/mago.tscn" id="3_280kd"]
-[ext_resource type="Script" uid="uid://ckq7yr4pty45h" path="res://niveles/nivel 1/nivel_1.gd" id="5_nivel_largo"]
+[ext_resource type="PackedScene" uid="uid://808rvxcuw4kj" path="res://personajes/clases_jugador/mago/mago.tscn" id="3_280kd"]
+[ext_resource type="Script" uid="uid://ckq7yr4pty45h" path="res://niveles/plantilla_niveles/nivel_base/nivel_base.gd" id="5_nivel_largo"]
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cww3w"]
 texture = ExtResource("1_280kd")
 0:0/0 = 0

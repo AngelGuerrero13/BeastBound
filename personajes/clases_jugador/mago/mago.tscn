@@ -6,9 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://bdfau4kl8pnu3" path="res://assets/art/personajes/mago/mago_idle.png" id="4_idle"]
 [ext_resource type="Texture2D" uid="uid://qhui7wogoctr" path="res://assets/art/personajes/mago/ranafoto.png" id="5_1d17s"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gt76d"]
-size = Vector2(32, 39)
-
 [sub_resource type="Animation" id="Animation_idle"]
 resource_name = "idle"
 length = 0.5
@@ -54,12 +51,15 @@ position = Vector2(0, 25)
 texture = ExtResource("4_idle")
 hframes = 5
 
-[node name="Colision Cuerpo" parent="." index="2" unique_id=1954197429]
-position = Vector2(-8, 3.5)
-shape = SubResource("RectangleShape2D_gt76d")
-
-[node name="Colision Sombra" parent="." index="3" unique_id=1812325256]
+[node name="Colision Sombra" parent="." index="2" unique_id=1812325256]
 position = Vector2(0, 25)
+
+[node name="HitBox" parent="." index="3" unique_id=1019743775]
+collision_mask = 13
+
+[node name="Colision Cuerpo" parent="HitBox" index="0" unique_id=1064339394]
+position = Vector2(-10, -9)
+polygon = PackedVector2Array(0, -7, 0, -6, -1, -6, -1, -4, -2, -4, -2, -2, -3, -2, -3, 0, -5, 0, -5, 1, -6, 1, -6, 2, -7, 2, -7, 7, -8, 7, -8, 9, -7, 9, -7, 10, -10, 10, -10, 11, -12, 11, -12, 12, -13, 12, -13, 13, -14, 13, -14, 16, -13, 16, -13, 17, -11, 17, -11, 20, -10, 20, -10, 21, -6, 21, -6, 25, -5, 25, -5, 27, -4, 27, -4, 28, -3, 28, -3, 29, -2, 29, -2, 30, 0, 30, 0, 31, 5, 31, 5, 30, 7, 30, 7, 29, 8, 29, 8, 28, 9, 28, 9, 27, 10, 27, 10, 25, 11, 25, 11, 22, 13, 22, 13, 23, 14, 23, 14, 24, 15, 24, 15, 25, 16, 25, 16, 24, 17, 24, 17, 22, 18, 22, 18, 20, 17, 20, 17, 18, 18, 18, 18, 16, 17, 16, 17, 15, 18, 15, 18, 10, 17, 10, 17, 8, 18, 8, 18, 4, 17, 4, 17, 3, 16, 3, 16, 2, 14, 2, 14, 3, 13, 3, 13, 4, 12, 4, 12, 8, 13, 8, 13, 10, 10, 10, 10, 9, 11, 9, 11, 7, 10, 7, 10, 5, 9, 5, 9, 2, 8, 2, 8, 1, 7, 1, 7, 0, 5, 0, 5, -2, 4, -2, 4, -4, 3, -4, 3, -6, 2, -6, 2, -7)
 
 [node name="Origen Disparo" type="Marker2D" parent="." index="4" unique_id=2094006370]
 position = Vector2(6, -11)

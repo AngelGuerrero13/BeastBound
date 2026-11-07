@@ -21,6 +21,7 @@ size = Vector2(44, 40)
 editor_description = "Granero de 480 x 200: una pantalla y media de ancho con zoom 2. Agrega tus muñecos a Zona Practica."
 y_sort_enabled = true
 script = ExtResource("script")
+siguiente_nivel = "uid://dbq710apt56s4"
 
 [node name="Fondo" type="Node2D" parent="." unique_id=1928423574]
 z_index = -10
@@ -241,111 +242,98 @@ theme = ExtResource("tema")
 theme_override_font_sizes/font_size = 14
 text = "AVANZAR AL NIVEL 1"
 
+[node name="Objetos Solidos" type="Node2D" parent="." unique_id=1935451431]
+
+[node name="Fardo" type="StaticBody2D" parent="Objetos Solidos" unique_id=1025194007]
+position = Vector2(24, 64)
+collision_mask = 0
+
+[node name="Colision Base" type="CollisionShape2D" parent="Objetos Solidos/Fardo" unique_id=39877955]
+shape = SubResource("Apoyo_Objetos")
+
+[node name="Saco" type="StaticBody2D" parent="Objetos Solidos" unique_id=372620578]
+position = Vector2(72, 64)
+collision_mask = 0
+
+[node name="Colision Base" type="CollisionShape2D" parent="Objetos Solidos/Saco" unique_id=694229921]
+shape = SubResource("Apoyo_Objetos")
+
+[node name="Barril" type="StaticBody2D" parent="Objetos Solidos" unique_id=1708229267]
+position = Vector2(376, 64)
+collision_mask = 0
+
+[node name="Colision Base" type="CollisionShape2D" parent="Objetos Solidos/Barril" unique_id=1756245661]
+shape = SubResource("Apoyo_Objetos")
+
+[node name="Caja" type="StaticBody2D" parent="Objetos Solidos" unique_id=784222731]
+position = Vector2(424, 64)
+collision_mask = 0
+
+[node name="Colision Base" type="CollisionShape2D" parent="Objetos Solidos/Caja" unique_id=1254966016]
+shape = SubResource("Apoyo_Objetos")
+
+[node name="Comedero" type="StaticBody2D" parent="Objetos Solidos" unique_id=1058695994]
+position = Vector2(456, 120)
+collision_mask = 0
+
+[node name="Colision Base" type="CollisionShape2D" parent="Objetos Solidos/Comedero" unique_id=713851448]
+shape = SubResource("Apoyo_Objetos")
+
+[node name="Saco Alto" type="StaticBody2D" parent="Objetos Solidos" unique_id=890741969]
+position = Vector2(344, 56)
+collision_mask = 0
+
+[node name="Colision Base" type="CollisionShape2D" parent="Objetos Solidos/Saco Alto" unique_id=869337238]
+shape = SubResource("Apoyo_Objetos")
+
+[node name="Caja Alta" type="StaticBody2D" parent="Objetos Solidos" unique_id=825093081]
+position = Vector2(424, 48)
+collision_mask = 0
+
+[node name="Colision Base" type="CollisionShape2D" parent="Objetos Solidos/Caja Alta" unique_id=1113634091]
+shape = SubResource("Apoyo_Objetos")
+
+[node name="Carro Alto" type="StaticBody2D" parent="Objetos Solidos" unique_id=367053666]
+position = Vector2(456, 64)
+collision_mask = 0
+
+[node name="Colision Base" type="CollisionShape2D" parent="Objetos Solidos/Carro Alto" unique_id=486954337]
+shape = SubResource("Apoyo_Objetos")
+
+[node name="Caja Frontal" type="StaticBody2D" parent="Objetos Solidos" unique_id=540547474]
+position = Vector2(472, 184)
+collision_mask = 0
+
+[node name="Colision Base" type="CollisionShape2D" parent="Objetos Solidos/Caja Frontal" unique_id=1411440528]
+shape = SubResource("Apoyo_Objetos")
+
+[node name="Saco Frontal" type="StaticBody2D" parent="Objetos Solidos" unique_id=1233998019]
+position = Vector2(448, 192)
+collision_mask = 0
+
+[node name="Colision Base" type="CollisionShape2D" parent="Objetos Solidos/Saco Frontal" unique_id=1183440182]
+shape = SubResource("Apoyo_Objetos")
+
+[node name="Caja Derecha" type="StaticBody2D" parent="Objetos Solidos" unique_id=986338881]
+position = Vector2(456, 56)
+collision_mask = 0
+
+[node name="Colision Base" type="CollisionShape2D" parent="Objetos Solidos/Caja Derecha" unique_id=190389846]
+shape = SubResource("Apoyo_Objetos")
+
+[node name="Comedero Alto" type="StaticBody2D" parent="Objetos Solidos" unique_id=392957851]
+position = Vector2(296, 56)
+collision_mask = 0
+
+[node name="Colision Base" type="CollisionShape2D" parent="Objetos Solidos/Comedero Alto" unique_id=1280867352]
+shape = SubResource("Apoyo_Objetos")
+
+[node name="Cubo" type="StaticBody2D" parent="Objetos Solidos" unique_id=563215153]
+position = Vector2(416, 152)
+collision_mask = 0
+
+[node name="Colision Base" type="CollisionShape2D" parent="Objetos Solidos/Cubo" unique_id=1656694290]
+shape = SubResource("Apoyo_Objetos")
+
 [connection signal="timeout" from="Tiempo Practica" to="." method="_habilitar_salida"]
 [connection signal="pressed" from="Interfaz Tutorial/Boton Avanzar" to="." method="_avanzar"]
-
-[node name="Objetos Solidos" type="Node2D" parent="."]
-
-[node name="Fardo" type="StaticBody2D" parent="Objetos Solidos"]
-position = Vector2(24, 64)
-collision_layer = 1
-collision_mask = 0
-
-[node name="Colision Base" type="CollisionShape2D" parent="Objetos Solidos/Fardo"]
-shape = SubResource("Apoyo_Objetos")
-
-[node name="Saco" type="StaticBody2D" parent="Objetos Solidos"]
-position = Vector2(72, 64)
-collision_layer = 1
-collision_mask = 0
-
-[node name="Colision Base" type="CollisionShape2D" parent="Objetos Solidos/Saco"]
-shape = SubResource("Apoyo_Objetos")
-
-[node name="Barril" type="StaticBody2D" parent="Objetos Solidos"]
-position = Vector2(376, 64)
-collision_layer = 1
-collision_mask = 0
-
-[node name="Colision Base" type="CollisionShape2D" parent="Objetos Solidos/Barril"]
-shape = SubResource("Apoyo_Objetos")
-
-[node name="Caja" type="StaticBody2D" parent="Objetos Solidos"]
-position = Vector2(424, 64)
-collision_layer = 1
-collision_mask = 0
-
-[node name="Colision Base" type="CollisionShape2D" parent="Objetos Solidos/Caja"]
-shape = SubResource("Apoyo_Objetos")
-
-[node name="Comedero" type="StaticBody2D" parent="Objetos Solidos"]
-position = Vector2(456, 120)
-collision_layer = 1
-collision_mask = 0
-
-[node name="Colision Base" type="CollisionShape2D" parent="Objetos Solidos/Comedero"]
-shape = SubResource("Apoyo_Objetos")
-
-[node name="Saco Alto" type="StaticBody2D" parent="Objetos Solidos"]
-position = Vector2(344, 56)
-collision_layer = 1
-collision_mask = 0
-
-[node name="Colision Base" type="CollisionShape2D" parent="Objetos Solidos/Saco Alto"]
-shape = SubResource("Apoyo_Objetos")
-
-[node name="Caja Alta" type="StaticBody2D" parent="Objetos Solidos"]
-position = Vector2(424, 48)
-collision_layer = 1
-collision_mask = 0
-
-[node name="Colision Base" type="CollisionShape2D" parent="Objetos Solidos/Caja Alta"]
-shape = SubResource("Apoyo_Objetos")
-
-[node name="Carro Alto" type="StaticBody2D" parent="Objetos Solidos"]
-position = Vector2(456, 64)
-collision_layer = 1
-collision_mask = 0
-
-[node name="Colision Base" type="CollisionShape2D" parent="Objetos Solidos/Carro Alto"]
-shape = SubResource("Apoyo_Objetos")
-
-[node name="Caja Frontal" type="StaticBody2D" parent="Objetos Solidos"]
-position = Vector2(472, 184)
-collision_layer = 1
-collision_mask = 0
-
-[node name="Colision Base" type="CollisionShape2D" parent="Objetos Solidos/Caja Frontal"]
-shape = SubResource("Apoyo_Objetos")
-
-[node name="Saco Frontal" type="StaticBody2D" parent="Objetos Solidos"]
-position = Vector2(448, 192)
-collision_layer = 1
-collision_mask = 0
-
-[node name="Colision Base" type="CollisionShape2D" parent="Objetos Solidos/Saco Frontal"]
-shape = SubResource("Apoyo_Objetos")
-
-[node name="Caja Derecha" type="StaticBody2D" parent="Objetos Solidos"]
-position = Vector2(456, 56)
-collision_layer = 1
-collision_mask = 0
-
-[node name="Colision Base" type="CollisionShape2D" parent="Objetos Solidos/Caja Derecha"]
-shape = SubResource("Apoyo_Objetos")
-
-[node name="Comedero Alto" type="StaticBody2D" parent="Objetos Solidos"]
-position = Vector2(296, 56)
-collision_layer = 1
-collision_mask = 0
-
-[node name="Colision Base" type="CollisionShape2D" parent="Objetos Solidos/Comedero Alto"]
-shape = SubResource("Apoyo_Objetos")
-
-[node name="Cubo" type="StaticBody2D" parent="Objetos Solidos"]
-position = Vector2(416, 152)
-collision_layer = 1
-collision_mask = 0
-
-[node name="Colision Base" type="CollisionShape2D" parent="Objetos Solidos/Cubo"]
-shape = SubResource("Apoyo_Objetos")

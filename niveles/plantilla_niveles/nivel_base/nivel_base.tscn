@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://c70rple81urpg"]
+
+[ext_resource type="Script" uid="uid://ckq7yr4pty45h" path="res://niveles/plantilla_niveles/nivel_base/nivel_base.gd" id="1_cw823"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vniob"]
+size = Vector2(4843.5, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lateral"]
+size = Vector2(16, 300)
+
+[node name="NivelBase" type="Node2D" unique_id=76547120]
+script = ExtResource("1_cw823")
+siguiente_nivel = "res://niveles/nivel 2/nivel 2.tscn"
+
+[node name="Ambiente" type="Node2D" parent="." unique_id=1051767340]
+
+[node name="Fondo" type="Node2D" parent="." unique_id=1308623334]
+editor_description = "Suelo, color de fondo y capas decorativas. Las paredes que bloquean al jugador estan en Limites Nivel."
+
+[node name="Limites Nivel" type="Node2D" parent="." unique_id=849471331]
+editor_description = "Colisiones que impiden salir del camino. Los dibujos se editan por separado en Fondo."
+
+[node name="Pared Superior" type="StaticBody2D" parent="Limites Nivel" unique_id=532228778]
+collision_mask = 0
+
+[node name="Colision Superior" type="CollisionShape2D" parent="Limites Nivel/Pared Superior" unique_id=2008038970]
+position = Vector2(2369, 37)
+shape = SubResource("RectangleShape2D_vniob")
+
+[node name="Pared Inferior" type="StaticBody2D" parent="Limites Nivel" unique_id=643306684]
+collision_mask = 0
+
+[node name="Colision Inferior" type="CollisionShape2D" parent="Limites Nivel/Pared Inferior" unique_id=831492881]
+position = Vector2(2383, 192)
+shape = SubResource("RectangleShape2D_vniob")
+
+[node name="Paredes Laterales" type="StaticBody2D" parent="Limites Nivel" unique_id=198738552]
+collision_mask = 0
+
+[node name="Colision Izquierda" type="CollisionShape2D" parent="Limites Nivel/Paredes Laterales" unique_id=92506176]
+position = Vector2(-8, 100)
+shape = SubResource("RectangleShape2D_lateral")
+
+[node name="Colision Derecha" type="CollisionShape2D" parent="Limites Nivel/Paredes Laterales" unique_id=2063665166]
+position = Vector2(4808, 100)
+shape = SubResource("RectangleShape2D_lateral")
+disabled = true
+
+[node name="Camara Nivel" type="Camera2D" parent="." unique_id=53130753]
+editor_description = "Sigue al jugador mas adelantado. Anticipacion y suavizado se ajustan en el nodo Nivel 1."
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+drag_vertical_enabled = true
+drag_top_margin = 0.4
+drag_bottom_margin = 0.4

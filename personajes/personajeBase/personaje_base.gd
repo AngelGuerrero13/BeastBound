@@ -182,6 +182,9 @@ func saltar() -> void:
 
 func ejecutar_ataque_normal(objetivo) -> void:
 	if objetivo:
+		if objetivo is Area2D:
+			objetivo = objetivo.get_parent()
+			
 		print(name, " realiza un ataque básico a ", objetivo.name, " por ", dano, " de daño.")
 		if objetivo.has_method("recibir_dano"):
 			objetivo.recibir_dano(dano)
@@ -191,7 +194,10 @@ func ejecutar_ataque_normal(objetivo) -> void:
 func ejecutar_ataque_cargado(objetivo) -> void:
 	if not es_jugador:
 		return
-
+	
+	if objetivo is Area2D:
+			objetivo = objetivo.get_parent()
+	
 	if objetivo:
 		var dano_cargado = dano * 2
 		print(name, " realiza un ataque CARGADO a ", objetivo.name, " por ", dano_cargado, " de daño.")

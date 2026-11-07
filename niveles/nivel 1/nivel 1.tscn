@@ -1,14 +1,14 @@
-[gd_scene format=4 uid="uid://btbx3x03l1cxj"]
+[gd_scene format=4 uid="uid://bjcagovcoc7iq"]
 
 [ext_resource type="Texture2D" uid="uid://b5o2bic3uhxqd" path="res://assets/art/fondos/MagicMarketFondo/Tilesets/TilesetFloor.png" id="1_280kd"]
-[ext_resource type="Script" uid="uid://ckq7yr4pty45h" path="res://niveles/nivel 1/nivel_1.gd" id="5_nivel_largo"]
-[ext_resource type="Script" uid="uid://c2ge3rp2ujpig" path="res://niveles/nivel 1/gestor_oleadas.gd" id="15_0m6eq"]
+[ext_resource type="Script" uid="uid://ckq7yr4pty45h" path="res://niveles/plantilla_niveles/nivel_base/nivel_base.gd" id="5_nivel_largo"]
+[ext_resource type="Script" uid="uid://c2ge3rp2ujpig" path="res://niveles/plantilla_niveles/nivel_oleada_base/gestor_oleadas.gd" id="15_0m6eq"]
 [ext_resource type="PackedScene" uid="uid://bcenw2rnuxqwv" path="res://niveles/spawn/puntos_spawn.tscn" id="15_lhl8s"]
 [ext_resource type="PackedScene" uid="uid://bjp30gibi1pc" path="res://personajes/enemigos_nivel1/hongo_cac/hongo_CaC(nivel1).tscn" id="16_ethxb"]
 [ext_resource type="PackedScene" uid="uid://cls33u2m5qch8" path="res://personajes/enemigos_nivel1/hongo_explosivo/hongo_explosivo.tscn" id="16_lhl8s"]
 [ext_resource type="PackedScene" uid="uid://boaiy5jhvwiia" path="res://personajes/enemigos_nivel1/hongo_tanque/hongo_tanque.tscn" id="17_ethxb"]
 [ext_resource type="PackedScene" uid="uid://cmgs18jfyukj0" path="res://personajes/enemigos_nivel1/hongo_tirador/hongo_tirador.tscn" id="18_k44xh"]
-[ext_resource type="Script" uid="uid://dav1n2nuc8e1l" path="res://niveles/nivel 1/emboscada.gd" id="20_5tjnx"]
+[ext_resource type="Script" uid="uid://dav1n2nuc8e1l" path="res://niveles/plantilla_niveles/nivel_oleada_base/emboscada.gd" id="20_5tjnx"]
 [ext_resource type="Texture2D" uid="uid://dxmjfgxeu67q5" path="res://assets/art/fondos/vegetacion_editable/color_fondo.png" id="veg_1_kqmcu"]
 [ext_resource type="TileSet" uid="uid://bdw3i5g2yicp7" path="res://assets/art/fondos/vegetacion_editable/01_Siluetas.tres" id="veg_2_a4jit"]
 [ext_resource type="TileSet" uid="uid://caxovbijxlqms" path="res://assets/art/fondos/vegetacion_editable/02_Rocas.tres" id="veg_3_towlq"]
@@ -21,11 +21,11 @@
 [ext_resource type="TileSet" uid="uid://ct6f4uwe31wgn" path="res://assets/art/fondos/vegetacion_editable/09_Piedras.tres" id="veg_10_grube"]
 [ext_resource type="TileSet" uid="uid://b06hmalywha0n" path="res://assets/art/fondos/vegetacion_editable/10_MalezaInferior.tres" id="veg_11_jcd2d"]
 
-[sub_resource type="Gradient" id="Gradient_punto_polen"]
+[sub_resource type="Gradient" id="Gradient_5tjnx"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_polen"]
-gradient = SubResource("Gradient_punto_polen")
+gradient = SubResource("Gradient_5tjnx")
 width = 2
 height = 2
 
@@ -33,7 +33,7 @@ height = 2
 offsets = PackedFloat32Array(0, 0.2, 0.8, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cww3w"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a2q6f"]
 texture = ExtResource("1_280kd")
 0:0/0 = 0
 1:0/0 = 0
@@ -151,7 +151,7 @@ texture = ExtResource("1_280kd")
 0:14/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_vfwvo"]
-sources/0 = SubResource("TileSetAtlasSource_cww3w")
+sources/0 = SubResource("TileSetAtlasSource_a2q6f")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vniob"]
 size = Vector2(4843.5, 16)
@@ -163,6 +163,7 @@ size = Vector2(16, 300)
 size = Vector2(20, 164)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r6eng"]
+size = Vector2(20, 137)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_salida"]
 size = Vector2(32, 168)
@@ -425,9 +426,12 @@ shape = SubResource("RectangleShape2D_5tjnx")
 visible = false
 
 [node name="ZonaSalida" type="Area2D" parent="GestorOleadas" unique_id=1516229905]
-position = Vector2(1136, -214)
+position = Vector2(4767, 101)
+collision_layer = 0
+collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GestorOleadas/ZonaSalida" unique_id=1867388212]
+[node name="AreaActivacion" type="CollisionShape2D" parent="GestorOleadas/ZonaSalida" unique_id=1867388212]
+position = Vector2(0, 12.5)
 shape = SubResource("RectangleShape2D_r6eng")
 
 [node name="Camara Nivel" type="Camera2D" parent="." unique_id=53130753]
