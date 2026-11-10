@@ -10,7 +10,7 @@ func _ready() -> void:
 	nivel_actual = $Tutorial
 	
 	var ruta_guardada: String = Partidas.estado_pendiente.get("nivel_ruta", "")
-	var guardado: int = Partidas.estado_pendiente.get("nivel", 0)
+	var guardado: int = Partidas.estado_pendiente.get("nivel_oleada_", 0)
 	
 	for n in niveles:
 		if ruta_guardada != "" and n.scene_file_path == ruta_guardada:

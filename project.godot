@@ -265,6 +265,7 @@ p4_ataque_definitivo={
 2d_physics/layer_2="Personaje"
 2d_physics/layer_3="Enemigo"
 2d_physics/layer_4="Destructible"
+2d_physics/layer_5="Proyectiles"
 
 [physics]
 

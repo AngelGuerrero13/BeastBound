@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://b7ny33jmwvcqt"]
 
-[ext_resource type="PackedScene" uid="uid://btbx3x03l1cxj" path="res://niveles/nivel 1/nivel 1.tscn" id="1_2q5vh"]
 [ext_resource type="PackedScene" uid="uid://ekvk3ftdwj0w" path="res://niveles/tutorial/tutorial.tscn" id="2_dpjaa"]
 [ext_resource type="Script" uid="uid://c8xtbgh2ayog2" path="res://niveles/mundo.gd" id="2_guardado"]
+[ext_resource type="PackedScene" uid="uid://dbq710apt56s4" path="res://niveles/nivel 1/nivel_oleda_1.tscn" id="4_tuwin"]
 [ext_resource type="PackedScene" uid="uid://cf8qr4gwr7dl2" path="res://ui/interfaz_jugador/interfaz_global.tscn" id="5_gsl08"]
 
 [node name="Mundo" type="Node2D" unique_id=1230376621]
@@ -11,6 +11,6 @@ script = ExtResource("2_guardado")
 [node name="Tutorial" parent="." unique_id=1340016319 instance=ExtResource("2_dpjaa")]
 siguiente_nivel = "uid://btbx3x03l1cxj"
 
-[node name="Nivel 1" parent="." unique_id=76547120 instance=ExtResource("1_2q5vh")]
-
 [node name="Interfaz Global" parent="." unique_id=1176805796 instance=ExtResource("5_gsl08")]
+
+[node name="NivelOleda1" parent="." unique_id=76547120 instance=ExtResource("4_tuwin")]

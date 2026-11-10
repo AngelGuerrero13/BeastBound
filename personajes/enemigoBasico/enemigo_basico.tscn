@@ -9,7 +9,7 @@ size = Vector2(9, 5)
 
 [node name="Enemigo Basico" unique_id=1382673604 instance=ExtResource("1_6l8mp")]
 collision_layer = 4
-collision_mask = 3
+collision_mask = 19
 script = ExtResource("2_p27fw")
 distancia_ataque_melee = 40.0
 duracion_ataque = 0.6

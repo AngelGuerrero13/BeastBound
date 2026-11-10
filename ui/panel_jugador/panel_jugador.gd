@@ -120,8 +120,8 @@ func actualizar_ui():
 			flecha_arriba.hide()
 			flecha_abajo.hide()
 
-func _actualizar_icono(device_id: int):
-	var nombre_mando = Input.get_joy_name(device_id).to_lower()
+func _actualizar_icono(id_dispositivo: int):
+	var nombre_mando = Input.get_joy_name(id_dispositivo).to_lower()
 	if "ps4" in nombre_mando or "ps5" in nombre_mando or "sony" in nombre_mando or "dualshock" in nombre_mando or "dualsense" in nombre_mando:
 		animacion_boton.play("ps")
 		animacion_listo.play("ps")

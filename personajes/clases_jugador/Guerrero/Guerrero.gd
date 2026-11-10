@@ -1,116 +1,82 @@
 extends "res://personajes/personajeBase/personaje_base.gd"
 
-@export_group("Combate y Habilidades")
+@export_group("Energía")
+@export var energia_maxima: float = 100.0
 @export var carga_por_golpe: float = 20.0
+@export var costo_cargado: float = 50.0
+@export var costo_definitiva: float = 100.0
+
+@export_group("Habilidades")
+@export var tiempo_anticipacion_golpe: float = 0.1
+@export var multiplicador_dano_cargado: float = 2.0
 @export var multiplicador_dano_definitiva: float = 5.0
+
 var energia_actual: float = 0.0
 
-@export_group("Progresión de Habilidades")
-@export var cristales_experiencia: int = 0
-@export var costo_base_mejora: int = 10
-@export var multiplicador_costo: float = 1.5
-
-var nivel_fuerza: int = 0
-var nivel_agilidad: int = 0
-var nivel_resistencia: int = 0
+@onready var zona_golpe: Area2D = $ZonaGolpe
+@onready var zona_definitiva: Area2D = $ZonaDefinitiva
 
 func _ready() -> void:
-	super._ready()
-	
-	
+	super()
 	if barra_carga:
-		barra_carga.visible = true
-		barra_carga.max_value = tiempo_requerido * 2.0
-		barra_carga.value = energia_actual
+		barra_carga.max_value = energia_maxima
+		actualizar_hud_carga()
 
-# La base carga por tiempo. Esta clase conserva su entrada propia por energía.
-# No llamar a super._process aquí: activaría dos sistemas de ataque distintos.
-func _process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	super(delta)
+	zona_golpe.position.x = abs(zona_golpe.position.x) * obtener_direccion_frente().x
+
+func _process(delta: float) -> void:
+	super(delta)
 	if not es_jugador:
 		return
-		
-	if Input.is_action_just_pressed(prefijo_input + "_ataque_normal"):
-		if puede_atacar_normal:
-			puede_atacar_normal = false
-			esta_atacando = true
-			ejecutar_ataque_normal(obtener_enemigo_objetivo())
-			await get_tree().create_timer(tiempo_recarga_normal).timeout
-			puede_atacar_normal = true
-			esta_atacando = false
-			
-	if Input.is_action_just_pressed(prefijo_input + "_ataque_cargado"):
-		if energia_actual >= tiempo_requerido:
-			energia_actual -= tiempo_requerido
-			actualizar_hud_carga()
-			ejecutar_ataque_cargado(obtener_enemigo_objetivo())
-			
-	if InputMap.has_action(prefijo_input + "_habilidad_definitiva") and Input.is_action_just_pressed(prefijo_input + "_habilidad_definitiva"):
-		var carga_definitiva = tiempo_requerido * 2.0
-		if energia_actual >= carga_definitiva:
-			energia_actual -= carga_definitiva
-			actualizar_hud_carga()
-			ejecutar_habilidad_definitiva(obtener_enemigo_objetivo())
+	
+	var accion = prefijo_input + "_ataque_definitivo"
+	if InputMap.has_action(accion) and Input.is_action_just_pressed(accion) \
+			and energia_actual >= costo_definitiva and not esta_atacando:
+		gastar_energia(costo_definitiva)
+		ejecutar_habilidad_definitiva()
 
-func ejecutar_ataque_normal(objetivo) -> void:
-	if objetivo and objetivo.has_method("recibir_dano"):
-		super.ejecutar_ataque_normal(objetivo)
+# Ataque normal: da energía al acertar
+func ejecutar_ataque_normal(_objetivo) -> void:
+	await get_tree().create_timer(tiempo_anticipacion_golpe).timeout
+	if vida <= 0:
+		return
+	if golpear_zona(zona_golpe, dano) > 0:
 		acumular_energia(carga_por_golpe)
 
-func ejecutar_habilidad_definitiva(objetivo) -> void:
-	var dano_definitiva = int(dano * multiplicador_dano_definitiva)
-	var enemigos = get_tree().get_nodes_in_group("enemigos")
-	for enemigo in enemigos:
-		if is_instance_valid(enemigo) and global_position.distance_to(enemigo.global_position) <= (rango_ataque * 2.0):
-			if enemigo.has_method("recibir_dano"):
-				enemigo.recibir_dano(dano_definitiva)
+# Ataque cargado: se gasta energía, no se mantiene el botón
+func manejar_ataque_cargado(_delta: float) -> void:
+	var accion = prefijo_input + "_ataque_cargado"
+	if Input.is_action_just_pressed(accion) and energia_actual >= costo_cargado and not esta_atacando:
+		gastar_energia(costo_cargado)
+		ejecutar_ataque_cargado(null)
+
+func ejecutar_ataque_cargado(_objetivo) -> void:
+	golpear_zona(zona_golpe, int(dano * multiplicador_dano_cargado))
+
+# Definitiva: daño en área alrededor del guerrero
+func ejecutar_habilidad_definitiva() -> void:
+	golpear_zona(zona_definitiva, int(dano * multiplicador_dano_definitiva))
+
+func golpear_zona(zona: Area2D, danio: int) -> int:
+	var golpeados := 0
+	for c in zona.get_overlapping_bodies():
+		if c != self and c.has_method("recibir_dano") \
+				and "es_jugador" in c and c.es_jugador != es_jugador:
+			c.recibir_dano(danio)
+			golpeados += 1
+	return golpeados
 
 func acumular_energia(cantidad: float) -> void:
-	var max_energia = tiempo_requerido * 2.0
-	energia_actual = clamp(energia_actual + cantidad, 0.0, max_energia)
+	energia_actual = clamp(energia_actual + cantidad, 0.0, energia_maxima)
+	actualizar_hud_carga()
+
+func gastar_energia(cantidad: float) -> void:
+	energia_actual = max(0.0, energia_actual - cantidad)
 	actualizar_hud_carga()
 
 func actualizar_hud_carga() -> void:
 	if barra_carga:
 		barra_carga.value = energia_actual
-
-func obtener_enemigo_objetivo() -> Node2D:
-	var enemigos = get_tree().get_nodes_in_group("enemigos")
-	var enemigo_cercano: Node2D = null
-	var menor_distancia: float = rango_ataque
-	for enemigo in enemigos:
-		if is_instance_valid(enemigo) and enemigo != self:
-			var distancia = global_position.distance_to(enemigo.global_position)
-			if distancia <= menor_distancia:
-				menor_distancia = distancia
-				enemigo_cercano = enemigo
-	return enemigo_cercano
-
-# --- PROGRESIÓN ---
-func mejorar_resistencia() -> bool:
-	var costo = int(costo_base_mejora * pow(multiplicador_costo, nivel_resistencia))
-	if cristales_experiencia >= costo:
-		cristales_experiencia -= costo
-		nivel_resistencia += 1
-		vida_maxima += 2
-		vida += 2
-		vida_cambiada.emit(vida) 
-		return true
-	return false
-
-func mejorar_fuerza() -> bool:
-	var costo = int(costo_base_mejora * pow(multiplicador_costo, nivel_fuerza))
-	if cristales_experiencia >= costo:
-		cristales_experiencia -= costo
-		nivel_fuerza += 1
-		dano += 1
-		return true
-	return false
-
-func mejorar_agilidad() -> bool:
-	var costo = int(costo_base_mejora * pow(multiplicador_costo, nivel_agilidad))
-	if cristales_experiencia >= costo:
-		cristales_experiencia -= costo
-		nivel_agilidad += 1
-		velocidad += 15.0
-		return true
-	return false
+		barra_carga.visible = energia_actual > 0.0

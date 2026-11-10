@@ -50,7 +50,7 @@ shape = SubResource("RectangleShape2D_2q5vh")
 collision_layer = 2
 collision_mask = 0
 
-[node name="Colision Cuerpo" type="CollisionPolygon2D" parent="HitBox" unique_id=1064339394]
+[node name="Colision Cuerpo" type="CollisionShape2D" parent="HitBox" unique_id=862487744]
 position = Vector2(0, 0.5)
 
 [node name="Animaciones Personaje" type="AnimationPlayer" parent="." unique_id=1895968384]

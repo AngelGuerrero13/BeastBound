@@ -4,6 +4,8 @@ var objetivo: Node2D = null
 var es_ataque_cargado: bool = false
 
 func _ready() -> void:
+	if not body_entered.is_connected(_on_body_entered):
+		body_entered.connect(_on_body_entered)
 	if has_node("Animacion Fuego"):
 		$"Animacion Fuego".play("default")
 

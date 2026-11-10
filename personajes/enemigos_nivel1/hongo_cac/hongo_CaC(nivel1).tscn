@@ -4,6 +4,9 @@
 [ext_resource type="Script" uid="uid://fckqsu8g11tb" path="res://personajes/enemigos_nivel1/hongo_cac/hongo_CaC(nivel_1).gd" id="2_vfe3u"]
 [ext_resource type="Texture2D" uid="uid://cwa6jfdewjuhb" path="res://personajes/muñecoPrueba/hongo simple.png" id="3_n761y"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_py2p6"]
+size = Vector2(25, 44)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4vuwf"]
 size = Vector2(7.5147395, 3.7973418)
 
@@ -14,7 +17,6 @@ radius = 10.552878
 script = ExtResource("2_vfe3u")
 tiempo_anticipacion = 0.35
 distancia_ataque_melee = 60.0
-duracion_ataque = 0.6
 velocidad = 200.0
 rango_ataque = 30.0
 tiempo_recarga_normal = 2.0
@@ -25,6 +27,13 @@ visible = false
 [node name="Imagen Personaje" parent="." index="1" unique_id=647587542]
 scale = Vector2(1, 1)
 texture = ExtResource("3_n761y")
+
+[node name="Colision Sombra" parent="." index="2" unique_id=1812325256]
+position = Vector2(-11, 26)
+
+[node name="Colision Cuerpo" parent="HitBox" parent_id_path=PackedInt32Array(1019743775) index="0" unique_id=862487744]
+position = Vector2(-11.5, 3)
+shape = SubResource("RectangleShape2D_py2p6")
 
 [node name="CollisionShape2D" parent="AreaDeteccion" parent_id_path=PackedInt32Array(1027424982) index="0" unique_id=885380396]
 position = Vector2(-0.99998856, 5.722046e-06)
@@ -40,3 +49,8 @@ position = Vector2(0, 1)
 scale = Vector2(1.145, 1.145)
 shape = SubResource("CircleShape2D_st51s")
 disabled = true
+
+[node name="Barra Vida Enemigo" parent="." index="8" unique_id=26031977]
+offset_top = -25.0
+offset_right = 42.0
+offset_bottom = -7.0

@@ -220,6 +220,10 @@ func recibir_dano(cantidad: int) -> void:
 	if vida <= 0:
 		morir()
 
+func es_enemigo(c: Node) -> bool:
+	return c != self and c.has_method("recibir_dano") \
+		and "es_jugador" in c and c.es_jugador != es_jugador
+
 func morir() -> void:
 	print(name, " ha muerto.")
 	ha_muerto.emit()
