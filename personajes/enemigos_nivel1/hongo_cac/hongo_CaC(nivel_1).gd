@@ -23,21 +23,24 @@ func ejecutar_ataque_normal(objetivo) -> void:
 	
 	await get_tree().physics_frame
 	await get_tree().physics_frame
-	
-	for cuerpo in zona_impacto.get_overlapping_bodies():
-		if cuerpo != self and cuerpo.is_in_group("Jugador") and cuerpo.has_method("recibir_dano"):
-			cuerpo.recibir_dano(dano)
+
+	for area in zona_impacto.get_overlapping_areas():
+		var victima = area.get_parent()
+		if victima != self and victima.is_in_group("Jugador") and victima.has_method("recibir_dano"):
+			victima.recibir_dano(dano)
 	
 	await get_tree().create_timer(0.1).timeout
 	hitbox_cabezazo.set_deferred("disabled", true)
+
 	hitbox_cabezazo.set_deferred("disabled", false)
 	
 	await get_tree().physics_frame
 	await get_tree().physics_frame
 	
-	for cuerpo in zona_impacto.get_overlapping_bodies():
-		if cuerpo != self and cuerpo.is_in_group("Jugador") and cuerpo.has_method("recibir_dano"):
-			cuerpo.recibir_dano(dano)
+	for area in zona_impacto.get_overlapping_areas():
+		var victima = area.get_parent()
+		if victima != self and victima.is_in_group("Jugador") and victima.has_method("recibir_dano"):
+			victima.recibir_dano(dano)
 	
 	await get_tree().create_timer(0.1).timeout
 	hitbox_cabezazo.set_deferred("disabled", true)

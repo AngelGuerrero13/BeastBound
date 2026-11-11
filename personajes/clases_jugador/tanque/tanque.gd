@@ -35,8 +35,10 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	super(delta)
 	frente.scale.x = obtener_direccion_frente().x
+	
 	if esta_embistiendo:
-		for c in zona_golpe.get_overlapping_bodies():
+		for area in zona_golpe.get_overlapping_areas():
+			var c = area.get_parent()
 			if es_enemigo(c) and not golpeados.has(c):
 				golpeados.append(c)
 				c.recibir_dano(dano_embestida)
@@ -52,17 +54,18 @@ func manejar_movimiento() -> void:
 	super()
 	velocidad = normal
 
-# Golpe de escudo
 func manejar_ataque_normal() -> void:
 	if not (esta_cargando or esta_embistiendo or escudo_activo):
 		super()
 
 func ejecutar_ataque_normal(_o) -> void:
 	await get_tree().create_timer(tiempo_anticipacion_golpe).timeout
-	for c in zona_golpe.get_overlapping_bodies():
-		if es_enemigo(c): c.recibir_dano(dano)
+	
+	for area in zona_golpe.get_overlapping_areas():
+		var c = area.get_parent()
+		if es_enemigo(c): 
+			c.recibir_dano(dano)
 
-# Embestida (se carga y se lanza al soltar)
 func manejar_ataque_cargado(delta: float) -> void:
 	if esta_embistiendo: return
 	var presionado = Input.is_action_pressed(prefijo_input + "_ataque_cargado")

@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://dcsc42p762drd"]
 
 [ext_resource type="PackedScene" uid="uid://dc41qho565f7g" path="res://personajes/personajeBase/personaje_base.tscn" id="1_4g8of"]
-
 [ext_resource type="Script" uid="uid://ro4umpecc7by" path="res://personajes/enemigos_nivel1/jefe_nivel1/arbusto_jefe_final.gd" id="2_4g8of"]
-[ext_resource type="Texture2D" uid="uid://ddopshrdhm58v" path="res://icon.svg" id="3_pcesn"]
+[ext_resource type="Texture2D" uid="uid://codkkmjvngs2y" path="res://assets/art/personajes/enemigos/nivel 1/Jefe nivel 1/jefe 1 p.jpeg" id="3_l71lc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4g8of"]
 size = Vector2(640, 360)
 
 [node name="Arbusto Jefe Final nivel 1" unique_id=1382673604 instance=ExtResource("1_4g8of")]
+position = Vector2(150, 200)
 script = ExtResource("2_4g8of")
 distancia_patruya = 40.0
 velocidad_patruya = 35.0
@@ -28,5 +28,6 @@ shape = SubResource("RectangleShape2D_4g8of")
 disabled = true
 
 [node name="Imagen Personaje" parent="." index="2" unique_id=647587542]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("3_pcesn")
+position = Vector2(-1.4305115e-06, 0.5)
+scale = Vector2(0.33333328, 0.3125)
+texture = ExtResource("3_l71lc")

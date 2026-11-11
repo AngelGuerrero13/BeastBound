@@ -29,9 +29,13 @@ func _physics_process(delta: float) -> void:
 	if distancia_recorrida >= distancia_maxima:
 		queue_free()
 
-func _on_body_entered(body: Node) -> void:
-	print("Proyectil tocó: ", body.name, " | es_jugador: ", body.get("es_jugador"), " | disparado_por_jugador: ", disparado_por_jugador)
-	if body.has_method("recibir_dano") and "es_jugador" in body:
-		if body.es_jugador != disparado_por_jugador:
-			body.recibir_dano(dano)
-			queue_free()
+func _on_area_entered(area: Area2D) -> void:
+	var victima = area.get_parent()
+	
+	print("Proyectil tocó el área de: ", victima.name)
+	
+	if victima.has_method("recibir_dano") and "es_jugador" in victima:
+		if victima.es_jugador != disparado_por_jugador:
+			victima.recibir_dano(dano)
+			
+	queue_free()

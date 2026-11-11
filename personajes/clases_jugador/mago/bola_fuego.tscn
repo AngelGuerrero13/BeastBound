@@ -49,4 +49,4 @@ sprite_frames = SubResource("SpriteFrames_vniob")
 frame = 3
 frame_progress = 0.4962979
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

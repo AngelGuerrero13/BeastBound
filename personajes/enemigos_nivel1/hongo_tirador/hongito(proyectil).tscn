@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://26vo14i720ld"]
 
-[ext_resource type="Script" uid="uid://873tcjoyvn1s" path="res://area_2d.gd" id="1_yfes7"]
+[ext_resource type="Script" uid="uid://873tcjoyvn1s" path="res://personajes/enemigos_nivel1/hongo_tirador/honguito(proyectil).gd" id="1_yfes7"]
 [ext_resource type="Texture2D" uid="uid://ddopshrdhm58v" path="res://icon.svg" id="2_jyk5g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tbcmv"]
@@ -27,3 +27,5 @@ shape = SubResource("RectangleShape2D_tbcmv")
 [node name="AnimacionHonguito" type="AnimatedSprite2D" parent="." unique_id=1539572173]
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_tbcmv")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

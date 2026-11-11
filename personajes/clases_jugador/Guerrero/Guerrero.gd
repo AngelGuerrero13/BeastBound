@@ -61,11 +61,15 @@ func ejecutar_habilidad_definitiva() -> void:
 
 func golpear_zona(zona: Area2D, danio: int) -> int:
 	var golpeados := 0
-	for c in zona.get_overlapping_bodies():
+	
+	for area in zona.get_overlapping_areas():
+		var c = area.get_parent()
+		
 		if c != self and c.has_method("recibir_dano") \
 				and "es_jugador" in c and c.es_jugador != es_jugador:
 			c.recibir_dano(danio)
 			golpeados += 1
+			
 	return golpeados
 
 func acumular_energia(cantidad: float) -> void:

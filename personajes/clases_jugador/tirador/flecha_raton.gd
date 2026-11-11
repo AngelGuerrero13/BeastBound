@@ -25,44 +25,28 @@ func _physics_process(delta: float) -> void:
 		return
 		
 	var destino = global_position + direccion_vuelo * velocidad * delta
-	var espacio = get_world_2d().direct_space_state
 	
-	var excluidos: Array[RID] = []
+	var consulta = PhysicsRayQueryParameters2D.create(global_position, destino, collision_mask)
+	
+	consulta.collide_with_areas = true 
+	consulta.collide_with_bodies = true
+	
 	if is_instance_valid(tirador):
-		excluidos.append(tirador.get_rid())
-	
-	var choque: Dictionary = {}
-	while true:
-		var consulta = PhysicsRayQueryParameters2D.create(global_position, destino, collision_mask)
-		consulta.exclude = excluidos
-		choque = espacio.intersect_ray(consulta)
+		consulta.exclude = [tirador.get_rid()]
 		
-		if choque.is_empty():
-			break
-		
-		var cuerpo = choque.collider
-		if es_aliado(cuerpo):
-			excluidos.append(cuerpo.get_rid())
-			continue
-		
-		break
+	var choque = get_world_2d().direct_space_state.intersect_ray(consulta)
 	
 	if not choque.is_empty():
 		global_position = choque.position
 		impacto = true
-		super._on_body_entered(choque.collider)
-		queue_free()
+		
+		if choque.collider is Area2D:
+			super._on_area_entered(choque.collider)
+		else:
+			queue_free()
 	else:
 		distancia_recorrida += global_position.distance_to(destino)
 		global_position = destino
 		
 		if distancia_recorrida >= distancia_maxima:
 			queue_free()
-
-func es_aliado(cuerpo: Object) -> bool:
-	return "es_jugador" in cuerpo and cuerpo.es_jugador == disparado_por_jugador
-
-func _on_body_entered(body: Node) -> void:
-	if impacto:
-		return
-	super(body)

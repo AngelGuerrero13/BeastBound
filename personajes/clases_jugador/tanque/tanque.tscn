@@ -25,7 +25,7 @@ _data = {
 
 [node name="Tanque" unique_id=1382673604 instance=ExtResource("1_ltgak")]
 collision_layer = 2
-collision_mask = 13
+collision_mask = 5
 script = ExtResource("2_wd2uv")
 tiempo_anticipacion_golpe = 0.15
 velocidad_embestida = 400.0
@@ -35,7 +35,6 @@ duracion_escudo = 4.0
 recarga_escudo = 10.0
 velocidad_escudo = 80.0
 duracion_aturdimiento = 1.5
-vida_maxima = 10
 vida = 10
 retrato = ExtResource("3_kluja")
 
@@ -51,12 +50,16 @@ texture = ExtResource("3_kluja")
 
 [node name="ZonaGolpe" type="Area2D" parent="Frente" index="0" unique_id=437169241]
 position = Vector2(23, 9)
+collision_layer = 0
+collision_mask = 4
 
 [node name="colision  ataque" type="CollisionShape2D" parent="Frente/ZonaGolpe" index="0" unique_id=1688251866]
 shape = SubResource("CapsuleShape2D_jdbdj")
 
 [node name="EscudoReinhardt" type="Area2D" parent="Frente" index="1" unique_id=950958209]
 position = Vector2(23, 0)
+collision_layer = 0
+collision_mask = 28
 
 [node name="Sprite2D" type="Sprite2D" parent="Frente/EscudoReinhardt" index="0" unique_id=1182509678]
 position = Vector2(0, 3.8146973e-06)
@@ -68,10 +71,9 @@ shape = SubResource("RectangleShape2D_g3u5t")
 
 [node name="Colision Sombra" parent="." index="3" unique_id=1812325256]
 position = Vector2(2, 25)
-disabled = true
 
 [node name="HitBox" parent="." index="4" unique_id=1019743775]
-collision_mask = 13
+collision_mask = 29
 
 [node name="Colision Cuerpo" parent="HitBox" index="0" unique_id=862487744]
 position = Vector2(3.5, 2.5)

@@ -35,9 +35,6 @@ tiempo_recarga_normal = 0.25
 [node name="Imagen Personaje" parent="." index="1" unique_id=647587542]
 texture = ExtResource("2_hgg11")
 
-[node name="Colision Sombra" parent="." index="2" unique_id=1812325256]
-disabled = true
-
 [node name="HitBox" parent="." index="3" unique_id=1019743775]
 collision_mask = 13
 
@@ -54,6 +51,8 @@ visible = false
 
 [node name="ZonaGolpe" type="Area2D" parent="." index="7" unique_id=1961572370]
 position = Vector2(16, -10)
+collision_layer = 0
+collision_mask = 13
 
 [node name="ColisionGolpe" type="CollisionShape2D" parent="ZonaGolpe" index="0" unique_id=27346319]
 position = Vector2(-0.5, 17)
@@ -61,6 +60,8 @@ shape = SubResource("RectangleShape2D_r6eng")
 
 [node name="ZonaDefinitiva" type="Area2D" parent="." index="8" unique_id=1648514694]
 position = Vector2(2, -32)
+collision_layer = 0
+collision_mask = 13
 
 [node name="ColisionGolpe" type="CollisionShape2D" parent="ZonaDefinitiva" index="0" unique_id=1861810081]
 position = Vector2(-1.5, 25.5)

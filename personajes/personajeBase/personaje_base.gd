@@ -182,6 +182,7 @@ func saltar() -> void:
 
 func ejecutar_ataque_normal(objetivo) -> void:
 	if objetivo:
+		# NUEVO: Si el objetivo detectado es la Hurtbox (Area2D), obtenemos a su padre (el Personaje)
 		if objetivo is Area2D:
 			objetivo = objetivo.get_parent()
 			
@@ -194,11 +195,11 @@ func ejecutar_ataque_normal(objetivo) -> void:
 func ejecutar_ataque_cargado(objetivo) -> void:
 	if not es_jugador:
 		return
-	
-	if objetivo is Area2D:
-			objetivo = objetivo.get_parent()
-	
+
 	if objetivo:
+		if objetivo is Area2D:
+			objetivo = objetivo.get_parent()
+			
 		var dano_cargado = dano * 2
 		print(name, " realiza un ataque CARGADO a ", objetivo.name, " por ", dano_cargado, " de daño.")
 		if objetivo.has_method("recibir_dano"):
