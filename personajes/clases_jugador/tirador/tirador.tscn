@@ -108,7 +108,7 @@ _data = {
 &"reposo": SubResource("Visual_reposo")
 }
 
-[node name="Raton Tirador" unique_id=84063767 instance=ExtResource("1_5qkhx")]
+[node name="Raton Tirador" unique_id=84063767 groups=["Jugador"] instance=ExtResource("1_5qkhx")]
 texture_filter = 1
 collision_layer = 2
 collision_mask = 13

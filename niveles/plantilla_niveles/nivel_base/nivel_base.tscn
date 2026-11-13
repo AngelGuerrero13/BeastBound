@@ -3,10 +3,10 @@
 [ext_resource type="Script" uid="uid://ckq7yr4pty45h" path="res://niveles/plantilla_niveles/nivel_base/nivel_base.gd" id="1_cw823"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vniob"]
-size = Vector2(4843.5, 16)
+size = Vector2(1261, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lateral"]
-size = Vector2(16, 300)
+size = Vector2(16, 140.5)
 
 [node name="NivelBase" type="Node2D" unique_id=76547120]
 script = ExtResource("1_cw823")
@@ -24,27 +24,26 @@ editor_description = "Colisiones que impiden salir del camino. Los dibujos se ed
 collision_mask = 0
 
 [node name="Colision Superior" type="CollisionShape2D" parent="Limites Nivel/Pared Superior" unique_id=2008038970]
-position = Vector2(2369, 37)
+position = Vector2(613.5, 37)
 shape = SubResource("RectangleShape2D_vniob")
 
 [node name="Pared Inferior" type="StaticBody2D" parent="Limites Nivel" unique_id=643306684]
 collision_mask = 0
 
 [node name="Colision Inferior" type="CollisionShape2D" parent="Limites Nivel/Pared Inferior" unique_id=831492881]
-position = Vector2(2383, 192)
+position = Vector2(612, 194)
 shape = SubResource("RectangleShape2D_vniob")
 
 [node name="Paredes Laterales" type="StaticBody2D" parent="Limites Nivel" unique_id=198738552]
 collision_mask = 0
 
 [node name="Colision Izquierda" type="CollisionShape2D" parent="Limites Nivel/Paredes Laterales" unique_id=92506176]
-position = Vector2(-8, 100)
+position = Vector2(-8, 115.75)
 shape = SubResource("RectangleShape2D_lateral")
 
 [node name="Colision Derecha" type="CollisionShape2D" parent="Limites Nivel/Paredes Laterales" unique_id=2063665166]
-position = Vector2(4808, 100)
+position = Vector2(1234, 114.5)
 shape = SubResource("RectangleShape2D_lateral")
-disabled = true
 
 [node name="Camara Nivel" type="Camera2D" parent="." unique_id=53130753]
 editor_description = "Sigue al jugador mas adelantado. Anticipacion y suavizado se ajustan en el nodo Nivel 1."

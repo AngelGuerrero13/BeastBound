@@ -37,7 +37,7 @@ extends Node2D
 
 var oleada_actual: int = 1
 var enemigos_vivos: int = 0
-var total_oleadas: int = 5
+var total_oleadas: int = 1
 var cambiando_escena: bool = false
 
 func _ready() -> void:
@@ -55,6 +55,7 @@ func _ready() -> void:
 	if zona_salida:
 		zona_salida.set_deferred("monitoring", false)
 		zona_salida.body_entered.connect(_on_salida_body_entered)
+		zona_salida.body_exited.connect(_on_salida_body_exited)
 	if label_vamos:
 		label_vamos.visible = false
 	if fundido:
@@ -167,7 +168,6 @@ func mostrar_vamos() -> void:
 	label_vamos.visible = true
 	label_vamos.modulate.a = 1.0
 	
-	# Parpadea durante unos segundos y luego se oculta
 	var tween = create_tween()
 	var parpadeos = int(duracion_vamos / 0.8)
 	for i in range(parpadeos):
@@ -175,21 +175,54 @@ func mostrar_vamos() -> void:
 		tween.tween_property(label_vamos, "modulate:a", 1.0, 0.4)
 	tween.tween_callback(func(): label_vamos.visible = false)
 
+var jugadores_en_zona: Array[Node2D] = []
+
 func _on_salida_body_entered(body: Node2D) -> void:
+	print("Entró: ", body.name, " | grupos: ", body.get_groups())
 	if cambiando_escena or not body.is_in_group("Jugador"):
 		return
-	
-	# Todos los jugadores vivos deben estar dentro de la zona
+		
+	if not body in jugadores_en_zona:
+		jugadores_en_zona.append(body)
+		
+	_verificar_transicion()
+
+func _on_salida_body_exited(body: Node2D) -> void:
+	if body.is_in_group("Jugador") and body in jugadores_en_zona:
+		jugadores_en_zona.erase(body)
+
+func _verificar_transicion() -> void:
+	if cambiando_escena:
+		return
+
+	var nivel := get_parent()
+	var dentro := zona_salida.get_overlapping_bodies()
+	var hay_jugador_vivo := false
+
 	for j in get_tree().get_nodes_in_group("Jugador"):
-		if not zona_salida.overlaps_body(j):
+		if not nivel.is_ancestor_of(j):
+			continue
+		if not is_instance_valid(j) or j.is_queued_for_deletion():
+			continue
+		if not j.is_inside_tree() or not j is PhysicsBody2D:
+			continue
+		if "es_jugador" in j and not j.es_jugador:
+			continue
+		if "vida" in j and j.vida <= 0:
+			continue
+
+		hay_jugador_vivo = true
+		if not j in dentro:
 			return
-	
-	ir_al_jefe()
+
+	if hay_jugador_vivo:
+		ir_al_jefe()
 
 func ir_al_jefe() -> void:
 	if escena_jefe == "":
-		print("Falta asignar la escena del jefe en el inspector.")
+		push_error("ERROR: Falta asignar la escena del jefe.")
 		return
+		
 	cambiando_escena = true
 	
 	if fundido:
@@ -197,4 +230,4 @@ func ir_al_jefe() -> void:
 		tween.tween_property(fundido, "modulate:a", 1.0, 0.8)
 		await tween.finished
 	
-	get_tree().change_scene_to_file(escena_jefe)
+	get_tree().call_deferred("change_scene_to_file", escena_jefe)

@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://cu5eg1o0kbq4p"]
+
+[ext_resource type="PackedScene" uid="uid://c3nrxyj8e7jxp" path="res://niveles/plantilla_niveles/nivel_jefe_base/nivel_jefe_base.tscn" id="1_hlybh"]
+
+[node name="JefeNivel1" unique_id=76547120 instance=ExtResource("1_hlybh")]

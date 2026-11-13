@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://c3nrxyj8e7jxp"]
+
+[ext_resource type="PackedScene" uid="uid://c70rple81urpg" path="res://niveles/plantilla_niveles/nivel_base/nivel_base.tscn" id="1_y12bo"]
+[ext_resource type="PackedScene" uid="uid://bcenw2rnuxqwv" path="res://niveles/spawn/puntos_spawn.tscn" id="2_5myg4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5myg4"]
+size = Vector2(892, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h6hl3"]
+size = Vector2(893.5, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_07rpb"]
+size = Vector2(20, 139)
+
+[node name="NivelJefeBase" unique_id=76547120 instance=ExtResource("1_y12bo")]
+
+[node name="PuntosSpawn" parent="." index="2" unique_id=1222723644 instance=ExtResource("2_5myg4")]
+position = Vector2(20, 111)
+
+[node name="Colision Superior" parent="Limites Nivel/Pared Superior" parent_id_path=PackedInt32Array(532228778) index="0" unique_id=2008038970]
+position = Vector2(429, 37)
+shape = SubResource("RectangleShape2D_5myg4")
+
+[node name="Colision Inferior" parent="Limites Nivel/Pared Inferior" parent_id_path=PackedInt32Array(643306684) index="0" unique_id=831492881]
+position = Vector2(428.25, 194)
+shape = SubResource("RectangleShape2D_h6hl3")
+
+[node name="Colision Derecha" parent="Limites Nivel/Paredes Laterales" parent_id_path=PackedInt32Array(198738552) index="1" unique_id=2063665166]
+position = Vector2(866, 116)
+
+[node name="GestorJefe" type="Node2D" parent="." index="5" unique_id=1341069168]
+
+[node name="PosicionJefe" type="Marker2D" parent="GestorJefe" index="0" unique_id=182908284]
+position = Vector2(556, 118)
+
+[node name="ZonaSalida" type="Area2D" parent="GestorJefe" index="1" unique_id=446009715]
+position = Vector2(789, 113)
+collision_layer = 0
+collision_mask = 2
+
+[node name="AreaActivacion" type="CollisionShape2D" parent="GestorJefe/ZonaSalida" index="0" unique_id=1153791471]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_07rpb")

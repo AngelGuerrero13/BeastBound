@@ -13,7 +13,7 @@ size = Vector2(13, 34)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_py2p6"]
 size = Vector2(155, 71)
 
-[node name="Guerrero" unique_id=1382673604 instance=ExtResource("1_d0xoe")]
+[node name="Guerrero" unique_id=1382673604 groups=["Jugador"] instance=ExtResource("1_d0xoe")]
 collision_layer = 2
 collision_mask = 13
 script = ExtResource("2_guerrero")

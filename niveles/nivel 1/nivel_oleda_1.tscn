@@ -147,8 +147,20 @@ texture = ExtResource("2_md6ks")
 [sub_resource type="TileSet" id="TileSet_oyqr2"]
 sources/0 = SubResource("TileSetAtlasSource_bryn1")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_salida"]
-size = Vector2(32, 168)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oyqr2"]
+size = Vector2(4830, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j610q"]
+size = Vector2(4829, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t41ti"]
+size = Vector2(16, 164)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ipki5"]
+size = Vector2(16, 164)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q2k40"]
+size = Vector2(20, 166)
 
 [node name="NivelOleda1" unique_id=76547120 node_paths=PackedStringArray("suelo") instance=ExtResource("1_gg34e")]
 script = ExtResource("2_oyqr2")
@@ -302,13 +314,37 @@ rendering_quadrant_size = 8
 collision_enabled = false
 navigation_enabled = false
 
-[node name="Salida Derecha" type="Area2D" parent="." index="6" unique_id=1145922088]
-editor_description = "Al atravesar el extremo derecho se entra al Nivel 2. Destino editable en la raiz: Siguiente Nivel."
-position = Vector2(4824, 100)
-collision_layer = 0
-collision_mask = 2
+[node name="Colision Superior" parent="Limites Nivel/Pared Superior" parent_id_path=PackedInt32Array(532228778) index="0" unique_id=2008038970]
+position = Vector2(2401, 38)
+shape = SubResource("RectangleShape2D_oyqr2")
 
-[node name="Colision Salida" type="CollisionShape2D" parent="Salida Derecha" index="0" unique_id=756222085]
-shape = SubResource("RectangleShape2D_salida")
+[node name="Colision Inferior" parent="Limites Nivel/Pared Inferior" parent_id_path=PackedInt32Array(643306684) index="0" unique_id=831492881]
+position = Vector2(2400.5, 219)
+shape = SubResource("RectangleShape2D_j610q")
 
-[connection signal="body_entered" from="Salida Derecha" to="." method="_salir_del_nivel"]
+[node name="Colision Izquierda" parent="Limites Nivel/Paredes Laterales" parent_id_path=PackedInt32Array(198738552) index="0" unique_id=92506176]
+position = Vector2(-6, 129)
+shape = SubResource("RectangleShape2D_t41ti")
+
+[node name="Colision Derecha" parent="Limites Nivel/Paredes Laterales" parent_id_path=PackedInt32Array(198738552) index="1" unique_id=2063665166]
+position = Vector2(4807, 128)
+shape = SubResource("RectangleShape2D_ipki5")
+
+[node name="GestorOleadas" parent="." index="4" unique_id=61592127]
+escena_jefe = "uid://cu5eg1o0kbq4p"
+
+[node name="Emboscada 2" parent="GestorOleadas/Emboscadas" parent_id_path=PackedInt32Array(360792914) index="1" unique_id=202051366]
+visible = true
+
+[node name="Emboscada 3" parent="GestorOleadas/Emboscadas" parent_id_path=PackedInt32Array(360792914) index="2" unique_id=1391179913]
+visible = true
+
+[node name="AreaActivacion" parent="GestorOleadas/Emboscadas/Emboscada 3" index="0" unique_id=1036715267]
+visible = true
+
+[node name="PuntoSpawn" parent="GestorOleadas/Emboscadas/Emboscada 3" index="1" unique_id=1306223896]
+visible = true
+
+[node name="AreaActivacion" parent="GestorOleadas/ZonaSalida" parent_id_path=PackedInt32Array(100756854) index="0" unique_id=80546213]
+position = Vector2(0, 27)
+shape = SubResource("RectangleShape2D_q2k40")

@@ -23,7 +23,7 @@ _data = {
 &"frame": SubResource("Animation_toitm")
 }
 
-[node name="Tanque" unique_id=1382673604 instance=ExtResource("1_ltgak")]
+[node name="Tanque" unique_id=1382673604 groups=["Jugador"] instance=ExtResource("1_ltgak")]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("2_wd2uv")
