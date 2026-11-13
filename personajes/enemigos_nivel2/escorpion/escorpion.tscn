@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cw7t1htaxqm4b"]
+
+[ext_resource type="PackedScene" uid="uid://bjp30gibi1pc" path="res://personajes/enemigos_nivel1/hongo_cac/hongo_CaC(nivel1).tscn" id="1_myp08"]
+[ext_resource type="Script" uid="uid://dib4nosyq76ff" path="res://personajes/enemigos_nivel2/escorpion/escorpion.gd" id="2_cwi25"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cwi25"]
+load_path = "res://.godot/imported/hongo simple.png-dc1914936760a1cdb787e6e361c6b175.ctex"
+
+[node name="Escorpion" unique_id=1382673604 instance=ExtResource("1_myp08")]
+script = ExtResource("2_cwi25")
+
+[node name="Imagen Personaje" parent="." index="1" unique_id=647587542]
+texture = SubResource("CompressedTexture2D_cwi25")
