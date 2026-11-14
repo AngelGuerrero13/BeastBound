@@ -1,5 +1,8 @@
 extends "res://personajes/proyectil_base.gd"
 
+@export var velocidad_bola_fuego: float = 300.0
+@export var velocidad_bola_fuego_cargada: float = 200.0
+
 var objetivo: Node2D = null
 var es_ataque_cargado: bool = false
 
@@ -12,9 +15,9 @@ func _ready() -> void:
 func configurar_bola(nuevo_objetivo: Node2D, cargado: bool, direccion_base: Vector2) -> void:
 	objetivo = nuevo_objetivo
 	es_ataque_cargado = cargado
-	
+
 	var dano_final = 2 if es_ataque_cargado else 1
-	velocidad = 200.0 if es_ataque_cargado else 300.0
+	velocidad = velocidad_bola_fuego_cargada if es_ataque_cargado else velocidad_bola_fuego
 	scale = Vector2(3, 3) if es_ataque_cargado else Vector2(1, 1)
 
 	super.configurar(direccion_base, true, dano_final)

@@ -11,13 +11,12 @@ size = Vector2(25, 44)
 size = Vector2(7.5147395, 3.7973418)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_st51s"]
-radius = 10.552878
+radius = 8.601622
 
 [node name="hongo_CaC" unique_id=1382673604 instance=ExtResource("1_d5whp")]
 script = ExtResource("2_vfe3u")
 tiempo_anticipacion = 0.35
 distancia_ataque_melee = 60.0
-velocidad = 200.0
 rango_ataque = 30.0
 tiempo_recarga_normal = 2.0
 
@@ -44,12 +43,12 @@ position = Vector2(-0.99998856, 5.722046e-06)
 shape = SubResource("RectangleShape2D_4vuwf")
 
 [node name="ZonaImpacto" type="Area2D" parent="." index="7" unique_id=1721791531]
-position = Vector2(-32, 24)
+position = Vector2(-33, 22)
 collision_layer = 0
 collision_mask = 2
 
 [node name="HitboxCabezazo" type="CollisionShape2D" parent="ZonaImpacto" index="0" unique_id=830055918]
-position = Vector2(0, 1)
+position = Vector2(0, -1.9073486e-06)
 scale = Vector2(1.145, 1.145)
 shape = SubResource("CircleShape2D_st51s")
 disabled = true

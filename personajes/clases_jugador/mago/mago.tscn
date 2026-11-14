@@ -37,15 +37,14 @@ collision_layer = 2
 collision_mask = 13
 script = ExtResource("2_wiglv")
 escena_bola_magica = ExtResource("3_wiglv")
-vida_maxima = 8
-vida = 8
+vida_maxima = 4
+vida = 4
 velocidad = 100.0
 velocidad_ataque = 4.0
 rango_ataque = 1.0
 desfase_horizontal_sprite = 8.0
 fuerza_salto = 200.0
 retrato = ExtResource("5_1d17s")
-tiempo_requerido = 2.0
 
 [node name="Sombra" parent="." index="0" unique_id=1873168614]
 position = Vector2(0, 25)
@@ -65,7 +64,7 @@ position = Vector2(-8, 3)
 shape = SubResource("RectangleShape2D_4vuwf")
 
 [node name="Origen Disparo" type="Marker2D" parent="." index="4" unique_id=2094006370]
-position = Vector2(6, -11)
+position = Vector2(14, -3)
 
 [node name="Animaciones Personaje" parent="." index="5" unique_id=1895968384]
 libraries/ = SubResource("AnimationLibrary_idle")

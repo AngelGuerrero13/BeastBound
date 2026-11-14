@@ -319,7 +319,7 @@ position = Vector2(2401, 38)
 shape = SubResource("RectangleShape2D_oyqr2")
 
 [node name="Colision Inferior" parent="Limites Nivel/Pared Inferior" parent_id_path=PackedInt32Array(643306684) index="0" unique_id=831492881]
-position = Vector2(2400.5, 219)
+position = Vector2(2400, 193)
 shape = SubResource("RectangleShape2D_j610q")
 
 [node name="Colision Izquierda" parent="Limites Nivel/Paredes Laterales" parent_id_path=PackedInt32Array(198738552) index="0" unique_id=92506176]
@@ -332,6 +332,9 @@ shape = SubResource("RectangleShape2D_ipki5")
 
 [node name="GestorOleadas" parent="." index="4" unique_id=61592127]
 escena_jefe = "uid://cu5eg1o0kbq4p"
+
+[node name="Emboscada 1" parent="GestorOleadas/Emboscadas" parent_id_path=PackedInt32Array(360792914) index="0" unique_id=739327426]
+enemigos = Array[PackedScene]([])
 
 [node name="Emboscada 2" parent="GestorOleadas/Emboscadas" parent_id_path=PackedInt32Array(360792914) index="1" unique_id=202051366]
 visible = true

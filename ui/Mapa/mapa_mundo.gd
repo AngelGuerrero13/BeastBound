@@ -37,9 +37,16 @@ func _process(_delta: float) -> void:
 		if indice_actual > 0:
 			viajar_a_nivel(indice_actual - 1)
 			
-	if Input.is_action_just_pressed("ui_accept"):
+	if alguien_acepta():
 		entrar_al_nivel()
 
+func alguien_acepta() -> bool:
+	for prefijo in ["p1", "p2", "p3", "p4"]:
+		if Input.is_action_just_pressed(prefijo + "_unirse"):
+			return true
+	return false
+	
+	
 func entrar_al_nivel() -> void:
 	if indice_actual < escenas_niveles.size() and escenas_niveles[indice_actual] != null:
 		var escena_seleccionada = escenas_niveles[indice_actual]

@@ -46,6 +46,7 @@ var esta_atacando: bool = false
 var esta_cargando: bool = false
 var tiempo_cargado: float = 0.0
 var ya_disparo_cargado: bool = false
+var esta_aturdido: bool = false
 
 func _ready() -> void:
 
@@ -78,6 +79,9 @@ func _process(delta: float) -> void:
 	manejar_ataque_cargado(delta)
 
 func manejar_ataque_normal() -> void:
+	if esta_aturdido:
+		return
+	
 	if Input.is_action_just_pressed(prefijo_input + "_ataque_normal") and puede_atacar_normal:
 		puede_atacar_normal = false
 		esta_atacando = true
@@ -88,6 +92,13 @@ func manejar_ataque_normal() -> void:
 		esta_atacando = false
 
 func manejar_ataque_cargado(delta: float) -> void:
+	if esta_aturdido:
+		tiempo_cargado = 0.0
+		if barra_carga:
+			barra_carga.visible = false
+			barra_carga.value = 0.0
+		return
+	
 	if Input.is_action_pressed(prefijo_input + "_ataque_cargado"):
 		esta_cargando = true
 		if barra_carga: barra_carga.visible = true
@@ -117,7 +128,7 @@ func manejar_movimiento() -> void:
 	if not es_jugador:
 		return
 
-	if esta_atacando or esta_cargando:
+	if esta_atacando or esta_cargando or esta_aturdido:
 		velocity = Vector2.ZERO
 		return
 
@@ -162,7 +173,7 @@ func manejar_gravedad_y_salto(delta: float) -> void:
 			velocidad_vertical = 0.0
 			en_suelo = true
 	else:
-		if es_jugador and Input.is_action_just_pressed(prefijo_input + "_salto"):
+		if es_jugador and not esta_aturdido and Input.is_action_just_pressed(prefijo_input + "_salto"):
 			saltar()
 
 	if sprite:
@@ -224,6 +235,15 @@ func recibir_dano(cantidad: int) -> void:
 func es_enemigo(c: Node) -> bool:
 	return c != self and c.has_method("recibir_dano") \
 		and "es_jugador" in c and c.es_jugador != es_jugador
+
+func aturdir(duracion: float) -> void:
+	esta_aturdido = true
+	velocity = Vector2.ZERO
+	esta_cargando = false
+	tiempo_cargado = 0.0
+	await get_tree().create_timer(duracion).timeout
+	if vida > 0:
+		esta_aturdido = false
 
 func morir() -> void:
 	print(name, " ha muerto.")

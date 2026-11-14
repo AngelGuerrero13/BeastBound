@@ -35,7 +35,12 @@ duracion_escudo = 4.0
 recarga_escudo = 10.0
 velocidad_escudo = 80.0
 duracion_aturdimiento = 1.5
+vida_maxima = 10
 vida = 10
+velocidad = 100.0
+velocidad_ataque = 4.0
+rango_ataque = 1.0
+fuerza_salto = 200.0
 retrato = ExtResource("3_kluja")
 
 [node name="Sombra" parent="." index="0" unique_id=1873168614]

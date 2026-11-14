@@ -1,9 +1,9 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene format=3 uid="uid://c8lnyfwjy10u5"]
 
-[ext_resource type="Script" path="res://ui/carga.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/art/fondos/carga/fondo_carga_aprobado.png" id="2_fondo"]
-[ext_resource type="FontFile" path="res://assets/art/fuentes/alagard.ttf" id="3_fuente"]
-[ext_resource type="Theme" path="res://ui/tema_partidas.tres" id="4_tema"]
+[ext_resource type="Script" uid="uid://bcqvjqh6hey3q" path="res://ui/carga.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://bjjih1dcc128f" path="res://assets/art/fondos/carga/fondo_carga_aprobado.png" id="2_fondo"]
+[ext_resource type="FontFile" uid="uid://bjejslilhfrgo" path="res://assets/art/fuentes/alagard.ttf" id="3_fuente"]
+[ext_resource type="Theme" uid="uid://yrjkfcaf3t3y" path="res://ui/tema_partidas.tres" id="4_tema"]
 
 [sub_resource type="AtlasTexture" id="Fondo_panoramico"]
 resource_name = "Encuadre Orilla"
@@ -23,22 +23,22 @@ border_width_bottom = 1
 border_color = Color(0.7, 0.66, 0.41, 0.8)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
-corner_radius_bottom_left = 3
 corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 anti_aliasing = false
 
-[node name="Pantalla Carga" type="Control"]
+[node name="Pantalla Carga" type="Control" unique_id=783721737]
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture_filter = 1
 theme = ExtResource("4_tema")
 script = ExtResource("1_script")
 
-[node name="Fondo" type="TextureRect" parent="."]
+[node name="Fondo" type="TextureRect" parent="." unique_id=544013488]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -49,7 +49,7 @@ mouse_filter = 2
 texture = SubResource("Fondo_panoramico")
 expand_mode = 1
 
-[node name="Panel Carga" type="PanelContainer" parent="."]
+[node name="Panel Carga" type="PanelContainer" parent="." unique_id=768821789]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -65,12 +65,12 @@ grow_vertical = 0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("Placa_carga")
 
-[node name="Estado" type="VBoxContainer" parent="Panel Carga"]
+[node name="Estado" type="VBoxContainer" parent="Panel Carga" unique_id=1964458490]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="Texto Estado" type="Label" parent="Panel Carga/Estado"]
+[node name="Texto Estado" type="Label" parent="Panel Carga/Estado" unique_id=687065203]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.96, 0.8, 1)
 theme_override_fonts/font = ExtResource("3_fuente")
@@ -79,7 +79,7 @@ text = "Cargando..."
 horizontal_alignment = 2
 autowrap_mode = 2
 
-[node name="Porcentaje" type="Label" parent="Panel Carga/Estado"]
+[node name="Porcentaje" type="Label" parent="Panel Carga/Estado" unique_id=1097349178]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.96, 0.8, 1)
 theme_override_fonts/font = ExtResource("3_fuente")
@@ -87,7 +87,7 @@ theme_override_font_sizes/font_size = 20
 text = "0 %"
 horizontal_alignment = 2
 
-[node name="Boton Volver" type="Button" parent="."]
+[node name="Boton Volver" type="Button" parent="." unique_id=81972062]
 visible = false
 layout_mode = 1
 anchors_preset = 2

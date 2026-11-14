@@ -35,8 +35,10 @@ animations = [{
 
 [node name="Bola Fuego" type="Area2D" unique_id=414202563]
 collision_layer = 16
-collision_mask = 12
+collision_mask = 28
 script = ExtResource("1_pgaii")
+velocidad_bola_fuego = 200.0
+distancia_maxima = 200.0
 
 [node name="Colision Proyectil" type="CollisionShape2D" parent="." unique_id=1357159020]
 position = Vector2(-4, 0)

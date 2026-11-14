@@ -16,9 +16,11 @@ animations = [{
 [node name="Flecha Raton" type="Area2D" unique_id=1466687007]
 editor_description = "Asta y Punta son nodos editables dentro de Imagen Flecha. Movimiento y colisión heredados del proyectil base."
 texture_filter = 1
-collision_layer = 0
-collision_mask = 4
+collision_layer = 16
+collision_mask = 28
 script = ExtResource("1_2010l")
+velocidad_flecha = 200.0
+distancia_maxima = 300.0
 
 [node name="Imagen Flecha" type="AnimatedSprite2D" parent="." unique_id=564810317]
 sprite_frames = SubResource("Animaciones")

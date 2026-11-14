@@ -24,11 +24,13 @@ costo_definitiva = 100.0
 tiempo_anticipacion_golpe = 0.1
 multiplicador_dano_cargado = 2.0
 multiplicador_dano_definitiva = 5.0
-vida_maxima = 10
-vida = 10
-velocidad = 230.0
+vida_maxima = 8
+vida = 8
+velocidad = 100.0
+velocidad_ataque = 4.0
 rango_ataque = 55.0
 sprite_mira_izquierda = false
+fuerza_salto = 200.0
 retrato = ExtResource("2_hgg11")
 tiempo_recarga_normal = 0.25
 

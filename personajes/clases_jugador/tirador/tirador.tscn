@@ -117,6 +117,9 @@ script = ExtResource("2_5qkhx")
 escena_flecha = ExtResource("3_h0gl3")
 angulo_flechas_cargado = 15.0
 multiplicador_dano_cargado = 1.0
+velocidad = 100.0
+velocidad_ataque = 4.0
+fuerza_salto = 200.0
 retrato = ExtResource("3_mycs7")
 
 [node name="Animacion Raton" type="AnimatedSprite2D" parent="Imagen Personaje" parent_id_path=PackedInt32Array(647587542) index="0" unique_id=1693731078]

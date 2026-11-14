@@ -34,8 +34,10 @@ func _on_area_entered(area: Area2D) -> void:
 	
 	print("Proyectil tocó el área de: ", victima.name)
 	
-	if victima.has_method("recibir_dano") and "es_jugador" in victima:
-		if victima.es_jugador != disparado_por_jugador:
-			victima.recibir_dano(dano)
-			
+	if not (victima.has_method("recibir_dano") and "es_jugador" in victima):
+		return
+	if victima.es_jugador == disparado_por_jugador:
+		return
+
+	victima.recibir_dano(dano)
 	queue_free()

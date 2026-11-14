@@ -4,47 +4,63 @@
 [ext_resource type="Script" uid="uid://c80dsxodm6tqo" path="res://personajes/enemigos_nivel1/hongo_tanque/hongo_tanque.gd" id="2_ntd21"]
 [ext_resource type="Texture2D" uid="uid://cdrxn4f1axudj" path="res://assets/art/personajes/enemigos/nivel 1/tanque/HongoMalvadoo.png" id="3_8c0j1"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r6eng"]
+size = Vector2(44, 47)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mnmdw"]
 size = Vector2(7, 3)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_g3u5t"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8c0j1"]
+size = Vector2(20, 38)
 
 [node name="Hongo tanque" unique_id=1382673604 instance=ExtResource("1_0j34q")]
 script = ExtResource("2_ntd21")
-velocidad_embestida = 600.0
+velocidad_embestida = 240.0
 distancia_activacion_embestida = 170.0
 tiempo_recarga_embestida = 4.0
+duracion_aturdimiento = 1.0
+multiplicador_dano_embestida = 2.0
 vida_maxima = 20
 vida = 20
 velocidad = 80.0
 rango_ataque = 30.0
 
 [node name="Sombra" parent="." index="0" unique_id=1873168614]
-visible = false
+position = Vector2(0, 23)
+scale = Vector2(1.9285715, 1)
 
 [node name="Imagen Personaje" parent="." index="1" unique_id=647587542]
 position = Vector2(-1, -11.000001)
 scale = Vector2(1.5, 1.394)
 texture = ExtResource("3_8c0j1")
 
-[node name="Colision Cuerpo" parent="." index="2" unique_id=1954197429]
-visible = false
+[node name="Colision Sombra" parent="." index="2" unique_id=1812325256]
+position = Vector2(0, 23)
 
-[node name="Colision Sombra" parent="." index="3" unique_id=1812325256]
-visible = false
+[node name="HitBox" parent="." index="3" unique_id=1019743775]
+collision_layer = 4
+collision_mask = 19
 
-[node name="Barra Vida Enemigo" parent="." index="6" unique_id=26031977]
-visible = false
+[node name="Colision Cuerpo" parent="HitBox" index="0" unique_id=862487744]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_r6eng")
 
 [node name="CollisionShape2D" parent="AreaDeteccion" parent_id_path=PackedInt32Array(1027424982) index="0" unique_id=885380396]
 position = Vector2(-5.9604645e-08, 1.1920929e-07)
 shape = SubResource("RectangleShape2D_mnmdw")
 
+[node name="Barra Vida Enemigo" parent="." index="7" unique_id=26031977]
+offset_left = -7.0
+offset_top = -29.0
+offset_right = 41.0
+offset_bottom = -11.0
+
 [node name="AreaEmbestida" type="Area2D" parent="." index="8" unique_id=986379505]
+position = Vector2(-30, 10)
+collision_mask = 2
 
 [node name="HitboxFrontal" type="CollisionShape2D" parent="AreaEmbestida" index="0" unique_id=354415447]
-position = Vector2(-10, 0)
-shape = SubResource("CircleShape2D_g3u5t")
-disabled = true
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_8c0j1")
 
 [connection signal="body_entered" from="AreaEmbestida" to="." method="_on_area_embestida_body_entered"]

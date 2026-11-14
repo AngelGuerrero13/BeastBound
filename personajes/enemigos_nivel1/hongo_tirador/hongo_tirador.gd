@@ -6,6 +6,8 @@ extends "res://personajes/enemigoBasico/enemigo_basico.gd"
 @export var distancia_disparo_max: float = 350.0
 @export var tiempo_recarga_espora: float = 2.5
 
+@onready var punto_disparo: Marker2D = $"Origen Disparo"
+
 func _ready() -> void:
 	super()
 	diccionario_cooldowns["disparo_espora"] = 0.0
@@ -39,7 +41,7 @@ func iniciar_ataque(ataque: String) -> void:
 		if escena_espora:
 			var espora = escena_espora.instantiate()
 			get_tree().current_scene.add_child(espora)
-			espora.global_position = global_position + Vector2(0, -10)
+			espora.global_position = global_position + Vector2(abs(punto_disparo.position.x) * dir.x, punto_disparo.position.y)
 			espora.configurar(dir, false, dano)
 
 		await get_tree().create_timer(0.5).timeout

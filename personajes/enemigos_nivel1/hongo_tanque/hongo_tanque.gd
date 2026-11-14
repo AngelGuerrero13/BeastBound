@@ -3,10 +3,12 @@ extends "res://personajes/enemigoBasico/enemigo_basico.gd"
 @export var velocidad_embestida: float = 600.0 
 @export var distancia_activacion_embestida: float = 170.0
 @export var tiempo_recarga_embestida: float = 4.0
+@export var duracion_aturdimiento: float = 1.0
+@export var multiplicador_dano_embestida: float = 2.0
 
 var esta_embistiendo: bool = false
 var direccion_embestida: Vector2 = Vector2.ZERO
-var ya_golpeo_embestida: bool = false
+var jugadores_golpeados: Array = []
 
 @onready var hitbox_frontal: CollisionShape2D = $AreaEmbestida/HitboxFrontal
 
@@ -40,7 +42,7 @@ func mover_hacia_objetivo(distancia: float) -> void:
 
 func iniciar_embestida() -> void:
 	esta_embistiendo = true
-	ya_golpeo_embestida = false
+	jugadores_golpeados.clear()
 	aplicar_cooldown("embestida", tiempo_recarga_embestida)
 	
 	direccion_embestida = Vector2.ZERO
@@ -54,7 +56,12 @@ func iniciar_embestida() -> void:
 	voltear_hacia(direccion_embestida.x)
 
 	if hitbox_frontal: hitbox_frontal.set_deferred("disabled", false)
-	await get_tree().create_timer(0.5).timeout 
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	for cuerpo in $AreaEmbestida.get_overlapping_bodies():
+		_on_area_embestida_body_entered(cuerpo)
+	
+	await get_tree().create_timer(0.5).timeout
 	if hitbox_frontal: hitbox_frontal.set_deferred("disabled", true)
 	
 	esta_embistiendo = false
@@ -74,8 +81,10 @@ func iniciar_ataque_lento() -> void:
 	puede_atacar_normal = true
 
 func _on_area_embestida_body_entered(body: Node2D) -> void:
-	if body == self or ya_golpeo_embestida:
+	if body == self or body in jugadores_golpeados:
 		return
 	if esta_embistiendo and body.is_in_group("Jugador") and body.has_method("recibir_dano"):
-		ya_golpeo_embestida = true
-		body.recibir_dano(dano * 2)
+		jugadores_golpeados.append(body)
+		body.recibir_dano(int(dano * multiplicador_dano_embestida))
+		if body.has_method("aturdir"):
+			body.aturdir(duracion_aturdimiento)
