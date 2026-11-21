@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://2o667mrw4oiq"]
+
+[ext_resource type="PackedScene" uid="uid://di2623p60lpat" path="res://personajes/enemigoBasico/enemigo_basico.tscn" id="1_epk3d"]
+[ext_resource type="Script" uid="uid://bna71o75yb22n" path="res://personajes/enemigos_nivel2/jefe_nivel2/jefe_nivel_2.gd" id="2_0exwo"]
+[ext_resource type="Script" uid="uid://d3u0yqjivhhge" path="res://personajes/enemigos_nivel2/jefe_nivel2/hit_box.gd" id="3_6jey6"]
+[ext_resource type="Script" uid="uid://lut1soiocjyy" path="res://personajes/enemigos_nivel2/jefe_nivel2/nucleo_talus.gd" id="3_hqimr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hqimr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0exwo"]
+radius = 15.0
+
+[node name="jefe nivel 2" unique_id=1382673604 instance=ExtResource("1_epk3d")]
+script = ExtResource("2_0exwo")
+reduccion_dano_cuerpo = 0.9
+velocidad_fase_2 = 30.0
+vida_maxima = 50
+velocidad = 30.0
+
+[node name="HitBox" parent="." index="3" unique_id=1019743775]
+script = ExtResource("3_6jey6")
+
+[node name="Colision Cuerpo" parent="HitBox" index="0" unique_id=862487744]
+shape = SubResource("RectangleShape2D_hqimr")
+
+[node name="Nucleo" type="Area2D" parent="." index="4" unique_id=1528138126]
+collision_layer = 4
+script = ExtResource("3_hqimr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Nucleo" index="0" unique_id=1559762241]
+shape = SubResource("CircleShape2D_0exwo")

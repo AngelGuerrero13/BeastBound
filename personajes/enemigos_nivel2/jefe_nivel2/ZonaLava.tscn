@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://cd8u2ia6op24l"]
+
+[ext_resource type="Script" uid="uid://1g3agc6pnu8t" path="res://personajes/enemigos_nivel2/jefe_nivel2/zona_lava.gd" id="1_ucch6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o75lj"]
+radius = 25.0
+
+[node name="ZonaLava" type="Area2D" unique_id=620214968]
+script = ExtResource("1_ucch6")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1625440024]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=576714268]
+shape = SubResource("CircleShape2D_o75lj")
+one_way_collision = true
