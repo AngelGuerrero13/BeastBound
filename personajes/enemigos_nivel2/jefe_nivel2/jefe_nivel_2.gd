@@ -9,13 +9,29 @@ enum Fase {
 	LAVA,
 	DERROTADO
 }
-
+var estado: String = "patrullando"
 var fase_actual = Fase.PIEDRA
+@onready var imagen_personaje: Sprite2D = $"Imagen Personaje"
+
+@export var textura_piedra: Texture2D
+@export var textura_lava: Texture2D
+
+@export_group("Patrullaje Talus")
+@export var ancho_patruya: float = 200.0
+@export var alto_patruya: float = 140.0
+@export var velocidad_patruya: float = 35.0
+@export var probabilidad_vertical: float = 0.30
+@export var pausa_patruya: float = 0.5
 
 @export var reduccion_dano_cuerpo: float = 0.9
 @export var velocidad_fase_2: float = 30.0
 @export_group("Rastro de lava")
 @export var distancia_entre_charcos: float  = 20.0
+@onready var boss_health_bar = $CanvasLayer/BossHealthBar
+var direccion: int = 1
+var posicion_inicial: Vector2
+var destino_patruya: Vector2
+var esperando_patruya: bool = false
 
 var escena_zona_lava = preload("res://personajes/enemigos_nivel2/jefe_nivel2/ZonaLava.tscn")
 var ultima_posicion_lava: Vector2
@@ -27,7 +43,13 @@ func _ready() -> void:
 	velocidad = 30.0
 	
 	super._ready()
+	if textura_piedra:
+		imagen_personaje.texture = textura_piedra
+
 	ultima_posicion_lava = global_position
+	posicion_inicial = global_position
+	destino_patruya = posicion_inicial
+	elegir_destino_patruya()
 
 func recibir_dano_talus(cantidad: float, es_nucleo: bool) -> void:
 	if fase_actual == Fase.TRANSFORMACION:
@@ -50,13 +72,15 @@ func recibir_dano_talus(cantidad: float, es_nucleo: bool) -> void:
 	
 	if barra_vida_enemigo:
 		barra_vida_enemigo.value = vida
-	
-	if vida <= 0:
-		if fase_actual == Fase.PIEDRA:
-			transformar_en_lava()
-		else:
-			derrotar_talus()
 
+
+	if fase_actual == Fase.PIEDRA and vida <= vida_maxima * 0.30:
+		transformar_en_lava()
+	elif fase_actual == Fase.LAVA and vida <= 0:
+		derrotar_talus()
+		
+func cambiar_apariencia_lava() -> void:
+	imagen_personaje.texture = textura_lava
 func recibir_dano(cantidad: int) -> void:
 	recibir_dano_talus(float(cantidad), false)
 	
@@ -86,7 +110,8 @@ func transformar_en_lava() -> void:
 	
 	fase_actual = Fase.LAVA
 	esta_atacando = false
-	
+	cambiar_apariencia_lava()
+	ultima_posicion_lava = global_position
 	vida = vida_maxima
 	velocidad = velocidad_fase_2
 	dano = 5
@@ -109,11 +134,37 @@ func derrotar_talus() -> void:
 	talus_derrotado.emit()
 	queue_free()
 	
+
 func _physics_process(delta: float) -> void:
-	super._physics_process(delta)
+	if fase_actual == Fase.TRANSFORMACION or fase_actual == Fase.DERROTADO:
+		velocity = Vector2.ZERO
+		return
+
+	if esta_atacando or vida <= 0:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+		
+	if jugador_objetivo != null and is_instance_valid(jugador_objetivo):
+		estado = "persiguiendo"
+		var distancia = global_position.distance_to(jugador_objetivo.global_position)
+		var ataque = decidir_ataque(distancia)
+		if ataque != "":
+			estado = "atacando"
+			iniciar_ataque(ataque)
+			velocity = Vector2.ZERO
+		else:
+			mover_hacia_objetivo(distancia)
+		
+	else:
+		estado = "patrullando"
+		patrullar_talus()
+		
+	move_and_slide()
 	
 	if fase_actual == Fase.LAVA:
 		dejar_rastro_lava()
+		
 		
 func dejar_rastro_lava()-> void:
 	if fase_actual != Fase.LAVA:
@@ -133,3 +184,54 @@ func morir() -> void:
 		transformar_en_lava()
 	elif fase_actual == Fase.LAVA:
 		derrotar_talus()
+func elegir_destino_patruya() -> void:
+	var mitad_ancho = ancho_patruya / 2.0
+	var mitad_alto = alto_patruya / 2.0
+
+	if randf() < probabilidad_vertical:
+		# Talus elige moverse verticalmente
+		destino_patruya = Vector2(
+			global_position.x,
+			posicion_inicial.y + randf_range(-mitad_alto, mitad_alto)
+		)
+	else:
+		# Talus elige moverse horizontalmente
+		destino_patruya = Vector2(
+			posicion_inicial.x + randf_range(-mitad_ancho, mitad_ancho),
+			global_position.y
+		)
+
+func patrullar_talus() -> void:
+	if esperando_patruya:
+		velocity = Vector2.ZERO
+		return
+
+	var distancia = global_position.distance_to(destino_patruya)
+
+	if distancia <= 3.0:
+		velocity = Vector2.ZERO
+		esperar_y_cambiar_destino()
+		return
+
+	var direccion_movimiento = (
+	destino_patruya - global_position
+	).normalized()
+
+	velocity = direccion_movimiento * velocidad_patruya
+
+	if absf(direccion_movimiento.x) > 0.01:
+		voltear_hacia(direccion_movimiento.x)
+
+func esperar_y_cambiar_destino() -> void:
+	if esperando_patruya:
+		return
+
+	esperando_patruya = true
+
+	await get_tree().create_timer(pausa_patruya).timeout
+
+	if not is_inside_tree():
+		return
+
+	elegir_destino_patruya()
+	esperando_patruya = false

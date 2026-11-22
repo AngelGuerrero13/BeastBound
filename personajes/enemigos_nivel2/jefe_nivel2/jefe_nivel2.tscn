@@ -2,30 +2,80 @@
 
 [ext_resource type="PackedScene" uid="uid://di2623p60lpat" path="res://personajes/enemigoBasico/enemigo_basico.tscn" id="1_epk3d"]
 [ext_resource type="Script" uid="uid://bna71o75yb22n" path="res://personajes/enemigos_nivel2/jefe_nivel2/jefe_nivel_2.gd" id="2_0exwo"]
+[ext_resource type="Texture2D" uid="uid://cudgnkj03sebf" path="res://personajes/enemigos_nivel2/jefe_nivel2/talus_piedra_48x48.png" id="3_4ay80"]
 [ext_resource type="Script" uid="uid://d3u0yqjivhhge" path="res://personajes/enemigos_nivel2/jefe_nivel2/hit_box.gd" id="3_6jey6"]
 [ext_resource type="Script" uid="uid://lut1soiocjyy" path="res://personajes/enemigos_nivel2/jefe_nivel2/nucleo_talus.gd" id="3_hqimr"]
+[ext_resource type="Texture2D" uid="uid://c1t2au0l17yik" path="res://personajes/enemigos_nivel2/jefe_nivel2/talus_lava_48x48.png" id="4_svrek"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hqimr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0exwo"]
 radius = 15.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_svrek"]
+
 [node name="jefe nivel 2" unique_id=1382673604 instance=ExtResource("1_epk3d")]
+platform_floor_layers = 4294967042
+platform_wall_layers = 13
 script = ExtResource("2_0exwo")
+textura_piedra = ExtResource("3_4ay80")
+textura_lava = ExtResource("4_svrek")
+ancho_patruya = 200.0
+alto_patruya = 140.0
+velocidad_patruya = 35.0
+probabilidad_vertical = 0.3
+pausa_patruya = 0.5
 reduccion_dano_cuerpo = 0.9
 velocidad_fase_2 = 30.0
+distancia_entre_charcos = 20.0
 vida_maxima = 50
 velocidad = 30.0
 
+[node name="Sombra" parent="." index="0" unique_id=1873168614]
+position = Vector2(99, 76)
+scale = Vector2(2.357145, 1.5)
+
+[node name="Imagen Personaje" parent="." index="1" unique_id=647587542]
+z_index = 1
+texture_filter = 1
+position = Vector2(100, 52)
+scale = Vector2(0.98, 1)
+texture = ExtResource("3_4ay80")
+
+[node name="Colision Sombra" parent="." index="2" unique_id=1812325256]
+position = Vector2(98, 76)
+
 [node name="HitBox" parent="." index="3" unique_id=1019743775]
+position = Vector2(3, 56)
+collision_mask = 13
 script = ExtResource("3_6jey6")
 
 [node name="Colision Cuerpo" parent="HitBox" index="0" unique_id=862487744]
+position = Vector2(96, 6)
 shape = SubResource("RectangleShape2D_hqimr")
 
 [node name="Nucleo" type="Area2D" parent="." index="4" unique_id=1528138126]
+position = Vector2(4, 3)
 collision_layer = 4
 script = ExtResource("3_hqimr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Nucleo" index="0" unique_id=1559762241]
+position = Vector2(100, 53)
 shape = SubResource("CircleShape2D_0exwo")
+
+[node name="AreaDeteccion" parent="." index="7" unique_id=1027424982]
+position = Vector2(-265, 48)
+collision_layer = 2
+collision_mask = 13
+
+[node name="CollisionShape2D" parent="AreaDeteccion" index="0" unique_id=885380396]
+position = Vector2(363, 10.999998)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_svrek")
+disabled = true
+
+[node name="Barra Vida Enemigo" parent="." index="8" unique_id=26031977]
+offset_left = 93.0
+offset_top = 27.0
+offset_right = 141.0
+offset_bottom = 45.0
