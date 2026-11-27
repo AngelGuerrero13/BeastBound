@@ -1,4 +1,4 @@
-extends "res://personajes/personajeBase/personaje_base.gd"
+extends "res://personajes/enemigoBasico/enemigo_basico.gd"
 
 #Estados de la IA
 var estado: String = "patrullando"
@@ -22,6 +22,7 @@ var atacando: bool = false
 var puede_atacar: bool = true
 
 @onready var detector: Area2D = $Area2D
+@onready var animacion_arbusto: AnimatedSprite2D = $AnimacionArbusto
 @onready var boss_health_bar = $CanvasLayer/BossHealthBar
 
 func _ready() -> void:
@@ -43,6 +44,7 @@ func _ready() -> void:
 	if barra_vida_enemigo:
 		barra_vida_enemigo.max_value = vida_maxima
 		barra_vida_enemigo.value = vida
+	animacion_arbusto.play("reposo")
 	
 func _physics_process(_delta:float)-> void:
 	print("El jefe está ejecutando su IA")
@@ -70,6 +72,7 @@ func _physics_process(_delta:float)-> void:
 
 
 func patrullar() -> void:
+	animacion_arbusto.play("patrulla")
 	global_position = global_position.move_toward(
 		destino_patruya,
 		velocidad_patruya * get_physics_process_delta_time()
@@ -117,6 +120,7 @@ func elegir_ataque() -> void:
 		return
 		
 	estado = "recuperando"
+	animacion_arbusto.play("reposo")
 	
 	var recuperacion = 1.5
 	
@@ -140,6 +144,7 @@ func elegir_ataque() -> void:
 		
 		
 func ataque_espinas() -> void:
+	animacion_arbusto.play("ataque_espinas")
 	print("¡El arbusto prepara sus espinas verticales!")
 	await get_tree().create_timer(0.6).timeout
 	
@@ -171,6 +176,7 @@ func elegir_destino_patruya() -> void:
 		
 		
 func ataque_raices()-> void:
+	animacion_arbusto.play("ataque_raices")
 	print("¡Saldran raices del suelo!")
 	
 	await  get_tree().create_timer(1.0).timeout
@@ -190,6 +196,7 @@ func ataque_raices()-> void:
 
 
 func ataque_esporas() -> void:
+	animacion_arbusto.play("ataque_esporas")
 	print("¡La flor del arbusto comienza a abrirse!")
 
 	await get_tree().create_timer(0.8).timeout

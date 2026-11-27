@@ -6,6 +6,43 @@
 [ext_resource type="Script" uid="uid://d3u0yqjivhhge" path="res://personajes/enemigos_nivel2/jefe_nivel2/hit_box.gd" id="3_6jey6"]
 [ext_resource type="Script" uid="uid://lut1soiocjyy" path="res://personajes/enemigos_nivel2/jefe_nivel2/nucleo_talus.gd" id="3_hqimr"]
 [ext_resource type="Texture2D" uid="uid://c1t2au0l17yik" path="res://personajes/enemigos_nivel2/jefe_nivel2/talus_lava_48x48.png" id="4_svrek"]
+[ext_resource type="Texture2D" uid="uid://brh2l2knscv5g" path="res://personajes/enemigos_nivel2/jefe_nivel2/Hoja de sprites del gólem de lava.png" id="7_2ej35"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ej35"]
+atlas = ExtResource("7_2ej35")
+region = Rect2(0, 0, 543, 724)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nae25"]
+atlas = ExtResource("7_2ej35")
+region = Rect2(543, 0, 543, 724)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lsvja"]
+atlas = ExtResource("7_2ej35")
+region = Rect2(1086, 0, 543, 724)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xtsow"]
+atlas = ExtResource("7_2ej35")
+region = Rect2(1629, 0, 543, 724)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nae25"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ej35")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nae25")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lsvja")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xtsow")
+}],
+"loop": 1,
+"name": &"caminar",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hqimr"]
 
@@ -32,50 +69,58 @@ vida_maxima = 50
 velocidad = 30.0
 
 [node name="Sombra" parent="." index="0" unique_id=1873168614]
-position = Vector2(99, 76)
+position = Vector2(218, 132)
 scale = Vector2(2.357145, 1.5)
 
-[node name="Imagen Personaje" parent="." index="1" unique_id=647587542]
+[node name="AnimacionTalus" type="AnimatedSprite2D" parent="." index="1" unique_id=1918006458]
+position = Vector2(219, 104)
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_nae25")
+animation = &"caminar"
+frame_progress = 0.78091997
+
+[node name="Imagen Personaje" parent="." index="2" unique_id=647587542]
+visible = false
 z_index = 1
-texture_filter = 1
+texture_filter = 5
 position = Vector2(100, 52)
 scale = Vector2(0.98, 1)
 texture = ExtResource("3_4ay80")
 
-[node name="Colision Sombra" parent="." index="2" unique_id=1812325256]
-position = Vector2(98, 76)
+[node name="Colision Sombra" parent="." index="3" unique_id=1812325256]
+position = Vector2(217, 132)
 
-[node name="HitBox" parent="." index="3" unique_id=1019743775]
+[node name="HitBox" parent="." index="4" unique_id=1019743775]
 position = Vector2(3, 56)
 collision_mask = 13
 script = ExtResource("3_6jey6")
 
 [node name="Colision Cuerpo" parent="HitBox" index="0" unique_id=862487744]
-position = Vector2(96, 6)
+position = Vector2(217, 67)
 shape = SubResource("RectangleShape2D_hqimr")
 
-[node name="Nucleo" type="Area2D" parent="." index="4" unique_id=1528138126]
+[node name="Nucleo" type="Area2D" parent="." index="5" unique_id=1528138126]
 position = Vector2(4, 3)
 collision_layer = 4
 script = ExtResource("3_hqimr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Nucleo" index="0" unique_id=1559762241]
-position = Vector2(100, 53)
+position = Vector2(215, 118)
 shape = SubResource("CircleShape2D_0exwo")
 
-[node name="AreaDeteccion" parent="." index="7" unique_id=1027424982]
+[node name="AreaDeteccion" parent="." index="8" unique_id=1027424982]
 position = Vector2(-265, 48)
 collision_layer = 2
 collision_mask = 13
 
 [node name="CollisionShape2D" parent="AreaDeteccion" index="0" unique_id=885380396]
-position = Vector2(363, 10.999998)
+position = Vector2(484, 76)
 scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_svrek")
 disabled = true
 
-[node name="Barra Vida Enemigo" parent="." index="8" unique_id=26031977]
-offset_left = 93.0
-offset_top = 27.0
-offset_right = 141.0
-offset_bottom = 45.0
+[node name="Barra Vida Enemigo" parent="." index="9" unique_id=26031977]
+offset_left = 212.0
+offset_top = 72.0
+offset_right = 260.0
+offset_bottom = 90.0

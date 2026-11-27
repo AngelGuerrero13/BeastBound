@@ -11,7 +11,7 @@ enum Fase {
 }
 var estado: String = "patrullando"
 var fase_actual = Fase.PIEDRA
-@onready var imagen_personaje: Sprite2D = $"Imagen Personaje"
+@onready var imagen_personaje: AnimatedSprite2D = $AnimacionTalus
 
 @export var textura_piedra: Texture2D
 @export var textura_lava: Texture2D
@@ -27,7 +27,7 @@ var fase_actual = Fase.PIEDRA
 @export var velocidad_fase_2: float = 30.0
 @export_group("Rastro de lava")
 @export var distancia_entre_charcos: float  = 20.0
-@onready var boss_health_bar = $CanvasLayer/BossHealthBar
+
 var direccion: int = 1
 var posicion_inicial: Vector2
 var destino_patruya: Vector2
@@ -43,8 +43,8 @@ func _ready() -> void:
 	velocidad = 30.0
 	
 	super._ready()
-	if textura_piedra:
-		imagen_personaje.texture = textura_piedra
+	if imagen_personaje.sprite_frames.has_animation("caminar"):
+		imagen_personaje.play("caminar")
 
 	ultima_posicion_lava = global_position
 	posicion_inicial = global_position
@@ -80,7 +80,10 @@ func recibir_dano_talus(cantidad: float, es_nucleo: bool) -> void:
 		derrotar_talus()
 		
 func cambiar_apariencia_lava() -> void:
-	imagen_personaje.texture = textura_lava
+	if imagen_personaje.sprite_frames.has_animation("caminar_lava"):
+		imagen_personaje.play("caminar_lava")
+		
+		
 func recibir_dano(cantidad: int) -> void:
 	recibir_dano_talus(float(cantidad), false)
 	
@@ -94,7 +97,14 @@ func _on_area_deteccion_body_entered(body: Node2D) -> void:
 func _on_area_deteccion_body_exited(body: Node2D) -> void:
 	if body == jugador_objetivo:
 		jugador_objetivo = null
-		print("El jugador salió del área")
+		estado = "patrullando"
+
+		esperando_patruya = false
+
+		# Elegir un destino nuevo
+		elegir_destino_patruya()
+
+		print("Talus perdió al jugador y vuelve a patrullar")
 
 func transformar_en_lava() -> void:
 	fase_actual = Fase.TRANSFORMACION
@@ -135,7 +145,7 @@ func derrotar_talus() -> void:
 	queue_free()
 	
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if fase_actual == Fase.TRANSFORMACION or fase_actual == Fase.DERROTADO:
 		velocity = Vector2.ZERO
 		return
@@ -161,7 +171,12 @@ func _physics_process(delta: float) -> void:
 		patrullar_talus()
 		
 	move_and_slide()
-	
+	if Engine.get_physics_frames() % 60 == 0:
+		print("Talus: ", global_position,
+		 " | Destino: ", destino_patruya,
+		 " | Velocidad: ", velocity,
+		" | Colisión: ", get_slide_collision_count())
+		
 	if fase_actual == Fase.LAVA:
 		dejar_rastro_lava()
 		
@@ -232,6 +247,8 @@ func esperar_y_cambiar_destino() -> void:
 
 	if not is_inside_tree():
 		return
-
-	elegir_destino_patruya()
 	esperando_patruya = false
+	if jugador_objetivo != null and is_instance_valid(jugador_objetivo):
+		return
+		
+	elegir_destino_patruya()
