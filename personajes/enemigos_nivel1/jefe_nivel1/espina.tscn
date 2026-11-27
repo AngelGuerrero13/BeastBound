@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://8p85xcbmjjs7"]
+
+[ext_resource type="Script" uid="uid://bud21ed6x4q5n" path="res://personajes/enemigos_nivel1/jefe_nivel1/espina.gd" id="1_6gw4n"]
+[ext_resource type="Texture2D" uid="uid://cdd7ugeyoj2sc" path="res://personajes/enemigos_nivel1/jefe_nivel1/Sprite de Lanza Pixelada en Movimiento.png" id="2_rmbpo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqiua"]
+atlas = ExtResource("2_rmbpo")
+region = Rect2(1810, 241, 362, 241)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_076hx"]
+atlas = ExtResource("2_rmbpo")
+region = Rect2(1448, 241, 362, 241)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mx23o"]
+atlas = ExtResource("2_rmbpo")
+region = Rect2(1086, 241, 362, 241)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6lmf3"]
+atlas = ExtResource("2_rmbpo")
+region = Rect2(724, 241, 362, 241)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vnxtd"]
+atlas = ExtResource("2_rmbpo")
+region = Rect2(362, 241, 362, 241)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eipls"]
+atlas = ExtResource("2_rmbpo")
+region = Rect2(0, 241, 362, 241)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6gw4n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iqiua")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_076hx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mx23o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6lmf3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vnxtd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eipls")
+}],
+"loop": 2,
+"name": &"vuelo espinas",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rmbpo"]
+
+[node name="Espina" type="Area2D" unique_id=1628962435]
+position = Vector2(440, 224)
+collision_layer = 2
+collision_mask = 13
+script = ExtResource("1_6gw4n")
+
+[node name="animaciones espinas" type="AnimatedSprite2D" parent="." unique_id=2855992]
+process_mode = 1
+process_priority = 1
+light_mask = 2
+visibility_layer = 13
+texture_filter = 1
+texture_repeat = 2
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_6gw4n")
+animation = &"vuelo espinas"
+
+[node name="colision espinas" type="CollisionShape2D" parent="." unique_id=2111330748]
+shape = SubResource("RectangleShape2D_rmbpo")

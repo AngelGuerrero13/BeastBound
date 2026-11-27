@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://qv3ucj8dp1e6"]
+
+[ext_resource type="Script" uid="uid://bvasakiwoc673" path="res://personajes/enemigos_nivel1/jefe_nivel1/esporas.gd" id="1_ym2jh"]
+[ext_resource type="Texture2D" uid="uid://dau5jwj6hha7o" path="res://personajes/enemigos_nivel1/jefe_nivel1/Sprite de Esporas Verde-Lima.png" id="2_i8r3e"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vx6vc"]
+atlas = ExtResource("2_i8r3e")
+region = Rect2(14, 0, 359, 724)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1q3l7"]
+atlas = ExtResource("2_i8r3e")
+region = Rect2(1809, 0, 359, 724)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ic1l"]
+atlas = ExtResource("2_i8r3e")
+region = Rect2(373, 0, 359, 724)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xwvm7"]
+atlas = ExtResource("2_i8r3e")
+region = Rect2(732, 0, 359, 724)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7qox"]
+atlas = ExtResource("2_i8r3e")
+region = Rect2(1091, 0, 359, 724)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cee4t"]
+atlas = ExtResource("2_i8r3e")
+region = Rect2(1450, 0, 359, 724)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ym2jh"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_vx6vc")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_1q3l7")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_5ic1l")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_xwvm7")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_n7qox")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_cee4t")
+}],
+"loop": 0,
+"name": &"nube",
+"speed": 4.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i8r3e"]
+radius = 23.769728
+
+[node name="esporas" type="Area2D" unique_id=1316332880]
+script = ExtResource("1_ym2jh")
+
+[node name="AnimacionEsporas" type="AnimatedSprite2D" parent="." unique_id=183126132]
+light_mask = 2
+visibility_layer = 13
+texture_filter = 1
+position = Vector2(321, 174)
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_ym2jh")
+animation = &"nube"
+frame = 5
+frame_progress = 1.0
+flip_h = true
+
+[node name="ColisionEsporas" type="CollisionShape2D" parent="." unique_id=516723324]
+position = Vector2(322, 172)
+shape = SubResource("CircleShape2D_i8r3e")

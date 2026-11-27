@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dc41qho565f7g" path="res://personajes/personajeBase/personaje_base.tscn" id="1_4g8of"]
 [ext_resource type="Script" uid="uid://ro4umpecc7by" path="res://personajes/enemigos_nivel1/jefe_nivel1/arbusto_jefe_final.gd" id="2_4g8of"]
+[ext_resource type="PackedScene" uid="uid://8p85xcbmjjs7" path="res://personajes/enemigos_nivel1/jefe_nivel1/espina.tscn" id="3_5ppkt"]
 [ext_resource type="Texture2D" uid="uid://d2wsvhtxwo25v" path="res://personajes/enemigos_nivel1/jefe_nivel1/Hoja de sprites del jefe planta】【。.png" id="3_48aci"]
 [ext_resource type="Texture2D" uid="uid://bonugprwhitj" path="res://personajes/enemigos_nivel1/jefe_nivel1/Hoja Sombría_ Animaciones de Reposo y Patrulla.png" id="4_5ppkt"]
 
@@ -152,7 +153,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"ataque espinas",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -175,7 +176,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"ataque esporas",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -198,7 +199,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"ataque raices",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -256,6 +257,7 @@ rango_deteccion = 40.0
 dano_raices = 2
 dano_espinas = 1
 dano_esporas = 1
+escena_espina = ExtResource("3_5ppkt")
 distancia_ataque_melee = 40.0
 duracion_ataque = 0.6
 es_jugador = false
@@ -276,8 +278,7 @@ position = Vector2(-1.1920929e-07, 7.0000005)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_1lhjd")
 animation = &"ataque espinas"
-frame = 3
-frame_progress = 0.3218365
+flip_h = true
 
 [node name="Imagen Personaje" parent="." index="3" unique_id=647587542]
 visible = false
