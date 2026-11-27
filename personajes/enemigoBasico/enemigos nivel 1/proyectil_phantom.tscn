@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://b2fotkioobix8"]
+
+[ext_resource type="Script" uid="uid://dexw1ov7327cq" path="res://personajes/enemigos_nivel2/Phantom Volador/proyectil_phantom.gd" id="1_ahkso"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g3u5t"]
+
+[node name="Proyectil Phantom" type="Node2D" unique_id=743834763]
+script = ExtResource("1_ahkso")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=149762309]
+shape = SubResource("CapsuleShape2D_g3u5t")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2141316772]
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=306518449]

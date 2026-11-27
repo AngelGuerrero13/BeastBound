@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dsm06iv8ficgi"]
+
+[ext_resource type="PackedScene" uid="uid://di2623p60lpat" path="res://personajes/enemigoBasico/enemigo_basico.tscn" id="1_k0otf"]
+[ext_resource type="Script" uid="uid://6fx2xw02otb5" path="res://personajes/enemigos_nivel2/Phantom Volador/phantom_volador.gd" id="2_k0otf"]
+
+[node name="Phantom volador" unique_id=1382673604 instance=ExtResource("1_k0otf")]
+script = ExtResource("2_k0otf")
+escena_proyectil = null
+altura_flote = 50.0

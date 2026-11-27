@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://dtbgdtspxw6sn"]
-
-[ext_resource type="PackedScene" uid="uid://26vo14i720ld" path="res://personajes/enemigos_nivel1/hongo_tirador/hongito(proyectil).tscn" id="1_wout0"]
-
-[node name="Honguito" unique_id=410957881 instance=ExtResource("1_wout0")]

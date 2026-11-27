@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://c5npvsnyw1vkg"]
-
-[ext_resource type="PackedScene" uid="uid://cmgs18jfyukj0" path="res://personajes/enemigos_nivel1/hongo_tirador/hongo_tirador.tscn" id="1_18lqb"]
-
-[node name="HongoTirador" unique_id=1382673604 instance=ExtResource("1_18lqb")]
